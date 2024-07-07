@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -42,7 +43,7 @@ fun MapView() {
             .fillMaxWidth()
             .height(160.dp)
             .background(
-                color = Color(0xFFF7F7FC)
+                color = Color.Unspecified
             ),
         shape = RoundedCornerShape(30.dp)
 //        contentAlignment = Alignment.Center
@@ -75,9 +76,9 @@ fun MapView() {
 
 @Composable
 fun ZoomImage(painter: Painter) {
-    var scale by remember { mutableStateOf(1f) }
-    var offsetX by remember { mutableStateOf(0f) }
-    var offsetY by remember { mutableStateOf(0f) }
+    var scale by remember { mutableFloatStateOf(1f) }
+    var offsetX by remember { mutableFloatStateOf(0f) }
+    var offsetY by remember { mutableFloatStateOf(0f) }
 
     Box(
         modifier = Modifier
