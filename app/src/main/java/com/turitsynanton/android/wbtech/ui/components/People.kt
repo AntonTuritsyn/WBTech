@@ -1,10 +1,13 @@
 package com.turitsynanton.android.wbtech.ui.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -58,7 +61,8 @@ fun People(modifier: Modifier, size: Int) {
             items(newList.size) { index ->
                 Card(
                     modifier = Modifier
-                        .size(48.dp),
+                        .size(48.dp)
+                        .border(width = 2.dp, Color(0xFFD2D5F9), shape = RoundedCornerShape(16.dp)),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardColors(
                         containerColor = Color(0xFFD2D5F9),
@@ -67,7 +71,8 @@ fun People(modifier: Modifier, size: Int) {
                         disabledContainerColor = Color.Unspecified
                     )
                 ) {
-                    Avatar(modifier = modifier, resId = avatars[index])
+                    Avatar(modifier = Modifier
+                        .fillMaxSize(), resId = avatars[index])
                 }
             }
         }

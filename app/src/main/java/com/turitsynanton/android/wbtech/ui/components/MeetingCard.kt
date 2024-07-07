@@ -99,7 +99,7 @@ fun MeetingCard(
 
             Spacer(modifier = Modifier.weight(1f))
             LazyRow(
-                modifier = modifier
+                modifier = Modifier
                     .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {

@@ -50,13 +50,3 @@ fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
         Icon(imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowRight, contentDescription = "")
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun MyMenuItemPreview() {
-    MyMenuItem(
-        modifier = Modifier,
-        text = "Мои встречи",
-        icon = R.drawable.ic_coffee
-    )
-}

@@ -63,14 +63,3 @@ fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) 
         Icon(imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowRight, contentDescription = "")
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun MyProfileItemPreview() {
-    MyProfileItem(
-        Modifier,
-        "Anton Turitsyn",
-        "+7 999 999-99-99",
-        R.drawable.my_photo
-    )
-}

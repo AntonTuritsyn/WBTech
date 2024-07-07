@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.ui.organisms
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +15,7 @@ import com.turitsynanton.android.wbtech.data.Meeting
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 
 @Composable
-fun MeetingColumn(meetingsList: List<Meeting>) {
+fun MeetingColumn(meetingsList: List<Meeting>, onClick: () -> Unit) {
     LazyColumn(
         Modifier
             .padding(vertical = 16.dp)
@@ -23,7 +24,8 @@ fun MeetingColumn(meetingsList: List<Meeting>) {
     ) {
         items(meetingsList.size) { index ->
             MeetingCard(
-                modifier = Modifier,
+                modifier = Modifier
+                    .clickable { onClick() },
                 resId = R.drawable.ic_meeting,
                 meetingName = meetingsList[index].name,
                 ended = meetingsList[index].ended,

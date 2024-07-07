@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MyApp() {
@@ -37,6 +38,12 @@ fun Screen2(onNavigate: () -> Unit) {
             Text("Go to Screen 1")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Prew() {
+    MyApp()
 }
 // варианты тут:
 // https://chatgpt.com/share/9385bd62-48b1-4b6c-8e5d-d49997604e08

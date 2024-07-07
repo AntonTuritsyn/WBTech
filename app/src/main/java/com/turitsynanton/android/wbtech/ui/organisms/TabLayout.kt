@@ -62,12 +62,3 @@ fun TabLayout(tabsNames: List<String>, pagerState: PagerState) {
         }
     }
 }
-
-@OptIn(ExperimentalFoundationApi::class)
-@Preview(showBackground = true)
-@Composable
-fun Prew() {
-    val tabs = listOf("Все встречи", "Активные")
-    val pagerState = rememberPagerState(pageCount = { pages.size })
-    TabLayout(tabsNames = tabs, pagerState = pagerState)
-}
