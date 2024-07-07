@@ -16,6 +16,7 @@ val meetingTag = listOf(
 
 val meetings = listOf(
     Meeting(
+        1,
         "Developer meet",
         "11.12.2023",
         "Moscow",
@@ -23,6 +24,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        2,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -30,6 +32,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        3,
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -38,6 +41,7 @@ val meetings = listOf(
     )
     ,
     Meeting(
+        4,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -45,6 +49,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        5,
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -52,6 +57,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        6,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -59,6 +65,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        7,
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -66,6 +73,7 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        8,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -73,10 +81,104 @@ val meetings = listOf(
         meetingTag
     ),
     Meeting(
+        9,
         "LAST meet",
         "11.08.2024",
         "Kazan",
         false,
         meetingTag
+    )
+)
+
+val communities = listOf(
+    Community(
+        1,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        2,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        3,
+        "Kotlin comm",
+        "19348275",
+    ),
+    Community(
+        4,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        5,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        6,
+        "Kotlin comm",
+        "19348275",
+    ),
+    Community(
+        7,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        8,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        9,
+        "Kotlin comm",
+        "19348275",
+    ),
+    Community(
+        10,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        11,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        12,
+        "Kotlin comm",
+        "19348275",
+    ),
+    Community(
+        13,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        14,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        15,
+        "Kotlin comm",
+        "19348275",
+    ),
+    Community(
+        16,
+        "Developer comm",
+        "10112",
+    ),
+    Community(
+        17,
+        "Android comm",
+        "10",
+    ),
+    Community(
+        16,
+        "LAST",
+        "19348275",
     )
 )
