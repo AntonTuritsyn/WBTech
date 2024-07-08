@@ -25,10 +25,9 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 @Composable
 fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .clickable { },
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

@@ -41,8 +41,10 @@ fun PreviewCommunities() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewMoreMenu() {
+    val navController = rememberNavController()
     ScreenMoreMenu(
-        modifier = Modifier
+        modifier = Modifier,
+        navController
     )
 }
 

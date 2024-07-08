@@ -23,7 +23,7 @@ import com.turitsynanton.android.wbtech.ui.components.MyProfileItem
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 
 @Composable
-fun ScreenMoreMenu(modifier: Modifier/*, onClick: () -> Unit*/) {
+fun ScreenMoreMenu(modifier: Modifier,/*, onClick: () -> Unit*/navHostController: NavHostController) {
     Scaffold(
         topBar = {
             TopBarMainScreens(title = "Ещё", false)
@@ -59,7 +59,10 @@ fun ScreenMoreMenu(modifier: Modifier/*, onClick: () -> Unit*/) {
                 }
             ), text = "Мои встречи", icon = R.drawable.ic_coffee)
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
-            MyMenuItem(modifier = Modifier, text = "Тема", icon = R.drawable.ic_theme)
+            MyMenuItem(modifier = Modifier
+                .clickable {
+                    navHostController.navigate(NavigationMoreMenu.Theme.route)
+                }, text = "Тема", icon = R.drawable.ic_theme)
             MyMenuItem(modifier = Modifier, text = "Уведомления", icon = R.drawable.ic_notification)
             MyMenuItem(modifier = Modifier, text = "Безопасность", icon = R.drawable.ic_safety)
             MyMenuItem(modifier = Modifier, text = "Память и ресурсы", icon = R.drawable.ic_memory)
