@@ -81,27 +81,8 @@ fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Search
             )
-
         )
     }
-    /*SearchBar(
-        query = query,
-        onQueryChange = { onQueryChange ->
-            query = onQueryChange
-        },
-        onSearch = { },
-        active = false,
-        onActiveChange = {},
-        leadingIcon = {
-            Icon(imageVector = Icons.Rounded.Search, contentDescription = "", tint = Color.Gray)
-        },
-        placeholder = {
-            Text(
-                text = "Поиск", color = Color.Gray) },
-        shape = RoundedCornerShape(4.dp)
-    ) {
-
-    }*/
 }
 
 @Preview(showBackground = true)

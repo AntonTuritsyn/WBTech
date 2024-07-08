@@ -1,6 +1,12 @@
 package com.turitsynanton.android.wbtech.navigation
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -11,14 +17,13 @@ import com.turitsynanton.android.wbtech.data.communities
 import com.turitsynanton.android.wbtech.data.meetingTag
 import com.turitsynanton.android.wbtech.data.meetings
 import com.turitsynanton.android.wbtech.data.tabs1
-import com.turitsynanton.android.wbtech.data.tabs2
-import com.turitsynanton.android.wbtech.ui.components.LottieAnimation
+import com.turitsynanton.android.wbtech.ui.drafts.CustomViews
+import com.turitsynanton.android.wbtech.ui.items.CodeCustomTextField
+import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunities
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetingDetails
 import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetings
 import com.turitsynanton.android.wbtech.ui.screens.ScreenMoreMenu
-import com.turitsynanton.android.wbtech.ui.screens.ScreenProfile
 import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @Composable
@@ -39,7 +44,10 @@ fun NavGraphBottom(navController: NavHostController, modifier: Modifier) {
             }
         }
         composable(route = NavigationItems.More.route) {
-            ScreenMoreMenu(modifier)
+            ScreenMoreMenu(modifier, navHostController = navController)
+        }
+        composable(route = NavigationMoreMenu.Theme.route) {
+            CustomViews()
         }
         meetingDetails(navController = navController, modifier)
     }
