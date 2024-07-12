@@ -31,7 +31,7 @@ fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = modifier
+            modifier = Modifier
                 .padding(end = 6.dp),
             painter = painterResource(id = icon),
             contentDescription = ""

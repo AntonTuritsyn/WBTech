@@ -8,22 +8,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.navigation.NavigationMoreMenu
-import com.turitsynanton.android.wbtech.navigation.TopBarMainScreens
+import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
 import com.turitsynanton.android.wbtech.ui.components.MyMenuItem
 import com.turitsynanton.android.wbtech.ui.components.MyProfileItem
-import com.turitsynanton.android.wbtech.ui.items.SomeText
 
 @Composable
-fun ScreenMoreMenu(modifier: Modifier,/*, onClick: () -> Unit*/navHostController: NavHostController) {
+fun ScreenMoreMenu(
+    modifier: Modifier,
+    navHostController: NavHostController,
+    onProfileScreen: () -> Unit,
+    onThemeDcreen: () -> Unit) {
     Scaffold(
         topBar = {
             TopBarMainScreens(title = "Ещё", false)
@@ -42,7 +43,7 @@ fun ScreenMoreMenu(modifier: Modifier,/*, onClick: () -> Unit*/navHostController
                     onClickLabel = "",
                     role = null,
                     onClick = {
-//                        onClick()
+                        onProfileScreen()
                     }
                 ),
                 name = "Anton Turitsyn",
@@ -61,7 +62,7 @@ fun ScreenMoreMenu(modifier: Modifier,/*, onClick: () -> Unit*/navHostController
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
             MyMenuItem(modifier = Modifier
                 .clickable {
-                    navHostController.navigate(NavigationMoreMenu.Theme.route)
+                    onThemeDcreen()
                 }, text = "Тема", icon = R.drawable.ic_theme)
             MyMenuItem(modifier = Modifier, text = "Уведомления", icon = R.drawable.ic_notification)
             MyMenuItem(modifier = Modifier, text = "Безопасность", icon = R.drawable.ic_safety)

@@ -26,13 +26,12 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 @Composable
 fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .clickable {  },
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CustomAvatar(modifier = modifier, variant = 1, resId = avatar)
+        CustomAvatar(modifier = Modifier, variant = 1, resId = avatar)
         Column(
             Modifier
                 .padding(start = 20.dp)

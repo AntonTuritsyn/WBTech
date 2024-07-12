@@ -13,8 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.data.meetingTag
 import com.turitsynanton.android.wbtech.ui.items.Avatar
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
@@ -24,22 +27,19 @@ fun СommunityCard(modifier: Modifier, resId: Int, text: String, communitySize: 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { }
     ) {
         Avatar(
-            modifier = modifier
+            modifier = Modifier
                 .padding(4.dp)
                 .size(48.dp),
             resId = resId,
         )
         Column(
-            modifier = modifier
-                .fillMaxSize()
+            modifier = Modifier
                 .padding(start = 16.dp)
         ) {
             SomeText(
-                modifier = modifier
-                    .padding(vertical = 4.dp),
+                modifier = Modifier,
                 text = text,
                 fontFamily = SfProDisplay,
                 fontSize = 14.sp,
@@ -48,8 +48,7 @@ fun СommunityCard(modifier: Modifier, resId: Int, text: String, communitySize: 
                 color = Color.Unspecified
             )
             SomeText(
-                modifier = modifier
-                    .padding(vertical = 2.dp),
+                modifier = Modifier,
                 text = "$communitySize человек",
                 fontFamily = SfProDisplay,
                 fontSize = 12.sp,
