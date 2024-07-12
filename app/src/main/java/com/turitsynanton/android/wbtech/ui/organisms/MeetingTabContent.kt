@@ -11,24 +11,24 @@ import com.turitsynanton.android.wbtech.data.tabs2
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MeetingTabContent(meetingsList: List<Meeting>, pagerState: PagerState, tabs: List<String>) {
+fun MeetingTabContent(meetingsList: List<Meeting>, pagerState: PagerState, tabs: List<String>, onClick: () -> Unit) {
     val mine = tabs == tabs2
     HorizontalPager(state = pagerState) { pageIndex ->
         if (mine) {
             when (pages[pageIndex]) {
                 MeetingPageTabs.LeftTab ->
-                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == false })
+                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == false }, onClick = onClick)
 
                 MeetingPageTabs.RightTab ->
-                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == true })
+                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == true }, onClick = onClick)
             }
         } else {
             when (pages[pageIndex]) {
                 MeetingPageTabs.LeftTab ->
-                    MeetingColumn(meetingsList = meetingsList)
+                    MeetingColumn(meetingsList = meetingsList, onClick = onClick)
 
                 MeetingPageTabs.RightTab ->
-                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == false })
+                    MeetingColumn(meetingsList = meetingsList.filter { it.ended == false }, onClick = onClick)
             }
         }
     }

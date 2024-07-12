@@ -99,9 +99,3 @@ fun ScreenProfile() {
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun ScreenProfilePreview() {
-    ScreenProfile()
-}

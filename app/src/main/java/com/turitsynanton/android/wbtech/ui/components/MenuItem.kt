@@ -25,14 +25,13 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 @Composable
 fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .clickable { },
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = modifier
+            modifier = Modifier
                 .padding(end = 6.dp),
             painter = painterResource(id = icon),
             contentDescription = ""
@@ -49,14 +48,4 @@ fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
         Spacer(modifier = Modifier.weight(1f))
         Icon(imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowRight, contentDescription = "")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MyMenuItemPreview() {
-    MyMenuItem(
-        modifier = Modifier,
-        text = "Мои встречи",
-        icon = R.drawable.ic_coffee
-    )
 }

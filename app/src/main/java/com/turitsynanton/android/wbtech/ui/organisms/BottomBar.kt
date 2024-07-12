@@ -1,24 +1,27 @@
 package com.turitsynanton.android.wbtech.ui.organisms
 
+import android.util.Log
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.turitsynanton.android.wbtech.navigation.NavigationItems
+import com.turitsynanton.android.wbtech.navigation.NavigationBottomBar
+import com.turitsynanton.android.wbtech.navigation.NavigationState
 import com.turitsynanton.android.wbtech.ui.components.BottomIcon
 
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        NavigationItems.Meetings, NavigationItems.Communities, NavigationItems.More
+        NavigationBottomBar.Meetings, NavigationBottomBar.Communities, NavigationBottomBar.More
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     var currentDestination = navBackStackEntry?.destination
@@ -36,19 +39,24 @@ fun BottomBar(navController: NavHostController) {
 
 @Composable
 fun RowScope.AddItem(
-    screen: NavigationItems, navDestination: NavDestination?, navController: NavHostController
+    screen: NavigationBottomBar, navDestination: NavDestination?, navController: NavHostController
 ) {
     /*val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination*/
 
-    val isSelected = /*currentDestination?.route == screen.route*/ navDestination?.route == screen.route
+    val isSelected = navDestination?.hierarchy?.any { it.route == screen.route } == true
     NavigationBarItem(
-        selected = navDestination?.hierarchy?.any { it.route == screen.route } == true,
+        selected = isSelected,
         onClick = {
-            navController.navigate(screen.route) {
-                popUpTo(navController.graph.startDestinationId)
-                launchSingleTop = true
+            if (!isSelected) {
+                navController.navigate(screen.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                }
             }
+
         },
         icon = {
             BottomIcon(isPressed = isSelected, title = screen.title, icon = screen.icon)
@@ -64,4 +72,5 @@ fun RowScope.AddItem(
             disabledTextColor = Color.Unspecified
         )
     )
+    Log.d("TAG", "isSelected $isSelected")
 }

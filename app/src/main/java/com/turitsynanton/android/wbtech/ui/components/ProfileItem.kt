@@ -26,13 +26,12 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 @Composable
 fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .clickable {  },
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CustomAvatar(modifier = modifier, variant = 1, resId = avatar)
+        CustomAvatar(modifier = Modifier, variant = 1, resId = avatar)
         Column(
             Modifier
                 .padding(start = 20.dp)
@@ -62,15 +61,4 @@ fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) 
         Spacer(modifier = Modifier.weight(1f))
         Icon(imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowRight, contentDescription = "")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MyProfileItemPreview() {
-    MyProfileItem(
-        Modifier,
-        "Anton Turitsyn",
-        "+7 999 999-99-99",
-        R.drawable.my_photo
-    )
 }
