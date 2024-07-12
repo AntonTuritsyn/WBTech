@@ -1,11 +1,5 @@
-package com.turitsynanton.android.wbtech.navigation
+package com.turitsynanton.android.wbtech.navigation.topbars
 
-import android.icu.text.CaseMap.Title
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,8 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
@@ -28,7 +20,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TobBarAdditionalScreens(title: String, onBackPressed: () -> Unit) {
+fun TobBarAdditionalScreens(title: String, navController: NavHostController, onBackPressed: () -> Unit) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     /*CenterAligned*/
     TopAppBar(
@@ -49,7 +41,7 @@ fun TobBarAdditionalScreens(title: String, onBackPressed: () -> Unit) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { /*navController.popBackStack()*/onBackPressed() }) {
+            IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back_arrow),
                     contentDescription = ""

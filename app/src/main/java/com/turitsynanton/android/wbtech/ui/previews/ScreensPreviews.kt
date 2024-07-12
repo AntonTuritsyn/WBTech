@@ -44,7 +44,9 @@ fun PreviewMoreMenu() {
     val navController = rememberNavController()
     ScreenMoreMenu(
         modifier = Modifier,
-        navController
+        navController,
+        onProfileScreen = {},
+        onThemeDcreen = {}
     )
 }
 
@@ -57,7 +59,8 @@ fun Profile() {
 @Preview(showBackground = true)
 @Composable
 fun CommunityDetails() {
-    ScreenCommunityDetails(meetingsList = meetings, Modifier) {
+    val navController = rememberNavController()
+    ScreenCommunityDetails(meetingsList = meetings, Modifier, navController) {
 
     }
 }

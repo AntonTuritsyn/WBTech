@@ -22,15 +22,14 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 fun MyFilterChip(modifier: Modifier, text: String) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier
-            .height(20.dp)
+        modifier = Modifier
             .background(
                 Color(0xFFF5ECFF),
                 shape = RoundedCornerShape(40.dp)
             )
     ) {
         SomeText(
-            modifier = modifier
+            modifier = Modifier
                 .padding(horizontal = 8.dp),
             text = text,
             fontFamily = SfProDisplay,
@@ -42,14 +41,6 @@ fun MyFilterChip(modifier: Modifier, text: String) {
     }
 }
 
-@Composable
-fun ChipsList() {
-    val chipsList = listOf(
-        MyFilterChip(modifier = Modifier, text = "Java"),
-        MyFilterChip(modifier = Modifier, text = "Kotlin"),
-        MyFilterChip(modifier = Modifier, text = "Android")
-    )
-}
 @Preview(showBackground = true)
 @Composable
 fun Prew() {

@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.navigation
+package com.turitsynanton.android.wbtech.navigation.topbars
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api

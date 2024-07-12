@@ -9,33 +9,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.Community
-import com.turitsynanton.android.wbtech.data.communities
-import com.turitsynanton.android.wbtech.data.meetings
-import com.turitsynanton.android.wbtech.data.tabs1
-import com.turitsynanton.android.wbtech.navigation.NavigationCommunityDetails
-import com.turitsynanton.android.wbtech.navigation.NavigationItems
-import com.turitsynanton.android.wbtech.navigation.NavigationMeetingDetails
-import com.turitsynanton.android.wbtech.navigation.meetingDetails
 import com.turitsynanton.android.wbtech.ui.components.СommunityCard
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunities
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunityDetails
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetings
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMoreMenu
-import com.turitsynanton.android.wbtech.ui.screens.screenstate.CommunitiesScreenState
 
 @Composable
-fun CommunityList(communityList: List<Community>, onClick: (Community) -> Unit) {
+fun CommunityList(communityList: List<Community>, onClick: (/*Community*/) -> Unit) {
     LazyColumn(
-        Modifier
+        modifier = Modifier
             .padding(vertical = 16.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -44,7 +26,7 @@ fun CommunityList(communityList: List<Community>, onClick: (Community) -> Unit) 
             СommunityCard(
                 modifier = Modifier
                     .clickable {
-                        onClick(communityList[index])
+                        onClick(/*communityList[index]*/)
                     },
                 resId = R.drawable.ic_designa,
                 text = communityList[index].name,

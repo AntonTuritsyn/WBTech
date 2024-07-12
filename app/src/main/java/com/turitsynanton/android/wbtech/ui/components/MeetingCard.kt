@@ -19,12 +19,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.ui.items.Avatar
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.data.MeetingTag
+import com.turitsynanton.android.wbtech.data.meetingTag
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -44,8 +47,6 @@ fun MeetingCard(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { }
-
     ) {
         Avatar(
             modifier = Modifier
@@ -54,16 +55,13 @@ fun MeetingCard(
             resId = resId,
         )
         Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(start = 16.dp)
+            modifier = Modifier
+                .padding(start = 16.dp),
+            verticalArrangement = Arrangement.Top
         ) {
-            Row(
-                modifier = modifier
-                    .padding(vertical = 4.dp)
-            ) {
+            Row {
                 SomeText(
-                    modifier = modifier,
+                    modifier = Modifier,
                     text = meetingName,
                     fontFamily = SfProDisplay,
                     fontSize = 14.sp,
@@ -74,7 +72,7 @@ fun MeetingCard(
                 Spacer(modifier = Modifier.weight(1f))
                 if (isEnded) {
                     SomeText(
-                        modifier = modifier,
+                        modifier = Modifier,
                         text = "Закончилась",
                         fontFamily = SfProDisplay,
                         fontSize = 10.sp,
@@ -84,10 +82,10 @@ fun MeetingCard(
                     )
                 }
             }
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f))
             Row {
                 SomeText(
-                    modifier = modifier,
+                    modifier = Modifier,
                     text = "$meetingDate - $meetingCity",
                     fontFamily = SfProDisplay,
                     fontSize = 12.sp,
@@ -97,7 +95,7 @@ fun MeetingCard(
                 )
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f))
             LazyRow(
                 modifier = Modifier
                     .padding(vertical = 4.dp),
@@ -105,7 +103,7 @@ fun MeetingCard(
             ) {
                 items(meetingTags.size) { index ->
                     MyFilterChip(
-                        modifier = modifier,
+                        modifier = Modifier,
                         text = meetingTags[index].name
                     )
                 }

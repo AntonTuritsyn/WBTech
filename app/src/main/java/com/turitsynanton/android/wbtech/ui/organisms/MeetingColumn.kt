@@ -17,7 +17,7 @@ import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 @Composable
 fun MeetingColumn(meetingsList: List<Meeting>, onClick: () -> Unit) {
     LazyColumn(
-        Modifier
+        modifier = Modifier
             .padding(vertical = 16.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)

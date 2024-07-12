@@ -6,33 +6,22 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.Community
-import com.turitsynanton.android.wbtech.data.Meeting
 import com.turitsynanton.android.wbtech.data.MeetingTag
-import com.turitsynanton.android.wbtech.navigation.TobBarAdditionalScreens
-import com.turitsynanton.android.wbtech.ui.components.MeetingCard
+import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.People
-import com.turitsynanton.android.wbtech.ui.components.СommunityCard
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
@@ -44,7 +33,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 fun ScreenMeetingDetails(modifier: Modifier, meetingTags: List<MeetingTag>, navController: NavHostController) {
     Scaffold(
         topBar = {
-            TobBarAdditionalScreens("Developer meeting", onBackPressed = {})
+            TobBarAdditionalScreens("Developer meeting", navController, onBackPressed = {})
         }
     ) {
         Column(
