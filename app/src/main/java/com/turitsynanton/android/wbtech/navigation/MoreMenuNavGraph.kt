@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.wbtech.ui.drafts.CustomViews
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMoreMenu
-import com.turitsynanton.android.wbtech.ui.screens.ScreenProfile
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
+import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenCode
+import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
 
 fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier: Modifier) {
     navigation(
@@ -19,7 +21,9 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier:
                 modifier = modifier,
                 navHostController = navController,
                 onProfileScreen = { navController.navigate(NavigationScreenMore.ScreenMore.route) },
-                onThemeDcreen = { navController.navigate(NavigationScreenMore.ScreenTheme.route) }
+                onThemeScreen = { navController.navigate(NavigationScreenMore.ScreenTheme.route) },
+                onNotificationScreen = { navController.navigate(NavigationScreenMore.ScreenNotification.route) },
+                onSafetyScreen = { navController.navigate(NavigationScreenMore.ScreenSafety.route) }
                 )
         }
         composable(route = NavigationScreenMore.ScreenMore.route) {
@@ -28,10 +32,19 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier:
         composable(route = NavigationScreenMore.ScreenTheme.route) {
             CustomViews()
         }
+        composable(route = NavigationScreenMore.ScreenNotification.route) {
+            ScreenPhone()
+        }
+        composable(route = NavigationScreenMore.ScreenSafety.route) {
+            ScreenCode()
+        }
     }
 }
 
 sealed class NavigationScreenMore(var route: String) {
     data object ScreenMore : NavigationScreenMore("profileScreen")
     data object ScreenTheme : NavigationScreenMore("themeScreen")
+    data object ScreenNotification : NavigationScreenMore("notificationScreen")
+    data object ScreenSafety : NavigationScreenMore("safetyScreen")
+
 }

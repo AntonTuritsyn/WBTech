@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens
+package com.turitsynanton.android.wbtech.ui.screens.mainscreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -82,7 +82,7 @@ fun ScreenMeetingDetails(modifier: Modifier, meetingTags: List<MeetingTag>, navC
             People(modifier = Modifier, size = 100)
             MyFilledButton(modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, bottom = 20.dp), text = "Пойду на встречу!", color = Color(0xFF9A41FE))
+                .padding(top = 16.dp, bottom = 20.dp), text = "Пойду на встречу!", color = Color(0xFF9A41FE), onClick = {})
         }
     }
 }
