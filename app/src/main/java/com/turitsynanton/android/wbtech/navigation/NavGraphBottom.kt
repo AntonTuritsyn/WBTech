@@ -2,20 +2,9 @@ package com.turitsynanton.android.wbtech.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import com.turitsynanton.android.wbtech.data.communities
-import com.turitsynanton.android.wbtech.data.meetingTag
-import com.turitsynanton.android.wbtech.data.meetings
-import com.turitsynanton.android.wbtech.data.tabs1
-import com.turitsynanton.android.wbtech.ui.drafts.CustomViews
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunities
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetingDetails
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetings
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMoreMenu
 import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @Composable

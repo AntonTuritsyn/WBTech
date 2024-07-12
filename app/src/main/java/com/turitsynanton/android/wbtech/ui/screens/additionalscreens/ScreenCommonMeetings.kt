@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens
+package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column

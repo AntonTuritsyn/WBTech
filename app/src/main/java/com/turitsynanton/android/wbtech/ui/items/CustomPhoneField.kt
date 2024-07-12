@@ -2,7 +2,6 @@ package com.turitsynanton.android.wbtech.ui.items
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -35,11 +34,15 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.data.User
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun CustomPhoneField(modifier: Modifier) {
+fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> Unit) {
+    val viewModel: MainViewModel = viewModel()
     var text by rememberSaveable { mutableStateOf("") }
     val flag = painterResource(id = R.drawable.flag)
     val countryCode = "+7"
@@ -87,6 +90,11 @@ fun CustomPhoneField(modifier: Modifier) {
             onValueChange = {
                 if (it.length <= maxPhoneNumberLength) {
                     text = it
+                }
+                if (it.length == maxPhoneNumberLength) {
+                    onPhoneEntered(user.copy(phone = it))
+                } else {
+                    onPhoneEntered(user.copy(""))
                 }
             },
             visualTransformation = PhoneVisualTransformation(),
@@ -162,5 +170,5 @@ class PhoneVisualTransformation : VisualTransformation {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    CustomPhoneField(Modifier)
+    CustomPhoneField(Modifier, user = User(""), onPhoneEntered = {})
 }

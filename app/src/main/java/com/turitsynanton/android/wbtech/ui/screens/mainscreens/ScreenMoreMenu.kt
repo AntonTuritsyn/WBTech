@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens
+package com.turitsynanton.android.wbtech.ui.screens.mainscreens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.navigation.NavigationMoreMenu
 import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
 import com.turitsynanton.android.wbtech.ui.components.MyMenuItem
 import com.turitsynanton.android.wbtech.ui.components.MyProfileItem
@@ -24,7 +23,9 @@ fun ScreenMoreMenu(
     modifier: Modifier,
     navHostController: NavHostController,
     onProfileScreen: () -> Unit,
-    onThemeDcreen: () -> Unit) {
+    onThemeScreen: () -> Unit,
+    onNotificationScreen: () -> Unit,
+    onSafetyScreen: () -> Unit) {
     Scaffold(
         topBar = {
             TopBarMainScreens(title = "Ещё", false)
@@ -62,10 +63,16 @@ fun ScreenMoreMenu(
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
             MyMenuItem(modifier = Modifier
                 .clickable {
-                    onThemeDcreen()
+                    onThemeScreen()
                 }, text = "Тема", icon = R.drawable.ic_theme)
-            MyMenuItem(modifier = Modifier, text = "Уведомления", icon = R.drawable.ic_notification)
-            MyMenuItem(modifier = Modifier, text = "Безопасность", icon = R.drawable.ic_safety)
+            MyMenuItem(modifier = Modifier
+                .clickable {
+                    onNotificationScreen()
+                }, text = "Уведомления", icon = R.drawable.ic_notification)
+            MyMenuItem(modifier = Modifier
+                .clickable {
+                    onSafetyScreen()
+                }, text = "Безопасность", icon = R.drawable.ic_safety)
             MyMenuItem(modifier = Modifier, text = "Память и ресурсы", icon = R.drawable.ic_memory)
             HorizontalDivider(thickness = 1.dp, color = Color(0xFFEDEDED))
             MyMenuItem(modifier = Modifier, text = "Помощь", icon = R.drawable.ic_help)

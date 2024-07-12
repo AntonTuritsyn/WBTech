@@ -20,12 +20,15 @@ import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
 
 @Composable
-fun MyFilledButton(modifier: Modifier, text: String, color: Color) {
+fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boolean = true, onClick: () -> Unit) {
     Button(
         modifier = modifier,
-        onClick = { /*TODO*/ },
+        onClick = { onClick() },
+        enabled = enable,
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
+            disabledContainerColor = Color(0xFF9A41FE),
+            disabledContentColor = Color(0xFFF7F7FC)
         )
     ) {
         Text(text = text)
@@ -61,8 +64,8 @@ fun MyOutlinedButton(modifier: Modifier, text: String, color: Color) {
 }
 
 @Composable
-fun MyTextButton(modifier: Modifier, text: String) {
-    TextButton(modifier = modifier, onClick = { /*TODO*/ }) {
+fun MyTextButton(modifier: Modifier, text: String, onClick: () -> Unit) {
+    TextButton(modifier = modifier, onClick = { onClick() }) {
         Text(text = text)
     }
 }
@@ -85,8 +88,10 @@ fun MyIconButton(modifier: Modifier, color: Color, icon: Painter) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewSmth() {
-    MyIconButton(modifier = Modifier
-        .size(height = 40.dp, width = 72.dp),
-        color = Color(0xFF9A41FE),
-        painterResource(id = R.drawable.ic_facebook))
+    MyFilledButton(
+        Modifier,
+        "Сохранить",
+        Color(0xFF660EC8),
+        onClick = {}
+    )
 }

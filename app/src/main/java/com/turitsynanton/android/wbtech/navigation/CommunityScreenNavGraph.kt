@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.wbtech.data.communities
 import com.turitsynanton.android.wbtech.data.meetings
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunities
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunityDetails
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
 
 fun NavGraphBuilder.communityScreenNavGraph(
     navController: NavHostController, modifier: Modifier
