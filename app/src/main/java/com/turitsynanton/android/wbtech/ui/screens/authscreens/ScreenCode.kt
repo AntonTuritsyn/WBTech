@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -24,14 +25,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.MainViewModel
+import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.items.CodeCustomTextField
 import com.turitsynanton.android.wbtech.ui.items.MyTextButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun ScreenCode(viewModel: MainViewModel = viewModel()) {
+fun ScreenCode(
+    viewModel: MainViewModel = viewModel(),
+    navController: NavHostController,
+    phoneNum: String
+) {
     val user by viewModel.user.collectAsState()
     Scaffold(
         topBar = {
@@ -62,7 +70,7 @@ fun ScreenCode(viewModel: MainViewModel = viewModel()) {
             )
             SomeText(
                 modifier = Modifier,
-                text = "Отправили код на номер\n${user?.phone}",
+                text = "Отправили код на номер\n +7 $phoneNum", // пока что мерзкий хардкод((
                 fontFamily = SfProDisplay,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
@@ -77,6 +85,7 @@ fun ScreenCode(viewModel: MainViewModel = viewModel()) {
             })
             Spacer(modifier = Modifier.padding(bottom = 68.dp))
             MyTextButton(modifier = Modifier, text = "Запросить код повторно") {
+                navController.navigate(route = Navigation.ScreenAddName.route)
                 Log.d("TAG", "phoneCode ${user?.phone}")
             }
         }
@@ -86,5 +95,9 @@ fun ScreenCode(viewModel: MainViewModel = viewModel()) {
 @Preview(showBackground = true)
 @Composable
 fun ScreenCodePreview() {
-    ScreenCode()
+    val navController = rememberNavController()
+    ScreenCode(
+        navController = navController,
+        phoneNum = ""
+    )
 }

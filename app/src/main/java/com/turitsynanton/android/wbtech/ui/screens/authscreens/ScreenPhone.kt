@@ -24,15 +24,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun ScreenPhone(viewModel: MainViewModel = viewModel()) {
+fun ScreenPhone(
+    viewModel: MainViewModel = viewModel(),
+    navController: NavHostController
+) {
     Scaffold(
         topBar = {
 //            TopBarMainScreens(title = "Встречи", true)
@@ -71,17 +77,21 @@ fun ScreenPhone(viewModel: MainViewModel = viewModel()) {
             )
             Spacer(modifier = Modifier.padding(bottom = 48.dp))
             CustomPhoneField(modifier = Modifier, user = User(), onPhoneEntered = {
-                userNum.phone = it.phone
+                val phoneNumber = it.phone
+                userNum.phone = phoneNumber
+                buttonEnable = userNum.phone.length == 10
             })
             Spacer(modifier = Modifier.padding(bottom = 68.dp))
             MyFilledButton(modifier = Modifier
                 .fillMaxWidth(),
                 text = "Продолжить",
                 color = Color(0xFF660EC8),
-                enable = false,
+                enable = buttonEnable,
                 onClick = {
-                    viewModel.updateUser(userNum)
-                    Log.d("TAG", "phone ${userNum.phone}") }
+                    navController.navigate("${Navigation.ScreenCode.route}/${userNum.phone}")
+//                    viewModel.updateUser(userNum)
+                    Log.d("TAG", "phone ${userNum.phone}")
+                }
             )
         }
     }
@@ -90,5 +100,6 @@ fun ScreenPhone(viewModel: MainViewModel = viewModel()) {
 @Preview(showBackground = true)
 @Composable
 fun ScreenPreview() {
-    ScreenPhone()
+    val navController = rememberNavController()
+    ScreenPhone(navController = navController)
 }

@@ -20,4 +20,7 @@ sealed class Navigation(var route: String, var icon: Int = 0, var title: String 
     data object ScreenTheme : Navigation("themeScreen")
     data object ScreenNotification : Navigation("notificationScreen")
     data object ScreenSafety : Navigation("safetyScreen")
+//    auth
+    data object ScreenCode : Navigation("codeScreen")
+    data object ScreenAddName : Navigation("addNameScreen")
 }

@@ -1,6 +1,7 @@
 package com.turitsynanton.android.wbtech.ui.screens.authscreens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -49,14 +51,15 @@ import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun ScreenAddName() {
+fun ScreenAddName(onClick: () -> Unit) {
     Scaffold(
         topBar = {
 //            TopBarMainScreens(title = "Встречи", true)
         }
     ) {
-        var userNum by remember { mutableStateOf(User()) }
+        var name by remember { mutableStateOf(User()) }
         var buttonEnable by remember { mutableStateOf(false) }
+        val context = LocalContext.current
 
         Column(
             modifier = Modifier
@@ -72,23 +75,31 @@ fun ScreenAddName() {
                 variant = 2,
                 resId = R.drawable.icon_variant_user
             )
-            TextFieldForAuth(hint = "Имя (обязательно)")
+            TextFieldForAuth(hint = "Имя (обязательно)", user = User()) {
+                name.name = it.name
+                buttonEnable = name.name.length > 1
+            }
             Spacer(modifier = Modifier.padding(bottom = 12.dp))
-            TextFieldForAuth(hint = "Фамилия (опционально)")
+            TextFieldForAuth(hint = "Фамилия (опционально)") {
+
+            }
             Spacer(modifier = Modifier.padding(bottom = 56.dp))
             MyFilledButton(modifier = Modifier
                 .fillMaxWidth(),
                 text = "Сохранить",
                 color = Color(0xFF660EC8),
-                enable = false,
-                onClick = {}
+                enable = buttonEnable,
+                onClick = {
+                    Toast.makeText(context, "!!!Успешно!!!", Toast.LENGTH_SHORT).show()
+                    onClick()
+                }
             )
         }
     }
 }
 
 @Composable
-fun TextFieldForAuth(hint: String) {
+fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) -> Unit) {
     var query: String by rememberSaveable { mutableStateOf("") }
     Row(
         Modifier
@@ -104,7 +115,10 @@ fun TextFieldForAuth(hint: String) {
                 .padding(8.dp),
             value = query,
             onValueChange = {
-                query = it
+                if (it.length > 1) {
+                    query = it
+                    onNameEntered(user.copy(name = it))
+                }
             },
             enabled = true,
             textStyle = TextStyle(
@@ -136,5 +150,5 @@ fun TextFieldForAuth(hint: String) {
 @Preview(showBackground = true)
 @Composable
 fun ScreenAddNamePreview() {
-    ScreenAddName()
+//    ScreenAddName()
 }

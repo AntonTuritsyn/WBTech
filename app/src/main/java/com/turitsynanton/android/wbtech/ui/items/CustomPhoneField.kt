@@ -92,6 +92,7 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
                     text = it
                 }
                 if (it.length == maxPhoneNumberLength) {
+//                    val phoneNum = "$countryCode $it"
                     onPhoneEntered(user.copy(phone = it))
                 } else {
                     onPhoneEntered(user.copy(""))

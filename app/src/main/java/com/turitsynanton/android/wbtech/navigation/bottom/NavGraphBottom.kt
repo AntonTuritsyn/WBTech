@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.navigation.communityScreenNavGraph
 import com.turitsynanton.android.wbtech.navigation.meetingScreenNavGraph
-import com.turitsynanton.android.wbtech.navigation.moreMenuNavGraph
+import com.turitsynanton.android.wbtech.navigation.moremenu.moreMenuNavGraph
 import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @Composable
