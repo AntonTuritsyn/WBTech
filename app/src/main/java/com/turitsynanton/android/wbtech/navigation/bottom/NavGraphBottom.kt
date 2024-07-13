@@ -1,10 +1,14 @@
-package com.turitsynanton.android.wbtech.navigation
+package com.turitsynanton.android.wbtech.navigation.bottom
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.turitsynanton.android.wbtech.navigation.Navigation
+import com.turitsynanton.android.wbtech.navigation.communityScreenNavGraph
+import com.turitsynanton.android.wbtech.navigation.meetingScreenNavGraph
+import com.turitsynanton.android.wbtech.navigation.moreMenuNavGraph
 import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @Composable
@@ -14,10 +18,10 @@ fun NavGraphBottom(
 ) {
     NavHost(
         navController = navController,
-        startDestination = SplashScreen.Splash.route
+        startDestination = Navigation.Splash.route
     )
     {
-        composable(route = SplashScreen.Splash.route) {
+        composable(route = Navigation.Splash.route) {
             SplashScreen(navController = navController)
         }
         meetingScreenNavGraph(
@@ -27,16 +31,4 @@ fun NavGraphBottom(
         communityScreenNavGraph(navController = navController, modifier = modifier)
         moreMenuNavGraph(navController = navController, modifier = modifier)
     }
-}
-
-sealed class SplashScreen(var route: String) {
-    data object Splash : SplashScreen("splashScreen")
-}
-
-sealed class NavigationMeetingDetails(var route: String) {
-    data object MeetingDetails : NavigationMeetingDetails("meetingDetails")
-}
-
-sealed class NavigationCommunityDetails(var route: String) {
-    data object CommunityDetails : NavigationCommunityDetails("communityDetails")
 }

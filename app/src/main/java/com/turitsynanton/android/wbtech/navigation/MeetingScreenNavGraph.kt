@@ -14,15 +14,15 @@ import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeeti
 
 fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController, modifier: Modifier) {
     navigation(
-        startDestination = NavigationBottomBar.Meetings.route,
-        route = NavigationBottomBar.MeetingsScreen.route
+        startDestination = Navigation.Meetings.route,
+        route = Navigation.MeetingsScreen.route
     ) {
-        composable(route = NavigationBottomBar.Meetings.route) {
+        composable(route = Navigation.Meetings.route) {
             ScreenMeetings(modifier, tabs1, meetings) {
-                navController.navigate(NavigationMeetingDetails.MeetingDetails.route)
+                navController.navigate(Navigation.MeetingDetails.route)
             }
         }
-        composable(route = NavigationMeetingDetails.MeetingDetails.route) {
+        composable(route = Navigation.MeetingDetails.route) {
             ScreenMeetingDetails(modifier, meetingTags = meetingTag, navController)
         }
     }

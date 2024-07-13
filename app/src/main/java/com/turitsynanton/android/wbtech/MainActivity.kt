@@ -5,16 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.turitsynanton.android.wbtech.navigation.NavGraphBottom
-import com.turitsynanton.android.wbtech.navigation.SplashScreen
-import com.turitsynanton.android.wbtech.navigation.rememberNavigationState
-import com.turitsynanton.android.wbtech.ui.organisms.BottomBar
+import com.turitsynanton.android.wbtech.navigation.bottom.NavGraphBottom
+import com.turitsynanton.android.wbtech.navigation.Navigation
+import com.turitsynanton.android.wbtech.navigation.bottom.BottomBar
 import com.turitsynanton.android.wbtech.ui.theme.WBTechTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,13 +21,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             WBTechTheme {
                 val navController = rememberNavController()
-//                val navigationState = rememberNavigationState()
-//                val navBackStackEntry by navigationState.navHostController.currentBackStackEntryAsState()
                 val showBottomBar = remember {
                     mutableStateOf(true)
                 }
                 navController.addOnDestinationChangedListener { _, destination, _ ->
-                    showBottomBar.value = destination.route != SplashScreen.Splash.route
+                    showBottomBar.value = destination.route != Navigation.Splash.route
                 }
                 Scaffold(
                     bottomBar = {

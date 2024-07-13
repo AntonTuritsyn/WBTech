@@ -13,38 +13,30 @@ import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
 
 fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier: Modifier) {
     navigation(
-        startDestination = NavigationBottomBar.More.route,
-        route = NavigationBottomBar.MoreScreen.route
+        startDestination = Navigation.More.route,
+        route = Navigation.MoreScreen.route
     ) {
-        composable(route = NavigationBottomBar.More.route) {
+        composable(route = Navigation.More.route) {
             ScreenMoreMenu(
                 modifier = modifier,
                 navHostController = navController,
-                onProfileScreen = { navController.navigate(NavigationScreenMore.ScreenMore.route) },
-                onThemeScreen = { navController.navigate(NavigationScreenMore.ScreenTheme.route) },
-                onNotificationScreen = { navController.navigate(NavigationScreenMore.ScreenNotification.route) },
-                onSafetyScreen = { navController.navigate(NavigationScreenMore.ScreenSafety.route) }
+                onProfileScreen = { navController.navigate(Navigation.ScreenMore.route) },
+                onThemeScreen = { navController.navigate(Navigation.ScreenTheme.route) },
+                onNotificationScreen = { navController.navigate(Navigation.ScreenNotification.route) },
+                onSafetyScreen = { navController.navigate(Navigation.ScreenSafety.route) }
                 )
         }
-        composable(route = NavigationScreenMore.ScreenMore.route) {
+        composable(route = Navigation.ScreenMore.route) {
             ScreenProfile()
         }
-        composable(route = NavigationScreenMore.ScreenTheme.route) {
+        composable(route = Navigation.ScreenTheme.route) {
             CustomViews()
         }
-        composable(route = NavigationScreenMore.ScreenNotification.route) {
+        composable(route = Navigation.ScreenNotification.route) {
             ScreenPhone()
         }
-        composable(route = NavigationScreenMore.ScreenSafety.route) {
+        composable(route = Navigation.ScreenSafety.route) {
             ScreenCode()
         }
     }
-}
-
-sealed class NavigationScreenMore(var route: String) {
-    data object ScreenMore : NavigationScreenMore("profileScreen")
-    data object ScreenTheme : NavigationScreenMore("themeScreen")
-    data object ScreenNotification : NavigationScreenMore("notificationScreen")
-    data object ScreenSafety : NavigationScreenMore("safetyScreen")
-
 }

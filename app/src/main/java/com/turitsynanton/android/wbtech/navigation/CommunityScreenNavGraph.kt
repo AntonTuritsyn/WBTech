@@ -14,15 +14,15 @@ fun NavGraphBuilder.communityScreenNavGraph(
     navController: NavHostController, modifier: Modifier
 ) {
     navigation(
-        startDestination = NavigationBottomBar.Communities.route,
-        route = NavigationBottomBar.CommunitiesScreen.route
+        startDestination = Navigation.Communities.route,
+        route = Navigation.CommunitiesScreen.route
     ) {
-        composable(route = NavigationBottomBar.Communities.route) {
+        composable(route = Navigation.Communities.route) {
             ScreenCommunities(modifier = modifier, communityList = communities) {
-                navController.navigate(NavigationCommunityDetails.CommunityDetails.route)
+                navController.navigate(Navigation.CommunityDetails.route)
             }
         }
-        composable(route = NavigationCommunityDetails.CommunityDetails.route) {
+        composable(route = Navigation.CommunityDetails.route) {
             ScreenCommunityDetails(meetingsList = meetings, modifier = modifier, navController) {
             }
         }
