@@ -90,14 +90,9 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
             value = text,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = {
-                if (it.length <= maxPhoneNumberLength) {
-                    text = it
-                }
-                if (it.length == maxPhoneNumberLength) {
-//                    val phoneNum = "$countryCode $it"
-                    onPhoneEntered(user.copy(phone = it))
-                } else {
-                    onPhoneEntered(user.copy(""))
+                when {
+                    it.length <= maxPhoneNumberLength -> text = it
+                    it.length == maxPhoneNumberLength -> onPhoneEntered(user.copy(phone = it))
                 }
             },
             visualTransformation = PhoneVisualTransformation(),
