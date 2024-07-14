@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.navigation.pages
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import kotlinx.coroutines.launch
 
@@ -56,7 +57,7 @@ fun TabLayout(tabsNames: List<String>, pagerState: PagerState) {
                         color = Color.Unspecified
                     )
                 },
-                selectedContentColor = Color(0xFF9A41FE),
+                selectedContentColor = BrandColorDefault,
                 unselectedContentColor = Color(0xFF666666)
             )
         }

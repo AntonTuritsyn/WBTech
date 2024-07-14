@@ -38,6 +38,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -60,7 +62,7 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
                 .fillMaxHeight()
                 .background(
                     shape = RoundedCornerShape(4.dp),
-                    color = Color(0xFFF7F7FC)
+                    color = NeutralSecondaryBG
                 ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -81,7 +83,7 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFADB5BD)
+                color = NeutralDisabled
             )
         }
         BasicTextField(
@@ -102,7 +104,10 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .background(Color(0xFFF7F7FC), RoundedCornerShape(4.dp)),
+                .background(
+                    NeutralSecondaryBG,
+                    shape = RoundedCornerShape(4.dp)
+                ),
             decorationBox = { innerTextField ->
                 Box(
                     Modifier
@@ -119,7 +124,7 @@ fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> U
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontStyle = FontStyle.Normal,
-                            color = Color(0xFFADB5BD)
+                            color = NeutralDisabled
                         )
                     innerTextField()
                 }

@@ -10,8 +10,8 @@ import com.turitsynanton.android.wbtech.data.meetings
 import com.turitsynanton.android.wbtech.data.tabs1
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
-import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetingDetails
-import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetings
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetings
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.Community
 import com.turitsynanton.android.wbtech.ui.components.СommunityCard
+import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
 fun CommunityList(communityList: List<Community>, onClick: (/*Community*/) -> Unit) {
@@ -35,7 +36,7 @@ fun CommunityList(communityList: List<Community>, onClick: (/*Community*/) -> Un
             HorizontalDivider(
                 modifier = Modifier.padding(top = 12.dp),
                 thickness = 1.dp,
-                color = Color(0xFFEDEDED)
+                color = NeutralLine
             )
         }
     }

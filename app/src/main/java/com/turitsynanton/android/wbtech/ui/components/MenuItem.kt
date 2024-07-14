@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -43,7 +44,7 @@ fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
             fontStyle = FontStyle.Normal,
-            color = Color(0xFF29183B)
+            color = NeutralActive
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowRight, contentDescription = "")

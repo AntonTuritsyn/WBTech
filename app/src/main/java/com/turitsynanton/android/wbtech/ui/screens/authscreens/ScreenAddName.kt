@@ -5,9 +5,11 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,20 +43,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.items.CustomAvatar
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDark
+import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun ScreenAddName(onClick: () -> Unit) {
+fun ScreenAddName(navController: NavHostController, onClick: () -> Unit) {
     Scaffold(
         topBar = {
-//            TopBarMainScreens(title = "Встречи", true)
+            TobBarAdditionalScreens("", navController, onBackPressed = {})
         }
     ) {
         var name by remember { mutableStateOf(User()) }
@@ -87,7 +94,7 @@ fun ScreenAddName(onClick: () -> Unit) {
             MyFilledButton(modifier = Modifier
                 .fillMaxWidth(),
                 text = "Сохранить",
-                color = Color(0xFF660EC8),
+                color = BrandColorDark,
                 enable = buttonEnable,
                 onClick = {
                     Toast.makeText(context, "!!!Успешно!!!", Toast.LENGTH_SHORT).show()
@@ -100,12 +107,15 @@ fun ScreenAddName(onClick: () -> Unit) {
 
 @Composable
 fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) -> Unit) {
-    var query: String by rememberSaveable { mutableStateOf("") }
+    var query by rememberSaveable { mutableStateOf("") }
     Row(
         Modifier
             .height(36.dp)
             .fillMaxWidth()
-            .background(shape = RoundedCornerShape(4.dp), color = Color(0xFFF7F7FC))
+            .background(
+                shape = RoundedCornerShape(4.dp),
+                color = NeutralSecondaryBG
+            )
             .clickable { },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -115,8 +125,8 @@ fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) ->
                 .padding(8.dp),
             value = query,
             onValueChange = {
+                query = it
                 if (it.length > 1) {
-                    query = it
                     onNameEntered(user.copy(name = it))
                 }
             },
@@ -128,21 +138,25 @@ fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) ->
                 fontWeight = FontWeight.Normal,
             ),
             decorationBox = { innerTextField ->
-                if (query.isEmpty()) {
-                    Text(
-                        text = hint,
-                        color = Color(0xFFADB5BD),
-                        fontSize = 14.sp,
-                        fontFamily = SfProDisplay,
-                        fontWeight = FontWeight.Normal
-                    )
+                Box(
+                    Modifier
+                        .padding(start = 8.dp)
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    if (query.isEmpty()) {
+                        Text(
+                            text = hint,
+                            color = NeutralDisabled,
+                            fontSize = 14.sp,
+                            fontFamily = SfProDisplay,
+                            fontWeight = FontWeight.Normal
+                        )
+                    }
                 }
                 innerTextField()
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Search
-            )
+            }
         )
     }
 }

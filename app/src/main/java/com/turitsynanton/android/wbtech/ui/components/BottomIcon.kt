@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -31,7 +32,7 @@ fun BottomIcon(isPressed: Boolean, title: String, icon: Int) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFF29183B)
+                color = NeutralActive
             )
             Icon(painter = painterResource(id = R.drawable.ic_dot), contentDescription = "")
         } else {

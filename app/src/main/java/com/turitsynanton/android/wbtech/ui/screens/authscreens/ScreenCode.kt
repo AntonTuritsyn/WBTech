@@ -29,6 +29,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.navigation.Navigation
+import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.items.CodeCustomTextField
 import com.turitsynanton.android.wbtech.ui.items.MyTextButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
@@ -43,7 +44,7 @@ fun ScreenCode(
     val user by viewModel.user.collectAsState()
     Scaffold(
         topBar = {
-//            TopBarMainScreens(title = "Встречи", true)
+            TobBarAdditionalScreens("", navController, onBackPressed = {})
         }
     ) {
         var otpValue by remember {

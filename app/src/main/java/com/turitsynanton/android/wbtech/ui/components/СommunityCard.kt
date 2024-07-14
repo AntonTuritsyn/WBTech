@@ -20,6 +20,7 @@ import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.meetingTag
 import com.turitsynanton.android.wbtech.ui.items.Avatar
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -54,7 +55,7 @@ fun СommunityCard(modifier: Modifier, resId: Int, text: String, communitySize: 
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFA4A4A4)
+                color = NeutralWeak
             )
         }
     }

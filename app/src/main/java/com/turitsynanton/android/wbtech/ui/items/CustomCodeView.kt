@@ -42,6 +42,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
+import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -108,7 +110,7 @@ private fun CharView(
                 )
                 .background(
                     color = if (char == "") {
-                        Color(0xFFEDEDED)
+                        NeutralLine
                     } else {
                         Color.Unspecified
                     },
@@ -122,7 +124,7 @@ private fun CharView(
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Normal,
-            color = Color(0xFF29183B)
+            color = NeutralActive
         )
     }
 }

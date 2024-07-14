@@ -25,7 +25,7 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier:
                 onProfileScreen = { navController.navigate(Navigation.ScreenMore.route) },
                 onThemeScreen = { navController.navigate(Navigation.ScreenTheme.route) },
                 onNotificationScreen = { navController.navigate(Navigation.ScreenNotification.route) },
-                onSafetyScreen = { navController.navigate(Navigation.ScreenSafety.route) }
+                onSafetyScreen = { /*navController.navigate(Navigation.ScreenSafety.route)*/ }
                 )
         }
         composable(route = Navigation.ScreenMore.route) {
@@ -44,8 +44,7 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier:
             }
         }
         composable(route = Navigation.ScreenAddName.route) {
-            ScreenAddName() {
-
+            ScreenAddName(navController = navController) {
             }
         }
     }

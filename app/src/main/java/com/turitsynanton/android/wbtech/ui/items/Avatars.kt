@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 
 @Composable
 fun Avatar(modifier: Modifier, resId: Int) {
@@ -75,27 +76,28 @@ fun CustomAvatar(
                 size
             )
             .background(
-                color = Color(0xFFF7F7FC),
+                color = NeutralSecondaryBG,
                 shape = CircleShape
             ),
         contentAlignment = Alignment.Center
     ) {
-        Avatar(modifier = Modifier
-            .scale(
-                /*scale*/
-                if (resId == R.drawable.icon_variant_user) {
-                    scale
-                } else {
-                    1f
-                }
-            )
-            .clip(
-                (if (resId != R.drawable.icon_variant_user) {
-                    CircleShape
-                } else {
-                    RectangleShape
-                })
-            ), resId = resId)
+        Avatar(
+            modifier = Modifier
+                .scale(
+                    if (resId == R.drawable.icon_variant_user) {
+                        scale
+                    } else {
+                        1f
+                    }
+                )
+                .clip(
+                    (if (resId != R.drawable.icon_variant_user) {
+                        CircleShape
+                    } else {
+                        RectangleShape
+                    })
+                ), resId = resId
+        )
         if (variant == 2) {
             Icon(
                 imageVector = Icons.Sharp.AddCircle,
@@ -103,6 +105,5 @@ fun CustomAvatar(
                 modifier = Modifier.align(Alignment.BottomEnd)
             )
         }
-
     }
 }

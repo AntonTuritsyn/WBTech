@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.components.BottomIcon
+import com.turitsynanton.android.wbtech.ui.theme.NeutralWhite
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -22,8 +23,8 @@ fun BottomBar(navController: NavHostController) {
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     NavigationBar(
-        contentColor = Color(0xFFFFFFFF),
-        containerColor = Color(0xFFFFFFFF)
+        contentColor = NeutralWhite,
+        containerColor = NeutralWhite
     ) {
         screens.forEach { screen ->
             AddItem(
@@ -58,10 +59,10 @@ fun RowScope.AddItem(
         alwaysShowLabel = false,
         colors = NavigationBarItemColors(
             selectedIconColor = Color.Unspecified,
-            selectedTextColor = Color(0xFFFFFFFF),
-            selectedIndicatorColor = Color(0xFFFFFFFF),
+            selectedTextColor = NeutralWhite,
+            selectedIndicatorColor = NeutralWhite,
             unselectedIconColor = Color.Unspecified,
-            unselectedTextColor = Color(0xFFFFFFFF),
+            unselectedTextColor = NeutralWhite,
             disabledIconColor = Color.Unspecified,
             disabledTextColor = Color.Unspecified
         )

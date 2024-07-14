@@ -39,6 +39,7 @@ fun ScreenPhone(
     viewModel: MainViewModel = viewModel(),
     navController: NavHostController
 ) {
+    val maxPhoneNumberLength = 10
     Scaffold(
         topBar = {
 //            TopBarMainScreens(title = "Встречи", true)
@@ -79,7 +80,7 @@ fun ScreenPhone(
             CustomPhoneField(modifier = Modifier, user = User(), onPhoneEntered = {
                 val phoneNumber = it.phone
                 userNum.phone = phoneNumber
-                buttonEnable = userNum.phone.length == 10
+                buttonEnable = userNum.phone.length == maxPhoneNumberLength
             })
             Spacer(modifier = Modifier.padding(bottom = 68.dp))
             MyFilledButton(modifier = Modifier

@@ -18,6 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 
 @Composable
 fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boolean = true, onClick: () -> Unit) {
@@ -27,8 +29,8 @@ fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boole
         enabled = enable,
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
-            disabledContainerColor = Color(0xFF9A41FE),
-            disabledContentColor = Color(0xFFF7F7FC)
+            disabledContainerColor = BrandColorDefault,
+            disabledContentColor = NeutralSecondaryBG
         )
     ) {
         Text(text = text)
