@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+//    viewModel
+    implementation(libs.androidx.viewmodel.compose)
 //    coil
     implementation(libs.coil)
 //    lottie
