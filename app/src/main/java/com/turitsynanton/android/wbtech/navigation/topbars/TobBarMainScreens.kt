@@ -17,18 +17,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarMainScreens(title: String, mayAdd: Boolean) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    /*CenterAligned*/
+
     TopAppBar(
         modifier = Modifier.padding(horizontal = 6.dp),
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Unspecified,
-            titleContentColor = Color(0xFF29183B)
+            titleContentColor = NeutralActive
         ),
         title = {
             SomeText(
@@ -38,7 +39,7 @@ fun TopBarMainScreens(title: String, mayAdd: Boolean) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFF29183B)
+                color = NeutralActive
             )
         },
         actions = {

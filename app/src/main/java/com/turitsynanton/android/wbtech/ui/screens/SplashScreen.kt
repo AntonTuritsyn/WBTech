@@ -8,9 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.airbnb.lottie.compose.*
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.navigation.NavigationBottomBar
-import com.turitsynanton.android.wbtech.navigation.NavigationState
-import com.turitsynanton.android.wbtech.navigation.SplashScreen
+import com.turitsynanton.android.wbtech.navigation.Navigation
 
 @Composable
 fun SplashScreen(navController: NavHostController) {
@@ -24,9 +22,8 @@ fun SplashScreen(navController: NavHostController) {
 
         LottieAnimation(composition = composition, progress = { logoAnimationState.progress })
         if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
-//            navigationState.navigateTo(NavigationBottomBar.Meetings.route)
-            navController.navigate(NavigationBottomBar.Meetings.route) {
-                popUpTo(SplashScreen.Splash.route) {
+            navController.navigate(Navigation.Meetings.route) {
+                popUpTo(Navigation.Splash.route) {
                     inclusive = true
                 }
             }

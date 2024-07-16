@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens
+package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,20 +15,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.ui.items.CustomAvatar
 import com.turitsynanton.android.wbtech.ui.items.MyIconButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
+import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
+import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
+import com.turitsynanton.android.wbtech.ui.theme.NeutralWhite
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
 fun ScreenProfile() {
     Scaffold(
         Modifier,
-        containerColor = Color(0xFFFFFFFF)
+        containerColor = NeutralWhite
     ) {
         Column(
             Modifier
@@ -47,7 +50,7 @@ fun ScreenProfile() {
                 fontSize = 24.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFF29183B)
+                color = NeutralActive
             )
             Spacer(modifier = Modifier.padding(vertical = 2.dp))
             SomeText(
@@ -57,7 +60,7 @@ fun ScreenProfile() {
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFADB5BD)
+                color = NeutralDisabled
             )
             Spacer(modifier = Modifier.padding(vertical = 20.dp))
             Row(
@@ -74,7 +77,7 @@ fun ScreenProfile() {
                 MyIconButton(
                     modifier = Modifier
                         .size(width = 72.dp, height = 40.dp),
-                    color = Color(0xFF9A41FE),
+                    color = BrandColorDefault,
                     icon = painterResource(
                         id = R.drawable.ic_inst
                     )
@@ -82,7 +85,7 @@ fun ScreenProfile() {
                 MyIconButton(
                     modifier = Modifier
                         .size(width = 72.dp, height = 40.dp),
-                    color = Color(0xFF9A41FE),
+                    color = BrandColorDefault,
                     icon = painterResource(
                         id = R.drawable.ic_linkedin
                     )
@@ -90,7 +93,7 @@ fun ScreenProfile() {
                 MyIconButton(
                     modifier = Modifier
                         .size(width = 72.dp, height = 40.dp),
-                    color = Color(0xFF9A41FE),
+                    color = BrandColorDefault,
                     icon = painterResource(
                         id = R.drawable.ic_facebook
                     )

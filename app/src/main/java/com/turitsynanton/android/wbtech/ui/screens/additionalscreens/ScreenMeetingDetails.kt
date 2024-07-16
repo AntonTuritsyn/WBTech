@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens
+package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,11 +26,17 @@ import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.organisms.MapView
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
+import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenMeetingDetails(modifier: Modifier, meetingTags: List<MeetingTag>, navController: NavHostController) {
+fun ScreenMeetingDetails(
+    modifier: Modifier,
+    meetingTags: List<MeetingTag>,
+    navController: NavHostController
+) {
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("Developer meeting", navController, onBackPressed = {})
@@ -51,7 +57,7 @@ fun ScreenMeetingDetails(modifier: Modifier, meetingTags: List<MeetingTag>, navC
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFA4A4A4)
+                color = NeutralWeak
             )
             LazyRow(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -76,13 +82,17 @@ fun ScreenMeetingDetails(modifier: Modifier, meetingTags: List<MeetingTag>, navC
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFA4A4A4)
+                color = NeutralWeak
             )
             Spacer(modifier = Modifier.weight(1f))
             People(modifier = Modifier, size = 100)
-            MyFilledButton(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp, bottom = 20.dp), text = "Пойду на встречу!", color = Color(0xFF9A41FE))
+            MyFilledButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp, bottom = 20.dp),
+                text = "Пойду на встречу!",
+                color = BrandColorDefault, onClick = {}
+            )
         }
     }
 }

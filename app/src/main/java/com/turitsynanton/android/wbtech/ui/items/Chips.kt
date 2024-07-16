@@ -16,6 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorBG
+import com.turitsynanton.android.wbtech.ui.theme.BrandColorDark
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -24,7 +26,7 @@ fun MyFilterChip(modifier: Modifier, text: String) {
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .background(
-                Color(0xFFF5ECFF),
+                color = BrandColorBG,
                 shape = RoundedCornerShape(40.dp)
             )
     ) {
@@ -36,7 +38,7 @@ fun MyFilterChip(modifier: Modifier, text: String) {
             fontSize = 10.sp,
             fontWeight = FontWeight.SemiBold,
             fontStyle = FontStyle.Normal,
-            color = Color(0xFF660EC8)
+            color = BrandColorDark
         )
     }
 }

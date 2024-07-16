@@ -2,7 +2,6 @@ package com.turitsynanton.android.wbtech.ui.items
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -35,11 +34,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun CustomPhoneField(modifier: Modifier) {
+fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> Unit) {
+    val viewModel: MainViewModel = viewModel()
     var text by rememberSaveable { mutableStateOf("") }
     val flag = painterResource(id = R.drawable.flag)
     val countryCode = "+7"
@@ -57,7 +62,7 @@ fun CustomPhoneField(modifier: Modifier) {
                 .fillMaxHeight()
                 .background(
                     shape = RoundedCornerShape(4.dp),
-                    color = Color(0xFFF7F7FC)
+                    color = NeutralSecondaryBG
                 ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -78,22 +83,26 @@ fun CustomPhoneField(modifier: Modifier) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontStyle = FontStyle.Normal,
-                color = Color(0xFFADB5BD)
+                color = NeutralDisabled
             )
         }
         BasicTextField(
             value = text,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = {
-                if (it.length <= maxPhoneNumberLength) {
-                    text = it
+                when {
+                    it.length <= maxPhoneNumberLength -> text = it
+                    it.length == maxPhoneNumberLength -> onPhoneEntered(user.copy(phone = it))
                 }
             },
             visualTransformation = PhoneVisualTransformation(),
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .background(Color(0xFFF7F7FC), RoundedCornerShape(4.dp)),
+                .background(
+                    NeutralSecondaryBG,
+                    shape = RoundedCornerShape(4.dp)
+                ),
             decorationBox = { innerTextField ->
                 Box(
                     Modifier
@@ -110,7 +119,7 @@ fun CustomPhoneField(modifier: Modifier) {
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontStyle = FontStyle.Normal,
-                            color = Color(0xFFADB5BD)
+                            color = NeutralDisabled
                         )
                     innerTextField()
                 }
@@ -162,5 +171,5 @@ class PhoneVisualTransformation : VisualTransformation {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    CustomPhoneField(Modifier)
+    CustomPhoneField(Modifier, user = User(""), onPhoneEntered = {})
 }

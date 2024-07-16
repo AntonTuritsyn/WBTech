@@ -15,6 +15,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -27,10 +28,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -46,7 +49,9 @@ fun SomeText(
     fontSize: TextUnit,
     fontWeight: FontWeight,
     fontStyle: FontStyle,
-    color: Color
+    color: Color,
+    textAlign: TextAlign? = null,
+    lineHeight: TextStyle = LocalTextStyle.current
 ) {
     Text(
         letterSpacing = 0.5.sp,
@@ -56,7 +61,9 @@ fun SomeText(
         fontSize = fontSize,
         fontWeight = fontWeight,
         fontStyle = fontStyle,
-        color = color
+        color = color,
+        textAlign = textAlign,
+        style = lineHeight
     )
 }
 

@@ -28,6 +28,7 @@ import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.data.MeetingTag
 import com.turitsynanton.android.wbtech.data.meetingTag
+import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
@@ -40,7 +41,6 @@ fun MeetingCard(
     meetingCity: String,
     meetingTags: List<MeetingTag>
 ) {
-//    ИСПРАВИТЬ РАЗМЕРЫ!!!!
     val isEnded by remember {
         mutableStateOf(ended)
     }
@@ -78,11 +78,10 @@ fun MeetingCard(
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Normal,
                         fontStyle = FontStyle.Normal,
-                        color = Color(0xFFA4A4A4)
+                        color = NeutralWeak
                     )
                 }
             }
-//            Spacer(modifier = Modifier.weight(1f))
             Row {
                 SomeText(
                     modifier = Modifier,
@@ -91,11 +90,9 @@ fun MeetingCard(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Normal,
                     fontStyle = FontStyle.Normal,
-                    color = Color(0xFFA4A4A4)
+                    color = NeutralWeak
                 )
             }
-
-//            Spacer(modifier = Modifier.weight(1f))
             LazyRow(
                 modifier = Modifier
                     .padding(vertical = 4.dp),

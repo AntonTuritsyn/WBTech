@@ -8,12 +8,12 @@ import com.turitsynanton.android.wbtech.data.communities
 import com.turitsynanton.android.wbtech.data.meetingTag
 import com.turitsynanton.android.wbtech.data.meetings
 import com.turitsynanton.android.wbtech.data.tabs1
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunities
-import com.turitsynanton.android.wbtech.ui.screens.ScreenCommunityDetails
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetingDetails
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMeetings
-import com.turitsynanton.android.wbtech.ui.screens.ScreenMoreMenu
-import com.turitsynanton.android.wbtech.ui.screens.ScreenProfile
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetings
+import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
+import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
 
 @Preview(showBackground = true)
 @Composable
@@ -46,7 +46,9 @@ fun PreviewMoreMenu() {
         modifier = Modifier,
         navController,
         onProfileScreen = {},
-        onThemeDcreen = {}
+        onThemeScreen = {},
+        onNotificationScreen = {},
+        onSafetyScreen = {}
     )
 }
 

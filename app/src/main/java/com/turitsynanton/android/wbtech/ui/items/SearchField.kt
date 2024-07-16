@@ -29,6 +29,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
+import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,8 +42,8 @@ fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
             .padding(vertical = 16.dp)
             .height(36.dp)
             .fillMaxWidth()
-            .background(shape = RoundedCornerShape(4.dp), color = Color(0xFFF7F7FC))
-            .clickable { false },
+            .background(shape = RoundedCornerShape(4.dp), color = NeutralSecondaryBG)
+            .clickable { },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -49,7 +51,8 @@ fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
             modifier = Modifier
                 .padding(start = 8.dp),
             contentDescription = "",
-            tint = Color(0xFFADB5BD))
+            tint = NeutralDisabled
+        )
         BasicTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,7 +72,7 @@ fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
                 if (query.isEmpty()) {
                     Text(
                         text = "Поиск",
-                        color = Color(0xFFADB5BD),
+                        color = NeutralDisabled,
                         fontSize = 14.sp,
                         fontFamily = SfProDisplay,
                         fontWeight = FontWeight.Normal

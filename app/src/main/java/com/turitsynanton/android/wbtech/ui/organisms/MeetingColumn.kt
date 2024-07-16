@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
 import com.turitsynanton.android.wbtech.data.Meeting
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
+import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
 fun MeetingColumn(meetingsList: List<Meeting>, onClick: () -> Unit) {
@@ -36,7 +37,7 @@ fun MeetingColumn(meetingsList: List<Meeting>, onClick: () -> Unit) {
             HorizontalDivider(
                 modifier = Modifier.padding(top = 12.dp),
                 thickness = 1.dp,
-                color = Color(0xFFEDEDED)
+                color = NeutralLine
             )
         }
     }
