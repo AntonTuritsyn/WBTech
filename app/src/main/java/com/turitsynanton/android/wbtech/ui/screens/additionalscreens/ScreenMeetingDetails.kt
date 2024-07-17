@@ -11,7 +11,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.MeetingTag
+import com.turitsynanton.android.wbtech.data.storage.models.MeetingTag
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.People
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton

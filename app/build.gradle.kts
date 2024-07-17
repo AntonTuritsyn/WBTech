@@ -60,8 +60,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+//    coroutines
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
+    implementation(libs.jetbrains.kotlinx.coroutines.android)
 //    viewModel
     implementation(libs.androidx.viewmodel.compose)
+//    koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
 //    coil
     implementation(libs.coil)
 //    lottie

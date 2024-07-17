@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.ui.screens.screenstate
 
-import com.turitsynanton.android.wbtech.data.Community
-import com.turitsynanton.android.wbtech.data.Meeting
+import com.turitsynanton.android.wbtech.data.storage.models.Community
+import com.turitsynanton.android.wbtech.data.storage.models.Meeting
 
 
 sealed class CommunitiesScreenState {

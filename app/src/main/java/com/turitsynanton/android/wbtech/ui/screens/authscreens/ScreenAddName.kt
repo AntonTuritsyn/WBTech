@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.ui.screens.authscreens
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,11 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.sharp.Search
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,37 +28,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.data.storage.models.User
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
+import com.turitsynanton.android.wbtech.ui.components.TextFieldForAuth
 import com.turitsynanton.android.wbtech.ui.items.CustomAvatar
-import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
-import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.screens.viewmodels.AuthViewModel
 import com.turitsynanton.android.wbtech.ui.theme.BrandColorDark
 import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ScreenAddName(navController: NavHostController, onClick: () -> Unit) {
+fun ScreenAddName(
+    authViewModel: AuthViewModel = koinViewModel(),
+    navController: NavHostController, onClick: () -> Unit) {
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("", navController, onBackPressed = {})
         }
     ) {
-        var name by remember { mutableStateOf(User()) }
+        var name by remember { mutableStateOf("") }
+        var surname by remember { mutableStateOf("") }
         var buttonEnable by remember { mutableStateOf(false) }
         val context = LocalContext.current
 
@@ -83,12 +76,12 @@ fun ScreenAddName(navController: NavHostController, onClick: () -> Unit) {
                 resId = R.drawable.icon_variant_user
             )
             TextFieldForAuth(hint = "Имя (обязательно)", user = User()) {
-                name.name = it.name
-                buttonEnable = name.name.length > 1
+                name = it.name
+                buttonEnable = name.length > 1
             }
             Spacer(modifier = Modifier.padding(bottom = 12.dp))
-            TextFieldForAuth(hint = "Фамилия (опционально)") {
-
+            TextFieldForAuth(hint = "Фамилия (опционально)", user = User()) {
+                surname = it.surname
             }
             Spacer(modifier = Modifier.padding(bottom = 56.dp))
             MyFilledButton(modifier = Modifier
@@ -98,66 +91,11 @@ fun ScreenAddName(navController: NavHostController, onClick: () -> Unit) {
                 enable = buttonEnable,
                 onClick = {
                     Toast.makeText(context, "!!!Успешно!!!", Toast.LENGTH_SHORT).show()
+                    authViewModel.saveUser(newUser = User(name =  name, surname = surname))
                     onClick()
                 }
             )
         }
-    }
-}
-
-@Composable
-fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) -> Unit) {
-    var query by rememberSaveable { mutableStateOf("") }
-    Row(
-        Modifier
-            .height(36.dp)
-            .fillMaxWidth()
-            .background(
-                shape = RoundedCornerShape(4.dp),
-                color = NeutralSecondaryBG
-            )
-            .clickable { },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        BasicTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            value = query,
-            onValueChange = {
-                query = it
-                if (it.length > 1) {
-                    onNameEntered(user.copy(name = it))
-                }
-            },
-            enabled = true,
-            textStyle = TextStyle(
-                color = Color(0xFF666666),
-                fontSize = 14.sp,
-                fontFamily = SfProDisplay,
-                fontWeight = FontWeight.Normal,
-            ),
-            decorationBox = { innerTextField ->
-                Box(
-                    Modifier
-                        .padding(start = 8.dp)
-                        .weight(1f)
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    if (query.isEmpty()) {
-                        Text(
-                            text = hint,
-                            color = NeutralDisabled,
-                            fontSize = 14.sp,
-                            fontFamily = SfProDisplay,
-                            fontWeight = FontWeight.Normal
-                        )
-                    }
-                }
-                innerTextField()
-            }
-        )
     }
 }
 

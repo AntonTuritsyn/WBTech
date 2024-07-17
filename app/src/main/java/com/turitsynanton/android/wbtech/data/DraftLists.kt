@@ -1,5 +1,9 @@
 package com.turitsynanton.android.wbtech.data
 
+import com.turitsynanton.android.wbtech.data.storage.models.Community
+import com.turitsynanton.android.wbtech.data.storage.models.Meeting
+import com.turitsynanton.android.wbtech.data.storage.models.MeetingTag
+
 val tabs1 = listOf("Все встречи", "Активные")
 val tabs2 = listOf("Запланировано", "Уже прошли")
 val meetingTag = listOf(

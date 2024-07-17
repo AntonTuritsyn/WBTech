@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.data.storage.models.User
 import com.turitsynanton.android.wbtech.ui.items.CodeCustomTextField
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 

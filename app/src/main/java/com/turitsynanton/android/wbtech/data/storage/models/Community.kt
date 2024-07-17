@@ -1,6 +1,4 @@
-package com.turitsynanton.android.wbtech.data
-
-import android.nfc.Tag
+package com.turitsynanton.android.wbtech.data.storage.models
 
 data class Community(
     val id: Long,
