@@ -31,7 +31,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ScreenProfile(authViewModel: AuthViewModel = koinViewModel()) {
-    val myProfile = authViewModel.getUserInfoFlow()
+//    val myProfile = authViewModel.getUserInfoFlow()
     Scaffold(
         Modifier,
         containerColor = NeutralWhite
