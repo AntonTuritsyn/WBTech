@@ -9,7 +9,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -17,17 +16,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.Meeting
+import com.turitsynanton.android.wbtech.data.storage.models.Meeting
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.screens.viewmodels.CommunityDetailsViewModel
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenCommunityDetails(meetingsList: List<Meeting>, modifier: Modifier, navController: NavHostController, onBackPressed: () -> Unit) {
+fun ScreenCommunityDetails(
+    meetingsList: List<Meeting>,
+    modifier: Modifier,
+    communityDetailsViewModel: CommunityDetailsViewModel = koinViewModel(),
+    navController: NavHostController,
+    onBackPressed: () -> Unit
+) {
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("Designa", navController, onBackPressed)

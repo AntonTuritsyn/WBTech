@@ -21,7 +21,7 @@ fun PreviewCommonMeetings() {
     ScreenMeetings(
         modifier = Modifier,
         tabs = tabs1,
-        meetingsList = meetings
+//        meetingsList = meetings
     ) {
 
     }
@@ -31,8 +31,7 @@ fun PreviewCommonMeetings() {
 @Composable
 fun PreviewCommunities() {
     ScreenCommunities(
-        modifier = Modifier,
-        communityList = communities
+        modifier = Modifier
     ) {
 
     }

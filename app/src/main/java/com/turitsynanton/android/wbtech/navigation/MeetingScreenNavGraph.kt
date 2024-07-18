@@ -18,7 +18,7 @@ fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController, modi
         route = Navigation.MeetingsScreen.route
     ) {
         composable(route = Navigation.Meetings.route) {
-            ScreenMeetings(modifier, tabs1, meetings) {
+            ScreenMeetings(modifier, tabs1) {
                 navController.navigate(Navigation.MeetingDetails.route)
             }
         }

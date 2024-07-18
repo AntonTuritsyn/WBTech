@@ -18,7 +18,7 @@ fun NavGraphBuilder.communityScreenNavGraph(
         route = Navigation.CommunitiesScreen.route
     ) {
         composable(route = Navigation.Communities.route) {
-            ScreenCommunities(modifier = modifier, communityList = communities) {
+            ScreenCommunities(modifier = modifier) {
                 navController.navigate(Navigation.CommunityDetails.route)
             }
         }

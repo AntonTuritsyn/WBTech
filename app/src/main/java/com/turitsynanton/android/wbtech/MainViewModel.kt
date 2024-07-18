@@ -1,16 +1,14 @@
 package com.turitsynanton.android.wbtech
 
 import androidx.lifecycle.ViewModel
-import com.turitsynanton.android.wbtech.data.Community
-import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.data.storage.models.Community
+import com.turitsynanton.android.wbtech.data.storage.models.User
 import com.turitsynanton.android.wbtech.data.communities
 import com.turitsynanton.android.wbtech.data.meetings
 import com.turitsynanton.android.wbtech.ui.screens.screenstate.CommunitiesScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.update
 
 class MainViewModel: ViewModel() {
     private val allMeetings = meetings
@@ -37,6 +35,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun updateUser(user: User) {
+//        need emit
         _user.value = user
     }
 }

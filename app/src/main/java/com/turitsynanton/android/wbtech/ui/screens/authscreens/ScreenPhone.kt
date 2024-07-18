@@ -27,16 +27,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.MainViewModel
-import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.data.storage.models.User
 import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
+import com.turitsynanton.android.wbtech.ui.screens.viewmodels.AuthViewModel
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
 fun ScreenPhone(
-    viewModel: MainViewModel = viewModel(),
     navController: NavHostController
 ) {
     val maxPhoneNumberLength = 10
