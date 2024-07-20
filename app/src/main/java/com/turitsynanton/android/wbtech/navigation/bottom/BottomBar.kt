@@ -67,5 +67,4 @@ fun RowScope.AddItem(
             disabledTextColor = Color.Unspecified
         )
     )
-    Log.d("TAG", "isSelected $isSelected")
 }

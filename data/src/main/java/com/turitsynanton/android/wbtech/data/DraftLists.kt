@@ -1,186 +1,186 @@
 package com.turitsynanton.android.wbtech.data
 
-import com.turitsynanton.android.wbtech.data.storage.models.Community
-import com.turitsynanton.android.wbtech.data.storage.models.Meeting
-import com.turitsynanton.android.wbtech.data.storage.models.MeetingTag
+import com.turitsynanton.android.wbtech.data.storage.models.DataCommunity
+import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
+import com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag
 
 val tabs1 = listOf("Все встречи", "Активные")
 val tabs2 = listOf("Запланировано", "Уже прошли")
-val meetingTag = listOf(
-    MeetingTag(
+val dataMeetingTags = listOf(
+    DataMeetingTag(
         "Java"
     ),
-    MeetingTag(
+    DataMeetingTag(
         "Kotlin"
     ),
-    MeetingTag(
+    DataMeetingTag(
         "Android"
     )
 )
 
-val meetings = listOf(
-    Meeting(
+val dataMeetings = listOf(
+    DataMeeting(
         1,
         "Developer meet",
         "11.12.2023",
         "Moscow",
         true,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         2,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
         true,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         3,
         "Android meet",
         "11.08.2024",
         "Kazan",
         false,
-        meetingTag
+        dataMeetingTags
     )
     ,
-    Meeting(
+    DataMeeting(
         4,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
         true,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         5,
         "Android meet",
         "11.08.2024",
         "Kazan",
         false,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         6,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
         true,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         7,
         "Android meet",
         "11.08.2024",
         "Kazan",
         false,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         8,
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
         true,
-        meetingTag
+        dataMeetingTags
     ),
-    Meeting(
+    DataMeeting(
         9,
         "LAST meet",
         "11.08.2024",
         "Kazan",
         false,
-        meetingTag
+        dataMeetingTags
     )
 )
 
-val communities = listOf(
-    Community(
+val dataCommunities = listOf(
+    DataCommunity(
         1,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         2,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         3,
         "Kotlin comm",
         "19348275",
     ),
-    Community(
+    DataCommunity(
         4,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         5,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         6,
         "Kotlin comm",
         "19348275",
     ),
-    Community(
+    DataCommunity(
         7,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         8,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         9,
         "Kotlin comm",
         "19348275",
     ),
-    Community(
+    DataCommunity(
         10,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         11,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         12,
         "Kotlin comm",
         "19348275",
     ),
-    Community(
+    DataCommunity(
         13,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         14,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         15,
         "Kotlin comm",
         "19348275",
     ),
-    Community(
+    DataCommunity(
         16,
         "Developer comm",
         "10112",
     ),
-    Community(
+    DataCommunity(
         17,
         "Android comm",
         "10",
     ),
-    Community(
+    DataCommunity(
         16,
         "LAST",
         "19348275",

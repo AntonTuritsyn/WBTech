@@ -6,8 +6,9 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import com.turitsynanton.android.wbtech.navigation.MeetingPageTabs
 import com.turitsynanton.android.wbtech.navigation.pages
-import com.turitsynanton.android.wbtech.data.storage.models.Meeting
+import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
 import com.turitsynanton.android.wbtech.data.tabs2
+import com.turitsynanton.android.wbtech.domain.models.Meeting
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

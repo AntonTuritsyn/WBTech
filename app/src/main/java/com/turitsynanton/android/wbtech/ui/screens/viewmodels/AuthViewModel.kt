@@ -12,18 +12,20 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _userInfo: MutableStateFlow<User> = MutableStateFlow(User())
+/*    private val _userInfo: MutableStateFlow<User> = MutableStateFlow(
+        com.turitsynanton.android.wbtech.data.storage.models.User()
+    )
     fun getUserInfoFlow(): StateFlow<User> = _userInfo.asStateFlow()
 
-    fun saveUser(newUser: User) {
+    fun saveUser(newUser: com.turitsynanton.android.wbtech.data.storage.models.User) {
         viewModelScope.launch {
             repository.saveUser(
-                user = User().copy(
+                user = com.turitsynanton.android.wbtech.data.storage.models.User().copy(
                     name = newUser.name,
                     surname = newUser.surname,
                     phone = newUser.phone
                 )
             )
         }
-    }
+    }*/
 }

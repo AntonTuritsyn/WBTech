@@ -75,12 +75,12 @@ fun ScreenAddName(
                 variant = 2,
                 resId = R.drawable.icon_variant_user
             )
-            TextFieldForAuth(hint = "Имя (обязательно)", user = User()) {
+            TextFieldForAuth(hint = "Имя (обязательно)", user = com.turitsynanton.android.wbtech.data.storage.models.User()) {
                 name = it.name
                 buttonEnable = name.length > 1
             }
             Spacer(modifier = Modifier.padding(bottom = 12.dp))
-            TextFieldForAuth(hint = "Фамилия (опционально)", user = User()) {
+            TextFieldForAuth(hint = "Фамилия (опционально)", user = com.turitsynanton.android.wbtech.data.storage.models.User()) {
                 surname = it.surname
             }
             Spacer(modifier = Modifier.padding(bottom = 56.dp))
@@ -91,7 +91,11 @@ fun ScreenAddName(
                 enable = buttonEnable,
                 onClick = {
                     Toast.makeText(context, "!!!Успешно!!!", Toast.LENGTH_SHORT).show()
-                    authViewModel.saveUser(newUser = User(name =  name, surname = surname))
+                    /*authViewModel.saveUser(newUser = User(
+                        name = name,
+                        surname = surname
+                    )
+                    )*/
                     onClick()
                 }
             )

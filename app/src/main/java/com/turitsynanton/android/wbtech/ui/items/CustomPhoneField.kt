@@ -171,5 +171,5 @@ class PhoneVisualTransformation : VisualTransformation {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    CustomPhoneField(Modifier, user = User(), onPhoneEntered = {})
+    CustomPhoneField(Modifier, user = com.turitsynanton.android.wbtech.data.storage.models.User(), onPhoneEntered = {})
 }

@@ -10,16 +10,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.turitsynanton.android.wbtech.navigation.pages
 import com.turitsynanton.android.wbtech.ui.items.SearchField
-import com.turitsynanton.android.wbtech.data.storage.models.Meeting
 import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
 import com.turitsynanton.android.wbtech.ui.organisms.MeetingTabContent
 import com.turitsynanton.android.wbtech.ui.organisms.TabLayout
 import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingsViewModel
 import org.koin.androidx.compose.koinViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 @OptIn(ExperimentalFoundationApi::class)

@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.storage.models.Meeting
+import com.turitsynanton.android.wbtech.domain.models.Meeting
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 

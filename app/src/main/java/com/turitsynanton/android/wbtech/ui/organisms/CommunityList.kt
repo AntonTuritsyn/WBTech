@@ -10,27 +10,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.storage.models.Community
+import com.turitsynanton.android.wbtech.data.storage.models.DataCommunity
+import com.turitsynanton.android.wbtech.domain.models.Community
 import com.turitsynanton.android.wbtech.ui.components.СommunityCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-fun CommunityList(communityList: List<Community>, onClick: (/*Community*/) -> Unit) {
+fun CommunityList(dataCommunityList: List<Community>, onClick: (/*Community*/) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(communityList.size) { index ->
+        items(dataCommunityList.size) { index ->
             СommunityCard(
                 modifier = Modifier
                     .clickable {
                         onClick(/*communityList[index]*/)
                     },
                 resId = R.drawable.ic_designa,
-                text = communityList[index].name,
-                communitySize = communityList[index].size
+                text = dataCommunityList[index].name,
+                communitySize = dataCommunityList[index].size
             )
             HorizontalDivider(
                 modifier = Modifier.padding(top = 12.dp),
