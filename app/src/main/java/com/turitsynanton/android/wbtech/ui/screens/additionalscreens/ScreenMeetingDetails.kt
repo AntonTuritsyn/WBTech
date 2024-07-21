@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.People
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
@@ -34,7 +35,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ScreenMeetingDetails(
     modifier: Modifier,
-    dataMeetingTags: List<com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag>,
+    meetingTags: List<MeetingTag>,
     meetingDetailsViewModel: MeetingDetailsViewModel = koinViewModel(),
     navController: NavHostController
 ) {
@@ -64,10 +65,10 @@ fun ScreenMeetingDetails(
                 modifier = Modifier.padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                items(dataMeetingTags.size) { index ->
+                items(meetingTags.size) { index ->
                     MyFilterChip(
                         modifier = Modifier,
-                        text = dataMeetingTags[index].name
+                        text = meetingTags[index].name
                     )
                 }
             }

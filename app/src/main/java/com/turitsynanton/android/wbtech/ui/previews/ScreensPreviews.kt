@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.data.dataMeetingTags
 import com.turitsynanton.android.wbtech.data.dataMeetings
 import com.turitsynanton.android.wbtech.data.tabs1
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.navigation.meetings
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
@@ -72,7 +73,20 @@ fun MeetingDetails() {
     val navController = rememberNavController()
     ScreenMeetingDetails(
         modifier = Modifier,
-        dataMeetingTags,
+        meetingTags,
         navController = navController
     )
 }
+
+//      временное решение
+val meetingTags = listOf(
+    MeetingTag(
+        "Java"
+    ),
+    MeetingTag(
+        "Kotlin"
+    ),
+    MeetingTag(
+        "Android"
+    )
+)
