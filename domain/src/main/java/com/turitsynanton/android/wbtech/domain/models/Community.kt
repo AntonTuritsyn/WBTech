@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.data.storage.models
+package com.turitsynanton.android.wbtech.domain.models
 
 data class Community(
     val id: Long,

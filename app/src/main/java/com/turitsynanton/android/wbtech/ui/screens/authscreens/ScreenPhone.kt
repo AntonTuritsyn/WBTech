@@ -45,7 +45,7 @@ fun ScreenPhone(
 //            TopBarMainScreens(title = "Встречи", true)
         }
     ) {
-        var userNum by remember { mutableStateOf(User()) }
+        var userNum by remember { mutableStateOf(com.turitsynanton.android.wbtech.data.storage.models.User()) }
         var buttonEnable by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
@@ -77,7 +77,7 @@ fun ScreenPhone(
                 lineHeight = LocalTextStyle.current.copy(lineHeight = 24.sp)
             )
             Spacer(modifier = Modifier.padding(bottom = 48.dp))
-            CustomPhoneField(modifier = Modifier, user = User(), onPhoneEntered = {
+            CustomPhoneField(modifier = Modifier, user = com.turitsynanton.android.wbtech.data.storage.models.User(), onPhoneEntered = {
                 val phoneNumber = it.phone
                 userNum.phone = phoneNumber
                 buttonEnable = userNum.phone.length == maxPhoneNumberLength

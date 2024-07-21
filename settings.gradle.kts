@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "WB Tech"
 include(":app")
- 
+include(":data")
+include(":domain")

@@ -9,8 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.turitsynanton.android.wbtech.data.storage.models.Community
 import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
 import com.turitsynanton.android.wbtech.ui.items.SearchField
 import com.turitsynanton.android.wbtech.ui.organisms.CommunityList
@@ -37,7 +35,7 @@ fun ScreenCommunities(
                 .padding(horizontal = 24.dp)
         ) {
             SearchField(modifier = Modifier, true)
-            CommunityList(communityList = communityList) {
+            CommunityList(dataCommunityList = communityList) {
 //                viewModel.openCommunityDetails(it)
                 onClick()
             }

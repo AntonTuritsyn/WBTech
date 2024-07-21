@@ -18,10 +18,10 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.ui.items.Avatar
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
-import com.turitsynanton.android.wbtech.data.storage.models.MeetingTag
 import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 

@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.storage.models.Meeting
+import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
+import com.turitsynanton.android.wbtech.domain.models.Meeting
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.items.SomeText

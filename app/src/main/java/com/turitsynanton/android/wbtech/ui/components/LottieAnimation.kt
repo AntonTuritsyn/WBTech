@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -14,7 +15,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.turitsynanton.android.wbtech.R
 
 @Composable
-fun LottieAnimation() {
+fun MyLottieAnimation() {
     val isPlaying by remember {
         mutableStateOf(true)
     }
@@ -32,11 +33,11 @@ fun LottieAnimation() {
         speed = speed,
         restartOnPlay = false)
 
-    com.airbnb.lottie.compose.LottieAnimation(composition = composition, progress = progress)
+    LottieAnimation(composition = composition, progress = progress)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    LottieAnimation()
+    MyLottieAnimation()
 }

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.storage.models.MeetingTag
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.navigation.topbars.TobBarAdditionalScreens
 import com.turitsynanton.android.wbtech.ui.components.People
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton

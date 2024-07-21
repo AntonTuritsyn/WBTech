@@ -4,10 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.turitsynanton.android.wbtech.data.communities
-import com.turitsynanton.android.wbtech.data.meetingTag
-import com.turitsynanton.android.wbtech.data.meetings
+import com.turitsynanton.android.wbtech.data.dataMeetingTags
+import com.turitsynanton.android.wbtech.data.dataMeetings
 import com.turitsynanton.android.wbtech.data.tabs1
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
+import com.turitsynanton.android.wbtech.navigation.meetings
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
@@ -61,7 +62,7 @@ fun Profile() {
 @Composable
 fun CommunityDetails() {
     val navController = rememberNavController()
-    ScreenCommunityDetails(meetingsList = meetings, Modifier, navController) {
+    ScreenCommunityDetails(meetingsList = meetings, Modifier, navController = navController) {
 
     }
 }
@@ -70,5 +71,22 @@ fun CommunityDetails() {
 @Composable
 fun MeetingDetails() {
     val navController = rememberNavController()
-    ScreenMeetingDetails(modifier = Modifier, meetingTag, navController)
+    ScreenMeetingDetails(
+        modifier = Modifier,
+        meetingTags,
+        navController = navController
+    )
 }
+
+//      временное решение
+val meetingTags = listOf(
+    MeetingTag(
+        "Java"
+    ),
+    MeetingTag(
+        "Kotlin"
+    ),
+    MeetingTag(
+        "Android"
+    )
+)
