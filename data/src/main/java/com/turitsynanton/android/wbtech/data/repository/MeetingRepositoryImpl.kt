@@ -2,8 +2,7 @@ package com.turitsynanton.android.wbtech.data.repository
 
 import com.turitsynanton.android.wbtech.data.dataMeetings
 import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
-import com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag
-import com.turitsynanton.android.wbtech.domain.models.Meeting
+import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.domain.repository.MeetingRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,14 +10,14 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class MeetingRepositoryImpl : MeetingRepository {
-    override fun getMeetingsList(): Flow<List<Meeting>> =
+    override fun getMeetingsList(): Flow<List<DomainMeeting>> =
         flow { emit(dataMeetings) }.map { it.mapToDomain() }
 
-    override fun getMeetingDetails(meetingId: Long): Meeting? =
+    override fun getMeetingDetails(meetingId: Long): DomainMeeting? =
         dataMeetings.find { it.id == meetingId }?.mapToDomain()
 
-    private fun DataMeeting.mapToDomain() : Meeting {
-        return Meeting(
+    private fun DataMeeting.mapToDomain() : DomainMeeting {
+        return DomainMeeting(
             id = id,
             name = name,
             date = date,
@@ -28,7 +27,7 @@ class MeetingRepositoryImpl : MeetingRepository {
         )
     }
 
-    private fun List<DataMeeting>.mapToDomain(): List<Meeting> {
+    private fun List<DataMeeting>.mapToDomain(): List<DomainMeeting> {
         return map { it.mapToDomain() }
     }
 }

@@ -10,13 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.storage.models.DataCommunity
-import com.turitsynanton.android.wbtech.domain.models.Community
+import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.ui.components.СommunityCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-fun CommunityList(dataCommunityList: List<Community>, onClick: (/*Community*/) -> Unit) {
+fun CommunityList(dataCommunityList: List<DomainCommunity>, onClick: (/*Community*/) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)

@@ -2,8 +2,7 @@ package com.turitsynanton.android.wbtech.ui.screens.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.data.repository.CommunityRepositoryImpl
-import com.turitsynanton.android.wbtech.domain.models.Community
+import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.repository.CommunityRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,8 +12,9 @@ import kotlinx.coroutines.launch
 
 class CommunityViewModel(private val repository: CommunityRepository): ViewModel() {
 
-    private val _communityList: MutableStateFlow<List<Community>> = MutableStateFlow(emptyList())
-    fun getMeetingsListFlow(): StateFlow<List<Community>> = _communityList.asStateFlow()
+    private val _Domain_communityList: MutableStateFlow<List<DomainCommunity>> = MutableStateFlow(emptyList())
+    private val domainCommunityList: StateFlow<List<DomainCommunity>> = _Domain_communityList.asStateFlow()
+    fun getMeetingsListFlow() = domainCommunityList
 
     init {
         getCommunityList()
@@ -23,7 +23,7 @@ class CommunityViewModel(private val repository: CommunityRepository): ViewModel
     fun getCommunityList() {
         viewModelScope.launch {
             repository.getCommunitiesList().collect { communityList ->
-                _communityList.update { communityList }
+                _Domain_communityList.update { communityList }
             }
         }
     }

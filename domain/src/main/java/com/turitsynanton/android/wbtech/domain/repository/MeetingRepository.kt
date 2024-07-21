@@ -1,10 +1,10 @@
 package com.turitsynanton.android.wbtech.domain.repository
 
-import com.turitsynanton.android.wbtech.domain.models.Meeting
+import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import kotlinx.coroutines.flow.Flow
 
 interface MeetingRepository {
-    fun getMeetingsList() : Flow<List<Meeting>>
+    fun getMeetingsList() : Flow<List<DomainMeeting>>
 
-    fun getMeetingDetails(meetingId: Long) : Meeting?
+    fun getMeetingDetails(meetingId: Long) : DomainMeeting?
 }

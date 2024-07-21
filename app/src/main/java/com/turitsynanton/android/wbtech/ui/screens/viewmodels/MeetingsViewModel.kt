@@ -2,8 +2,7 @@ package com.turitsynanton.android.wbtech.ui.screens.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
-import com.turitsynanton.android.wbtech.domain.models.Meeting
+import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import com.turitsynanton.android.wbtech.domain.repository.MeetingRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,8 +13,9 @@ import kotlinx.coroutines.launch
 class MeetingsViewModel(private val repository: MeetingRepository) : ViewModel() {
 
     //      исправить импорты
-    private val _meetingsList: MutableStateFlow<List<Meeting>> = MutableStateFlow(emptyList())
-    fun getMeetingsListFlow(): StateFlow<List<Meeting>> = _meetingsList.asStateFlow()
+    private val _meetingsList: MutableStateFlow<List<DomainMeeting>> = MutableStateFlow(emptyList())
+    private val meetingsList: StateFlow<List<DomainMeeting>> = _meetingsList.asStateFlow()
+    fun getMeetingsListFlow(): StateFlow<List<DomainMeeting>> = meetingsList
 
     init {
         getMeetingsList()
