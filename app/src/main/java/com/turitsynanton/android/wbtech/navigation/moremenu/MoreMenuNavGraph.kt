@@ -6,12 +6,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.wbtech.navigation.Navigation
-import com.turitsynanton.android.wbtech.ui.drafts.CustomViews
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenAddName
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenCode
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
+import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier: Modifier) {
     navigation(
@@ -32,15 +32,14 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier:
             ScreenProfile()
         }
         composable(route = Navigation.ScreenTheme.route) {
-            CustomViews()
+
         }
         composable(route = Navigation.ScreenNotification.route) {
             ScreenPhone(navController = navController)
         }
         composable(route = "${Navigation.ScreenCode.route}/{phoneNum}") { stackEntry ->
-            val phoneNum = stackEntry.arguments?.getString("phoneNum")
-            if (phoneNum != null) {
-                ScreenCode(navController = navController, phoneNum = phoneNum)
+            stackEntry.arguments?.getString("phoneNum")?.let {
+                ScreenCode(navController = navController, phoneNum = it)
             }
         }
         composable(route = Navigation.ScreenAddName.route) {

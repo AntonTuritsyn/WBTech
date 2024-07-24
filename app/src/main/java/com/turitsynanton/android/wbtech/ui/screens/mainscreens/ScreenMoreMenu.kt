@@ -20,7 +20,7 @@ import com.turitsynanton.android.wbtech.ui.components.MyProfileItem
 
 @Composable
 fun ScreenMoreMenu(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     navHostController: NavHostController,
     onProfileScreen: () -> Unit,
     onThemeScreen: () -> Unit,

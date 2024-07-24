@@ -5,8 +5,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.communities
-import com.turitsynanton.android.wbtech.data.meetings
+import com.turitsynanton.android.wbtech.data.repository.meetingTags
+import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
 
@@ -18,12 +18,15 @@ fun NavGraphBuilder.communityScreenNavGraph(
         route = Navigation.CommunitiesScreen.route
     ) {
         composable(route = Navigation.Communities.route) {
-            ScreenCommunities(modifier = modifier, communityList = communities) {
+            ScreenCommunities(modifier = modifier) {
                 navController.navigate(Navigation.CommunityDetails.route)
             }
         }
         composable(route = Navigation.CommunityDetails.route) {
-            ScreenCommunityDetails(meetingsList = meetings, modifier = modifier, navController) {
+            ScreenCommunityDetails(
+                modifier = modifier,
+                navController = navController
+            ) {
             }
         }
     }

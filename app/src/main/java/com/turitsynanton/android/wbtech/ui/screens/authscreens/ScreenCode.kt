@@ -50,7 +50,6 @@ fun ScreenCode(
         var otpValue by remember {
             mutableStateOf("")
         }
-        var buttonEnable by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
                 .padding(it)

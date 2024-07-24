@@ -6,12 +6,12 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import com.turitsynanton.android.wbtech.navigation.MeetingPageTabs
 import com.turitsynanton.android.wbtech.navigation.pages
-import com.turitsynanton.android.wbtech.data.Meeting
 import com.turitsynanton.android.wbtech.data.tabs2
+import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MeetingTabContent(meetingsList: List<Meeting>, pagerState: PagerState, tabs: List<String>, onClick: () -> Unit) {
+fun MeetingTabContent(meetingsList: List<DomainMeeting>, pagerState: PagerState, tabs: List<String>, onClick: () -> Unit) {
     val mine = tabs == tabs2
     HorizontalPager(state = pagerState) { pageIndex ->
         if (mine) {

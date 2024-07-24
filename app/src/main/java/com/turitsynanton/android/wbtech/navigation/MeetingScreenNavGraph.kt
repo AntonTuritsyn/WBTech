@@ -5,9 +5,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.meetingTag
-import com.turitsynanton.android.wbtech.data.meetings
 import com.turitsynanton.android.wbtech.data.tabs1
+import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetings
 
@@ -18,12 +17,28 @@ fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController, modi
         route = Navigation.MeetingsScreen.route
     ) {
         composable(route = Navigation.Meetings.route) {
-            ScreenMeetings(modifier, tabs1, meetings) {
+            ScreenMeetings(modifier = modifier, tabs = tabs1) {
                 navController.navigate(Navigation.MeetingDetails.route)
             }
         }
         composable(route = Navigation.MeetingDetails.route) {
-            ScreenMeetingDetails(modifier, meetingTags = meetingTag, navController)
+            ScreenMeetingDetails(
+                modifier = modifier,
+                meetingTags = meetingTags,
+                navController = navController
+            )
         }
     }
 }
+//      временное решение
+val meetingTags = listOf(
+    MeetingTag(
+        "Java"
+    ),
+    MeetingTag(
+        "Kotlin"
+    ),
+    MeetingTag(
+        "Android"
+    )
+)

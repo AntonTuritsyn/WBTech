@@ -23,11 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.turitsynanton.android.wbtech.MainViewModel
-import com.turitsynanton.android.wbtech.data.User
 import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
@@ -36,7 +33,6 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
 fun ScreenPhone(
-    viewModel: MainViewModel = viewModel(),
     navController: NavHostController
 ) {
     val maxPhoneNumberLength = 10
@@ -45,7 +41,7 @@ fun ScreenPhone(
 //            TopBarMainScreens(title = "Встречи", true)
         }
     ) {
-        var userNum by remember { mutableStateOf(User()) }
+        var userNum by remember { mutableStateOf(com.turitsynanton.android.wbtech.data.storage.models.DataUser()) }
         var buttonEnable by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
@@ -77,7 +73,7 @@ fun ScreenPhone(
                 lineHeight = LocalTextStyle.current.copy(lineHeight = 24.sp)
             )
             Spacer(modifier = Modifier.padding(bottom = 48.dp))
-            CustomPhoneField(modifier = Modifier, user = User(), onPhoneEntered = {
+            CustomPhoneField(modifier = Modifier, user = com.turitsynanton.android.wbtech.data.storage.models.DataUser(), onPhoneEntered = {
                 val phoneNumber = it.phone
                 userNum.phone = phoneNumber
                 buttonEnable = userNum.phone.length == maxPhoneNumberLength

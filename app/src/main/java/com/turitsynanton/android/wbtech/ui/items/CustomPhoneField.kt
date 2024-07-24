@@ -37,13 +37,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.turitsynanton.android.wbtech.MainViewModel
 import com.turitsynanton.android.wbtech.R
-import com.turitsynanton.android.wbtech.data.User
+import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun CustomPhoneField(modifier: Modifier, user: User, onPhoneEntered: (User) -> Unit) {
+fun CustomPhoneField(modifier: Modifier, user: DataUser, onPhoneEntered: (DataUser) -> Unit) {
     val viewModel: MainViewModel = viewModel()
     var text by rememberSaveable { mutableStateOf("") }
     val flag = painterResource(id = R.drawable.flag)
@@ -171,5 +171,5 @@ class PhoneVisualTransformation : VisualTransformation {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    CustomPhoneField(Modifier, user = User(""), onPhoneEntered = {})
+    CustomPhoneField(Modifier, user = com.turitsynanton.android.wbtech.data.storage.models.DataUser(), onPhoneEntered = {})
 }
