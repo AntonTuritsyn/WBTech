@@ -1,8 +1,8 @@
 package com.turitsynanton.android.wbtech.data.storage
 
-import com.turitsynanton.android.wbtech.data.storage.models.User
+import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 
 interface UserStorage {
-    fun save(user: User)
-    fun get() : User
+    fun save(user: DataUser)
+    fun get() : DataUser
 }

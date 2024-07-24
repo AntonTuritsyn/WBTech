@@ -5,8 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.dataMeetingTags
-import com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag
 import com.turitsynanton.android.wbtech.data.tabs1
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails

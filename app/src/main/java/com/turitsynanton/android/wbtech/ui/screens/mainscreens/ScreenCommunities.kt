@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
 import com.turitsynanton.android.wbtech.ui.items.SearchField
 import com.turitsynanton.android.wbtech.ui.organisms.CommunityList
@@ -18,11 +19,11 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScreenCommunities(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     communityViewModel: CommunityViewModel = koinViewModel(),
     onClick: () -> Unit
 ) {
-    val communityList by communityViewModel.getMeetingsListFlow().collectAsState()
+    val communityList by communityViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -35,7 +36,7 @@ fun ScreenCommunities(
                 .padding(horizontal = 24.dp)
         ) {
             SearchField(modifier = Modifier, true)
-            CommunityList(dataCommunityList = communityList) {
+            CommunityList(domainCommunityList = communityList) {
 //                viewModel.openCommunityDetails(it)
                 onClick()
             }

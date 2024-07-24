@@ -6,7 +6,7 @@ import com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag
 
 val tabs1 = listOf("Все встречи", "Активные")
 val tabs2 = listOf("Запланировано", "Уже прошли")
-val dataMeetingTags = listOf(
+internal val dataMeetingTags = listOf(
     DataMeetingTag(
         "Java"
     ),
@@ -18,7 +18,7 @@ val dataMeetingTags = listOf(
     )
 )
 
-val dataMeetings = listOf(
+internal val dataMeetings = listOf(
     DataMeeting(
         1,
         "Developer meet",
@@ -94,7 +94,7 @@ val dataMeetings = listOf(
     )
 )
 
-val dataCommunities = listOf(
+internal val dataCommunities = listOf(
     DataCommunity(
         1,
         "Developer comm",

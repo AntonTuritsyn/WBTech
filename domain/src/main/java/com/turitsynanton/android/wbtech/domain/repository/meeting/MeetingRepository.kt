@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.repository
+package com.turitsynanton.android.wbtech.domain.repository.meeting
 
 import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import kotlinx.coroutines.flow.Flow

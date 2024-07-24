@@ -1,31 +1,30 @@
 package com.turitsynanton.android.wbtech.ui.screens.viewmodels
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.data.storage.models.User
+import com.turitsynanton.android.wbtech.domain.models.DomainUser
 import com.turitsynanton.android.wbtech.domain.repository.Repository
+import com.turitsynanton.android.wbtech.domain.usecases.auth.GetUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.auth.SaveUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val repository: Repository) : ViewModel() {
+class AuthViewModel(
+    private val getUserUseCase: GetUserUseCase,
+    private val saveUserUseCase: SaveUserUseCase
+) : ViewModel() {
 
-/*    private val _userInfo: MutableStateFlow<User> = MutableStateFlow(
-        com.turitsynanton.android.wbtech.data.storage.models.User()
-    )
-    fun getUserInfoFlow(): StateFlow<User> = _userInfo.asStateFlow()
+    private val _user: MutableStateFlow<DomainUser?> = MutableStateFlow(null)
+    private val user: StateFlow<DomainUser?> = _user.asStateFlow()
 
-    fun saveUser(newUser: com.turitsynanton.android.wbtech.data.storage.models.User) {
+    fun getUserFlow(): StateFlow<DomainUser?> = user
+
+    fun getUser(userId: Long) {
         viewModelScope.launch {
-            repository.saveUser(
-                user = com.turitsynanton.android.wbtech.data.storage.models.User().copy(
-                    name = newUser.name,
-                    surname = newUser.surname,
-                    phone = newUser.phone
-                )
-            )
+            _user.value = getUserUseCase.execute(userId = userId)
         }
-    }*/
+    }
 }

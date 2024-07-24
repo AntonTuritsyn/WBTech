@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,16 +23,16 @@ fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: () -> Unit) {
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(meetingsList.size) { index ->
+        items(meetingsList) { item ->
             MeetingCard(
                 modifier = Modifier
                     .clickable { onClick() },
                 resId = R.drawable.ic_meeting,
-                meetingName = meetingsList[index].name,
-                ended = meetingsList[index].ended,
-                meetingDate = meetingsList[index].date,
-                meetingCity = meetingsList[index].city,
-                meetingTags = meetingsList[index].tags
+                meetingName = item.name,
+                ended = item.ended,
+                meetingDate = item.date,
+                meetingCity = item.city,
+                meetingTags = item.tags
             )
             HorizontalDivider(
                 modifier = Modifier.padding(top = 12.dp),

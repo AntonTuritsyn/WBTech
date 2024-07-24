@@ -15,10 +15,10 @@ val appModule = module {
         AuthViewModel(repository = get())
     }
     viewModel<MeetingsViewModel> {
-        MeetingsViewModel(repository = get())
+        MeetingsViewModel(getMeetingListUseCase = get())
     }
     viewModel<CommunityViewModel> {
-        CommunityViewModel(repository = get())
+        CommunityViewModel(getCommunityListUseCase = get())
     }
     viewModel<CommunityDetailsViewModel> {
         CommunityDetailsViewModel()

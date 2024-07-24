@@ -23,13 +23,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.turitsynanton.android.wbtech.data.storage.models.User
+import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun TextFieldForAuth(hint: String, user: User = User(), onNameEntered: (User) -> Unit) {
+fun TextFieldForAuth(hint: String, user: DataUser = DataUser(), onNameEntered: (DataUser) -> Unit) {
     var query by rememberSaveable { mutableStateOf("") }
     Row(
         Modifier

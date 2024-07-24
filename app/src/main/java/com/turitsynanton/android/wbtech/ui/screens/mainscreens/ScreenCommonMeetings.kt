@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.wbtech.navigation.pages
 import com.turitsynanton.android.wbtech.ui.items.SearchField
 import com.turitsynanton.android.wbtech.navigation.topbars.TopBarMainScreens
@@ -18,16 +19,15 @@ import com.turitsynanton.android.wbtech.ui.organisms.TabLayout
 import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScreenMeetings(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     tabs: List<String>,
     meetingsViewModel: MeetingsViewModel = koinViewModel(),
     onClick: () -> Unit
 ) {
-    val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsState()
+    val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {

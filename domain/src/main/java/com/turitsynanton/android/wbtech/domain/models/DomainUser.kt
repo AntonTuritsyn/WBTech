@@ -1,6 +1,6 @@
-package com.turitsynanton.android.wbtech.data.storage.models
+package com.turitsynanton.android.wbtech.domain.models
 
-data class User(
+data class DomainUser(
     val id: Long = 1,
     var name: String = "",
     var surname: String = "",

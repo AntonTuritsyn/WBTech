@@ -3,18 +3,18 @@ package com.turitsynanton.android.wbtech.ui.screens.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.repository.CommunityRepository
+import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CommunityViewModel(private val repository: CommunityRepository): ViewModel() {
+class CommunityViewModel(private val getCommunityListUseCase: GetCommunityListUseCase): ViewModel() {
 
-    private val _Domain_communityList: MutableStateFlow<List<DomainCommunity>> = MutableStateFlow(emptyList())
-    private val domainCommunityList: StateFlow<List<DomainCommunity>> = _Domain_communityList.asStateFlow()
-    fun getMeetingsListFlow() = domainCommunityList
+    private val _communityList: MutableStateFlow<List<DomainCommunity>> = MutableStateFlow(emptyList())
+    private val communityList: StateFlow<List<DomainCommunity>> = _communityList.asStateFlow()
+    fun getMeetingsListFlow() = communityList
 
     init {
         getCommunityList()
@@ -22,8 +22,8 @@ class CommunityViewModel(private val repository: CommunityRepository): ViewModel
 
     fun getCommunityList() {
         viewModelScope.launch {
-            repository.getCommunitiesList().collect { communityList ->
-                _Domain_communityList.update { communityList }
+            getCommunityListUseCase.execute().collect { communityList ->
+                _communityList.update { communityList }
             }
         }
     }

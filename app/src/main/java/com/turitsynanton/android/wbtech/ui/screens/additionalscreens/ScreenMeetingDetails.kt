@@ -34,7 +34,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenMeetingDetails(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     meetingTags: List<MeetingTag>,
     meetingDetailsViewModel: MeetingDetailsViewModel = koinViewModel(),
     navController: NavHostController
