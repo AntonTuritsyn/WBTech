@@ -12,7 +12,10 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModel<AuthViewModel> {
-        AuthViewModel(repository = get())
+        AuthViewModel(
+            getUserUseCase = get(),
+//            saveUserUseCase = get()
+        )
     }
     viewModel<MeetingsViewModel> {
         MeetingsViewModel(getMeetingListUseCase = get())
