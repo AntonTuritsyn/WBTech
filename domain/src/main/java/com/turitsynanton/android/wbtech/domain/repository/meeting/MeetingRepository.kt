@@ -8,7 +8,7 @@ interface MeetingRepository {
 
     fun getMeetingDetails(meetingId: Long) : Flow<DomainMeeting>
 
-    fun goToMeeting() : Boolean
+    fun goToMeeting() : Flow<Boolean>
 
-    fun cancelMeeting() : Boolean
+    fun cancelMeeting() : Flow<Boolean>
 }

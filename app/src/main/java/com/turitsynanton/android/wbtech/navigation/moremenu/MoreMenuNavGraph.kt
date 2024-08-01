@@ -5,13 +5,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.navigation.Navigation
+import com.turitsynanton.android.wbtech.ui.Navigation
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenAddName
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenCode
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
-import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier: Modifier) {
     navigation(

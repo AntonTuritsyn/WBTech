@@ -4,7 +4,7 @@ import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.repository.community.CommunityRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetCommunityDetailsUseCase(private val communityRepository: CommunityRepository) :
+internal class GetCommunityDetailsUseCase(private val communityRepository: CommunityRepository) :
     IGetCommunityDetailsUseCase {
 
     override fun execute(comunityId: Long): Flow<DomainCommunity?> =

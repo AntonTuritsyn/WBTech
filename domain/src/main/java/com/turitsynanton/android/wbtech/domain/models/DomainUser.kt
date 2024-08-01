@@ -2,7 +2,7 @@ package com.turitsynanton.android.wbtech.domain.models
 
 data class DomainUser(
     val id: Long = 1,
-    var name: String = "",
-    var surname: String = "",
+    val name: String = "",
+    val surname: String = "",
     var phone: String = ""
 )

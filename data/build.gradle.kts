@@ -36,13 +36,12 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(libs.androidx.core.ktx)
-
-    //    coroutines
+//    coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.core)
     implementation(libs.jetbrains.kotlinx.coroutines.android)
+//    koin
+    implementation(libs.koin.core)
 
-//    implementation(libs.androidx.appcompat)
-//    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
