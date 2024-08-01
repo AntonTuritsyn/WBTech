@@ -20,7 +20,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun BottomIcon(isPressed: Boolean, title: String, icon: Int) {
+internal fun BottomIcon(isPressed: Boolean, title: String, icon: Int) {
     Column {
 
     }

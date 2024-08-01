@@ -26,7 +26,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun MeetingCard(
+internal fun MeetingCard(
     modifier: Modifier,
     resId: Int,
     meetingName: String,

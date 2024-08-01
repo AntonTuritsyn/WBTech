@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal class MeetingsViewModel(private val iGetMeetingListUseCase: IGetMeetingsListUseCase) : ViewModel() {
+class MeetingsViewModel(private val iGetMeetingListUseCase: IGetMeetingsListUseCase) : ViewModel() {
 
     //      исправить импорты
     private val _meetingsList: MutableStateFlow<List<DomainMeeting>> = MutableStateFlow(emptyList())

@@ -42,7 +42,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun CustomPhoneField(modifier: Modifier, user: DomainUser, onPhoneEntered: (DomainUser) -> Unit) {
+internal fun CustomPhoneField(modifier: Modifier, user: DomainUser, onPhoneEntered: (DomainUser) -> Unit) {
     var text by rememberSaveable { mutableStateOf("") }
     val flag = painterResource(id = R.drawable.flag)
     val countryCode = "+7"
@@ -126,7 +126,7 @@ fun CustomPhoneField(modifier: Modifier, user: DomainUser, onPhoneEntered: (Doma
     }
 }
 
-class PhoneVisualTransformation : VisualTransformation {
+internal class PhoneVisualTransformation : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
         val originalText = text.text
         val formattedText = StringBuilder()

@@ -15,7 +15,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.turitsynanton.android.ui.R
 
 @Composable
-fun MyLottieAnimation() {
+internal fun MyLottieAnimation() {
     val isPlaying by remember {
         mutableStateOf(true)
     }

@@ -23,7 +23,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
+internal fun MyMenuItem(modifier: Modifier, text: String, icon: Int) {
     Row(
         modifier = modifier
             .padding(vertical = 8.dp)

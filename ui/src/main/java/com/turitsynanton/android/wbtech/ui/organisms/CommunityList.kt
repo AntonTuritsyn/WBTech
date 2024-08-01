@@ -16,7 +16,7 @@ import com.turitsynanton.android.wbtech.ui.components.СommunityCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: (/*Community*/) -> Unit) {
+internal fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: (/*Community*/) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)

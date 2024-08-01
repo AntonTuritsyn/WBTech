@@ -18,7 +18,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun СommunityCard(modifier: Modifier, resId: Int, text: String, communitySize: String) {
+internal fun СommunityCard(modifier: Modifier, resId: Int, text: String, communitySize: String) {
     Row(
         modifier = modifier
             .fillMaxWidth()

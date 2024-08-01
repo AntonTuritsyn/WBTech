@@ -22,14 +22,14 @@ import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.items.Avatar
 
-fun <T> MutableList<T>.randomSubset(maxSize: Int): List<T> {
+internal fun <T> MutableList<T>.randomSubset(maxSize: Int): List<T> {
     if (this.isEmpty()) return emptyList()
     val resultSize = minOf(this.size, maxSize)
     return this.shuffled().take(resultSize)
 }
 
 @Composable
-fun People(modifier: Modifier, size: Int) {
+internal fun People(modifier: Modifier, size: Int) {
 
     val avatars = mutableListOf<Int>()
     for (i in 1..size) {

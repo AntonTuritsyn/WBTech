@@ -35,7 +35,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
+internal fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
     var query: String by rememberSaveable { mutableStateOf("") }
     Row(
         Modifier
@@ -90,6 +90,6 @@ fun SearchField(modifier: Modifier, isEnabled: Boolean = true) {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchFieldPreview() {
+internal fun SearchFieldPreview() {
     SearchField(modifier = Modifier)
 }

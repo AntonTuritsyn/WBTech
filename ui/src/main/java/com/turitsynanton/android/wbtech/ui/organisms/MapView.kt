@@ -30,7 +30,7 @@ import androidx.compose.ui.window.Dialog
 import com.turitsynanton.android.ui.R
 
 @Composable
-fun MapView() {
+internal fun MapView() {
     var isDialogOpen by remember {
         mutableStateOf(false)
     }
@@ -71,7 +71,7 @@ fun MapView() {
 }
 
 @Composable
-fun ZoomImage(painter: Painter) {
+internal fun ZoomImage(painter: Painter) {
     var scale by remember { mutableFloatStateOf(1f) }
     var offsetX by remember { mutableFloatStateOf(0f) }
     var offsetY by remember { mutableFloatStateOf(0f) }
@@ -105,6 +105,6 @@ fun ZoomImage(painter: Painter) {
 
 @Preview(showBackground = true)
 @Composable
-fun Prew() {
+internal fun Prew() {
     MapView()
 }

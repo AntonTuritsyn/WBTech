@@ -19,7 +19,7 @@ import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 
 @Composable
-fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boolean = true, onClick: () -> Unit) {
+internal fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boolean = true, onClick: () -> Unit) {
     Button(
         modifier = modifier,
         onClick = { onClick() },
@@ -35,14 +35,14 @@ fun MyFilledButton(modifier: Modifier, text: String, color: Color, enable: Boole
 }
 
 @Composable
-fun MyElevatedButton(modifier: Modifier, text: String) {
+internal fun MyElevatedButton(modifier: Modifier, text: String) {
     ElevatedButton(modifier = modifier, onClick = { /*TODO*/ }) {
         Text(text = text)
     }
 }
 
 @Composable
-fun MyTonalButton(modifier: Modifier, text: String, color: Color) {
+internal fun MyTonalButton(modifier: Modifier, text: String, color: Color) {
     FilledTonalButton(
         modifier = modifier,
         onClick = { /*TODO*/ },
@@ -54,7 +54,7 @@ fun MyTonalButton(modifier: Modifier, text: String, color: Color) {
 }
 
 @Composable
-fun MyOutlinedButton(modifier: Modifier, text: String, color: Color) {
+internal fun MyOutlinedButton(modifier: Modifier, text: String, color: Color) {
     OutlinedButton(
         onClick = { /*TODO*/ },
     ) {
@@ -63,14 +63,14 @@ fun MyOutlinedButton(modifier: Modifier, text: String, color: Color) {
 }
 
 @Composable
-fun MyTextButton(modifier: Modifier, text: String, onClick: () -> Unit) {
+internal fun MyTextButton(modifier: Modifier, text: String, onClick: () -> Unit) {
     TextButton(modifier = modifier, onClick = { onClick() }) {
         Text(text = text)
     }
 }
 
 @Composable
-fun MyIconButton(modifier: Modifier, color: Color, icon: Painter) {
+internal fun MyIconButton(modifier: Modifier, color: Color, icon: Painter) {
     OutlinedButton(
         modifier = modifier,
         onClick = { /*TODO*/ },
@@ -86,7 +86,7 @@ fun MyIconButton(modifier: Modifier, color: Color, icon: Painter) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewSmth() {
+internal fun PreviewSmth() {
     MyFilledButton(
         Modifier,
         "Сохранить",

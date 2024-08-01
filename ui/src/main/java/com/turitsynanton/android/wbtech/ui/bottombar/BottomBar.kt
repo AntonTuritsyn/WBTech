@@ -36,7 +36,7 @@ fun BottomBar(navController: NavHostController) {
 }
 
 @Composable
-fun RowScope.AddItem(
+internal fun RowScope.AddItem(
     screen: Navigation, navBackStackEntry: NavBackStackEntry?, navController: NavHostController
 ) {
     val isSelected =

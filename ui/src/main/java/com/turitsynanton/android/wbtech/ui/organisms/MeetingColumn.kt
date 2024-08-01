@@ -16,7 +16,7 @@ import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: () -> Unit) {
+internal fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: () -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)

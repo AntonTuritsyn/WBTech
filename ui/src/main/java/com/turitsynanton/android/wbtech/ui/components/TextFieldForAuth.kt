@@ -29,7 +29,11 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun TextFieldForAuth(hint: String, user: DataUser = DataUser(), onNameEntered: (DataUser) -> Unit) {
+internal fun TextFieldForAuth(
+    hint: String,
+    user: DataUser = DataUser(),
+    onNameEntered: (DataUser) -> Unit
+) {
     var query by rememberSaveable { mutableStateOf("") }
     Row(
         Modifier
