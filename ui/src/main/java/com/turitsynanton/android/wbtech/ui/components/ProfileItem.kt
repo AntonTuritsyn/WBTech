@@ -22,7 +22,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) {
+internal fun MyProfileItem(modifier: Modifier, name: String, phone: String, avatar: Int) {
     Row(
         modifier = modifier
             .padding(vertical = 8.dp)

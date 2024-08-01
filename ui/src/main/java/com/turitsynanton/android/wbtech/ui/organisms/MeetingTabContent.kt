@@ -11,7 +11,7 @@ import com.turitsynanton.android.wbtech.ui.pages
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MeetingTabContent(meetingsList: List<DomainMeeting>, pagerState: PagerState, tabs: List<String>, onClick: () -> Unit) {
+internal fun MeetingTabContent(meetingsList: List<DomainMeeting>, pagerState: PagerState, tabs: List<String>, onClick: () -> Unit) {
     val mine = tabs == tabs2
     HorizontalPager(state = pagerState) { pageIndex ->
         if (mine) {

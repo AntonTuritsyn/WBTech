@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TabLayout(tabsNames: List<String>, pagerState: PagerState) {
+internal fun TabLayout(tabsNames: List<String>, pagerState: PagerState) {
     val tabs = tabsNames
     val scope = rememberCoroutineScope()
     TabRow(

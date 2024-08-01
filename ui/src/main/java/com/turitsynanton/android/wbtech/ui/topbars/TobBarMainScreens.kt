@@ -22,7 +22,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarMainScreens(title: String, mayAdd: Boolean) {
+internal fun TopBarMainScreens(title: String, mayAdd: Boolean) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     TopAppBar(

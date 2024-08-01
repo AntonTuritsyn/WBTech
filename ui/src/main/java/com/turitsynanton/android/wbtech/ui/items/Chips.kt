@@ -21,7 +21,7 @@ import com.turitsynanton.android.wbtech.ui.theme.BrandColorDark
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun MyFilterChip(modifier: Modifier, text: String) {
+internal fun MyFilterChip(modifier: Modifier, text: String) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -45,6 +45,6 @@ fun MyFilterChip(modifier: Modifier, text: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun Prew() {
+internal fun Prew() {
     MyFilterChip(modifier = Modifier, text = "KDHF")
 }

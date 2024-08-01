@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun SomeText(
+internal fun SomeText(
     modifier: Modifier,
     text: String,
     fontFamily: FontFamily,
@@ -69,7 +69,7 @@ fun SomeText(
 
 @Preview(showBackground = true)
 @Composable
-fun SomeTextPreview() {
+internal fun SomeTextPreview() {
     Column {
         Text(
             text = "Мои встречи",

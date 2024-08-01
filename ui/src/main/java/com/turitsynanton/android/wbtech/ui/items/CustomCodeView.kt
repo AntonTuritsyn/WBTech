@@ -48,7 +48,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @Composable
-fun CodeCustomTextField(
+internal fun CodeCustomTextField(
     modifier: Modifier = Modifier,
     otpText: String,
     textLength: Int = 4,

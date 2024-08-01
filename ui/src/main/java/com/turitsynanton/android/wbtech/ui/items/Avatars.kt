@@ -24,7 +24,7 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 
 @Composable
-fun Avatar(modifier: Modifier, resId: Int) {
+internal fun Avatar(modifier: Modifier, resId: Int) {
     Image(
         modifier = modifier,
         painter = painterResource(id = resId),
@@ -34,7 +34,7 @@ fun Avatar(modifier: Modifier, resId: Int) {
 }
 
 @Composable
-fun Avatars(modifier: Modifier, resId: Int) {
+internal fun Avatars(modifier: Modifier, resId: Int) {
     Avatar(
         modifier = Modifier
             .padding(2.dp),
@@ -44,13 +44,13 @@ fun Avatars(modifier: Modifier, resId: Int) {
 
 @Preview(showBackground = true)
 @Composable
-fun Show() {
+internal fun Show() {
     CustomAvatar(modifier = Modifier, variant = 2, resId = R.drawable.icon_variant_user)
 //    Avatar(modifier = Modifier, resId = R.drawable.my_photo)
 }
 
 @Composable
-fun CustomAvatar(
+internal fun CustomAvatar(
     modifier: Modifier, variant: Int, resId: Int
 ) {
     val size = remember(variant) {
