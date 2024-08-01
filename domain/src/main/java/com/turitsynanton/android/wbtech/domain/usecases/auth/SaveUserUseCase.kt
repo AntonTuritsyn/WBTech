@@ -1,10 +1,10 @@
 package com.turitsynanton.android.wbtech.domain.usecases.auth
 
-import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.models.DomainUser
 import com.turitsynanton.android.wbtech.domain.repository.auth.AuthRepository
-import com.turitsynanton.android.wbtech.domain.repository.community.CommunityRepository
 
-class SaveUserUseCase(private val authRepository: AuthRepository) {
-    fun execute(user: DomainUser) = authRepository.saveUser(user)
+class SaveUserUseCase(private val authRepository: AuthRepository) : ISaveUserUseCase {
+    override fun execute(name: String, surname: String, phone: String) = authRepository.saveUser(
+        DomainUser(name = name, surname = surname, phone = phone)
+    )
 }

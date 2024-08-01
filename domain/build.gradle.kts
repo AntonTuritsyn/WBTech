@@ -12,4 +12,16 @@ dependencies {
     //    coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.core)
     implementation(libs.jetbrains.kotlinx.coroutines.android)
+
+    testImplementation(libs.junit.jupiter)
+//    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.kotlinx.coroutines.test)
+}
+
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter("5.8.2")
+        }
+    }
 }
