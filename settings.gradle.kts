@@ -23,3 +23,4 @@ rootProject.name = "WB Tech"
 include(":app")
 include(":data")
 include(":domain")
+include(":ui")

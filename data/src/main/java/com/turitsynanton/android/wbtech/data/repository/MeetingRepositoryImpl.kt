@@ -15,11 +15,11 @@ class MeetingRepositoryImpl : MeetingRepository {
     override fun getMeetingDetails(meetingId: Long): Flow<DomainMeeting> =
         flow { dataMeetings.find { it.id == meetingId }?.mapMeetingToDomain()?.let { emit(it) } }
 
-    override fun goToMeeting(): Boolean {
+    override fun goToMeeting(): Flow<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override fun cancelMeeting(): Boolean {
+    override fun cancelMeeting(): Flow<Boolean> {
         TODO("Not yet implemented")
     }
 

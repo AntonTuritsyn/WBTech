@@ -9,9 +9,12 @@ java {
 }
 
 dependencies {
-    //    coroutines
+//    coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.core)
     implementation(libs.jetbrains.kotlinx.coroutines.android)
+//    koin
+    implementation(libs.koin.core)
+//    implementation(libs.koin.androidx.compose)
 
     testImplementation(libs.junit.jupiter)
 //    testImplementation(libs.junit.jupiter.api)
