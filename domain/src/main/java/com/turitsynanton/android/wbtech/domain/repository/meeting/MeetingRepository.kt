@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface MeetingRepository {
     fun getMeetingsList() : Flow<List<DomainMeeting>>
 
-    fun getMeetingDetails(meetingId: Long) : Flow<DomainMeeting>
+    fun getMeetingDetails(meetingId: String) : Flow<DomainMeeting>
 
     fun goToMeeting() : Flow<Boolean>
 

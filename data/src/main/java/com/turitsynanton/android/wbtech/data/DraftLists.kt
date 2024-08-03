@@ -20,7 +20,7 @@ internal val dataMeetingTags = listOf(
 
 internal val dataMeetings = listOf(
     DataMeeting(
-        1,
+        "1",
         "Developer meet",
         "11.12.2023",
         "Moscow",
@@ -28,7 +28,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        2,
+        "2",
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -36,7 +36,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        3,
+        "3",
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -45,7 +45,7 @@ internal val dataMeetings = listOf(
     )
     ,
     DataMeeting(
-        4,
+        "4",
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -53,7 +53,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        5,
+        "5",
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -61,7 +61,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        6,
+        "6",
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -69,7 +69,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        7,
+        "7",
         "Android meet",
         "11.08.2024",
         "Kazan",
@@ -77,7 +77,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        8,
+        "8",
         "Kotlin meet",
         "11.05.2024",
         "Volgograd",
@@ -85,7 +85,7 @@ internal val dataMeetings = listOf(
         dataMeetingTags
     ),
     DataMeeting(
-        9,
+        "9",
         "LAST meet",
         "11.08.2024",
         "Kazan",
@@ -96,92 +96,92 @@ internal val dataMeetings = listOf(
 
 internal val dataCommunities = listOf(
     DataCommunity(
-        1,
+        "1",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        2,
+        "2",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        3,
+        "3",
         "Kotlin comm",
         "19348275",
     ),
     DataCommunity(
-        4,
+        "4",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        5,
+        "5",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        6,
+        "6",
         "Kotlin comm",
         "19348275",
     ),
     DataCommunity(
-        7,
+        "7",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        8,
+        "8",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        9,
+        "9",
         "Kotlin comm",
         "19348275",
     ),
     DataCommunity(
-        10,
+        "10",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        11,
+        "11",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        12,
+        "12",
         "Kotlin comm",
         "19348275",
     ),
     DataCommunity(
-        13,
+        "13",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        14,
+        "14",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        15,
+        "15",
         "Kotlin comm",
         "19348275",
     ),
     DataCommunity(
-        16,
+        "16",
         "Developer comm",
         "10112",
     ),
     DataCommunity(
-        17,
+        "17",
         "Android comm",
         "10",
     ),
     DataCommunity(
-        16,
+        "16",
         "LAST",
         "19348275",
     )

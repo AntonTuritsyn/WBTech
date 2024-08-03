@@ -5,5 +5,5 @@ import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import kotlinx.coroutines.flow.Flow
 
 interface IGetMeetingDetailsUseCase {
-    fun execute(meetingId: Long) : Flow<DomainMeeting>
+    fun execute(meetingId: String) : Flow<DomainMeeting>
 }

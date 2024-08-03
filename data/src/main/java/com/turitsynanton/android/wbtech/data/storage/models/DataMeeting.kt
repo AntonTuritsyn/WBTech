@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.data.storage.models
 
 internal data class DataMeeting(
-    val id: Long,
+    val id: String,
     val name: String,
     val date: String,
     val city: String,

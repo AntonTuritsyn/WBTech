@@ -12,7 +12,7 @@ class MeetingRepositoryImpl : MeetingRepository {
     override fun getMeetingsList(): Flow<List<DomainMeeting>> =
         flow { emit(dataMeetings) }.map { it.mapMeetingToDomain() }
 
-    override fun getMeetingDetails(meetingId: Long): Flow<DomainMeeting> =
+    override fun getMeetingDetails(meetingId: String): Flow<DomainMeeting> =
         flow { dataMeetings.find { it.id == meetingId }?.mapMeetingToDomain()?.let { emit(it) } }
 
     override fun goToMeeting(): Flow<Boolean> {

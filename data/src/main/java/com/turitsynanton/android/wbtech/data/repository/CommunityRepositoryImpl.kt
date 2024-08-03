@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class CommunityRepositoryImpl : CommunityRepository {
-    override fun getCommunityDetailsFlow(comunityId: Long): Flow<DomainCommunity?> =
+    override fun getCommunityDetailsFlow(comunityId: String): Flow<DomainCommunity?> =
         flow { emit(dataCommunities.find { it.id == comunityId }?.mapCommunityToDomain()) }
 
     override fun getCommunitiesListFlow(): Flow<List<DomainCommunity>> =

@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.ui.organisms
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +17,7 @@ import com.turitsynanton.android.wbtech.ui.components.СommunityCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-internal fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: (/*Community*/) -> Unit) {
+internal fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)
@@ -27,7 +28,8 @@ internal fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: 
             СommunityCard(
                 modifier = Modifier
                     .clickable {
-                        onClick(/*item*/)
+                        onClick(item.id)
+                        Log.d("TAG", "ITEMID ${item.id}")
                     },
                 resId = R.drawable.ic_designa,
                 text = item.name,

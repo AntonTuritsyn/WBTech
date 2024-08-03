@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.models
 
 data class DomainMeeting(
-    val id: Long,
+    val id: String,
     val name: String,
     val date: String,
     val city: String,

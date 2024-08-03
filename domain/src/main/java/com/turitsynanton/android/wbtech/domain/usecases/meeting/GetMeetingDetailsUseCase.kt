@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 internal class GetMeetingDetailsUseCase(private val meetingRepository: MeetingRepository) :
     IGetMeetingDetailsUseCase {
-    override fun execute(meetingId: Long): Flow<DomainMeeting> =
+    override fun execute(meetingId: String): Flow<DomainMeeting> =
         meetingRepository.getMeetingDetails(meetingId)
 }

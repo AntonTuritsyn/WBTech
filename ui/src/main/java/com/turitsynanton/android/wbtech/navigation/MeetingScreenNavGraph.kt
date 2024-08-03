@@ -17,19 +17,26 @@ fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController, modi
         route = Navigation.MeetingsScreen.route
     ) {
         composable(route = Navigation.Meetings.route) {
-            ScreenMeetings(modifier = modifier, tabs = tabs1) {
-                navController.navigate(Navigation.MeetingDetails.route)
-            }
+            ScreenMeetings(modifier = modifier, tabs = tabs1, onClick = {
+                navController.navigate("${Navigation.MeetingDetails.route}/${it}")
+            })
         }
-        composable(route = Navigation.MeetingDetails.route) {
-            ScreenMeetingDetails(
-                modifier = modifier,
-                meetingTags = meetingTags,
-                navController = navController
-            )
+        composable(route = "${Navigation.MeetingDetails.route}/{id}") { stackEntry ->
+            stackEntry.arguments?.getString("id")?.let { id ->
+                ScreenMeetingDetails(
+                    modifier = modifier,
+                    meetingTags = meetingTags,
+                    navController = navController,
+                    meetingId = id
+                ) {
+
+                }
+            }
+
         }
     }
 }
+
 //      временное решение
 val meetingTags = listOf(
     MeetingTag(

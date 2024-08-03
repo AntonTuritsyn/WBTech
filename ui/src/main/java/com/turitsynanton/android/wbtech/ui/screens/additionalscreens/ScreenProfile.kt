@@ -30,7 +30,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ScreenProfile(authViewModel: AuthViewModel = koinViewModel()) {
+internal fun ScreenProfile(authViewModel: AuthViewModel = koinViewModel()) {
 //    val myProfile = authViewModel.getUserInfoFlow()
     Scaffold(
         Modifier,

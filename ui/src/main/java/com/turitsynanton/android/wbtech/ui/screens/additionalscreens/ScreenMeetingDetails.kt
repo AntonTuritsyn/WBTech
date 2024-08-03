@@ -10,12 +10,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
@@ -30,18 +32,26 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.ui.topbars.TobBarAdditionalScreens
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenMeetingDetails(
     modifier: Modifier = Modifier,
     meetingTags: List<MeetingTag>,
-    meetingDetailsViewModel: MeetingDetailsViewModel = koinViewModel(),
-    navController: NavHostController
+    meetingId: String,
+    meetingDetailsViewModel: MeetingDetailsViewModel = koinViewModel(parameters = {
+        parametersOf(
+            meetingId
+        )
+    }),
+    navController: NavHostController,
+    onBackPressed: () -> Unit
 ) {
+    val meetingDetails by meetingDetailsViewModel.getMeetingDetailsFlow().collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
-            TobBarAdditionalScreens("Developer meeting", navController, onBackPressed = {})
+            TobBarAdditionalScreens("${meetingDetails?.name}", navController, onBackPressed)
         }
     ) {
         Column(
@@ -54,7 +64,7 @@ fun ScreenMeetingDetails(
             SomeText(
                 modifier = Modifier
                     .padding(vertical = 4.dp),
-                text = "13.09.2024 — Москва, ул. Громова, 4",
+                text = "${meetingDetails?.date} - ${meetingDetails?.city}",
                 fontFamily = SfProDisplay,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -93,7 +103,8 @@ fun ScreenMeetingDetails(
                     .fillMaxWidth()
                     .padding(top = 16.dp, bottom = 20.dp),
                 text = "Пойду на встречу!",
-                color = BrandColorDefault, onClick = {}
+                color = BrandColorDefault,
+                onClick = {}
             )
         }
     }

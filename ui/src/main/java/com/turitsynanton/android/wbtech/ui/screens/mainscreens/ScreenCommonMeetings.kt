@@ -25,7 +25,7 @@ fun ScreenMeetings(
     modifier: Modifier = Modifier,
     tabs: List<String>,
     meetingsViewModel: MeetingsViewModel = koinViewModel(),
-    onClick: () -> Unit
+    onClick: (String) -> Unit
 ) {
     val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
 
@@ -42,7 +42,12 @@ fun ScreenMeetings(
         ) {
             SearchField(modifier = Modifier, true)
             TabLayout(tabsNames = tabs, pagerState = pagerState)
-            MeetingTabContent(meetingsList = meetingsList, pagerState = pagerState, tabs, onClick)
+            MeetingTabContent(
+                meetingsList = meetingsList,
+                pagerState = pagerState,
+                tabs = tabs,
+                onClick = onClick
+            )
         }
     }
 }

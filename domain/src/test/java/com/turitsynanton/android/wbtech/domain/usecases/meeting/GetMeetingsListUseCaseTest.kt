@@ -23,14 +23,14 @@ class GetMeetingsListUseCaseTest {
     fun `test execute returns correct meetings list`() = runTest {
         val expectedMeetings = listOf(
             DomainMeeting(
-                id = 1,
+                id = "1",
                 name = "Meeting 1",
                 date = "11.11.24",
                 city = "Moscow",
                 ended = true,
                 tags = emptyList()),
             DomainMeeting(
-                id = 2,
+                id = "2",
                 name = "Meeting 2",
                 date = "22.01.24",
                 city = "Moscow",

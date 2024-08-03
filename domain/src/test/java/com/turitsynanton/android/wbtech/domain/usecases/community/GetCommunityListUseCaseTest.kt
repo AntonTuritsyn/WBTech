@@ -24,12 +24,12 @@ class GetCommunityListUseCaseTest {
     fun `test execute returns correct community list`() = runTest {
         val expectedCommunities = listOf(
             DomainCommunity(
-                id = 1,
+                id = "1",
                 name = "Community 1",
                 size = "1000"
             ),
             DomainCommunity(
-                id = 2,
+                id = "2",
                 name = "Community 2",
                 size = "40"
             )
