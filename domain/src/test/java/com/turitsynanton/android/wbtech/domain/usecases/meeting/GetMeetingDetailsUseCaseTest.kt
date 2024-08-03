@@ -23,7 +23,7 @@ class GetMeetingDetailsUseCaseTest {
 
     @Test
     fun `test execute returns correct meeting details`() = runTest {
-        val meetingId = 1L
+        val meetingId = "1"
         val expectedMeeting = DomainMeeting(
             id = meetingId,
             name = "Meeting 1",
@@ -42,7 +42,7 @@ class GetMeetingDetailsUseCaseTest {
 
     @Test
     fun `test execute throws exception for unknown meeting`() = runTest {
-        val unknownMeetingId = 999L
+        val unknownMeetingId = "999"
 
         val exception = assertThrows<GetMeetingDetailsUseCaseStub.MeetingNotFoundException> {
             getMeetingDetailsUseCaseStub.execute(unknownMeetingId).first()

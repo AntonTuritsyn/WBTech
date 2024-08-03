@@ -6,6 +6,7 @@ import com.turitsynanton.android.wbtech.ui.screens.viewmodels.CommunityViewModel
 import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingDetailsViewModel
 import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val uiModule = module {
@@ -21,10 +22,11 @@ val uiModule = module {
     viewModel<CommunityViewModel> {
         CommunityViewModel(iGetCommunityListUseCase = get())
     }
-    viewModel<CommunityDetailsViewModel> {
-        CommunityDetailsViewModel()
-    }
+    viewModelOf(::CommunityDetailsViewModel)
+    /*viewModel<CommunityDetailsViewModel> {
+        CommunityDetailsViewModel(iGetCommunityDetailsUseCase = get())
+    }*/
     viewModel<MeetingDetailsViewModel> {
-        MeetingDetailsViewModel()
+        MeetingDetailsViewModel(meetingId = get(), iGetMeetingDetailsUseCase = get())
     }
 }

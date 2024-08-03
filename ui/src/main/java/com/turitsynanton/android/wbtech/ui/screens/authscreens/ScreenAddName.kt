@@ -30,7 +30,7 @@ import com.turitsynanton.android.wbtech.ui.topbars.TobBarAdditionalScreens
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ScreenAddName(
+internal fun ScreenAddName(
     authViewModel: AuthViewModel = koinViewModel(),
     navController: NavHostController, onClick: () -> Unit) {
     Scaffold(

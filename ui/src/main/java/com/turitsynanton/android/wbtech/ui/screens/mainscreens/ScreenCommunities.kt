@@ -21,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ScreenCommunities(
     modifier: Modifier = Modifier,
     communityViewModel: CommunityViewModel = koinViewModel(),
-    onClick: () -> Unit
+    onClick: (String) -> Unit
 ) {
     val communityList by communityViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
 
@@ -36,10 +36,10 @@ fun ScreenCommunities(
                 .padding(horizontal = 24.dp)
         ) {
             SearchField(modifier = Modifier, true)
-            CommunityList(domainCommunityList = communityList) {
-//                viewModel.openCommunityDetails(it)
-                onClick()
-            }
+            CommunityList(
+                domainCommunityList = communityList,
+                onClick = onClick
+            )
         }
     }
 }

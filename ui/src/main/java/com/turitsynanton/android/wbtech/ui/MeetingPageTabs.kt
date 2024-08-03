@@ -1,8 +1,8 @@
 package com.turitsynanton.android.wbtech.ui
 
-sealed class MeetingPageTabs {
-    object LeftTab: MeetingPageTabs()
-    object RightTab: MeetingPageTabs()
+enum class MeetingPageTabs {
+    LeftTab,
+    RightTab
 }
 
 val pages = listOf(

@@ -21,7 +21,7 @@ class GetCommunityDetailsUseCaseTest {
 
     @Test
     fun `test execute returns correct community details`() = runTest {
-        val communityId = 1L
+        val communityId = "1"
         val expectedCommunity =
             DomainCommunity(id = communityId, name = "Test Community", size = "1000")
 

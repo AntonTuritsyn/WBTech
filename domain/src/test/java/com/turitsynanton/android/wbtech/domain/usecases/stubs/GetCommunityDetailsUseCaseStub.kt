@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.flowOf
 
 
 class GetCommunityDetailsUseCaseStub : IGetCommunityDetailsUseCase {
-    private var communityDetails: Map<Long, DomainCommunity?> = emptyMap()
+    private var communityDetails: Map<String, DomainCommunity?> = emptyMap()
 
-    fun setCommunityDetails(details: Map<Long, DomainCommunity?>) {
+    fun setCommunityDetails(details: Map<String, DomainCommunity?>) {
         communityDetails = details
     }
 
-    override fun execute(comunityId: Long): Flow<DomainCommunity?> {
+    override fun execute(comunityId: String): Flow<DomainCommunity?> {
         return flowOf(communityDetails[comunityId])
     }
 }

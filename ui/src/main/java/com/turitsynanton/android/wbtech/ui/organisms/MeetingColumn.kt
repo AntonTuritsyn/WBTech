@@ -16,7 +16,7 @@ import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
-internal fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: () -> Unit) {
+internal fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)
@@ -26,7 +26,7 @@ internal fun MeetingColumn(meetingsList: List<DomainMeeting>, onClick: () -> Uni
         items(meetingsList) { item ->
             MeetingCard(
                 modifier = Modifier
-                    .clickable { onClick() },
+                    .clickable { onClick(item.id) },
                 resId = R.drawable.ic_meeting,
                 meetingName = item.name,
                 ended = item.ended,

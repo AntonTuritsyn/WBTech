@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 internal class GetCommunityDetailsUseCase(private val communityRepository: CommunityRepository) :
     IGetCommunityDetailsUseCase {
 
-    override fun execute(comunityId: Long): Flow<DomainCommunity?> =
+    override fun execute(comunityId: String): Flow<DomainCommunity?> =
         communityRepository.getCommunityDetailsFlow(comunityId)
 }

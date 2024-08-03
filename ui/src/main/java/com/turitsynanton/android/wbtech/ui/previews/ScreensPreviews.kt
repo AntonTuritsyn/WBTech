@@ -55,16 +55,15 @@ fun Profile() {
     ScreenProfile()
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun CommunityDetails() {
     val navController = rememberNavController()
     ScreenCommunityDetails(modifier = Modifier, navController = navController) {
-
     }
-}
+}*/
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun MeetingDetails() {
     val navController = rememberNavController()
@@ -73,7 +72,7 @@ fun MeetingDetails() {
         meetingTags,
         navController = navController
     )
-}
+}*/
 
 //      временное решение
 val meetingTags = listOf(
