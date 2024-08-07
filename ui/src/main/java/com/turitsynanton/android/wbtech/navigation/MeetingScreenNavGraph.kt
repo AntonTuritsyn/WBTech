@@ -11,20 +11,20 @@ import com.turitsynanton.android.wbtech.ui.Navigation
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetings
 
-fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController, modifier: Modifier) {
+fun NavGraphBuilder.meetingScreenNavGraph(navController: NavHostController) {
     navigation(
         startDestination = Navigation.Meetings.route,
         route = Navigation.MeetingsScreen.route
     ) {
         composable(route = Navigation.Meetings.route) {
-            ScreenMeetings(modifier = modifier, tabs = tabs1, onClick = {
+            ScreenMeetings(modifier = Modifier, tabs = tabs1, onClick = {
                 navController.navigate("${Navigation.MeetingDetails.route}/${it}")
             })
         }
         composable(route = "${Navigation.MeetingDetails.route}/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let { id ->
                 ScreenMeetingDetails(
-                    modifier = modifier,
+                    modifier = Modifier,
                     meetingTags = meetingTags,
                     navController = navController,
                     meetingId = id

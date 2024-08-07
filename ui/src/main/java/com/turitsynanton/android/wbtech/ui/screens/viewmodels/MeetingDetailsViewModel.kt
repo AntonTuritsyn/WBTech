@@ -18,11 +18,16 @@ class MeetingDetailsViewModel(
     private val _meeting: MutableStateFlow<DomainMeeting?> = MutableStateFlow(null)
     private val meeting: StateFlow<DomainMeeting?> = _meeting.asStateFlow()
 
+    private val _isExpanded: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val isExpanded: StateFlow<Boolean> = _isExpanded.asStateFlow()
+
     init {
         getMeetingDetails(meetingId)
     }
 
     fun getMeetingDetailsFlow(): StateFlow<DomainMeeting?> = meeting
+
+    fun isExpandedFlow(): StateFlow<Boolean> = isExpanded
 
     fun getMeetingDetails(meetingId: String) {
         viewModelScope.launch {
@@ -30,5 +35,9 @@ class MeetingDetailsViewModel(
                 _meeting.update { meetingDetails }
             }
         }
+    }
+
+    fun toggleExpanded() {
+        _isExpanded.value = !_isExpanded.value
     }
 }

@@ -3,6 +3,8 @@ package com.turitsynanton.android.wbtech
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.mutableStateOf
@@ -36,10 +38,15 @@ class MainActivity : ComponentActivity() {
                             )
                     }
                 ) { innerPading ->
-                    NavGraphBottom(
-                        navController = navController,
-                        modifier = Modifier.padding(innerPading)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(innerPading)
+                    ) {
+                        NavGraphBottom(
+                            navController = navController
+                        )
+                    }
                 }
             }
         }

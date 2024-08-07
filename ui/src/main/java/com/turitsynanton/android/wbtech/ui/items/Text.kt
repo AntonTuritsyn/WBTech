@@ -50,6 +50,7 @@ internal fun SomeText(
     fontWeight: FontWeight,
     fontStyle: FontStyle,
     color: Color,
+    maxLines: Int = Int.MAX_VALUE,
     textAlign: TextAlign? = null,
     lineHeight: TextStyle = LocalTextStyle.current
 ) {
@@ -63,7 +64,8 @@ internal fun SomeText(
         fontStyle = fontStyle,
         color = color,
         textAlign = textAlign,
-        style = lineHeight
+        style = lineHeight,
+        maxLines = maxLines
     )
 }
 

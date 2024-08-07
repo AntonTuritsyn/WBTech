@@ -12,14 +12,14 @@ import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
 
 fun NavGraphBuilder.communityScreenNavGraph(
-    navController: NavHostController, modifier: Modifier
+    navController: NavHostController
 ) {
     navigation(
         startDestination = Navigation.Communities.route,
         route = Navigation.CommunitiesScreen.route
     ) {
         composable(route = Navigation.Communities.route) {
-            ScreenCommunities(modifier = modifier, onClick = {
+            ScreenCommunities(modifier = Modifier, onClick = {
                 navController.navigate("${Navigation.CommunityDetails.route}/${it}")
             })
         }
@@ -28,7 +28,7 @@ fun NavGraphBuilder.communityScreenNavGraph(
         ) { stackEntry ->
             stackEntry.arguments?.getString("id")?.let { id ->
                 ScreenCommunityDetails(
-                    modifier = modifier,
+                    modifier = Modifier,
                     navController = navController,
                     communityId = id
                 ) {

@@ -21,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ScreenMeetings(
+internal fun ScreenMeetings(
     modifier: Modifier = Modifier,
     tabs: List<String>,
     meetingsViewModel: MeetingsViewModel = koinViewModel(),

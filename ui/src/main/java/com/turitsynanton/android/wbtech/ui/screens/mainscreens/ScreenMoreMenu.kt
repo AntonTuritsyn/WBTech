@@ -19,13 +19,14 @@ import com.turitsynanton.android.wbtech.ui.components.MyProfileItem
 import com.turitsynanton.android.wbtech.ui.topbars.TopBarMainScreens
 
 @Composable
-fun ScreenMoreMenu(
+internal fun ScreenMoreMenu(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
     onProfileScreen: () -> Unit,
     onThemeScreen: () -> Unit,
     onNotificationScreen: () -> Unit,
-    onSafetyScreen: () -> Unit) {
+    onSafetyScreen: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopBarMainScreens(title = "Ещё", false)
@@ -52,32 +53,44 @@ fun ScreenMoreMenu(
                 avatar = R.drawable.my_photo
             )
             Spacer(modifier = Modifier.padding(bottom = 0.dp))
-            MyMenuItem(modifier = Modifier.clickable(
-                enabled = true,
-                onClickLabel = "",
-                role = null,
-                onClick = {
+
+            MyMenuItem(
+                modifier = Modifier.clickable(
+                    enabled = true,
+                    onClickLabel = "",
+                    role = null,
+                    onClick = {
 //                        navController.popBackStack()
-                }
-            ), text = "Мои встречи", icon = R.drawable.ic_coffee)
+                    }
+                ),
+                text = "Мои встречи",
+                icon = R.drawable.ic_coffee)
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
-            MyMenuItem(modifier = Modifier
-                .clickable {
-                    onThemeScreen()
-                }, text = "Тема", icon = R.drawable.ic_theme)
-            MyMenuItem(modifier = Modifier
-                .clickable {
-                    onNotificationScreen()
-                }, text = "Уведомления", icon = R.drawable.ic_notification)
-            MyMenuItem(modifier = Modifier
-                .clickable {
-                    onSafetyScreen()
-                }, text = "Безопасность", icon = R.drawable.ic_safety)
+
+            MyMenuItem(
+                modifier = Modifier
+                    .clickable {
+                        onThemeScreen()
+                    }, text = "Тема", icon = R.drawable.ic_theme
+            )
+            MyMenuItem(
+                modifier = Modifier
+                    .clickable {
+                        onNotificationScreen()
+                    }, text = "Уведомления", icon = R.drawable.ic_notification
+            )
+            MyMenuItem(
+                modifier = Modifier
+                    .clickable {
+                        onSafetyScreen()
+                    }, text = "Безопасность", icon = R.drawable.ic_safety
+            )
             MyMenuItem(modifier = Modifier, text = "Память и ресурсы", icon = R.drawable.ic_memory)
+
             HorizontalDivider(thickness = 1.dp, color = Color(0xFFEDEDED))
+
             MyMenuItem(modifier = Modifier, text = "Помощь", icon = R.drawable.ic_help)
             MyMenuItem(modifier = Modifier, text = "Пригласи друга", icon = R.drawable.ic_invite)
         }
     }
-
 }

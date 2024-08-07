@@ -14,7 +14,7 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.Navigation
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
+internal fun SplashScreen(navController: NavHostController) {
     Box(modifier = Modifier
         .fillMaxHeight()) {
         val composition by rememberLottieComposition(

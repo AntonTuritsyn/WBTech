@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.lang.Thread.State
 
 class CommunityDetailsViewModel(
     communityId: String,
@@ -18,11 +19,16 @@ class CommunityDetailsViewModel(
     private val _community: MutableStateFlow<DomainCommunity?> = MutableStateFlow(null)
     private val community: StateFlow<DomainCommunity?> = _community.asStateFlow()
 
+    private val _isExpanded: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val isExpanded: StateFlow<Boolean> = _isExpanded.asStateFlow()
+
     init {
         getCommunityDetails(communityId)
     }
 
     fun getCommunityDetailsFlow(): StateFlow<DomainCommunity?> = community
+
+    fun isExpandedFlow(): StateFlow<Boolean> = isExpanded
 
     fun getCommunityDetails(communityId: String) {
         viewModelScope.launch {
@@ -30,5 +36,9 @@ class CommunityDetailsViewModel(
                 _community.update { communityDetails }
             }
         }
+    }
+
+    fun toggleExpanded() {
+        _isExpanded.value = !_isExpanded.value
     }
 }
