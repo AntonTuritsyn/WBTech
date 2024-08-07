@@ -35,7 +35,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.ui.topbars.TobBarAdditionalScreens
 
 @Composable
-fun ScreenCode(
+internal fun ScreenCode(
 //    viewModel: MainViewModel = viewModel(),
     navController: NavHostController,
     phoneNum: String

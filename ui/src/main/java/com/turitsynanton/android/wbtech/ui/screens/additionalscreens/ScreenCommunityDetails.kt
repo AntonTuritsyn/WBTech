@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.ui.R
+import com.turitsynanton.android.wbtech.ui.components.ExpandableText
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.screens.viewmodels.CommunityDetailsViewModel
@@ -32,7 +34,7 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenCommunityDetails(
+internal fun ScreenCommunityDetails(
     modifier: Modifier = Modifier,
     communityId: String,
     communityDetailsViewModel: CommunityDetailsViewModel = koinViewModel(parameters = {
@@ -47,6 +49,7 @@ fun ScreenCommunityDetails(
     val communityDetails by communityDetailsViewModel.getCommunityDetailsFlow()
         .collectAsStateWithLifecycle()
     val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
+    val expanded by communityDetailsViewModel.isExpandedFlow().collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("${communityDetails?.name}", navController, onBackPressed)
@@ -60,16 +63,16 @@ fun ScreenCommunityDetails(
                 .fillMaxWidth()
         ) {
             item {
-                SomeText(
-                    modifier = Modifier
-                        .height(270.dp),
+                ExpandableText(
+                    modifier = Modifier,
                     text = stringResource(id = R.string.loremIpsum),
-                    fontFamily = SfProDisplay,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    fontStyle = FontStyle.Normal,
-                    color = NeutralWeak
-                )
+                    maxLines = Int.MAX_VALUE,
+                    maxLinesMinimise = 8,
+                    expanded = expanded
+                ) {
+                    communityDetailsViewModel.toggleExpanded()
+                    Log.d("TAG", "$expanded")
+                }
             }
             item {
                 SomeText(

@@ -1,16 +1,22 @@
 package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -21,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
+import com.turitsynanton.android.wbtech.ui.components.ExpandableText
 import com.turitsynanton.android.wbtech.ui.components.People
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
@@ -36,7 +43,7 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenMeetingDetails(
+internal fun ScreenMeetingDetails(
     modifier: Modifier = Modifier,
     meetingTags: List<MeetingTag>,
     meetingId: String,
@@ -48,7 +55,10 @@ fun ScreenMeetingDetails(
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val meetingDetails by meetingDetailsViewModel.getMeetingDetailsFlow().collectAsStateWithLifecycle()
+    val meetingDetails by meetingDetailsViewModel.getMeetingDetailsFlow()
+        .collectAsStateWithLifecycle()
+    val expanded by meetingDetailsViewModel.isExpandedFlow().collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("${meetingDetails?.name}", navController, onBackPressed)
@@ -59,7 +69,8 @@ fun ScreenMeetingDetails(
                 .padding(it)
                 .padding(top = 16.dp)
                 .padding(horizontal = 24.dp)
-                .fillMaxWidth()
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             SomeText(
                 modifier = Modifier
@@ -85,17 +96,15 @@ fun ScreenMeetingDetails(
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
             MapView()
             Spacer(modifier = Modifier.padding(bottom = 20.dp))
-            SomeText(
-                modifier = Modifier
-                    .padding(vertical = 4.dp)
-                    .height(170.dp),
+            ExpandableText(
+                modifier = Modifier,
                 text = stringResource(id = R.string.loremIpsum),
-                fontFamily = SfProDisplay,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
-                fontStyle = FontStyle.Normal,
-                color = NeutralWeak
-            )
+                maxLines = Int.MAX_VALUE,
+                maxLinesMinimise = 8,
+                expanded = expanded
+            ) {
+                meetingDetailsViewModel.toggleExpanded()
+            }
             Spacer(modifier = Modifier.weight(1f))
             People(modifier = Modifier, size = 100)
             MyFilledButton(

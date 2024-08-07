@@ -18,7 +18,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ScreenCommunities(
+internal fun ScreenCommunities(
     modifier: Modifier = Modifier,
     communityViewModel: CommunityViewModel = koinViewModel(),
     onClick: (String) -> Unit

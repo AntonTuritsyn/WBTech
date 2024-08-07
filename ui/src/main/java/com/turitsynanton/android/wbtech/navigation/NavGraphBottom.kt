@@ -13,8 +13,7 @@ import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @Composable
 fun NavGraphBottom(
-    navController: NavHostController,
-    modifier: Modifier
+    navController: NavHostController
 ) {
     NavHost(
         navController = navController,
@@ -25,10 +24,9 @@ fun NavGraphBottom(
             SplashScreen(navController = navController)
         }
         meetingScreenNavGraph(
-            navController = navController,
-            modifier = modifier
+            navController = navController
         )
-        communityScreenNavGraph(navController = navController, modifier = modifier)
-        moreMenuNavGraph(navController = navController, modifier = modifier)
+        communityScreenNavGraph(navController = navController)
+        moreMenuNavGraph(navController = navController)
     }
 }

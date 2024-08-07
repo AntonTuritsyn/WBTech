@@ -12,14 +12,14 @@ import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenAddName
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenCode
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
 
-fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController, modifier: Modifier) {
+fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController) {
     navigation(
         startDestination = Navigation.More.route,
         route = Navigation.MoreScreen.route
     ) {
         composable(route = Navigation.More.route) {
             ScreenMoreMenu(
-                modifier = modifier,
+                modifier = Modifier,
                 navHostController = navController,
                 onProfileScreen = { navController.navigate(Navigation.ScreenMore.route) },
                 onThemeScreen = { navController.navigate(Navigation.ScreenTheme.route) },
