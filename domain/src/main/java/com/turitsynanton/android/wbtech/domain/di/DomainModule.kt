@@ -1,6 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.di
 
 import com.turitsynanton.android.wbtech.domain.usecases.auth.GetUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.auth.IGetUserUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityDetailsUseCase
@@ -20,6 +21,8 @@ val domainModule = module {
 
     factoryOf(::GetMeetingListUseCase) bind IGetMeetingsListUseCase::class
     factoryOf(::GetMeetingDetailsUseCase) bind IGetMeetingDetailsUseCase::class
+
+    factoryOf(::GetUserUseCase) bind IGetUserUseCase::class
 
     factoryOf(::GetUserUseCase)
 }
