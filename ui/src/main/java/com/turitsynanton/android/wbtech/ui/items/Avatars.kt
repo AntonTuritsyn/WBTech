@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 
@@ -31,6 +32,16 @@ internal fun Avatar(modifier: Modifier, resId: Int) {
         contentDescription = "common",
         contentScale = ContentScale.Crop
     )
+}
+@Composable
+internal fun RandomAvatar(modifier: Modifier, resId: Int) {
+    AsyncImage(model = "https://api.api-ninjas.com/v1/randomimage", contentDescription = "", contentScale = ContentScale.Crop)
+    /*Image(
+        modifier = modifier,
+        painter = painterResource(id = resId),
+        contentDescription = "common",
+        contentScale = ContentScale.Crop
+    )*/
 }
 
 @Composable

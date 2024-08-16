@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.items.Avatar
+import com.turitsynanton.android.wbtech.ui.items.RandomAvatar
 
 internal fun <T> MutableList<T>.randomSubset(maxSize: Int): List<T> {
     if (this.isEmpty()) return emptyList()
@@ -70,8 +71,11 @@ internal fun People(modifier: Modifier, size: Int) {
                         disabledContainerColor = Color.Unspecified
                     )
                 ) {
-                    Avatar(modifier = Modifier
-                        .fillMaxSize(), resId = avatars[index])
+                    Avatar(
+                        modifier = Modifier
+                        .fillMaxSize(),
+                        resId = avatars[index]
+                    )
                 }
             }
         }
