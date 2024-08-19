@@ -23,10 +23,14 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
 
 @Composable
@@ -34,6 +38,18 @@ internal fun MapView() {
     var isDialogOpen by remember {
         mutableStateOf(false)
     }
+
+//    тест рандомного изображения из сети
+    val imageUrl = "https://api.api-ninjas.com/v1/randomimage?category="
+    val apiKey = "mQP54MwvQ5OymmGfGKY+Tw==uM5bQlAWjr6RWAte"
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+        .data(imageUrl)
+        .addHeader("X-Api-Key", apiKey)
+        .addHeader("Accept", "image/jpg")
+        .build()
+    )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,7 +61,7 @@ internal fun MapView() {
 //        contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.map),
+            painter = /*painterResource(id = R.drawable.map)*/painter,
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -63,8 +79,7 @@ internal fun MapView() {
                         indication = null,
                         onClick = { isDialogOpen = !isDialogOpen })
             ) {
-                ZoomImage(painter = painterResource(id = R.drawable.map))
-
+                ZoomImage(painter = painter)
             }
         }
     }
