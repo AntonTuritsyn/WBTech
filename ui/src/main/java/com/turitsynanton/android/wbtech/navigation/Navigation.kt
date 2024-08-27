@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui
+package com.turitsynanton.android.wbtech.navigation
 
 import com.turitsynanton.android.ui.R
 

@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.ui.R
@@ -18,6 +19,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 
 @Composable
 internal fun CommunityList(domainCommunityList: List<DomainCommunity>, onClick: (String) -> Unit) {
+
     LazyColumn(
         modifier = Modifier
             .padding(vertical = 16.dp)

@@ -13,8 +13,7 @@ class MainViewModel : ViewModel() {
 
     private val _user: MutableStateFlow<DataUser?> = MutableStateFlow(null)
     val user: StateFlow<DataUser?> = _user.asStateFlow()
-
-
+    
 //    private val initialCommunitiesScreenState = CommunitiesScreenState.Communities(dataCommunities)
 
 //    private val _currentCommunitiesScreenState: MutableStateFlow<CommunitiesScreenState> =

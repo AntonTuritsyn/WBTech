@@ -6,7 +6,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.data.tabs1
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
-import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenCommunities
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenMeetingDetails
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMeetings
@@ -25,7 +24,7 @@ fun PreviewCommonMeetings() {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun PreviewCommunities() {
     ScreenCommunities(
@@ -33,7 +32,7 @@ fun PreviewCommunities() {
     ) {
 
     }
-}
+}*/
 
 @Preview(showBackground = true)
 @Composable

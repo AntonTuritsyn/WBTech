@@ -21,7 +21,11 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TobBarAdditionalScreens(title: String, navController: NavHostController, onBackPressed: () -> Unit) {
+internal fun TobBarAdditionalScreens(
+    title: String,
+    navController: NavHostController,
+    onBackPressed: () -> Unit
+) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     TopAppBar(
         modifier = Modifier,

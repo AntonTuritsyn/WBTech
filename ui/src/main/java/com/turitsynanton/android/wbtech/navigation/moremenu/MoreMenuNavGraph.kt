@@ -1,17 +1,21 @@
 package com.turitsynanton.android.wbtech.navigation.moremenu
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.ui.Navigation
+import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.screens.mainscreens.ScreenMoreMenu
 import com.turitsynanton.android.wbtech.ui.screens.additionalscreens.ScreenProfile
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenAddName
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenCode
 import com.turitsynanton.android.wbtech.ui.screens.authscreens.ScreenPhone
+import com.turitsynanton.android.wbtech.uinew.components.SearchFieldNew
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController) {
     navigation(
         startDestination = Navigation.More.route,
@@ -31,7 +35,14 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController) {
             ScreenProfile()
         }
         composable(route = Navigation.ScreenTheme.route) {
-
+            /*CommunityRecommends(
+                modifier = Modifier,
+                recommendationName = "Сообщества для тестировщиков",
+                communitiesList = commmunitiesList,
+                subscribeButtonStyle = SubscribeButtonStyle.Default
+            )*/
+//            ScreenEvents(eventsList = generateEvents())
+            SearchFieldNew(modifier = Modifier, query = "")
         }
         composable(route = Navigation.ScreenNotification.route) {
             ScreenPhone(navController = navController)

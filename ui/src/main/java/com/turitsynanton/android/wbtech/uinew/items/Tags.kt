@@ -43,7 +43,8 @@ internal fun Tag(
         fontSize = style.fontSize,
         fontWeight = FontWeight.Medium,
         fontStyle = FontStyle.Normal,
-        color = style.textColor
+        color = style.textColor,
+        maxLines = 1
     )
 }
 
