@@ -11,7 +11,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.ui.Navigation
+import com.turitsynanton.android.wbtech.navigation.Navigation
 
 @Composable
 internal fun SplashScreen(navController: NavHostController) {
@@ -25,7 +25,7 @@ internal fun SplashScreen(navController: NavHostController) {
 
         LottieAnimation(composition = composition, progress = { logoAnimationState.progress })
         if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
-            navController.navigate(Navigation.Meetings.route) {
+            navController.navigate(com.turitsynanton.android.wbtech.navigationnew.Navigation.EventsList.route) {
                 popUpTo(Navigation.Splash.route) {
                     inclusive = true
                 }

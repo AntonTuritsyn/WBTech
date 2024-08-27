@@ -33,9 +33,14 @@ internal fun Avatar(modifier: Modifier, resId: Int) {
         contentScale = ContentScale.Crop
     )
 }
+
 @Composable
 internal fun RandomAvatar(modifier: Modifier, resId: Int) {
-    AsyncImage(model = "https://api.api-ninjas.com/v1/randomimage", contentDescription = "", contentScale = ContentScale.Crop)
+    AsyncImage(
+        model = "https://api.api-ninjas.com/v1/randomimage",
+        contentDescription = "",
+        contentScale = ContentScale.Crop
+    )
     /*Image(
         modifier = modifier,
         painter = painterResource(id = resId),

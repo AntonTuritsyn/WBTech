@@ -1,8 +1,9 @@
 package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -50,6 +52,7 @@ internal fun ScreenCommunityDetails(
         .collectAsStateWithLifecycle()
     val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
     val expanded by communityDetailsViewModel.isExpandedFlow().collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {
             TobBarAdditionalScreens("${communityDetails?.name}", navController, onBackPressed)
@@ -65,7 +68,7 @@ internal fun ScreenCommunityDetails(
             item {
                 ExpandableText(
                     modifier = Modifier,
-                    text = stringResource(id = R.string.loremIpsum),
+                    text = stringResource(id = R.string.lorem_ipsum),
                     maxLines = Int.MAX_VALUE,
                     maxLinesMinimise = 8,
                     expanded = expanded

@@ -30,6 +30,14 @@ internal enum class TagsStyle(
         verticalPaddings = 8.dp,
         horizontalPaddings = 8.dp
     ),
+    UnclickableBig(
+        textColor = Color(0xFF9A10F0),
+        containerColor = Color(0xFFF6F6FA),
+        clickable = false,
+        fontSize = 16.sp,
+        verticalPaddings = 8.dp,
+        horizontalPaddings = 8.dp
+    ),
     Minimize(
         textColor = Color(0xFF9A10F0),
         containerColor = Color(0xFFF6F6FA),

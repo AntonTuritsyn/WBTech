@@ -6,50 +6,52 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
-import com.turitsynanton.android.wbtech.uinew.utils.SubdcribeButtonStyle
+import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
 @Composable
 internal fun GradientButton(
     modifier: Modifier,
     text: String,
-    enable: ButtonStyle,
+    buttonStyle: ButtonStyle,
     onClick: () -> Unit
 ) {
-    if (enable.loading) {
+    if (buttonStyle.loading) {
         CircularProgressIndicator(
             modifier = modifier
                 .clip(shape = RoundedCornerShape(16.dp))
                 .background(
-                    brush = enable.gradient
+                    brush = buttonStyle.gradient
                 )
                 .padding(16.dp),
-            color = enable.textColor
+            color = buttonStyle.textColor
         )
     } else {
         SimpleTextField(
             modifier = modifier
+                .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(16.dp))
                 .background(
-                    brush = enable.gradient
+                    brush = buttonStyle.gradient
                 )
                 .clickable(
-                    enabled = enable.clickable
+                    enabled = buttonStyle.clickable
                 ) {
                     onClick()
                 }
@@ -59,15 +61,16 @@ internal fun GradientButton(
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold,
             fontStyle = FontStyle.Normal,
-            color = enable.textColor
+            color = buttonStyle.textColor,
+            textAlign = TextAlign.Center
         )
     }
 }
 
 @Composable
-internal fun SubdcribeButton(
+internal fun SubscribeButton(
     modifier: Modifier,
-    style: SubdcribeButtonStyle,
+    style: SubscribeButtonStyle,
     onClick: () -> Unit
 ) {
     Box(modifier = modifier
@@ -78,7 +81,8 @@ internal fun SubdcribeButton(
         .clickable {
             onClick()
         }
-        .padding(8.dp)
+        .padding(8.dp),
+        contentAlignment = Alignment.Center
     ) {
         Icon(imageVector = style.icon, contentDescription = "", tint = style.crossColor)
     }
@@ -91,15 +95,15 @@ private fun GradientButtonPreview() {
         GradientButton(
             modifier = Modifier,
             text = "Оплатить",
-            enable = ButtonStyle.Secondary
+            buttonStyle = ButtonStyle.Secondary
         ) {
         }
         Spacer(modifier = Modifier.padding(18.dp))
         Row {
-            SubdcribeButton(modifier = Modifier, style = SubdcribeButtonStyle.Done) {
+            SubscribeButton(modifier = Modifier, style = SubscribeButtonStyle.Done) {
             }
             Spacer(modifier = Modifier.padding(18.dp))
-            SubdcribeButton(modifier = Modifier, style = SubdcribeButtonStyle.Default) {
+            SubscribeButton(modifier = Modifier, style = SubscribeButtonStyle.Default) {
             }
         }
     }

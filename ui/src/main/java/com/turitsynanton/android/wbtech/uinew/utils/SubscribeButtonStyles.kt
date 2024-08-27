@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.turitsynanton.android.wbtech.ui.theme.NeutralWhite
 
-internal enum class SubdcribeButtonStyle(
+internal enum class SubscribeButtonStyle(
     val crossColor: Color,
     val containerColor: Brush,
     val icon: ImageVector
