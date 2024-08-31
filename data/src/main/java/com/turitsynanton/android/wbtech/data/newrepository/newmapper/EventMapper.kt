@@ -17,7 +17,7 @@ internal class EventMapper(
             city = entity.city,
             description = entity.description,
             host = hostMapper.mapToDomain(entity.host),
-            organizer = communityMapper.mapToDomain(entity.organizer),
+//            organizer = communityMapper.mapToDomain(entity.organizer),
             participants = entity.participants.map { user ->
                 usersMapper.mapToDomain(user)
             },
@@ -27,4 +27,12 @@ internal class EventMapper(
             icon = entity.icon
         )
     }
+}
+
+internal fun DataEvent.mapEventToDomain(mapper: IMapper<DataEvent, DomainEvent>): DomainEvent {
+    return mapper.mapToDomain(this)
+}
+
+internal fun List<DataEvent>.mapEventToDomain(mapper: IMapper<DataEvent, DomainEvent>): List<DomainEvent> {
+    return map { it.mapEventToDomain(mapper) }
 }

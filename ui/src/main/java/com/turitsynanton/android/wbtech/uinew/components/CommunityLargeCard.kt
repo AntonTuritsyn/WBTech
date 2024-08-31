@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
@@ -64,7 +64,7 @@ internal fun CommunityLargeCard(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            val tags = generateTagsForEvent()
+            val tags = generateTags()
             tags.forEach { content ->
                 Tag(modifier = Modifier, text = content.content, style = TagsStyle.UnclickableBig) {
                 }

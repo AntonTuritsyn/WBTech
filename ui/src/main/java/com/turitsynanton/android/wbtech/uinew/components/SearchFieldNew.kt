@@ -2,31 +2,21 @@ package com.turitsynanton.android.wbtech.uinew.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.sharp.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,23 +26,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
-import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
-import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 
 @Composable
 internal fun SearchFieldNew(
     modifier: Modifier,
-    query: String
+    query: String,
+    onQueryChanged: (String) -> Unit,
+    onCrossClick: () -> Unit
 ) {
-    var queryOld: String by rememberSaveable { mutableStateOf("") }
-
     BasicTextField(
         modifier = Modifier
             .then(modifier)
@@ -63,7 +49,7 @@ internal fun SearchFieldNew(
             .wrapContentHeight(Alignment.CenterVertically),
         value = query,
         onValueChange = {
-            queryOld = it
+            onQueryChanged(it)
         },
         enabled = true,
         textStyle = TextStyle(
@@ -81,7 +67,9 @@ internal fun SearchFieldNew(
                 if (query.isEmpty()) {
                     DecorationBoxForEmptyText(modifier = Modifier)
                 } else {
-                    DecorationBoxForSearch(modifier = Modifier)
+                    DecorationBoxForSearch(modifier = Modifier) {
+                        onCrossClick()
+                    }
                 }
                 innerTextField()
             }
@@ -126,7 +114,7 @@ private fun DecorationBoxForEmptyText(
 @Composable
 private fun DecorationBoxForSearch(
     modifier: Modifier,
-
+    onCrossClick: () -> Unit
     ) {
     Row(
         modifier = modifier
@@ -140,7 +128,11 @@ private fun DecorationBoxForSearch(
         Icon(
             painter = painterResource(id = R.drawable.ic_cross),
             modifier = Modifier
-                .padding(end = 6.dp),
+                .padding(end = 6.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) { onCrossClick() },
             contentDescription = "",
             tint = Color.Unspecified
         )
@@ -155,5 +147,6 @@ private fun DecorationBoxForSearch(
 )
 @Composable
 internal fun SearchFieldNewPreview() {
-    SearchFieldNew(modifier = Modifier, query = "")
+    SearchFieldNew(modifier = Modifier, query = "", onQueryChanged = {}) {
+    }
 }

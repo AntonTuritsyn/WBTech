@@ -19,3 +19,11 @@ internal class UsersMapper(
         )
     }
 }
+
+internal fun DataUser.mapUserToDomain(mapper: IMapper<DataUser, DomainUser>): DomainUser {
+    return mapper.mapToDomain(this)
+}
+
+internal fun List<DataUser>.mapUserToDomain(mapper: IMapper<DataUser, DomainUser>): List<DomainUser> {
+    return map { it.mapUserToDomain(mapper) }
+}

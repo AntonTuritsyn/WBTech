@@ -22,6 +22,7 @@ import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
+import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.uinew.components.CommunityLargeCard
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
@@ -40,7 +41,7 @@ internal fun ScreenCommunityDetails(
     communityId: String,
     community: DataCommunity,
     eventList: List<DataEvent>,
-    pastEventList: List<DataEvent>,
+    pastEventList: List<DomainEvent>,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
     onSubscribeClick: () -> Unit,
@@ -166,7 +167,7 @@ internal fun MainInfoBlock(
 @Composable
 internal fun PastEventsRow(
     modifier: Modifier,
-    pastEventList: List<DataEvent>,
+    pastEventList: List<DomainEvent>,
     onEventClick: () -> Unit
 ) {
     Column(
@@ -177,8 +178,7 @@ internal fun PastEventsRow(
         DifferentEvents(
             modifier = Modifier,
             componentName = stringResource(id = R.string.past_events),
-            eventsList = pastEventList,
-            evetsTags = listOf()
+            eventsList = pastEventList
         ) {
             onEventClick()
         }
@@ -194,7 +194,7 @@ private fun ScreenCommunityPreview() {
         communityId = "",
         community = generateCommunity(),
         eventList = generateEvents(),
-        pastEventList = generateEvents(),
+        pastEventList = listOf(),
         onBackClick = {},
         onShareClick = {},
         onSubscribeClick = {},

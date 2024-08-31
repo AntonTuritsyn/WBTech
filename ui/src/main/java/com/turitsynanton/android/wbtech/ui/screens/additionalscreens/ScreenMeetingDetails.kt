@@ -29,7 +29,7 @@ import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.MyFilterChip
 import com.turitsynanton.android.wbtech.ui.items.SomeText
 import com.turitsynanton.android.wbtech.ui.organisms.MapView
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingDetailsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.viewmodelsold.MeetingDetailsViewModelOld
 import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
 import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
@@ -43,7 +43,7 @@ internal fun ScreenMeetingDetails(
     modifier: Modifier = Modifier,
     meetingTags: List<MeetingTag>,
     meetingId: String,
-    meetingDetailsViewModel: MeetingDetailsViewModel = koinViewModel(parameters = {
+    meetingDetailsViewModel: MeetingDetailsViewModelOld = koinViewModel(parameters = {
         parametersOf(
             meetingId
         )

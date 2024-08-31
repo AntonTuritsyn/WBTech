@@ -7,7 +7,7 @@ data class DomainEvent(
     val city: String,
     val description: String,
     val host: DomainUser,
-    val organizer: DomainCommunity,
+//    val organizer: DomainCommunity,
     val participants: List<DomainUser>,
     val tags: List<DomainTag>,
     val icon: String

@@ -7,7 +7,7 @@ data class DataEvent(
     val city: String,
     val description: String,
     val host: DataUser,
-    val organizer: DataCommunity,
+//    val organizer: DataCommunity,
     val participants: List<DataUser>,
     val tags: List<DataTag>,
     val icon: String

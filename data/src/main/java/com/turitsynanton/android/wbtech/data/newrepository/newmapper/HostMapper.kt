@@ -13,3 +13,7 @@ internal class HostMapper : IMapper<DataHost, DomainHost> {
         )
     }
 }
+
+internal fun DataHost.mapHostToDomain(mapper: IMapper<DataHost, DomainHost>): DomainHost {
+    return mapper.mapToDomain(this)
+}

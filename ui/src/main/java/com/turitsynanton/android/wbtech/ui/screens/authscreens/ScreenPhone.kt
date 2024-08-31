@@ -30,14 +30,13 @@ import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.ui.items.CustomPhoneField
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.AuthViewModel
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun ScreenPhone(
     navController: NavHostController,
-    authViewModel: AuthViewModel = koinViewModel()
+    /*authViewModel: AuthViewModel = koinViewModel()*/
 ) {
     Scaffold(
         topBar = {

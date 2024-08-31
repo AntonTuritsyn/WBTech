@@ -2,27 +2,27 @@ package com.turitsynanton.android.wbtech.domain.di
 
 import com.turitsynanton.android.wbtech.domain.usecases.auth.GetUserUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.auth.IGetUserUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityListUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityListUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.meeting.GetMeetingDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.meeting.GetMeetingListUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.meeting.IGetMeetingDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.meeting.IGetMeetingsListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.community.GetCommunityDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.community.GetCommunitiesListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunityDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunitiesListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.GetEventDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.GetEventListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventListUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val domainModule = module {
-    factoryOf(::GetCommunityListUseCase) bind IGetCommunityListUseCase::class
+    factoryOf(::GetCommunitiesListUseCase) bind IGetCommunitiesListUseCase::class
     factoryOf(::GetCommunityDetailsUseCase) bind IGetCommunityDetailsUseCase::class
 
-    factoryOf(::GetMeetingListUseCase) bind IGetMeetingsListUseCase::class
-    factoryOf(::GetMeetingDetailsUseCase) bind IGetMeetingDetailsUseCase::class
+    factoryOf(::GetEventListUseCase) bind IGetEventListUseCase::class
+    factoryOf(::GetEventDetailsUseCase) bind IGetEventDetailsUseCase::class
 
-    factoryOf(::GetUserUseCase) bind IGetUserUseCase::class
+/*    factoryOf(::GetUserUseCase) bind IGetUserUseCase::class
 
-    factoryOf(::GetUserUseCase)
+    factoryOf(::GetUserUseCase)*/
 }

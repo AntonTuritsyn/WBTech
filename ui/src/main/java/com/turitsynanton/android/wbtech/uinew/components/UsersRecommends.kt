@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
@@ -45,7 +45,7 @@ internal fun UsersRecommends(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(usersList.size) { index ->
-                val generatedUserTag: List<DataTag> = generateTagsForEvent(1, 1)
+                val generatedUserTag: List<DataTag> = generateTags(1, 1)
                 Person(
                     modifier = Modifier,
                     picture = R.drawable.my_photo,

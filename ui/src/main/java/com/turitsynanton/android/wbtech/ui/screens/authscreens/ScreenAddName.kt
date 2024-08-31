@@ -24,14 +24,13 @@ import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import com.turitsynanton.android.wbtech.ui.components.TextFieldForAuth
 import com.turitsynanton.android.wbtech.ui.items.CustomAvatar
 import com.turitsynanton.android.wbtech.ui.items.MyFilledButton
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.AuthViewModel
 import com.turitsynanton.android.wbtech.ui.theme.BrandColorDark
 import com.turitsynanton.android.wbtech.ui.topbars.TobBarAdditionalScreens
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun ScreenAddName(
-    authViewModel: AuthViewModel = koinViewModel(),
+    /*authViewModel: AuthViewModel = koinViewModel()*/
     navController: NavHostController, onClick: () -> Unit) {
     Scaffold(
         topBar = {

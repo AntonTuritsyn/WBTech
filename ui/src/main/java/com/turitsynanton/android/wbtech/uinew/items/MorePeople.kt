@@ -1,6 +1,7 @@
 package com.turitsynanton.android.wbtech.uinew.items
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ internal fun MorePeople(
     SimpleTextField(
         modifier = modifier
             .clip(shape = CircleShape)
+            .border(width = 2.dp, color = Color.White, shape = CircleShape)
             .background(
                 color = Color(0xFFF6F6FA)
             )
@@ -36,8 +38,7 @@ internal fun MorePeople(
 
             }
             .size(48.dp)
-            .wrapContentSize(align = Alignment.Center)
-        ,
+            .wrapContentSize(align = Alignment.Center),
         text = "+${numberOfPeople.toString()}",
         fontFamily = SfProDisplay,
         fontSize = 14.sp,

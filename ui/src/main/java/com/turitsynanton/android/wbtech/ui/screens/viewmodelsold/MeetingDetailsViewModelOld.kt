@@ -1,8 +1,7 @@
-package com.turitsynanton.android.wbtech.ui.screens.viewmodels
+package com.turitsynanton.android.wbtech.ui.screens.viewmodelsold
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import com.turitsynanton.android.wbtech.domain.usecases.meeting.IGetMeetingDetailsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MeetingDetailsViewModel(
+class MeetingDetailsViewModelOld(
     meetingId: String,
     private val iGetMeetingDetailsUseCase: IGetMeetingDetailsUseCase
 ): ViewModel() {

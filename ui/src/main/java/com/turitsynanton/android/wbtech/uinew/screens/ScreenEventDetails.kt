@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -26,12 +27,11 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.mocks.generateHost
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.components.AddressCard
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
-import com.turitsynanton.android.wbtech.uinew.components.EventCard
 import com.turitsynanton.android.wbtech.uinew.components.Host
 import com.turitsynanton.android.wbtech.uinew.components.Organizer
 import com.turitsynanton.android.wbtech.uinew.components.Subscribers
@@ -45,6 +45,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 
+@OptIn(ExperimentalComposeUiApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 internal fun ScreenEventDetails(
@@ -97,7 +98,10 @@ internal fun ScreenEventDetails(
                 }
             }
             item {
-                AddressCard(modifier = Modifier, address = "Севкабель Порт, Кожевенная линия, 40, ")
+                AddressCard(modifier = Modifier/*.pointerInteropFilter {
+                    // Consume the touch event
+                    true
+                }*/, address = "Севкабель Порт, Кожевенная линия, 40, ")
             }
             item {
                 Subscribers(
@@ -120,8 +124,7 @@ internal fun ScreenEventDetails(
                 DifferentEvents(
                     modifier = Modifier,
                     componentName = "Другие встречи сообщества",
-                    eventsList = generateEvents(),
-                    evetsTags = listOf()
+                    eventsList = listOf()
                 ) {
                     onEventClick()
                 }
@@ -138,6 +141,7 @@ internal fun ScreenEventDetails(
         }
     }
 }
+
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -188,7 +192,7 @@ internal fun Header(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            val tags = generateTagsForEvent()
+            val tags = generateTags()
             tags.forEach { content ->
                 Tag(modifier = Modifier, text = content.content, style = TagsStyle.Minimize) {
                 }

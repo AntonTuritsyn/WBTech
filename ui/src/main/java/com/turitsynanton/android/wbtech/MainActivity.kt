@@ -18,22 +18,25 @@ import com.turitsynanton.android.wbtech.navigation.Navigation
 import com.turitsynanton.android.wbtech.navigationnew.NavGraph
 import com.turitsynanton.android.wbtech.ui.bottombar.BottomBar
 import com.turitsynanton.android.wbtech.ui.theme.WBTechTheme
+import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
+        MapKitFactory.initialize(this)
         setContent {
             WBTechTheme {
                 val navController = rememberNavController()
                 val showBottomBar = remember {
                     mutableStateOf(false)
                 }
+                NavGraph(navController = navController)
                 /*navController.addOnDestinationChangedListener { _, destination, _ ->
                     showBottomBar.value = destination.route != Navigation.Splash.route
                 }*/
-                NavGraph(navController = navController)
+
                 /*Scaffold(
                     bottomBar = {
                         if (showBottomBar.value)
@@ -54,5 +57,15 @@ class MainActivity : ComponentActivity() {
                 }*/
             }
         }
+    }
+//    для яндекс карт
+    override fun onStart() {
+        super.onStart()
+        MapKitFactory.getInstance().onStart()
+    }
+
+    override fun onStop() {
+        MapKitFactory.getInstance().onStop()
+        super.onStop()
     }
 }

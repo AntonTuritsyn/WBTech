@@ -3,6 +3,7 @@ package com.turitsynanton.android.wbtech.navigation.moremenu
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -42,7 +43,6 @@ fun NavGraphBuilder.moreMenuNavGraph(navController: NavHostController) {
                 subscribeButtonStyle = SubscribeButtonStyle.Default
             )*/
 //            ScreenEvents(eventsList = generateEvents())
-            SearchFieldNew(modifier = Modifier, query = "")
         }
         composable(route = Navigation.ScreenNotification.route) {
             ScreenPhone(navController = navController)

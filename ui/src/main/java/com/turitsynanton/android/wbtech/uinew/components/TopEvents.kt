@@ -11,16 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
+import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 
 @Composable
 internal fun TopEvents(
     modifier: Modifier,
-    eventsList: List<DataEvent>,
-    evetsTags: List<DataTag>,
+    eventsList: List<DomainEvent>,
     onEventClick: () -> Unit
 ) {
     Column(
@@ -32,13 +32,12 @@ internal fun TopEvents(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(eventsList.size) { index ->
-                val tagsList: List<DataTag> = generateTagsForEvent()
                 EventCard(
                     modifier = Modifier,
                     eventName = eventsList[index].name,
                     eventDate = eventsList[index].date,
                     eventAddress = eventsList[index].city,
-                    eventTags = tagsList,
+                    eventTags = eventsList[index].tags,
                     eventStyle = EventCardStyles.Large
                 ) {
                     onEventClick()
@@ -52,7 +51,7 @@ internal fun TopEvents(
 @Preview(showBackground = true)
 @Composable
 private fun UpcomingEventsPreview() {
-    TopEvents(modifier = Modifier, eventsList = generateEvents(), evetsTags = listOf()) {
+    TopEvents(modifier = Modifier, eventsList = listOf()) {
 
     }
 }
