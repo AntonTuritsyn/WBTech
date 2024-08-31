@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
+import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
@@ -22,7 +23,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 internal fun CommunityRecommends(
     modifier: Modifier,
     recommendationName: String,
-    communitiesList: List<DataCommunity>,
+    communitiesList: List<DomainCommunity>,
     subscribeButtonStyle: SubscribeButtonStyle,
     onButtonClick: () -> Unit,
     onElementClick: () -> Unit
@@ -65,7 +66,7 @@ private fun CommunityRecommendsPreview() {
     CommunityRecommends(
         modifier = Modifier,
         recommendationName = "Сообщества для тестировщиков",
-        communitiesList = generateCommunitiesList(),
+        communitiesList = /*generateCommunitiesList()*/listOf(),
         subscribeButtonStyle = SubscribeButtonStyle.Default,
         onButtonClick = {}
     ) {}

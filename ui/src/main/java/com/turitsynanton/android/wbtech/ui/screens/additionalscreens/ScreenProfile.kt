@@ -21,7 +21,6 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.items.CustomAvatar
 import com.turitsynanton.android.wbtech.ui.items.MyIconButton
 import com.turitsynanton.android.wbtech.ui.items.SomeText
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.AuthViewModel
 import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
 import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
@@ -30,7 +29,7 @@ import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-internal fun ScreenProfile(authViewModel: AuthViewModel = koinViewModel()) {
+internal fun ScreenProfile(/*authViewModel: AuthViewModel = koinViewModel()*/) {
 //    val myProfile = authViewModel.getUserInfoFlow()
     Scaffold(
         Modifier,

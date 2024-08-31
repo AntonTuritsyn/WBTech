@@ -1,6 +1,7 @@
 package com.turitsynanton.android.wbtech.uinew.screens
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,10 +17,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
@@ -31,26 +37,32 @@ import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
 import com.turitsynanton.android.wbtech.uinew.components.OtherEvents
 import com.turitsynanton.android.wbtech.uinew.components.SearchFieldNew
+import com.turitsynanton.android.wbtech.uinew.newviewmodel.ScreenEventsListViewModel
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
+import okhttp3.internal.filterList
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun ScreenEventsList(
     modifier: Modifier = Modifier,
-    eventTopList: List<DataEvent>,
     eventsUpcomingList: List<DataEvent>,
-    communitiesList: List<DataCommunity>,
-    eventsList: List<DataEvent>,
+    screenEventsListViewModel: ScreenEventsListViewModel = koinViewModel(),
     onProfileClick: () -> Unit,
     onEventClick: () -> Unit,
     onCommunityClick: () -> Unit,
     onSubscribeClick: () -> Unit,
     onUserClick: () -> Unit
 ) {
-    val searchQuery by remember {
-        mutableStateOf("")
-    }
+
+    val eventTopList by screenEventsListViewModel.getEventsListFlow().collectAsStateWithLifecycle()
+    val filteredEventsList by screenEventsListViewModel.getFilteredListFlow().collectAsStateWithLifecycle()
+    val communitiesList by screenEventsListViewModel.getCommunitiesListFlow().collectAsStateWithLifecycle()
+    val searchQuery by screenEventsListViewModel.getSearchQueryFlow().collectAsStateWithLifecycle()
+
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     Scaffold(
         topBar = {
             Row(
@@ -59,11 +71,17 @@ internal fun ScreenEventsList(
                     .padding(top = 12.dp, bottom = 20.dp, start = 16.dp, end = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
+                Log.d("TAG", "ScreenEventsList: $filteredEventsList")
                 SearchFieldNew(
                     modifier = Modifier
-                        .weight(1f),
-                    query = searchQuery
-                )
+                        .weight(1f)
+                        .focusRequester(focusRequester),
+                    query = searchQuery,
+                    onQueryChanged = { screenEventsListViewModel.updateSearchQuery(it) }
+                ) {
+                    screenEventsListViewModel.updateSearchQuery("")
+                    focusManager.clearFocus()
+                }
                 Image(
                     painter = painterResource(id = R.drawable.ic_user_new),
                     contentDescription = "",
@@ -93,7 +111,7 @@ internal fun ScreenEventsList(
                                         eventName = eventTopList[index].name,
                                         eventDate = eventTopList[index].date,
                                         eventAddress = eventTopList[index].city,
-                                        eventTags = listOf(),
+                                        eventTags = eventTopList[index].tags,
                                         eventStyle = EventCardStyles.Large
                                     ) {
                                         onEventClick()
@@ -106,8 +124,7 @@ internal fun ScreenEventsList(
                             DifferentEvents(
                                 modifier = Modifier,
                                 componentName = stringResource(id = R.string.upcoming_events),
-                                eventsList = eventsUpcomingList,
-                                evetsTags = listOf()
+                                eventsList = eventTopList
                             ) {
                                 onEventClick()
                             }
@@ -119,7 +136,7 @@ internal fun ScreenEventsList(
                                 recommendationName = "Сообщества для тестировщиков",
                                 communitiesList = communitiesList,
                                 subscribeButtonStyle = SubscribeButtonStyle.Default,
-                                onButtonClick = { onSubscribeClick() }
+                                onButtonClick = {  }
                             ) {
                                 onCommunityClick()
                             }
@@ -128,20 +145,23 @@ internal fun ScreenEventsList(
                         3 -> {
                             OtherEvents(
                                 modifier = Modifier,
-                                tagsList = tags,
-                                tagsStyle = TagsStyle.Unselected
-                            )
+                                tagsList = tags.map { tag ->
+                                    tag to if (screenEventsListViewModel.isTagSelected(tag)) TagsStyle.Selected else TagsStyle.Unselected
+                                }
+                            ) { tag ->
+                                screenEventsListViewModel.onTagSelected(tag)
+                            }
                         }
                     }
                 }
             }
-            items(eventsList.size) { index ->
+            items(filteredEventsList.size) { index ->
                 EventCard(
                     modifier = Modifier,
-                    eventName = eventsList[index].name,
-                    eventDate = eventsList[index].date,
-                    eventAddress = eventsList[index].city,
-                    eventTags = listOf(),
+                    eventName = filteredEventsList[index].name,
+                    eventDate = filteredEventsList[index].date,
+                    eventAddress = filteredEventsList[index].city,
+                    eventTags = filteredEventsList[index].tags,
                     eventStyle = EventCardStyles.Full
                 ) {
                     onEventClick()
@@ -150,6 +170,7 @@ internal fun ScreenEventsList(
         }
     }
 }
+/*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
@@ -157,7 +178,7 @@ internal fun ScreenEventsList(
 private fun ScreenEventsPreview() {
     ScreenEventsList(
         eventsList = generateEvents(),
-        eventTopList = generateEvents(),
+//        eventTopList = generateEvents(),
         communitiesList = generateCommunitiesList(),
         eventsUpcomingList = generateEvents(),
         onEventClick = {},
@@ -167,4 +188,4 @@ private fun ScreenEventsPreview() {
     ) {
 
     }
-}
+}*/

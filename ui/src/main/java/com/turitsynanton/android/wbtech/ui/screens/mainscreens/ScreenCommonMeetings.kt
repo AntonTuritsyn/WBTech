@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,7 +14,7 @@ import com.turitsynanton.android.wbtech.ui.items.SearchField
 import com.turitsynanton.android.wbtech.ui.organisms.MeetingTabContent
 import com.turitsynanton.android.wbtech.ui.organisms.TabLayout
 import com.turitsynanton.android.wbtech.ui.pages
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.viewmodelsold.MeetingsViewModelOld
 import com.turitsynanton.android.wbtech.ui.topbars.TopBarMainScreens
 import org.koin.androidx.compose.koinViewModel
 
@@ -24,7 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 internal fun ScreenMeetings(
     modifier: Modifier = Modifier,
     tabs: List<String>,
-    meetingsViewModel: MeetingsViewModel = koinViewModel(),
+    meetingsViewModel: MeetingsViewModelOld = koinViewModel(),
     onClick: (String) -> Unit
 ) {
     val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()

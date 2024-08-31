@@ -9,11 +9,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
 import com.turitsynanton.android.wbtech.uinew.components.Person
@@ -55,7 +54,7 @@ internal fun ScreenParticipants(
                             modifier = Modifier,
                             picture = R.drawable.my_photo,
                             userName = participant.name,
-                            tagInfo = generateTagsForEvent().first().content
+                            tagInfo = generateTags().first().content
                         ) {
                             onUserClick()
                         }

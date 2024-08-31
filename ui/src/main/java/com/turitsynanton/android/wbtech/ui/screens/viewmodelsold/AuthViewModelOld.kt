@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens.viewmodels
+package com.turitsynanton.android.wbtech.ui.screens.viewmodelsold
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,10 +7,9 @@ import com.turitsynanton.android.wbtech.domain.usecases.auth.IGetUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal class AuthViewModel(
+internal class AuthViewModelOld(
     private val iGetUserUseCase: IGetUserUseCase,
 ) : ViewModel() {
 

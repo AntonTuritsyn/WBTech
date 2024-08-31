@@ -1,8 +1,6 @@
 package com.turitsynanton.android.wbtech.ui.screens.additionalscreens
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,7 +10,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -25,8 +22,8 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.components.ExpandableText
 import com.turitsynanton.android.wbtech.ui.components.MeetingCard
 import com.turitsynanton.android.wbtech.ui.items.SomeText
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.CommunityDetailsViewModel
-import com.turitsynanton.android.wbtech.ui.screens.viewmodels.MeetingsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.viewmodelsold.CommunityDetailsViewModelOld
+import com.turitsynanton.android.wbtech.ui.screens.viewmodelsold.MeetingsViewModelOld
 import com.turitsynanton.android.wbtech.ui.theme.NeutralLine
 import com.turitsynanton.android.wbtech.ui.theme.NeutralWeak
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
@@ -39,19 +36,19 @@ import org.koin.core.parameter.parametersOf
 internal fun ScreenCommunityDetails(
     modifier: Modifier = Modifier,
     communityId: String,
-    communityDetailsViewModel: CommunityDetailsViewModel = koinViewModel(parameters = {
+    communityDetailsViewModelOld: CommunityDetailsViewModelOld = koinViewModel(parameters = {
         parametersOf(
             communityId
         )
     }),
-    meetingsViewModel: MeetingsViewModel = koinViewModel(),
+    meetingsViewModel: MeetingsViewModelOld = koinViewModel(),
     navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val communityDetails by communityDetailsViewModel.getCommunityDetailsFlow()
+    val communityDetails by communityDetailsViewModelOld.getCommunityDetailsFlow()
         .collectAsStateWithLifecycle()
     val meetingsList by meetingsViewModel.getMeetingsListFlow().collectAsStateWithLifecycle()
-    val expanded by communityDetailsViewModel.isExpandedFlow().collectAsStateWithLifecycle()
+    val expanded by communityDetailsViewModelOld.isExpandedFlow().collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -73,7 +70,7 @@ internal fun ScreenCommunityDetails(
                     maxLinesMinimise = 8,
                     expanded = expanded
                 ) {
-                    communityDetailsViewModel.toggleExpanded()
+                    communityDetailsViewModelOld.toggleExpanded()
                     Log.d("TAG", "$expanded")
                 }
             }

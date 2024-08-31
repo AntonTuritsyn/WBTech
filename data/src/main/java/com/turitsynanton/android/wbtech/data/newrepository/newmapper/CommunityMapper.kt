@@ -22,3 +22,11 @@ internal class CommunityMapper(
         )
     }
 }
+
+internal fun DataCommunity.mapCommunityToDomain(mapper: IMapper<DataCommunity, DomainCommunity>): DomainCommunity {
+    return mapper.mapToDomain(this)
+}
+
+internal fun List<DataCommunity>.mapCommunityToDomain(mapper: IMapper<DataCommunity, DomainCommunity>): List<DomainCommunity> {
+    return map { it.mapCommunityToDomain(mapper) }
+}

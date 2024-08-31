@@ -1,9 +1,8 @@
-package com.turitsynanton.android.wbtech.ui.screens.viewmodels
+package com.turitsynanton.android.wbtech.ui.screens.viewmodelsold
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
-import com.turitsynanton.android.wbtech.domain.repository.meeting.MeetingRepository
 import com.turitsynanton.android.wbtech.domain.usecases.meeting.IGetMeetingsListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MeetingsViewModel(private val iGetMeetingListUseCase: IGetMeetingsListUseCase) : ViewModel() {
+class MeetingsViewModelOld(private val iGetMeetingListUseCase: IGetMeetingsListUseCase) : ViewModel() {
 
     //      исправить импорты
     private val _meetingsList: MutableStateFlow<List<DomainMeeting>> = MutableStateFlow(emptyList())

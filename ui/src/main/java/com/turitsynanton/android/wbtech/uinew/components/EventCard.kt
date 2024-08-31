@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,8 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTagsForEvent
+import com.turitsynanton.android.wbtech.data.mocks.generateTags
+import com.turitsynanton.android.wbtech.data.mocks.tags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
+import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.items.ImageHolder
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -38,7 +39,7 @@ internal fun EventCard(
     eventName: String,
     eventDate: String,
     eventAddress: String,
-    eventTags: List<DataTag>,
+    eventTags: List<DomainTag>,
     eventStyle: EventCardStyles,
     onClick: () -> Unit
 ) {
@@ -76,6 +77,7 @@ internal fun EventCard(
             fontWeight = eventStyle.fontWeight,
             fontStyle = FontStyle.Normal,
             color = Color(0xFF000000),
+            lineHeight = eventStyle.lineHeight,
             maxLines = 2
         )
         SimpleTextField(
@@ -95,8 +97,7 @@ internal fun EventCard(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            val tags = generateTagsForEvent()
-            tags.forEach { content ->
+            eventTags.forEach { content ->
                 Tag(modifier = Modifier, text = content.content, style = TagsStyle.Minimize) {
                 }
             }

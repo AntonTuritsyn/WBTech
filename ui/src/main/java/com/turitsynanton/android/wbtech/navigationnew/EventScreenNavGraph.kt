@@ -10,10 +10,12 @@ import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
+import com.turitsynanton.android.wbtech.uinew.screens.MapScreen
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenEventDetails
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenEventsList
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenParticipants
+import com.turitsynanton.android.wbtech.uinew.screens.ScreenProfile
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
@@ -23,11 +25,13 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
     ) {
         composable(route = Navigation.EventsList.route) {
             ScreenEventsList(
-                eventTopList = generateEvents(),
+//                eventTopList = generateEvents(),
                 eventsUpcomingList = generateEvents(),
-                communitiesList = generateCommunitiesList(),
-                eventsList = generateEvents(),
-                onProfileClick = {},
+//                communitiesList = generateCommunitiesList(),
+//                eventsList = generateEvents(),
+                onProfileClick = {
+                    navController.navigate("${Navigation.MyProfileScreen.route}")
+                },
                 onEventClick = {
                     navController.navigate("${Navigation.EventDetailsScreen.route}/${it}")
                 },
@@ -36,12 +40,9 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 },
                 onSubscribeClick = {},
                 onUserClick = {
-                    navController.navigate("${Navigation.ParticipantsDetailsScreen.route}/${it}")
+
                 }
             )
-            /*ScreenMeetings(modifier = Modifier, tabs = tabs1, onClick = {
-                navController.navigate("${Navigation.EventDetails.route}/${it}")
-            })*/
         }
         composable(route = "${Navigation.EventDetailsScreen.route}/{id}") { stackEntry ->
             stackEntry.arguments?.getString("id")?.let { id ->
@@ -52,9 +53,15 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onShareClick = {},
                     onSubscribeClick = {},
                     onHostClick = {},
-                    onParticipantsClick = {},
-                    onOganizerClick = {},
-                    onEventClick = {},
+                    onParticipantsClick = {
+                        navController.navigate(Navigation.ParticipantsDetailsScreen.route)
+                    },
+                    onOganizerClick = {
+                        navController.navigate("${Navigation.CommunityDetailsScreen.route}/{id}")
+                    },
+                    onEventClick = {
+                        navController.navigate("${Navigation.EventDetailsScreen.route}/{id}")
+                    },
                     onSignUpToEventClick = {})
             }
         }
@@ -64,12 +71,16 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     communityId = id,
                     community = generateCommunity(),
                     eventList = generateEvents(),
-                    pastEventList = generateEvents(),
+                    pastEventList = listOf(),
                     onBackClick = { navController.popBackStack() },
                     onShareClick = {},
                     onSubscribeClick = {},
-                    onUsersClick = {},
-                    onEventClick = {})
+                    onUsersClick = {
+                        navController.navigate(Navigation.ParticipantsDetailsScreen.route)
+                    },
+                    onEventClick = {
+                        navController.navigate("${Navigation.EventDetailsScreen.route}/{id}")
+                    })
             }
         }
         composable(route = Navigation.ParticipantsDetailsScreen.route) {
@@ -78,6 +89,18 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 onBackClick = { navController.popBackStack() },
                 onUserClick = {}
             )
+//            MapScreen()
+        }
+        composable(route = Navigation.MyProfileScreen.route) {
+            ScreenProfile(
+                user = generateUsersList().first(),
+                eventsList = listOf(),
+                communitiesList = /*generateCommunitiesList()*/listOf(),
+                onBackClick = { /*TODO*/ },
+                onEventClick = { /*TODO*/ },
+                onCommunityClick = { /*TODO*/ }) {
+
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 internal fun TopBar(
     modifier: Modifier,
     title: String,
+    topBarColor: Color = Color.Unspecified,
     needActions: Boolean,
     onShareClick: () -> Unit,
     onBackPressed: () -> Unit
@@ -31,7 +32,7 @@ internal fun TopBar(
     CenterAlignedTopAppBar(
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.Unspecified,
+            containerColor = topBarColor,
             titleContentColor = NeutralActive
         ),
         title = {

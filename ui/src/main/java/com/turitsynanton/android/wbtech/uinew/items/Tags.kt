@@ -20,7 +20,7 @@ internal fun Tag(
     modifier: Modifier,
     text: String,
     style: TagsStyle,
-    onClick: () -> Unit
+    onClick: (String) -> Unit
 ) {
     SimpleTextField(
         modifier = modifier
@@ -31,7 +31,7 @@ internal fun Tag(
                 },
                 enabled = style.clickable
             ) {
-                onClick()
+                onClick(text)
             }
             .background(
                 color = style.containerColor,

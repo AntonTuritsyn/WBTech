@@ -15,12 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
@@ -88,6 +92,27 @@ internal fun SubscribeButton(
     }
 }
 
+@Composable
+internal fun SocialButton(
+    modifier: Modifier,
+    icon: Painter,
+    onClick: () -> Unit
+) {
+    Box(modifier = modifier
+        .clip(RoundedCornerShape(16.dp))
+        .background(
+            color = Color(0xFF9A10F0)
+        )
+        .clickable {
+            onClick()
+        }
+        .padding(10.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(painter = icon, contentDescription = "", tint = Color.White)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun GradientButtonPreview() {
@@ -104,6 +129,14 @@ private fun GradientButtonPreview() {
             }
             Spacer(modifier = Modifier.padding(18.dp))
             SubscribeButton(modifier = Modifier, style = SubscribeButtonStyle.Default) {
+            }
+            Spacer(modifier = Modifier.padding(18.dp))
+            SocialButton(modifier = Modifier, icon = painterResource(id = R.drawable.ic_habr)) {
+                
+            }
+            Spacer(modifier = Modifier.padding(18.dp))
+            SocialButton(modifier = Modifier, icon = painterResource(id = R.drawable.ic_telegram)) {
+
             }
         }
     }

@@ -10,9 +10,10 @@ internal enum class EventCardStyles(
     val height: Dp,
     val width: Dp,
     val textHeight: TextUnit,
-    val fontWeight: FontWeight
+    val fontWeight: FontWeight,
+    val lineHeight: TextUnit = TextUnit.Unspecified
 ) {
-    Full(height = 180.dp, width = 320.dp, textHeight = 34.sp, fontWeight = FontWeight.Bold),
+    Full(height = 180.dp, width = 320.dp, textHeight = 34.sp, fontWeight = FontWeight.Bold, lineHeight = 38.sp),
     Large(height = 180.dp, width = 320.dp, textHeight = 24.sp, fontWeight = FontWeight.Bold),
     Medium(height = 148.dp, width = 212.dp, textHeight = 18.sp, fontWeight = FontWeight.SemiBold),
     Small(height = 104.dp, width = 104.dp, textHeight = 14.sp, fontWeight = FontWeight.SemiBold)

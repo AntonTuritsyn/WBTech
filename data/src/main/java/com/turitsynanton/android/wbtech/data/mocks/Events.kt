@@ -4,22 +4,20 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataHost
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainHost
 import java.time.LocalDate
 import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun generateEvents(): List<DataEvent> {
-    val eventsList = List((10..30).random()) {
+    val eventsList = List((10..20).random()) {
         DataEvent(
             id = UUID.randomUUID().toString(),
-            name = generateRandomWord(5, 30),
-            date = generateRandomDate().toString(),
+            name = /*generateRandomWord(5, 30)*/eventsNames.random(),
+            date = generateRandomDate(),
             city = cities.random(),
             description = generateRandomWord(40, 80),
             host = DataUser(
@@ -30,7 +28,7 @@ fun generateEvents(): List<DataEvent> {
                 tags = listOf(),
                 city = cities.random()
             ),
-            organizer = DataCommunity(
+            /*organizer = DataCommunity(
                 id = UUID.randomUUID().toString(),
                 name = generateRandomWord(5, 20),
                 description = generateRandomWord(40, 80),
@@ -38,9 +36,9 @@ fun generateEvents(): List<DataEvent> {
                 tags = listOf(),
                 users = generateUsersList(),
                 events = listOf()
-            ),
+            ),*/
             participants = generateUsersList(),
-            tags = listOf(),
+            tags = generateTags(),
             icon = ""
         )
     }
@@ -55,13 +53,16 @@ fun generateRandomWord(min: Int, max: Int): String {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun generateRandomDate(): LocalDate {
-    val startYear = 1900
-    val endYear = 2100
+fun generateRandomDate(): String {
+    val startYear = 2024
+    val endYear = 2025
 
     val randomYear = Random.nextInt(startYear, endYear)
     val randomMonth = Month.of(Random.nextInt(1, 13))
     val randomDay = Random.nextInt(1, randomMonth.length(true))
 
-    return LocalDate.of(randomYear, randomMonth, randomDay)
+    val randomDate = LocalDate.of(randomYear, randomMonth, randomDay)
+    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+    return randomDate.format(formatter)
 }

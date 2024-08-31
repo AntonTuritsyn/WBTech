@@ -45,7 +45,11 @@ internal fun Person(
             color = Color(0xFF000000)
         )
         Spacer(modifier = Modifier.padding(2.dp))
-        Tag(modifier = Modifier, text = tagInfo, style = TagsStyle.Minimize) {
+        Tag(
+            modifier = Modifier,
+            text = tagInfo,
+            style = TagsStyle.Minimize
+        ) {
         }
     }
 }

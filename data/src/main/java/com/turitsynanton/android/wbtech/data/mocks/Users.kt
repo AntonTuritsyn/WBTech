@@ -9,8 +9,8 @@ fun generateUsersList() : List<DataUser> {
             id = UUID.randomUUID().toString(),
             name = names.random(),
             city = cities.random(),
-            description = generateRandomWord(40, 80),
-            tags = listOf(),
+            description = /*generateRandomWord(40, 80)*/usersDescriptions.random(),
+            tags = generateTags(1, 5),
             icon = ""
         )
     }

@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.ui.screens.viewmodels
+package com.turitsynanton.android.wbtech.ui.screens.viewmodelsold
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CommunityViewModel(private val iGetCommunityListUseCase: IGetCommunityListUseCase) :
+class CommunityViewModelOld(private val iGetCommunityListUseCase: IGetCommunityListUseCase) :
     ViewModel() {
 
     private val _communityList: MutableStateFlow<List<DomainCommunity>> =
