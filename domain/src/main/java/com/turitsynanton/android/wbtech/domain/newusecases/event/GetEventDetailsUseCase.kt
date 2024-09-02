@@ -5,7 +5,7 @@ import com.turitsynanton.android.wbtech.domain.newrepository.DataListsRepository
 import com.turitsynanton.android.wbtech.domain.newrepository.EventRepository
 import kotlinx.coroutines.flow.Flow
 
-internal class GetEventDetailsUseCase(private val /*eventRepository: EventRepository*/dataListsRepository: DataListsRepository) :
+internal class GetEventDetailsUseCase(private val dataListsRepository: DataListsRepository) :
     IGetEventDetailsUseCase {
     override fun execute(eventId: String): Flow<DomainEvent> =
         dataListsRepository.getEventDetailsFlow(eventId)

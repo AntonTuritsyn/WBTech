@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.uinew.newviewmodel
+package com.turitsynanton.android.wbtech.uinew.screens.eventdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,8 +25,8 @@ class ScreenEventDetailsViewModel(
 
     fun getEventDetails(eventsId: String) {
         viewModelScope.launch {
-            iGetEventDetailsUseCase.execute(eventsId).collect { meetingDetails ->
-                _events.update { meetingDetails }
+            iGetEventDetailsUseCase.execute(eventsId).collect { eventDetails ->
+                _events.update { eventDetails }
             }
         }
     }

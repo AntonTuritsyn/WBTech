@@ -5,7 +5,8 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 
 internal class CommunityMapper(
     private val tagsMapper: TagsMapper,
-    private val usersMapper: UsersMapper
+    private val usersMapper: UsersMapper,
+    private val eventMapper: EventMapper
 ) : IMapper<DataCommunity, DomainCommunity> {
     override fun mapToDomain(entity: DataCommunity): DomainCommunity {
         return DomainCommunity(
@@ -18,6 +19,9 @@ internal class CommunityMapper(
             },
             users = entity.users.map { user ->
                 usersMapper.mapToDomain(user)
+            },
+            events = entity.events.map { event ->
+                eventMapper.mapToDomain(event)
             }
         )
     }

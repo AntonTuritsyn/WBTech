@@ -3,20 +3,14 @@ package com.turitsynanton.android.wbtech.uinew.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -25,21 +19,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateHost
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataHost
-import com.turitsynanton.android.wbtech.uinew.items.ImageHolder
+import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
-import com.turitsynanton.android.wbtech.uinew.utils.AvatarStyles
-import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 
 @Composable
 internal fun Host(
     modifier: Modifier,
-    host: DataHost,
+    host: DomainUser,
     onClick: () -> Unit
 ) {
 
@@ -95,6 +84,7 @@ internal fun Host(
     }
 }
 
+/*
 @Preview(
     widthDp = 360,
     showBackground = true
@@ -102,4 +92,4 @@ internal fun Host(
 @Composable
 private fun HostPreview() {
     Host(modifier = Modifier, host = generateHost()) {}
-}
+}*/

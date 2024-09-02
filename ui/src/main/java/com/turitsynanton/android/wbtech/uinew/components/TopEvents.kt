@@ -15,13 +15,14 @@ import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
+import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 
 @Composable
 internal fun TopEvents(
     modifier: Modifier,
-    eventsList: List<DomainEvent>,
-    onEventClick: () -> Unit
+    eventsList: List<UiEventCard>,
+    onEventClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -34,14 +35,14 @@ internal fun TopEvents(
             items(eventsList.size) { index ->
                 EventCard(
                     modifier = Modifier,
+                    eventId = eventsList[index].id,
                     eventName = eventsList[index].name,
                     eventDate = eventsList[index].date,
-                    eventAddress = eventsList[index].city,
+                    eventAddress = eventsList[index].address,
                     eventTags = eventsList[index].tags,
-                    eventStyle = EventCardStyles.Large
-                ) {
-                    onEventClick()
-                }
+                    eventStyle = EventCardStyles.Large,
+                    onClick = onEventClick
+                )
             }
         }
     }

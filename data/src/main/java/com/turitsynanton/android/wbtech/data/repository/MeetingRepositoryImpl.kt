@@ -1,8 +1,7 @@
 package com.turitsynanton.android.wbtech.data.repository
 
 import com.turitsynanton.android.wbtech.data.dataMeetings
-import com.turitsynanton.android.wbtech.data.repository.mapper.communities.CommunityMapper
-import com.turitsynanton.android.wbtech.data.repository.mapper.meetings.MeetingMapper
+import com.turitsynanton.android.wbtech.data.repository.mapper.meetings.MeetingMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mapper.meetings.mapMeetingToDomain
 import com.turitsynanton.android.wbtech.domain.models.DomainMeeting
 import com.turitsynanton.android.wbtech.domain.models.MeetingTag
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-internal class MeetingRepositoryImpl(private val mapper: MeetingMapper) : MeetingRepository {
+internal class MeetingRepositoryImpl(private val mapper: MeetingMapperToDomain) : MeetingRepository {
     override fun getMeetingsList(): Flow<List<DomainMeeting>> =
         flow { emit(dataMeetings) }.map { it.mapMeetingToDomain(mapper) }
 

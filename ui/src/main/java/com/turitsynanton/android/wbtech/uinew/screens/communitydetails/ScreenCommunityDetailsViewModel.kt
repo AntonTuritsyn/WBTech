@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.uinew.newviewmodel
+package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

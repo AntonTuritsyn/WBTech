@@ -6,14 +6,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
-import com.turitsynanton.android.wbtech.uinew.screens.MapScreen
-import com.turitsynanton.android.wbtech.uinew.screens.ScreenCommunityDetails
-import com.turitsynanton.android.wbtech.uinew.screens.ScreenEventDetails
-import com.turitsynanton.android.wbtech.uinew.screens.ScreenEventsList
+import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
+import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
+import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenParticipants
 import com.turitsynanton.android.wbtech.uinew.screens.ScreenProfile
 
@@ -48,7 +46,6 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
             stackEntry.arguments?.getString("id")?.let { id ->
                 ScreenEventDetails(
                     eventId = id,
-                    event = generateEvents().first(),
                     onBackClick = { navController.popBackStack() },
                     onShareClick = {},
                     onSubscribeClick = {},

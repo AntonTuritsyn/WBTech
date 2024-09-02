@@ -13,9 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
+import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
@@ -23,7 +21,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 internal fun CommunityRecommends(
     modifier: Modifier,
     recommendationName: String,
-    communitiesList: List<DomainCommunity>,
+    communitiesList: List<UiCommunityCard>,
     subscribeButtonStyle: SubscribeButtonStyle,
     onButtonClick: () -> Unit,
     onElementClick: () -> Unit

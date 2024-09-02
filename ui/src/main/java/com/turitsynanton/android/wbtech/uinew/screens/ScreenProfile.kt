@@ -3,6 +3,7 @@ package com.turitsynanton.android.wbtech.uinew.screens
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -35,6 +37,8 @@ import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
+import com.turitsynanton.android.wbtech.models.UiCommunityCard
+import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
@@ -48,8 +52,8 @@ import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 internal fun ScreenProfile(
     modifier: Modifier = Modifier,
     user: DataUser,
-    eventsList: List<DomainEvent>,
-    communitiesList: List<DomainCommunity>,
+    eventsList: List<UiEventCard>,
+    communitiesList: List<UiCommunityCard>,
     onBackClick: () -> Unit,
     onEventClick: () -> Unit,
     onCommunityClick: () -> Unit,
@@ -144,7 +148,12 @@ internal fun MainInfo(
                 contentScale = ContentScale.FillWidth
             )
             TopBar(
-                modifier = Modifier,
+                modifier = Modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color.Black.copy(alpha = 0.6f), Color.Transparent)
+                        )
+                    ),
                 topBarColor = Color.Transparent,
                 title = "",
                 needActions = true,

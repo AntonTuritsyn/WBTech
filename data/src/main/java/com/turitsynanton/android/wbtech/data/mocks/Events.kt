@@ -16,14 +16,14 @@ fun generateEvents(): List<DataEvent> {
     val eventsList = List((10..20).random()) {
         DataEvent(
             id = UUID.randomUUID().toString(),
-            name = /*generateRandomWord(5, 30)*/eventsNames.random(),
+            name = eventsNames.random(),
             date = generateRandomDate(),
             city = cities.random(),
-            description = generateRandomWord(40, 80),
+            description = eventsDescriptions.random(),
             host = DataUser(
                 id = UUID.randomUUID().toString(),
                 name = names.random(),
-                description = generateRandomWord(40, 80),
+                description = usersDescriptions.random(),
                 icon = "",
                 tags = listOf(),
                 city = cities.random()
