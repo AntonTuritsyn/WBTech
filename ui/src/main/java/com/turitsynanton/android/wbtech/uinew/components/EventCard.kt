@@ -25,6 +25,7 @@ import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.mocks.tags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
+import com.turitsynanton.android.wbtech.models.UiTag
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.items.ImageHolder
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -36,12 +37,13 @@ import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 @Composable
 internal fun EventCard(
     modifier: Modifier,
+    eventId: String,
     eventName: String,
     eventDate: String,
     eventAddress: String,
-    eventTags: List<DomainTag>,
+    eventTags: List<UiTag>,
     eventStyle: EventCardStyles,
-    onClick: () -> Unit
+    onClick: (String) -> Unit
 ) {
 
     Column(
@@ -61,7 +63,7 @@ internal fun EventCard(
                     bottomStart = 8.dp
                 )
             )
-            .clickable { onClick() }
+            .clickable { onClick(eventId) }
     ) {
         ImageHolder(
             modifier = Modifier,
@@ -111,6 +113,7 @@ private fun EventCardPreview() {
     EventCard(
         modifier = Modifier,
         eventStyle = EventCardStyles.Full,
+        eventId = "",
         eventName = "Python daysPython daysPython daysPython daysPython days",
         eventDate = "10 августа",
         eventAddress = "Кожевенная линия, 40",

@@ -6,8 +6,7 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 internal class EventMapper(
     private val hostMapper: UsersMapper,
     private val usersMapper: UsersMapper,
-    private val tagsMapper: TagsMapper,
-    private val communityMapper: CommunityMapper
+    private val tagsMapper: TagsMapper
 ) : IMapper<DataEvent, DomainEvent> {
     override fun mapToDomain(entity: DataEvent): DomainEvent {
         return DomainEvent(

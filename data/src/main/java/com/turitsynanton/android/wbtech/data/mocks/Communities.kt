@@ -10,8 +10,8 @@ fun generateCommunitiesList(min: Int = 7, max: Int = 15): List<DataCommunity> {
     val communitiesList = List((min..max).random()) {
         DataCommunity(
             id = UUID.randomUUID().toString(),
-            name = /*generateRandomWord(5, 20)*/communitiesNames.random(),
-            description = /*generateRandomWord(40, 80)*/communityDescriptions.random(),
+            name = communitiesNames.random(),
+            description = communityDescriptions.random(),
             icon = "",
             tags = listOf(),
             users = generateUsersList(),

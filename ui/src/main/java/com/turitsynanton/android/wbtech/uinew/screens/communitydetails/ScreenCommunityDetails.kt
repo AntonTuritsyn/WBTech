@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.uinew.screens
+package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -23,6 +23,7 @@ import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
+import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityLargeCard
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
@@ -33,7 +34,6 @@ import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
-import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
 @Composable
 internal fun ScreenCommunityDetails(
@@ -41,12 +41,12 @@ internal fun ScreenCommunityDetails(
     communityId: String,
     community: DataCommunity,
     eventList: List<DataEvent>,
-    pastEventList: List<DomainEvent>,
+    pastEventList: List<UiEventCard>,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
     onSubscribeClick: () -> Unit,
     onUsersClick: () -> Unit,
-    onEventClick: () -> Unit
+    onEventClick: (String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -76,7 +76,7 @@ internal fun ScreenCommunityDetails(
                     onUsersClick()
                 }
             }
-            items(eventList.size + 1) { index ->
+            items(eventList.size) { index ->
                 when (index) {
                     0 -> {
                         SimpleTextField(
@@ -91,21 +91,23 @@ internal fun ScreenCommunityDetails(
                     else -> {
                         EventCard(
                             modifier = Modifier,
+                            eventId = eventList[index].id,
                             eventName = eventList[index].name,
-                            eventDate = eventList[index].name,
-                            eventAddress = eventList[index].name,
+                            eventDate = eventList[index].date,
+                            eventAddress = eventList[index].city,
                             eventTags = listOf(),
-                            eventStyle = EventCardStyles.Full
-                        ) {
-                            onEventClick()
-                        }
+                            eventStyle = EventCardStyles.Full,
+                            onClick = onEventClick
+                        )
                     }
                 }
             }
             item {
-                PastEventsRow(modifier = Modifier, pastEventList = pastEventList) {
-                    onEventClick()
-                }
+                PastEventsRow(
+                    modifier = Modifier,
+                    pastEventList = pastEventList,
+                    onEventClick = onEventClick
+                )
             }
         }
     }
@@ -167,8 +169,8 @@ internal fun MainInfoBlock(
 @Composable
 internal fun PastEventsRow(
     modifier: Modifier,
-    pastEventList: List<DomainEvent>,
-    onEventClick: () -> Unit
+    pastEventList: List<UiEventCard>,
+    onEventClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -178,10 +180,9 @@ internal fun PastEventsRow(
         DifferentEvents(
             modifier = Modifier,
             componentName = stringResource(id = R.string.past_events),
-            eventsList = pastEventList
-        ) {
-            onEventClick()
-        }
+            eventsList = pastEventList,
+            onEventClick = onEventClick
+        )
     }
 }
 

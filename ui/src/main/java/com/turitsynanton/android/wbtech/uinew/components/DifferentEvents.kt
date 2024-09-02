@@ -23,6 +23,7 @@ import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
+import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 
@@ -30,9 +31,9 @@ import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 internal fun DifferentEvents(
     modifier: Modifier,
     componentName: String,
-    eventsList: List<DomainEvent>,
+    eventsList: List<UiEventCard>,
 //    eventsTags: List<DomainTag>,
-    onEventClick: () -> Unit
+    onEventClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -53,14 +54,14 @@ internal fun DifferentEvents(
             items(eventsList.size) { index ->
                 EventCard(
                     modifier = Modifier,
+                    eventId = eventsList[index].id,
                     eventName = eventsList[index].name,
                     eventDate = eventsList[index].date,
-                    eventAddress = eventsList[index].city,
+                    eventAddress = eventsList[index].address,
                     eventTags = eventsList[index].tags,
-                    eventStyle = EventCardStyles.Medium
-                ) {
-                    onEventClick()
-                }
+                    eventStyle = EventCardStyles.Medium,
+                    onClick = onEventClick
+                )
             }
         }
     }
