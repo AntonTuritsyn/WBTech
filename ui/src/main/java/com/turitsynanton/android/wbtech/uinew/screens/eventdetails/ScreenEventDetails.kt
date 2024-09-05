@@ -1,6 +1,7 @@
 package com.turitsynanton.android.wbtech.uinew.screens.eventdetails
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -66,11 +67,11 @@ internal fun ScreenEventDetails(
     onSubscribeClick: () -> Unit,
     onHostClick: () -> Unit,
     onParticipantsClick: () -> Unit,
-    onOganizerClick: () -> Unit,
+    onOganizerClick: (String) -> Unit,
     onEventClick: () -> Unit,
     onSignUpToEventClick: () -> Unit
 ) {
-
+    Log.d("TAG", "ЗАГРУЗИЛОСЬeventId??: $eventId")
     val eventDetails by eventDetailsViewModel.getEventDetailsFlow().collectAsStateWithLifecycle()
 
     Scaffold(
@@ -133,9 +134,10 @@ internal fun ScreenEventDetails(
                 Organizer(
                     modifier = Modifier,
                     community = generateCommunity(), // TODO: add community
-                    onButtonClick = { onSubscribeClick() }) {
-                    onOganizerClick()
-                }
+                    onButtonClick = { onSubscribeClick() },
+                    onElementClick = { communityId ->
+                        onOganizerClick(communityId)
+                    })
             }
             item {
                 DifferentEvents(

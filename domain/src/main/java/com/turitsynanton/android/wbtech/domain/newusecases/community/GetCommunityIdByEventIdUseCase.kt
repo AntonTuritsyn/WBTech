@@ -1,11 +1,11 @@
 package com.turitsynanton.android.wbtech.domain.newusecases.community
 
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.newrepository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetCommunityIdByEventIdUseCase(private val dataListsRepository: DataListsRepository) :
+internal class GetCommunityIdByEventIdUseCase(private val dataListsRepository: IDataListsRepository) :
     IGetCommunityIdByEventIdUseCase {
     override fun execute(
         eventId: String,

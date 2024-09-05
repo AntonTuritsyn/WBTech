@@ -9,7 +9,7 @@ import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapCommunit
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapEventToDomain
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
-import com.turitsynanton.android.wbtech.domain.newrepository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 internal class DataListsRepositoryImpl(
     private val communityMapper: CommunityMapper,
     private val eventMapper: EventMapper
-) : DataListsRepository {
+) : IDataListsRepository {
 
     private val communitiesList = generateCommunitiesList()
 
@@ -27,10 +27,13 @@ internal class DataListsRepositoryImpl(
     override fun getCommunitiesListFlow(): Flow<List<DomainCommunity>> =
         flow { emit(communitiesList) }.map { it.mapCommunityToDomain(communityMapper) }
 
-    override fun getCommunityDetailsFlow(comunityId: String): Flow<DomainCommunity?> =
+    override fun getCommunityDetailsFlow(comunityId: String): Flow<DomainCommunity> =
         flow {
-            emit(communitiesList.find { it.id == comunityId }
-                ?.mapCommunityToDomain(communityMapper))
+            communitiesList.find { it.id == comunityId }?.let {
+                emit(
+                    it
+                        .mapCommunityToDomain(communityMapper))
+            }
         }
 
     override fun getEventsListFlow(): Flow<List<DomainEvent>> =
@@ -40,4 +43,12 @@ internal class DataListsRepositoryImpl(
         flow {
             allEventsList.find { it.id == eventId }?.mapEventToDomain(eventMapper)?.let { emit(it) }
         }
+
+    override fun getEventDetailsFlowExperiment(eventId: String): Flow<DomainEvent?> =
+        flow { allEventsList.find { it.id == eventId }?.mapEventToDomain(eventMapper)?.let { emit(it) } }
+
+    override fun getEventDetailsFlowNew(eventId: String): DomainEvent? =
+        allEventsList.find { it.id == eventId }?.mapEventToDomain(eventMapper)?.let { it }
+
+
 }

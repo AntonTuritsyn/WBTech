@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetEventDetailsUseCaseTest {
+class GetEventDetailsUseCase2ExperimentTest {
     private lateinit var getMeetingDetailsUseCaseStub: GetMeetingDetailsUseCaseStub
 
     @BeforeEach

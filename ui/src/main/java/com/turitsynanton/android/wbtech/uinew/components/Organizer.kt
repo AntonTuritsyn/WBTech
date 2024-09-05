@@ -36,7 +36,7 @@ internal fun Organizer(
     modifier: Modifier,
     community: DataCommunity,
     onButtonClick: () -> Unit,
-    onElementClick: () -> Unit
+    onElementClick: (String) -> Unit
 ) {
 
     Column(
@@ -54,7 +54,7 @@ internal fun Organizer(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onElementClick() },
+                .clickable { onElementClick(community.id) },
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(

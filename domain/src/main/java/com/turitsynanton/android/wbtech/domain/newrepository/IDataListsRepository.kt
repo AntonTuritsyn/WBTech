@@ -4,13 +4,18 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import kotlinx.coroutines.flow.Flow
 
-interface DataListsRepository {
+interface IDataListsRepository {
 
-    fun getCommunityDetailsFlow(comunityId: String) : Flow<DomainCommunity?>
+    fun getCommunityDetailsFlow(comunityId: String) : Flow<DomainCommunity>
 
     fun getCommunitiesListFlow() : Flow<List<DomainCommunity>>
 
     fun getEventsListFlow() : Flow<List<DomainEvent>>
 
     fun getEventDetailsFlow(eventId: String) : Flow<DomainEvent>
+
+    fun getEventDetailsFlowExperiment(eventId: String) : Flow<DomainEvent?>
+
+    fun getEventDetailsFlowNew(eventId: String) : DomainEvent?
+
 }
