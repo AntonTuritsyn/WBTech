@@ -1,6 +1,8 @@
 package com.turitsynanton.android.wbtech.uinew.screens.eventslist
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.tags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
+import com.turitsynanton.android.wbtech.models.UiCommunity
+import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
@@ -34,6 +38,10 @@ import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 import org.koin.androidx.compose.koinViewModel
 
+
+private const val FIRST_ITEMS_IN_COLUMN = 4
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 internal fun ScreenEventsList(
     modifier: Modifier = Modifier,
@@ -41,18 +49,13 @@ internal fun ScreenEventsList(
     screenEventsListViewModel: ScreenEventsListViewModel = koinViewModel(),
     onProfileClick: () -> Unit,
     onEventClick: (String) -> Unit,
-    onCommunityClick: () -> Unit,
+    onCommunityClick: (String) -> Unit,
     onSubscribeClick: () -> Unit,
     onUserClick: () -> Unit
 ) {
 
     val screenState by screenEventsListViewModel.screenState.collectAsStateWithLifecycle()
-//    val eventTopList by screenEventsListViewModel.getEventsListFlow().collectAsStateWithLifecycle()
-    /*val filteredEventsList by screenEventsListViewModel.getFilteredListFlow().collectAsStateWithLifecycle()
-    val communitiesList by screenEventsListViewModel.getCommunitiesListFlow().collectAsStateWithLifecycle()
-    val searchQuery by screenEventsListViewModel.getSearchQueryFlow().collectAsStateWithLifecycle()
-
-    val communityId by screenEventsListViewModel.getCommunityIdFlow().collectAsStateWithLifecycle()*/
+    val upcomingEventsList by screenEventsListViewModel.getUpcomingEventListFlow().collectAsStateWithLifecycle()
 
     Log.d("TAG", "communityId: ${screenState.communityId}")
 
@@ -92,7 +95,7 @@ internal fun ScreenEventsList(
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             if (screenState.searchQuery.isEmpty()) {
-                items(4) { index ->
+                items(FIRST_ITEMS_IN_COLUMN) { index ->
                     when (index) {
                         0 -> {
                             LazyRow(
@@ -111,7 +114,7 @@ internal fun ScreenEventsList(
 
                                     ) {
                                         onEventClick(screenState.events[index].id)
-                                        screenEventsListViewModel.getCommunityDetailsByEventId(screenState.communityId)
+                                        screenEventsListViewModel.getCommunityDetailsByEventId(screenState.events[index].id)
                                     }
                                 }
                             }
@@ -121,7 +124,7 @@ internal fun ScreenEventsList(
                             DifferentEvents(
                                 modifier = Modifier,
                                 componentName = stringResource(id = R.string.upcoming_events),
-                                eventsList = screenState.events,
+                                eventsList = /*screenState.events*/upcomingEventsList,
                                 onEventClick = onEventClick
                             )
                         }
@@ -132,10 +135,11 @@ internal fun ScreenEventsList(
                                 recommendationName = "Сообщества для тестировщиков",
                                 communitiesList = screenState.communities,
                                 subscribeButtonStyle = SubscribeButtonStyle.Default,
-                                onButtonClick = {  }
-                            ) {
-                                onCommunityClick()
-                            }
+                                onButtonClick = {  },
+                                onElementClick = { communityId ->
+                                    onCommunityClick(communityId)
+                                }
+                            )
                         }
 
                         3 -> {

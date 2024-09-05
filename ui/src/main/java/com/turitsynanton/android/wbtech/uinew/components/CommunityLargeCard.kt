@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -27,19 +28,23 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
+import com.turitsynanton.android.wbtech.models.UiCommunity
+import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
+import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun CommunityLargeCard(
     modifier: Modifier,
-    community: DataCommunity
+    community: UiCommunity,
+    onSubscribeClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
     ) {
         Image(
             painter = painterResource(id = R.drawable.event_example),
@@ -55,7 +60,8 @@ internal fun CommunityLargeCard(
             text = community.name,
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF000000)
+            color = Color(0xFF000000),
+            lineHeight = 34.sp
         )
         Spacer(modifier = Modifier.padding(4.dp))
         FlowRow(
@@ -64,16 +70,24 @@ internal fun CommunityLargeCard(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            val tags = generateTags()
-            tags.forEach { content ->
+            community.tags.forEach { content ->
                 Tag(modifier = Modifier, text = content.content, style = TagsStyle.UnclickableBig) {
                 }
             }
         }
+//        Spacer(modifier = Modifier.padding(16.dp))
+        GradientButton(
+            modifier = Modifier
+                .padding(top = 32.dp),
+            text = "Подписаться",
+            buttonStyle = ButtonStyle.Enable
+        ) {
+            onSubscribeClick()
+        }
     }
-
 }
 
+/*
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(widthDp = 360,
     showBackground = true)
@@ -83,4 +97,4 @@ private fun CommunityLargeCardPreview() {
         modifier = Modifier,
         community = generateCommunity()
     )
-}
+}*/

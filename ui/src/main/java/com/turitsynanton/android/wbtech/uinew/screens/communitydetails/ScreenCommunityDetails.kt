@@ -1,15 +1,18 @@
 package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -17,12 +20,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
+import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityLargeCard
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
@@ -32,15 +37,22 @@ import com.turitsynanton.android.wbtech.uinew.components.TopBar
 import com.turitsynanton.android.wbtech.uinew.components.avatars
 import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
+import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsListViewModel
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun ScreenCommunityDetails(
     modifier: Modifier = Modifier,
     communityId: String,
+    screenCommunityDetailsViewModel: ScreenCommunityDetailsViewModel = koinViewModel(parameters = {
+        parametersOf(
+            communityId
+        )
+    }),
     community: DataCommunity,
-    eventList: List<DataEvent>,
     pastEventList: List<UiEventCard>,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
@@ -48,11 +60,14 @@ internal fun ScreenCommunityDetails(
     onUsersClick: () -> Unit,
     onEventClick: (String) -> Unit
 ) {
+
+    val screenState by screenCommunityDetailsViewModel.screenState
+        .collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopBar(
                 modifier = Modifier,
-                title = "${community.name}",
+                title = "${screenState.communityDetails?.name}",
                 needActions = true,
                 onShareClick = { onShareClick() }
             ) {
@@ -68,40 +83,40 @@ internal fun ScreenCommunityDetails(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                MainInfoBlock(
+                screenState.communityDetails?.let { community ->
+                    MainInfoBlock(
+                        modifier = Modifier,
+                        community = community,
+                        onSubscribeClick = { onSubscribeClick() }
+                    ) {
+                        onUsersClick()
+                    }
+                }
+            }
+            item {
+                SimpleTextField(
                     modifier = Modifier,
-                    community = community,
-                    onSubscribeClick = { onSubscribeClick() }
+                    text = "Встречи",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF000000)
+                )
+            }
+            items(screenState.eventsList.size) { index ->
+                EventCard(
+                    modifier = Modifier,
+                    eventId = screenState.eventsList[index].id,
+                    eventName = screenState.eventsList[index].name,
+                    eventDate = screenState.eventsList[index].date,
+                    eventAddress = screenState.eventsList[index].address,
+                    eventTags = screenState.eventsList[index].tags,
+                    eventStyle = EventCardStyles.Full
                 ) {
-                    onUsersClick()
+                    onEventClick(screenState.eventsList[index].id)
+                    Log.d("TAG", "onEventClick: ${screenState.eventsList[index].id}")
                 }
             }
-            items(eventList.size) { index ->
-                when (index) {
-                    0 -> {
-                        SimpleTextField(
-                            modifier = Modifier,
-                            text = "Встречи",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF000000)
-                        )
-                    }
 
-                    else -> {
-                        EventCard(
-                            modifier = Modifier,
-                            eventId = eventList[index].id,
-                            eventName = eventList[index].name,
-                            eventDate = eventList[index].date,
-                            eventAddress = eventList[index].city,
-                            eventTags = listOf(),
-                            eventStyle = EventCardStyles.Full,
-                            onClick = onEventClick
-                        )
-                    }
-                }
-            }
             item {
                 PastEventsRow(
                     modifier = Modifier,
@@ -117,24 +132,15 @@ internal fun ScreenCommunityDetails(
 @Composable
 internal fun MainInfoBlock(
     modifier: Modifier,
-    community: DataCommunity,
+    community: UiCommunity,
     onSubscribeClick: () -> Unit,
     onUsersClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
     ) {
-        CommunityLargeCard(modifier = Modifier, community = community)
-        Spacer(
-            modifier = Modifier
-                .padding(16.dp)
-        )
-        GradientButton(
-            modifier = Modifier,
-            text = "Подписаться",
-            buttonStyle = ButtonStyle.Enable
-        ) {
+        CommunityLargeCard(modifier = Modifier, community = community) {
             onSubscribeClick()
         }
         Spacer(
@@ -143,7 +149,7 @@ internal fun MainInfoBlock(
         )
         SimpleTextField(
             modifier = Modifier,
-            text = "Сообщество профессионалов в сфере IT. Объединяем специалистов разных направлений для обмена опытом, знаниями и идеями.",
+            text = "${community.description}",
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
             color = Color(0xFF000000)
@@ -194,7 +200,6 @@ private fun ScreenCommunityPreview() {
         modifier = Modifier,
         communityId = "",
         community = generateCommunity(),
-        eventList = generateEvents(),
         pastEventList = listOf(),
         onBackClick = {},
         onShareClick = {},

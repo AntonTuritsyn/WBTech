@@ -9,7 +9,7 @@ fun generateCommunity(): DataCommunity {
         name = generateRandomWord(5, 20),
         description = generateRandomWord(40, 80),
         icon = "",
-        tags = listOf(),
+        tags = generateTags(),
         users = generateUsersList(),
         events = generateEvents()
     )

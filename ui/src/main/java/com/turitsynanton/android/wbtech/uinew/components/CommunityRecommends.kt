@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +14,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
+import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetailsViewModel
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
 @Composable
@@ -24,7 +28,7 @@ internal fun CommunityRecommends(
     communitiesList: List<UiCommunityCard>,
     subscribeButtonStyle: SubscribeButtonStyle,
     onButtonClick: () -> Unit,
-    onElementClick: () -> Unit
+    onElementClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -51,21 +55,26 @@ internal fun CommunityRecommends(
                     subscribeButtonStyle = subscribeButtonStyle,
                     onButtonClick = { onButtonClick() }
                 ) {
-                    onElementClick()
+                    Log.d("TAG", "CommunityRecommendsId: ${communitiesList[index].id}")
+                    Log.d("TAG", "CommunityRecommendsId: ${communitiesList[index].name}")
+                    onElementClick(communitiesList[index].id)
                 }
             }
         }
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 private fun CommunityRecommendsPreview() {
     CommunityRecommends(
         modifier = Modifier,
         recommendationName = "Сообщества для тестировщиков",
-        communitiesList = /*generateCommunitiesList()*/listOf(),
+        communitiesList = */
+/*generateCommunitiesList()*//*
+listOf(),
         subscribeButtonStyle = SubscribeButtonStyle.Default,
         onButtonClick = {}
     ) {}
-}
+}*/
