@@ -17,7 +17,13 @@ import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventDetail
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventListUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IFilterEventsUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.event.FilterEventsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.GetOtherEventsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.GetPastEventsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.GetUpcomingEventsUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IEventsListByCommunityIdUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetOtherEventsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetPastEventsUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetUpcomingEventsUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetails
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetailsUseCase2
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetailsUseCaseNew
@@ -35,6 +41,12 @@ import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlists
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IFilterEventUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IInnerFilterEventUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.InnerFilterEventUseCaseNew
+import com.turitsynanton.android.wbtech.domain.newusecases.participants.GetParticipantsListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.participants.IGetParticipantsListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.subscribers.GetSubscribersListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.subscribers.IGetSubscribersListUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.users.GetUserFullInfoUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.users.IGetUserFullInfoUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -56,6 +68,13 @@ val domainModule = module {
     factoryOf(::CombinedEventInfo)
     factoryOf(::UseCaseInnerGetEventDetails)
     factoryOf(::GetEventDetailsUseCaseExperiment)
+
+    factoryOf(::GetOtherEventsUseCase) bind IGetOtherEventsUseCase::class
+    factoryOf(::GetUpcomingEventsUseCase) bind IGetUpcomingEventsUseCase::class
+    factoryOf(::GetParticipantsListUseCase) bind IGetParticipantsListUseCase::class
+    factoryOf(::GetPastEventsUseCase) bind IGetPastEventsUseCase::class
+    factoryOf(::GetSubscribersListUseCase) bind IGetSubscribersListUseCase::class
+    factoryOf(::GetUserFullInfoUseCase) bind IGetUserFullInfoUseCase::class
 
     factoryOf(::GetEventsListUseCaseNew)/* bind IGetEventsListUseCaseNew::class*/
     factoryOf(::GetCommunitiesListUseCaseNew)/* bind IGetCommunitiesListUseCaseNew::class*/

@@ -49,7 +49,7 @@ class UseCaseInnerGetEventDetails(): IGetEventDetailsUseCaseExperiment {
 
 }
 
-class FilterEventsUseCase: IFilterEventsUseCase {
+/*class FilterEventsUseCase: IFilterEventsUseCase {
     private val queryForSearch = MutableStateFlow<String>("")
 
     override fun execute(query: String, eventList: List<DomainEvent>): Flow<List<DomainEvent>> {
@@ -66,7 +66,7 @@ class FilterEventsUseCase: IFilterEventsUseCase {
     }
 
     fun observe(): Flow<String> = queryForSearch
-}
+}*/
 
 internal class InteractorFullInfoExperiment(
     private val getEventDetails: GetEventDetailsUseCaseExperiment,

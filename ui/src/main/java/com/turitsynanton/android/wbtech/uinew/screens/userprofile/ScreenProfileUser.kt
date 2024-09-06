@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.uinew.screens
+package com.turitsynanton.android.wbtech.uinew.screens.userprofile
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -31,14 +32,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
+import com.turitsynanton.android.wbtech.models.UiPerson
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
@@ -47,11 +48,16 @@ import com.turitsynanton.android.wbtech.uinew.items.SocialButton
 import com.turitsynanton.android.wbtech.uinew.items.Tag
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun ScreenProfile(
+internal fun ScreenProfileUser(
     modifier: Modifier = Modifier,
-    user: DataUser,
+    userId: String,
+    profileUserViewModel: ScreenProfileUserViewModel = koinViewModel(parameters = {
+        parametersOf(userId)
+    }),
     eventsList: List<UiEventCard>,
     communitiesList: List<UiCommunityCard>,
     onBackClick: () -> Unit,
@@ -59,11 +65,17 @@ internal fun ScreenProfile(
     onCommunityClick: () -> Unit,
     onLogOutClick: () -> Unit
 ) {
+    val userInfo by profileUserViewModel.getUserInfoFlow().collectAsStateWithLifecycle()
+
     val stroke = Stroke(
         width = 2f,
         pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
     )
-    Scaffold {
+    Scaffold(
+        topBar = {
+
+        }
+    ) {
         LazyColumn(
             modifier = modifier
                 .padding(it)
@@ -72,8 +84,10 @@ internal fun ScreenProfile(
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             item {
-                MainInfo(user = user) {
-                    onBackClick()
+                userInfo?.let { it1 ->
+                    MainInfo(user = it1) {
+                        onBackClick()
+                    }
                 }
             }
             item {
@@ -129,7 +143,7 @@ internal fun ScreenProfile(
 @Composable
 internal fun MainInfo(
     modifier: Modifier = Modifier,
-    user: DataUser,
+    user: UiPerson,
     onBackClick: () -> Unit
 ) {
     Column(
@@ -157,8 +171,8 @@ internal fun MainInfo(
                 topBarColor = Color.Transparent,
                 title = "",
                 needActions = true,
-                onShareClick = { onBackClick() }) {
-
+                onShareClick = {  }) {
+                onBackClick()
             }
         }
         Spacer(modifier = Modifier.padding(10.dp))
@@ -196,8 +210,7 @@ internal fun MainInfo(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            val tags = generateTags(min = 4, max = 8)
-            tags.forEach { tag ->
+            user.tags.forEach { tag ->
                 Tag(modifier = Modifier, text = tag.content, style = TagsStyle.Minimize) {
 
                 }
@@ -224,8 +237,8 @@ internal fun MainInfo(
 @Preview(showBackground = true)
 @Composable
 private fun ScreenProfilePreview() {
-    ScreenProfile(
-        user = generateUsersList().first(),
+    ScreenProfileUser(
+        userId = "1",
         eventsList = listOf(),
         communitiesList = /*generateCommunitiesList()*/listOf(),
         onBackClick = {},

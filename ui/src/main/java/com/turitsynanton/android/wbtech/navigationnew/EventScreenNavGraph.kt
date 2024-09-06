@@ -6,14 +6,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
-import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
+import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
+import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
 import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
-import com.turitsynanton.android.wbtech.uinew.screens.ScreenParticipants
-import com.turitsynanton.android.wbtech.uinew.screens.ScreenProfile
+import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribers
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
@@ -23,9 +22,9 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
     ) {
         composable(route = Navigation.EventsList.route) {
             ScreenEventsList(
-                eventsUpcomingList = generateEvents(),
                 onProfileClick = {
-                    navController.navigate("${Navigation.MyProfileScreen.route}")
+//                    пока не существует
+//                    navController.navigate("${Navigation.MyProfileScreen.route}")
                 },
                 onEventClick = { eventId ->
                     navController.navigate("${Navigation.EventDetailsScreen.route}/${eventId}")
@@ -47,8 +46,8 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onShareClick = {},
                     onSubscribeClick = {},
                     onHostClick = {},
-                    onParticipantsClick = {
-                        navController.navigate(Navigation.ParticipantsDetailsScreen.route)
+                    onParticipantsClick = { eventId ->
+                        navController.navigate("${Navigation.ParticipantsDetailsScreen.route}/${eventId}")
                     },
                     onOganizerClick = { communityId ->
                         navController.navigate("${Navigation.CommunityDetailsScreen.route}/${communityId}")
@@ -56,43 +55,62 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onEventClick = {
                         navController.navigate("${Navigation.EventDetailsScreen.route}/{id}")
                     },
-                    onSignUpToEventClick = {})
+                    onSignUpToEventClick = {
+                        navController.navigate("${Navigation.ParticipantsDetailsScreen.route}/{id}")
+                    }
+                )
             }
         }
         composable(route = "${Navigation.CommunityDetailsScreen.route}/{communityid}") { stackEntry ->
             stackEntry.arguments?.getString("communityid")?.let { id ->
                 ScreenCommunityDetails(
                     communityId = id,
-                    community = generateCommunity(),
-                    pastEventList = listOf(),
                     onBackClick = { navController.popBackStack() },
                     onShareClick = {},
-                    onSubscribeClick = {},
-                    onUsersClick = {
-                        navController.navigate(Navigation.ParticipantsDetailsScreen.route)
+                    onSubscribeClick = {
+
+                    },
+                    onUsersClick = { communityId ->
+                        navController.navigate("${Navigation.SubscribersDetailsScreen.route}/${communityId}")
                     },
                     onEventClick = { eventId ->
                         navController.navigate("${Navigation.EventDetailsScreen.route}/$eventId")
                     })
             }
         }
-        composable(route = Navigation.ParticipantsDetailsScreen.route) {
-            ScreenParticipants(
-                participants = generateUsersList(),
-                onBackClick = { navController.popBackStack() },
-                onUserClick = {}
-            )
-//            MapScreen()
+        composable(route = "${Navigation.ParticipantsDetailsScreen.route}/{eventId}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { id ->
+                ScreenParticipants(
+                    eventId = id,
+                    onBackClick = { navController.popBackStack() },
+                    onUserClick = { userId ->
+                        navController.navigate("${Navigation.ProfileScreen.route}/${userId}")
+                    }
+                )
+            }
         }
-        composable(route = Navigation.MyProfileScreen.route) {
-            ScreenProfile(
-                user = generateUsersList().first(),
-                eventsList = listOf(),
-                communitiesList = listOf(),
-                onBackClick = { /*TODO*/ },
-                onEventClick = { /*TODO*/ },
-                onCommunityClick = { /*TODO*/ }) {
+        composable(route = "${Navigation.SubscribersDetailsScreen.route}/{communityId}") { stackEntry ->
+            stackEntry.arguments?.getString("communityId")?.let { id ->
+                ScreenSubscribers(
+                    communityId = id,
+                    onBackClick = { navController.popBackStack() },
+                    onUserClick = { userId ->
+                        navController.navigate("${Navigation.ProfileScreen.route}/${userId}")
+                    }
+                )
+            }
+        }
+        composable(route = "${Navigation.ProfileScreen.route}/{userId}") { stackEntry ->
+            stackEntry.arguments?.getString("userId")?.let { id ->
+                ScreenProfileUser(
+                    userId = id,
+                    eventsList = listOf(),
+                    communitiesList = listOf(),
+                    onBackClick = { navController.popBackStack() },
+                    onEventClick = { /*TODO*/ },
+                    onCommunityClick = { /*TODO*/ }) {
 
+                }
             }
         }
     }

@@ -2,6 +2,8 @@ package com.turitsynanton.android.wbtech.uinew.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +35,8 @@ import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.generateEvents
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
+import com.turitsynanton.android.wbtech.uinew.components.CountryDropDown
+import com.turitsynanton.android.wbtech.uinew.components.PhoneField
 import com.turitsynanton.android.wbtech.uinew.items.ComplexTextField
 import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -86,6 +90,12 @@ internal fun Title(
             fontWeight = FontWeight.Normal,
             color = Color(0xFF000000)
         )
+        Spacer(modifier = Modifier.padding(12.dp))
+        InteractiveBlock(
+            modifier = Modifier,
+            hint = "Name",
+            buttonText = "Next"
+        )
     }
 }
 
@@ -94,9 +104,9 @@ fun InteractiveBlock(
     modifier: Modifier,
     hint: String,
     buttonText:String,
-    selectedCountry: Country,
-    onCountrySelected: (Country) -> Unit,
-    onButtonClick: () -> Unit
+//    selectedCountry: Country,
+//    onCountrySelected: (Country) -> Unit,
+//    onButtonClick: () -> Unit
 ) {
     val countries = listOf(
         Country("Russia", "+7", R.drawable.flag_russia),
@@ -111,56 +121,35 @@ fun InteractiveBlock(
         Spacer(modifier = Modifier.padding(12.dp))
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            var expanded by remember { mutableStateOf(false) }
-            Box(modifier = Modifier) {
-                IconButton(onClick = { expanded = true }) {
-                    Icon(Icons.Default.MoreVert, contentDescription = "Показать меню")
-                }
-                /*DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                    Text("Скопировать", fontSize=18.sp, modifier = Modifier.padding(10.dp))
-                    Text("Вставить", fontSize=18.sp, modifier = Modifier.padding(10.dp))
-                    Divider()
-                    Text("Настройки", fontSize=18.sp, modifier = Modifier.padding(10.dp))
-                }*/
-                /*DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    countries.forEach { country ->
-                        DropdownMenuItem(
-                            text = {
-                                ""
-                            },
-                            onClick = {
-                            onCountrySelected(country)
-                            expanded = false
-                        }) {
-                            Text(text = "")
-                            *//*Row {
-                                Icon(
-                                    painter = painterResource(id = country.flag),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(text = "${country.code} ${country.name}")
-                            }*//*
-                        }
-                    }
-                }*/
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            GradientButton(
-                modifier = Modifier,
-                text = buttonText,
-                buttonStyle = ButtonStyle.Disable
-            ) {
-
+            CountryDropDown(modifier = Modifier)
+//            ComplexTextField(hint = hint, textFieldStyle = TextFieldStyle.Filled)
+            PhoneField(modifier = Modifier, number = "") {
+                
             }
         }
+        Spacer(modifier = Modifier.weight(1f))
+        GradientButton(
+            modifier = Modifier,
+            text = buttonText,
+            buttonStyle = ButtonStyle.Disable
+        ) {
+
+        }
+    }
+}
+
+@Composable
+internal fun SetName(
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
+
     }
 }
 

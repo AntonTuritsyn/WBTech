@@ -25,8 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
+import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.SubscribeButton
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
@@ -34,7 +34,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 @Composable
 internal fun Organizer(
     modifier: Modifier,
-    community: DataCommunity,
+    community: UiCommunity,
     onButtonClick: () -> Unit,
     onElementClick: (String) -> Unit
 ) {
@@ -102,16 +102,5 @@ internal fun Organizer(
                 }
             }
         }
-    }
-}
-
-@Preview(
-    widthDp = 360,
-    showBackground = true
-)
-@Composable
-private fun OrganizerPreview() {
-    Organizer(modifier = Modifier, community = generateCommunity(), onButtonClick = {}) {
-
     }
 }

@@ -19,4 +19,5 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="my_communities">Мои сообщества</string>
     <string name="log_out">Выйти</string>
     <string name="signup_to_event">Вход и\nзапись на\nвстречу</string>
+    <string name="phone_placeholder">000 000-00-00</string>
 </resources>

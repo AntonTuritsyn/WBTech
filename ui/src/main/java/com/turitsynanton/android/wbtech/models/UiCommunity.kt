@@ -6,5 +6,6 @@ data class UiCommunity(
     val description: String,
     val icon: String,
     val tags: List<UiTag>,
-    val events: List<UiEventCard>
+    val events: List<UiEventCard>,
+    val users: List<UiPersonCard>
 )

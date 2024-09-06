@@ -15,3 +15,7 @@ internal class TagMapper: IMapperToUi<DomainTag, UiTag> {
 internal fun DomainTag.mapTagToUi(mapper: IMapperToUi<DomainTag, UiTag>): UiTag {
     return mapper.mapToUi(this)
 }
+
+internal fun List<DomainTag>.mapTagToUi(mapper: IMapperToUi<DomainTag, UiTag>): List<UiTag> {
+    return map { it.mapTagToUi(mapper) }
+}

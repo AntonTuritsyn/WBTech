@@ -18,7 +18,7 @@ internal class InfoEventListScreenInteractor(
 
     private val innerFlow = combine(
         getEventsListUseCaseNew(),
-        getCommunitiesListUseCaseNew.invoke(),
+        getCommunitiesListUseCaseNew(),
         filterEventUseCaseNew.invoke(),
         getCommunityIdByEventIdUseCaseNew.invoke()
     ) { eventList, communitiesList, filteredEvents, communityId ->

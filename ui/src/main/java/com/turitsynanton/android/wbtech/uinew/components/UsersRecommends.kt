@@ -11,21 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
+import com.turitsynanton.android.wbtech.models.UiPersonCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 
 @Composable
 internal fun UsersRecommends(
     modifier: Modifier,
-    usersList: List<DataUser>,
-    userTag: List<DataTag>,
+    usersList: List<UiPersonCard>,
     onUserClick: () -> Unit
 ) {
     Column(
@@ -45,26 +40,13 @@ internal fun UsersRecommends(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(usersList.size) { index ->
-                val generatedUserTag: List<DataTag> = generateTags(1, 1)
                 Person(
                     modifier = Modifier,
-                    picture = R.drawable.my_photo,
-                    userName = usersList[index].name,
-                    tagInfo = generatedUserTag.first().content
+                    user = usersList[index],
                 ) {
                     onUserClick()
                 }
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun UsersRecommendsPreview() {
-    UsersRecommends(
-        modifier = Modifier,
-        usersList = generateUsersList(),
-        userTag = listOf()
-    ) {}
 }

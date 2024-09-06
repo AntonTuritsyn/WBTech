@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 @RequiresApi(Build.VERSION_CODES.O)
 internal class EventRepositoryImpl(private val mapper: EventMapper) : EventRepository {
 
-    val eventsList = generateEvents()
+    val eventsList = generateEvents(10, 40)
 
     override fun getEventsList(): Flow<List<DomainEvent>> =
         flow { emit(eventsList) }.map { it.mapEventToDomain(mapper) }

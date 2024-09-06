@@ -10,9 +10,12 @@ enum class Navigation(var route: String) {
     //      communities
     Community("communitys"),
     CommunityDetailsScreen("communityDetailsScreen"),
-    //      people
+    //      participants
     Participants("participants"),
     ParticipantsDetailsScreen("participantsDetailsScreen"),
+    //      subscribers
+    Subscribers("subscribers"),
+    SubscribersDetailsScreen("subscribersDetailsScreen"),
     //      userProfile
     Profile("profile"),
     ProfileScreen("profileDetailsScreen"),

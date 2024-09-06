@@ -12,8 +12,8 @@ import java.util.UUID
 import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun generateEvents(): List<DataEvent> {
-    val eventsList = List((10..20).random()) {
+fun generateEvents(min: Int = 10, max: Int = 20): List<DataEvent> {
+    val eventsList = List((min..max).random()) {
         DataEvent(
             id = UUID.randomUUID().toString(),
             name = eventsNames.random(),
@@ -28,16 +28,7 @@ fun generateEvents(): List<DataEvent> {
                 tags = listOf(),
                 city = cities.random()
             ),
-            /*organizer = DataCommunity(
-                id = UUID.randomUUID().toString(),
-                name = generateRandomWord(5, 20),
-                description = generateRandomWord(40, 80),
-                icon = "",
-                tags = listOf(),
-                users = generateUsersList(),
-                events = listOf()
-            ),*/
-            participants = generateUsersList(),
+            participants = usersForEvents(),
             tags = generateTags(),
             icon = ""
         )

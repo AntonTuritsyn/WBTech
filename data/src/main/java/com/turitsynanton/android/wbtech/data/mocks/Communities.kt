@@ -14,7 +14,7 @@ fun generateCommunitiesList(min: Int = 7, max: Int = 15): List<DataCommunity> {
             description = communityDescriptions.random(),
             icon = "",
             tags = generateTags(),
-            users = generateUsersList(),
+            users = usersForCommunities(),
             events = generateEvents()
         )
     }

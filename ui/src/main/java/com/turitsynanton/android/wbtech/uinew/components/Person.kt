@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.turitsynanton.android.ui.R
+import com.turitsynanton.android.wbtech.models.UiPersonCard
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.items.Avatar
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -24,9 +22,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 @Composable
 internal fun Person(
     modifier: Modifier,
-    picture: Int,
-    userName: String,
-    tagInfo: String,
+    user: UiPersonCard,
     onClick: () -> Unit
 ) {
     Column(
@@ -34,11 +30,11 @@ internal fun Person(
             .width(104.dp)
             .clickable { onClick() }
     ) {
-        Avatar(modifier = Modifier, avatarStyle = AvatarStyles.Medium, res = picture)
+        Avatar(modifier = Modifier, avatarStyle = AvatarStyles.Medium, user = user)
         Spacer(modifier = Modifier.padding(2.dp))
         SimpleTextField(
             modifier = Modifier,
-            text = userName,
+            text = user.name,
             fontFamily = SfProDisplay,
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium,
@@ -47,20 +43,9 @@ internal fun Person(
         Spacer(modifier = Modifier.padding(2.dp))
         Tag(
             modifier = Modifier,
-            text = tagInfo,
+            text = user.tag.content,
             style = TagsStyle.Minimize
         ) {
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PersonPreview() {
-    Person(
-        modifier = Modifier,
-        picture = R.drawable.my_photo,
-        userName = "Антон",
-        tagInfo = "Разработка"
-    ) {}
 }

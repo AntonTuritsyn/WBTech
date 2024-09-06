@@ -11,5 +11,5 @@ data class ScreenEventsListState(
     val filteredEvents: List<UiEventCard> = emptyList(),
     val searchQuery: String = "",
     val selectedTags: List<String> = emptyList(),
-    val communityId: String = ""
+    val upcomingEvents: List<UiEventCard> = emptyList()
 )
