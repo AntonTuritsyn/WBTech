@@ -5,6 +5,8 @@ import com.turitsynanton.android.wbtech.models.UiEvent
 
 internal class EventMapper(
     private val tagMapper: TagMapper,
+    private val hostMapper: HostMapper,
+    private val organizerMapper: OrganizerMapper,
     private val eventCardMapper: EventCardMapper
 ): IMapperToUi<DomainEvent, UiEvent> {
     override fun mapToUi(entity: DomainEvent): UiEvent {
@@ -16,6 +18,7 @@ internal class EventMapper(
             tags = entity.tags.map { tag ->
                 tagMapper.mapToUi(tag)
             },
+            host = hostMapper.mapToUi(entity.host),
             description = entity.description
         )
     }

@@ -22,11 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
-import com.turitsynanton.android.wbtech.data.mocks.generateEvents
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityLargeCard
@@ -34,11 +29,7 @@ import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
 import com.turitsynanton.android.wbtech.uinew.components.Subscribers
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
-import com.turitsynanton.android.wbtech.uinew.components.avatars
-import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
-import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsListViewModel
-import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -52,17 +43,16 @@ internal fun ScreenCommunityDetails(
             communityId
         )
     }),
-    community: DataCommunity,
-    pastEventList: List<UiEventCard>,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
     onSubscribeClick: () -> Unit,
-    onUsersClick: () -> Unit,
+    onUsersClick: (String) -> Unit,
     onEventClick: (String) -> Unit
 ) {
 
     val screenState by screenCommunityDetailsViewModel.screenState
         .collectAsStateWithLifecycle()
+    Log.d("TAG", "screenState: ${screenState.pastEventsList}")
     Scaffold(
         topBar = {
             TopBar(
@@ -89,7 +79,7 @@ internal fun ScreenCommunityDetails(
                         community = community,
                         onSubscribeClick = { onSubscribeClick() }
                     ) {
-                        onUsersClick()
+                        onUsersClick(community.id)
                     }
                 }
             }
@@ -120,7 +110,7 @@ internal fun ScreenCommunityDetails(
             item {
                 PastEventsRow(
                     modifier = Modifier,
-                    pastEventList = pastEventList,
+                    pastEventList = screenState.pastEventsList,
                     onEventClick = onEventClick
                 )
             }
@@ -134,7 +124,7 @@ internal fun MainInfoBlock(
     modifier: Modifier,
     community: UiCommunity,
     onSubscribeClick: () -> Unit,
-    onUsersClick: () -> Unit,
+    onUsersClick: (String) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -161,9 +151,9 @@ internal fun MainInfoBlock(
         Subscribers(
             modifier = Modifier,
             title = stringResource(id = R.string.subscribers),
-            avatarsList = avatars
+            avatarsList = community.users
         ) {
-            onUsersClick()
+            onUsersClick(community.id)
         }
         Spacer(
             modifier = Modifier
@@ -199,8 +189,6 @@ private fun ScreenCommunityPreview() {
     ScreenCommunityDetails(
         modifier = Modifier,
         communityId = "",
-        community = generateCommunity(),
-        pastEventList = listOf(),
         onBackClick = {},
         onShareClick = {},
         onSubscribeClick = {},

@@ -8,6 +8,7 @@ import com.turitsynanton.android.wbtech.data.newrepository.newmapper.EventMapper
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.UsersMapper
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.TagsMapper
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.HostMapper
+import com.turitsynanton.android.wbtech.data.newrepository.newmapper.ProfileMapper
 import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -21,6 +22,7 @@ val dataModule = module {
     singleOf(::UsersMapper)
     singleOf(::TagsMapper)
     singleOf(::HostMapper)
+    singleOf(::ProfileMapper)
 
     /*singleOf(::CommunityRepositoryImpl) bind CommunityRepository::class
     singleOf(::EventRepositoryImpl) bind EventRepository::class*/

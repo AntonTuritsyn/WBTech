@@ -25,7 +25,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.mocks.generateTags
 import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
 import com.turitsynanton.android.wbtech.models.UiCommunity
@@ -86,15 +85,3 @@ internal fun CommunityLargeCard(
         }
     }
 }
-
-/*
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(widthDp = 360,
-    showBackground = true)
-@Composable
-private fun CommunityLargeCardPreview() {
-    CommunityLargeCard(
-        modifier = Modifier,
-        community = generateCommunity()
-    )
-}*/

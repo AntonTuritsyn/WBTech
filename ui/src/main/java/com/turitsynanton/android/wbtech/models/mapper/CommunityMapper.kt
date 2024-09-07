@@ -5,7 +5,8 @@ import com.turitsynanton.android.wbtech.models.UiCommunity
 
 internal class CommunityMapper(
     private val tagMapper: TagMapper,
-    private val eventCardMapper: EventCardMapper
+    private val eventCardMapper: EventCardMapper,
+    private val personCardMapper: PersonCardMapper
 ): IMapperToUi<DomainCommunity, UiCommunity> {
     override fun mapToUi(entity: DomainCommunity): UiCommunity {
         return UiCommunity(
@@ -18,6 +19,9 @@ internal class CommunityMapper(
             },
             events = entity.events.map { event ->
                 eventCardMapper.mapToUi(event)
+            },
+            users = entity.users.map { user ->
+                personCardMapper.mapToUi(user)
             }
         )
     }

@@ -29,6 +29,7 @@ import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
+import com.turitsynanton.android.wbtech.uinew.components.CountryDropDown
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
 import com.turitsynanton.android.wbtech.uinew.components.OtherEvents
@@ -45,7 +46,6 @@ private const val FIRST_ITEMS_IN_COLUMN = 4
 @Composable
 internal fun ScreenEventsList(
     modifier: Modifier = Modifier,
-    eventsUpcomingList: List<DataEvent>,
     screenEventsListViewModel: ScreenEventsListViewModel = koinViewModel(),
     onProfileClick: () -> Unit,
     onEventClick: (String) -> Unit,
@@ -55,9 +55,6 @@ internal fun ScreenEventsList(
 ) {
 
     val screenState by screenEventsListViewModel.screenState.collectAsStateWithLifecycle()
-    val upcomingEventsList by screenEventsListViewModel.getUpcomingEventListFlow().collectAsStateWithLifecycle()
-
-    Log.d("TAG", "communityId: ${screenState.communityId}")
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -112,19 +109,19 @@ internal fun ScreenEventsList(
                                         eventTags = screenState.events[index].tags,
                                         eventStyle = EventCardStyles.Large,
 
-                                    ) {
+                                        ) {
                                         onEventClick(screenState.events[index].id)
-                                        screenEventsListViewModel.getCommunityDetailsByEventId(screenState.events[index].id)
                                     }
                                 }
                             }
+//                            CountryDropDown(modifier = Modifier)
                         }
 
                         1 -> {
                             DifferentEvents(
                                 modifier = Modifier,
                                 componentName = stringResource(id = R.string.upcoming_events),
-                                eventsList = /*screenState.events*/upcomingEventsList,
+                                eventsList = screenState.upcomingEvents,
                                 onEventClick = onEventClick
                             )
                         }
@@ -135,7 +132,7 @@ internal fun ScreenEventsList(
                                 recommendationName = "Сообщества для тестировщиков",
                                 communitiesList = screenState.communities,
                                 subscribeButtonStyle = SubscribeButtonStyle.Default,
-                                onButtonClick = {  },
+                                onButtonClick = { },
                                 onElementClick = { communityId ->
                                     onCommunityClick(communityId)
                                 }
@@ -146,7 +143,11 @@ internal fun ScreenEventsList(
                             OtherEvents(
                                 modifier = Modifier,
                                 tagsList = tags.map { tag ->
-                                    tag to if (screenEventsListViewModel.isTagSelected(tag)) TagsStyle.Selected else TagsStyle.Unselected
+                                    tag to if (screenEventsListViewModel.isTagSelected(tag)) {
+                                        TagsStyle.Selected
+                                    } else {
+                                        TagsStyle.Unselected
+                                    }
                                 }
                             ) { tag ->
                                 screenEventsListViewModel.onTagSelected(tag)
@@ -170,22 +171,3 @@ internal fun ScreenEventsList(
         }
     }
 }
-/*
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-private fun ScreenEventsPreview() {
-    ScreenEventsList(
-        eventsList = generateEvents(),
-//        eventTopList = generateEvents(),
-        communitiesList = generateCommunitiesList(),
-        eventsUpcomingList = generateEvents(),
-        onEventClick = {},
-        onCommunityClick = {},
-        onProfileClick = {},
-        onSubscribeClick = {},
-    ) {
-
-    }
-}*/

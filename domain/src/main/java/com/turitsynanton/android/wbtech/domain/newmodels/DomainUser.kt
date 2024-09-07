@@ -6,5 +6,5 @@ data class DomainUser(
     val city: String,
     val description: String,
     val tags: List<DomainTag>,
-    val picture: String
+    val icon: String
 )

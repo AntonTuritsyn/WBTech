@@ -2,22 +2,34 @@ package com.turitsynanton.android.wbtech.domain.newusecases.community
 
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.update
 
 internal class GetCommunityIdByEventIdUseCase(private val dataListsRepository: IDataListsRepository) :
     IGetCommunityIdByEventIdUseCase {
     override fun execute(
-        eventId: String,
-        communities: List<DomainCommunity>
-    ): Flow<String>? {
-        communities.forEach { community ->
-            if (community.events.any {
-                    it.id == eventId
+        eventId: String
+    ): Flow<DomainCommunity?> {
+        val communities = dataListsRepository.getCommunitiesListFlow()
+        val communityDetails = MutableStateFlow<DomainCommunity?>(null)
+        communities.flatMapLatest { communities ->
+            communities.firstOrNull { community ->
+                community.events.any { it.id == eventId }
+            }?.let { neededCommunity ->
+                communityDetails.update {
+                    neededCommunity
                 }
-            )
-                return flow { emit(community.id) }
-        }
-        return null
+            }
+            emptyFlow<String>()
+        }.launchIn(CoroutineScope(Dispatchers.IO))
+
+        return communityDetails
     }
 }

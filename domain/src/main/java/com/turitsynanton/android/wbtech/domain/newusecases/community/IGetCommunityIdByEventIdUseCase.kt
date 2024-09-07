@@ -4,5 +4,5 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import kotlinx.coroutines.flow.Flow
 
 interface IGetCommunityIdByEventIdUseCase {
-    fun execute(eventId: String, communities: List<DomainCommunity>): Flow<String>?
+    fun execute(eventId: String): Flow<DomainCommunity?>
 }

@@ -4,5 +4,5 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import kotlinx.coroutines.flow.Flow
 
 interface IFilterEventsUseCase {
-    fun execute(query: String, eventList: List<DomainEvent>): Flow<List<DomainEvent>>
+    fun execute(query: String): Flow<List<DomainEvent>>
 }

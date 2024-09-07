@@ -6,6 +6,7 @@ data class UiEvent(
     val date: String,
     val address: String,
     val tags: List<UiTag>,
+    val host: UiHost,
     val description: String,
 //    val events: List<UiEventCard>
 )

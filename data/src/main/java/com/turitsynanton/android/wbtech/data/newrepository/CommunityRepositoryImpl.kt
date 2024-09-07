@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.turitsynanton.android.wbtech.data.dataCommunities
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
-import com.turitsynanton.android.wbtech.data.mocks.generateCommunity
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.CommunityMapper
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapCommunityToDomain
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity

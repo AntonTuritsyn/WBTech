@@ -40,6 +40,7 @@ import com.turitsynanton.android.wbtech.domain.models.DomainUser
 import com.turitsynanton.android.wbtech.ui.theme.NeutralDisabled
 import com.turitsynanton.android.wbtech.ui.theme.NeutralSecondaryBG
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
+import com.turitsynanton.android.wbtech.uinew.utils.PhoneVisualTransformation
 
 @Composable
 internal fun CustomPhoneField(modifier: Modifier, user: DomainUser, onPhoneEntered: (DomainUser) -> Unit) {
@@ -123,46 +124,6 @@ internal fun CustomPhoneField(modifier: Modifier, user: DomainUser, onPhoneEnter
                 }
             }
         )
-    }
-}
-
-internal class PhoneVisualTransformation : VisualTransformation {
-    override fun filter(text: AnnotatedString): TransformedText {
-        val originalText = text.text
-        val formattedText = StringBuilder()
-
-        originalText.forEachIndexed { index, char ->
-            formattedText.append(char)
-            when (index) {
-                2 -> formattedText.append(' ')
-                5, 7 -> formattedText.append('-')
-            }
-        }
-
-        val out = formattedText.toString()
-
-        val offsetMapping = object : OffsetMapping {
-            override fun originalToTransformed(offset: Int): Int {
-                return when (offset) {
-                    in 0..2 -> offset
-                    in 3..5 -> offset + 1
-                    in 6..7 -> offset + 2
-                    in 8..10 -> offset + 3
-                    else -> out.length
-                }
-            }
-
-            override fun transformedToOriginal(offset: Int): Int {
-                return when (offset) {
-                    in 0..2 -> offset
-                    in 3..6 -> offset - 1
-                    in 7..9 -> offset - 2
-                    in 10..12 -> offset - 3
-                    else -> text.length
-                }
-            }
-        }
-        return TransformedText(AnnotatedString(out), offsetMapping)
     }
 }
 

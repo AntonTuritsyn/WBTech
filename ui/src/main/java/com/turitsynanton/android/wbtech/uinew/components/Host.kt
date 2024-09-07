@@ -23,12 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
+import com.turitsynanton.android.wbtech.models.UiHost
+import com.turitsynanton.android.wbtech.models.UiOrganizer
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 
 @Composable
 internal fun Host(
     modifier: Modifier,
-    host: DomainUser,
+    host: UiHost,
     onClick: () -> Unit
 ) {
 

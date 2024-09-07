@@ -15,7 +15,7 @@ internal class UsersMapper(
             tags = entity.tags.map { tag ->
                 tagsMapper.mapToDomain(tag)
             },
-            picture = entity.icon
+            icon = entity.icon
         )
     }
 }

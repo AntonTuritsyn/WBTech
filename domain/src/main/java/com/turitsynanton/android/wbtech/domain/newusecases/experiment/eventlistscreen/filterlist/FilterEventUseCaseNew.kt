@@ -4,6 +4,7 @@ import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flattenConcat
@@ -20,25 +21,22 @@ internal class FilterEventUseCaseNew(
 ) : IFilterEventUseCaseNew {
     private val eventsPrepared = MutableStateFlow<List<DomainEvent>>(emptyList())
 
-    override fun execute(query: String, eventList: List<DomainEvent>) {
-//        innerFilterEventUseCaseExperiment.observe().mapLatest { query ->
-        eventsPrepared.update {
-            if (query.isEmpty()) {
-                eventList
-                /*eventsPrepared.update {
-                    eventList
-                }*/
-            } else {
-                /*eventsPrepared.update {
-                    eventList.filter { event ->
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun execute(query: String) {
+        val eventsList = dataListsRepository.getEventsListFlow()
+
+        eventsList.mapLatest { events ->
+            eventsPrepared.update {
+                if (query.isEmpty()) {
+                    events
+                } else {
+                    events.filter { event ->
                         event.name.contains(query, ignoreCase = true)
                     }
-                }*/
-                eventList.filter { event ->
-                    event.name.contains(query, ignoreCase = true)
                 }
             }
         }
+
     }
 
     fun invoke(): Flow<List<DomainEvent>> = eventsPrepared

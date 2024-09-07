@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.uinew.screens
+package com.turitsynanton.android.wbtech.uinew.screens.participants
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -8,23 +8,28 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.wbtech.uinew.components.Person
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun ScreenParticipants(
     modifier: Modifier = Modifier,
-    participants: List<DataUser>,
+    eventId: String,
+    participantsViewModel: ScreenParticipantsViewModel = koinViewModel(parameters = {
+        parametersOf(
+            eventId
+        )
+    }),
     onBackClick: () -> Unit,
-    onUserClick: () -> Unit
+    onUserClick: (String) -> Unit
 ) {
+    val user by participantsViewModel.getParticipantsListFlow().collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopBar(
@@ -43,7 +48,7 @@ internal fun ScreenParticipants(
                 .padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            items(participants.chunked(3)) { rowItems ->
+            items(user.chunked(3)) { rowItems ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -52,25 +57,13 @@ internal fun ScreenParticipants(
                     for (participant in rowItems) {
                         Person(
                             modifier = Modifier,
-                            picture = R.drawable.my_photo,
-                            userName = participant.name,
-                            tagInfo = generateTags().first().content
+                            user = participant
                         ) {
-                            onUserClick()
+                            onUserClick(participant.id)
                         }
                     }
                 }
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ScreenParticipantsPreview() {
-    ScreenParticipants(
-        modifier = Modifier,
-        participants = generateUsersList(),
-        onBackClick = {}
-    ) {}
 }
