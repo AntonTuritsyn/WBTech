@@ -37,10 +37,11 @@ internal fun ComplexTextField(
     query: String,
     onQueryChanged: (String) -> Unit,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    singleLine : Boolean = true,
     textFieldStyle: TextFieldStyle
 ) {
     BasicTextField(
-        modifier = Modifier
+        modifier = modifier
             .clip(shape = RoundedCornerShape(16.dp))
             .background(color = textFieldStyle.containerColor)
             .border(
@@ -54,6 +55,7 @@ internal fun ComplexTextField(
         onValueChange = {
             onQueryChanged(it)
         },
+        singleLine = singleLine,
         enabled = true,
         textStyle = TextStyle(
             color = Color(0xFF000000),

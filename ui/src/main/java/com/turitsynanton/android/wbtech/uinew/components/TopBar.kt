@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.sharp.KeyboardArrowLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
@@ -47,16 +49,24 @@ internal fun TopBar(
         },
         navigationIcon = {
             IconButton(onClick = { onBackPressed() }) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Sharp.KeyboardArrowLeft,
+                Image(
+                    painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = "back",
-                    tint = Color(0xFF9A10F0)
                 )
             }
         },
         actions = {
             when (topBarStyle) {
                 TopBarStyles.Empty -> {}
+                TopBarStyles.Save -> {
+                    IconButton(onClick = { onIconClick() }) {
+                        Icon(
+                            painter = painterResource(id = topBarStyle.icon),
+                            contentDescription = "back",
+                            tint = Color(0xFF9A10F0)
+                        )
+                    }
+                }
                 TopBarStyles.Edit -> {
                     IconButton(onClick = { onIconClick() }) {
                         Icon(

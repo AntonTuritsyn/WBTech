@@ -27,10 +27,7 @@ import com.turitsynanton.android.wbtech.domain.newusecases.event.IEventsListByCo
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetOtherEventsUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetPastEventsUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetUpcomingEventsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetails
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetailsUseCase2
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventDetailsUseCaseNew
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.GetEventIdUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventdetailsscreen.IGetEventDetailsUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.FilterEventUseCaseNew
@@ -42,12 +39,16 @@ import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlists
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IFilterEventUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IInnerFilterEventUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.InnerFilterEventUseCaseNew
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.GetEventsVisibilityUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.GetMyProfileUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.IGetListsVisibilityUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.IGetMyProfileUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.GetCommunitiesVisibilityUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.ISetListsVisibilityUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.SetCommunitiesVisibilityUseCase
+import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.SetEventsVisibilityUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.participants.GetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.participants.IGetParticipantsListUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.permissions.CheckLocationPermissionUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.permissions.ICheckLocationPermissionUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.subscribers.GetSubscribersListUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.subscribers.IGetSubscribersListUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.GetCommunitiesForUserUseCase
@@ -57,8 +58,6 @@ import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetCommu
 import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetEventsForUserUseCase
 import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetUserFullInfoUseCase
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
-import org.koin.core.scope.get
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -90,6 +89,11 @@ val domainModule = module {
     factoryOf(::GetEventsForUserUseCase) bind IGetEventsForUserUseCase::class
     factoryOf(::GetCommunitiesForUserUseCase) bind IGetCommunitiesForUserUseCase::class
     factoryOf(::GetMyProfileUseCase) bind IGetMyProfileUseCase::class
+
+    factoryOf(::SetEventsVisibilityUseCase) bind ISetListsVisibilityUseCase::class
+    factoryOf(::GetEventsVisibilityUseCase) bind IGetListsVisibilityUseCase::class
+    factoryOf(::SetCommunitiesVisibilityUseCase) bind ISetListsVisibilityUseCase::class
+    factoryOf(::GetCommunitiesVisibilityUseCase) bind IGetListsVisibilityUseCase::class
 
     factoryOf(::GetEventsListUseCaseNew)/* bind IGetEventsListUseCaseNew::class*/
     factoryOf(::GetCommunitiesListUseCaseNew)/* bind IGetCommunitiesListUseCaseNew::class*/

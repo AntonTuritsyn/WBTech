@@ -30,4 +30,14 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="find_other_events">Найти другие встречи</string>
     <string name="events_title_for_community">Встречи</string>
     <string name="successful_registration"><![CDATA[Вы записались на встречу]]></string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="phone_profile_placeholder">+7 000 000-00-00</string>
+    <string name="city">Город</string>
+    <string name="talk_about_yourself">Расскажите о себе</string>
+    <string name="interests">Интересы</string>
+    <string name="socials">Социальные сети</string>
+    <string name="show_my_communities">Показывать мои сообщества</string>
+    <string name="show_my_events">Показывать мои встречи</string>
+    <string name="notifications">Включить уведомления\n</string>
+    <string name="delete_profile">Удалить профиль</string>
 </resources>
