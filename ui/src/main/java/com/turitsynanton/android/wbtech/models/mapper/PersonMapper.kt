@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.models.mapper
 
-import com.turitsynanton.android.wbtech.data.repository.mapper.IMapperToDomain
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
 import com.turitsynanton.android.wbtech.models.UiPerson
 
