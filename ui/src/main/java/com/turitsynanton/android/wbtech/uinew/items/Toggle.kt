@@ -33,7 +33,7 @@ import com.turitsynanton.android.wbtech.ui.theme.NeutralWhite
 @Composable
 internal fun CustomSwitch(
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    onCheckedChange: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val shadowColor = if (checked) Color(0xFF7B0CBF) else Color(0xFFE1E1E1)
@@ -45,7 +45,7 @@ internal fun CustomSwitch(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
             ) {
-                onCheckedChange(!checked)
+                onCheckedChange(/*!checked*/)
             }
             .size(48.dp, 24.dp)
     ) {
@@ -73,5 +73,5 @@ internal fun CustomSwitch(
 @Composable
 private fun TogglePreview() {
     var isChecked by remember { mutableStateOf(false) }
-    CustomSwitch(checked = isChecked, onCheckedChange = {isChecked = it})
+    CustomSwitch(checked = isChecked, onCheckedChange = {/*isChecked = it*/})
 }

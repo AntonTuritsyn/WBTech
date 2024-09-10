@@ -121,10 +121,13 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 eventsList = listOf(),
                 communitiesList = listOf(),
                 onBackClick = { navController.popBackStack() },
+                onEditClick = {},
+                onSaveClick = {},
                 onEventClick = { /*TODO*/ },
-                onCommunityClick = { /*TODO*/ }) {
-
-            }
+                onCommunityClick = { /*TODO*/ },
+                onSocialClick = {},
+                onLogOutClick = {}
+            )
         }
         composable(route = "${Navigation.RegistrationScreen.route}/{eventId}") { stackEntry ->
             stackEntry.arguments?.getString("eventId")?.let { id ->
