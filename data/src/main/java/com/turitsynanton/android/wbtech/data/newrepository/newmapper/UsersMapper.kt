@@ -11,6 +11,7 @@ internal class UsersMapper(
             id = entity.id,
             name = entity.name,
             city = entity.city,
+            phone = entity.phone,
             description = entity.description,
             tags = entity.tags.map { tag ->
                 tagsMapper.mapToDomain(tag)

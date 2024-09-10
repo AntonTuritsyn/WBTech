@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.turitsynanton.android.wbtech.navigation.moremenu.moreMenuNavGraph
-import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
+import com.turitsynanton.android.wbtech.uinew.screens.SplashScreen
 
 @Composable
 fun NavGraphBottom(

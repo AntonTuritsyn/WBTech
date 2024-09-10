@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.newusecases.users
+package com.turitsynanton.android.wbtech.domain.newusecases.userprofile
 
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
 import kotlinx.coroutines.flow.Flow

@@ -30,7 +30,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.PhoneVisualTransformation
 
 @Composable
 internal fun PhoneField(
-    modifier: Modifier, number: String, onPhoneEntered: () -> Unit
+    modifier: Modifier, number: String, onPhoneEntered: (String) -> Unit
 ) {
 
     val maxPhoneNumberLength = 10
@@ -39,10 +39,7 @@ internal fun PhoneField(
         value = number,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         onValueChange = {
-            when {
-//                it.length <= maxPhoneNumberLength -> number = it
-                it.length == maxPhoneNumberLength -> onPhoneEntered()
-            }
+            onPhoneEntered(it)
         },
         visualTransformation = PhoneVisualTransformation(),
         modifier = modifier

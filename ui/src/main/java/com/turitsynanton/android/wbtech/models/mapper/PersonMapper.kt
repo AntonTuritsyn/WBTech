@@ -12,6 +12,7 @@ internal class PersonMapper(
             id = entity.id,
             name = entity.name,
             city = entity.city,
+            phone = entity.phone,
             description = entity.description,
             tags = entity.tags.map { tag ->
                 tagMapper.mapToUi(tag)
@@ -19,4 +20,12 @@ internal class PersonMapper(
             avatar = entity.icon
         )
     }
+}
+
+internal fun DomainUser.mapPersonToUi(mapper: IMapperToUi<DomainUser, UiPerson>): UiPerson {
+    return mapper.mapToUi(this)
+}
+
+internal fun List<DomainUser>.mapPersonToUi(mapper: IMapperToUi<DomainUser, UiPerson>): List<UiPerson> {
+    return map { it.mapPersonToUi(mapper) }
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +20,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,13 +32,13 @@ import com.turitsynanton.android.wbtech.uinew.utils.TextFieldStyle
 
 @Composable
 internal fun ComplexTextField(
+    modifier: Modifier = Modifier,
     hint: String,
+    query: String,
+    onQueryChanged: (String) -> Unit,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     textFieldStyle: TextFieldStyle
 ) {
-
-//    TODO убрать в VM!!!
-    var query by rememberSaveable { mutableStateOf("") }
-
     BasicTextField(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(16.dp))
@@ -49,10 +52,7 @@ internal fun ComplexTextField(
             .padding(vertical = 16.dp, horizontal = 20.dp),
         value = query,
         onValueChange = {
-            query = it
-            /*if (it.length > 1) {
-                onNameEntered(user.copy(name = it))
-            }*/
+            onQueryChanged(it)
         },
         enabled = true,
         textStyle = TextStyle(
@@ -61,6 +61,10 @@ internal fun ComplexTextField(
             fontFamily = SfProDisplay,
             fontWeight = FontWeight.Normal,
         ),
+        keyboardOptions = keyboardOptions/*KeyboardOptions(
+            capitalization = KeyboardCapitalization.Sentences,
+            keyboardType = KeyboardType.Text
+        )*/,
         decorationBox = { innerTextField ->
             Decoration(query = query, hint = hint)
             innerTextField()
@@ -89,9 +93,9 @@ private fun Decoration(
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 private fun ComplexTextFieldPreview() {
-    ComplexTextField(hint = "Имя и фамилия", textFieldStyle = TextFieldStyle.Error)
-}
+    ComplexTextField(hint = "Имя и фамилия", query = "", textFieldStyle = TextFieldStyle.Error)
+}*/
 

@@ -31,6 +31,7 @@ internal fun OtherEvents(
 ) {
     Column(
         modifier = modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
     ) {
         SimpleTextField(

@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.newusecases.users
+package com.turitsynanton.android.wbtech.domain.newusecases.userprofile
 
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
 import com.turitsynanton.android.wbtech.domain.newrepository.IDataListsRepository
@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update

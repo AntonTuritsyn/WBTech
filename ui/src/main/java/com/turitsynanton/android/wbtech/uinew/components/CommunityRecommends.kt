@@ -35,7 +35,8 @@ internal fun CommunityRecommends(
             .fillMaxWidth()
     ) {
         SimpleTextField(
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
             text = recommendationName,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
@@ -50,7 +51,14 @@ internal fun CommunityRecommends(
         ) {
             items(communitiesList.size) { index ->
                 CommunitySmallCard(
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .then(
+                            when (index) {
+                                0 -> Modifier.padding(start = 16.dp)
+                                communitiesList.size - 1 -> Modifier.padding(end = 16.dp)
+                                else -> Modifier
+                            }
+                        ),
                     communityName = communitiesList[index].name,
                     subscribeButtonStyle = subscribeButtonStyle,
                     onButtonClick = { onButtonClick() }

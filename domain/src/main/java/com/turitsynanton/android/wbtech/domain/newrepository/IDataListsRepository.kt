@@ -22,4 +22,6 @@ interface IDataListsRepository {
 
     fun getUsersListFlow() : Flow<List<DomainUser>>
 
+    fun getProfileFlow() : Flow<DomainProfile>
+
 }

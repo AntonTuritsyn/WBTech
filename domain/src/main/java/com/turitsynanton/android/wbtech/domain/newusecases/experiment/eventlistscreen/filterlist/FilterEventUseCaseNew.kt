@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flattenConcat
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
@@ -26,15 +27,19 @@ internal class FilterEventUseCaseNew(
         val eventsList = dataListsRepository.getEventsListFlow()
 
         eventsList.mapLatest { events ->
-            eventsPrepared.update {
                 if (query.isEmpty()) {
-                    events
+                    println("query.isEmpty(): ${query.isEmpty()}")
+                    eventsPrepared.update { events }
+
                 } else {
-                    events.filter { event ->
-                        event.name.contains(query, ignoreCase = true)
+                    println("query.isEmpty(): ${query.isEmpty()}")
+                    eventsPrepared.update{
+                        events.filter { event ->
+                            event.name.contains(query, ignoreCase = true)
+                        }
                     }
                 }
-            }
+
         }
 
     }

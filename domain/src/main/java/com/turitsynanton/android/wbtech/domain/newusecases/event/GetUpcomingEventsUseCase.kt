@@ -30,7 +30,6 @@ internal class GetUpcomingEventsUseCase(
             println("eventsList: $eventsList")
             upComingEvents.update {
                 eventsList.filter { event ->
-                    println("event.date: ${event.date}")
                     val eventDate = LocalDate.parse(event.date, dateFormatter)
                     eventDate in currentDate..twoWeeksFromNow
                 }.sortedBy { it.date }

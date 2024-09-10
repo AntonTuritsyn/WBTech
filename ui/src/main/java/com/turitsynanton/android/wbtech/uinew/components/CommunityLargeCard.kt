@@ -43,6 +43,7 @@ internal fun CommunityLargeCard(
 ) {
     Column(
         modifier = Modifier
+            .padding(horizontal = 16.dp)
             .fillMaxSize()
     ) {
         Image(

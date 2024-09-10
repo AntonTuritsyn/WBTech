@@ -16,8 +16,18 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="organizer">Организатор</string>
     <string name="participants">Пойдут на встречу</string>
     <string name="my_events">Мои встречи</string>
+    <string name="profile_events">Встречи</string>
     <string name="my_communities">Мои сообщества</string>
+    <string name="profile_communities">Сообщества</string>
     <string name="log_out">Выйти</string>
     <string name="signup_to_event">Вход и\nзапись на\nвстречу</string>
     <string name="phone_placeholder">000 000-00-00</string>
+    <string name="hint_name">Имя и фамилия</string>
+    <string name="next_button">Продолжить</string>
+    <string name="get_code">Получить код</string>
+    <string name="code_plaseholder">0000</string>
+    <string name="registration">Отправить и подтвердить запись</string>
+    <string name="find_other_events">Найти другие встречи</string>
+    <string name="events_title_for_community">Встречи</string>
+    <string name="successful_registration"><![CDATA[Вы записались на встречу]]></string>
 </resources>
