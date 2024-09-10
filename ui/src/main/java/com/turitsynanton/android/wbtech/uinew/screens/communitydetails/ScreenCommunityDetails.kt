@@ -31,6 +31,7 @@ import com.turitsynanton.android.wbtech.uinew.components.Subscribers
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
+import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -58,8 +59,8 @@ internal fun ScreenCommunityDetails(
             TopBar(
                 modifier = Modifier,
                 title = "${screenState.communityDetails?.name}",
-                needActions = true,
-                onShareClick = { onShareClick() }
+                topBarStyle = TopBarStyles.Share,
+                onIconClick = { onShareClick() }
             ) {
                 onBackClick()
             }
@@ -68,7 +69,7 @@ internal fun ScreenCommunityDetails(
         LazyColumn(
             modifier = modifier
                 .padding(it)
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(bottom = 16.dp)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -85,8 +86,9 @@ internal fun ScreenCommunityDetails(
             }
             item {
                 SimpleTextField(
-                    modifier = Modifier,
-                    text = "Встречи",
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp),
+                    text = stringResource(R.string.events_title_for_community),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF000000)
@@ -130,7 +132,11 @@ internal fun MainInfoBlock(
         modifier = modifier
             .fillMaxSize()
     ) {
-        CommunityLargeCard(modifier = Modifier, community = community) {
+        CommunityLargeCard(
+            modifier = Modifier,
+            community = community
+        )
+        {
             onSubscribeClick()
         }
         Spacer(
@@ -138,7 +144,8 @@ internal fun MainInfoBlock(
                 .padding(16.dp)
         )
         SimpleTextField(
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
             text = "${community.description}",
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,

@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,13 +17,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,9 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson
@@ -48,6 +40,7 @@ import com.turitsynanton.android.wbtech.uinew.items.SocialButton
 import com.turitsynanton.android.wbtech.uinew.items.Tag
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
+import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -66,16 +59,10 @@ internal fun ScreenProfileUser(
     onLogOutClick: () -> Unit
 ) {
     val userInfo by profileUserViewModel.getUserInfoFlow().collectAsStateWithLifecycle()
+    val events by profileUserViewModel.getEventsFlow().collectAsStateWithLifecycle()
+    val communities by profileUserViewModel.getCommunitiesFlow().collectAsStateWithLifecycle()
 
-    val stroke = Stroke(
-        width = 2f,
-        pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-    )
-    Scaffold(
-        topBar = {
-
-        }
-    ) {
+    Scaffold {
         LazyColumn(
             modifier = modifier
                 .padding(it)
@@ -95,8 +82,8 @@ internal fun ScreenProfileUser(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    componentName = stringResource(R.string.my_events),
-                    eventsList = eventsList
+                    componentName = stringResource(R.string.profile_events),
+                    eventsList = events
                 ) {
                     onEventClick()
                 }
@@ -106,14 +93,14 @@ internal fun ScreenProfileUser(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    recommendationName = stringResource(R.string.my_communities),
-                    communitiesList = communitiesList,
-                    subscribeButtonStyle = SubscribeButtonStyle.Done,
+                    recommendationName = stringResource(R.string.profile_communities),
+                    communitiesList = communities,
+                    subscribeButtonStyle = SubscribeButtonStyle.Default,
                     onButtonClick = { /*TODO*/ }) {
                     onCommunityClick()
                 }
             }
-            item {
+            /*item {
                 Box(
                     Modifier
                         .fillMaxWidth()
@@ -134,7 +121,7 @@ internal fun ScreenProfileUser(
                         color = Color(0xFF76778E)
                     )
                 }
-            }
+            }*/
         }
     }
 }
@@ -170,8 +157,8 @@ internal fun MainInfo(
                     ),
                 topBarColor = Color.Transparent,
                 title = "",
-                needActions = true,
-                onShareClick = {  }) {
+                topBarStyle = TopBarStyles.Share,
+                onIconClick = {  }) {
                 onBackClick()
             }
         }

@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.navigationnew.NavGraph
+import com.turitsynanton.android.wbtech.permissions.LocationPermissionScreen
 import com.turitsynanton.android.wbtech.ui.theme.WBTechTheme
 import com.yandex.mapkit.MapKitFactory
 
@@ -25,28 +26,6 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf(false)
                 }
                 NavGraph(navController = navController)
-                /*navController.addOnDestinationChangedListener { _, destination, _ ->
-                    showBottomBar.value = destination.route != Navigation.Splash.route
-                }*/
-
-                /*Scaffold(
-                    bottomBar = {
-                        if (showBottomBar.value)
-                            BottomBar(
-                                navController = navController
-                            )
-                    }
-                ) { innerPading ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(innerPading)
-                    ) {
-                        NavGraphBottom(
-                            navController = navController
-                        )
-                    }
-                }*/
             }
         }
     }

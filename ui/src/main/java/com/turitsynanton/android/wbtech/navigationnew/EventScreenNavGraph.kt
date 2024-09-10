@@ -6,12 +6,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
+import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
 import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
 import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
+import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMy
+import com.turitsynanton.android.wbtech.uinew.screens.registration.Country
+import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEvent
 import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribers
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -24,7 +27,7 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
             ScreenEventsList(
                 onProfileClick = {
 //                    пока не существует
-//                    navController.navigate("${Navigation.MyProfileScreen.route}")
+                    navController.navigate("${Navigation.MyProfileScreen.route}")
                 },
                 onEventClick = { eventId ->
                     navController.navigate("${Navigation.EventDetailsScreen.route}/${eventId}")
@@ -55,8 +58,8 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onEventClick = {
                         navController.navigate("${Navigation.EventDetailsScreen.route}/{id}")
                     },
-                    onSignUpToEventClick = {
-                        navController.navigate("${Navigation.ParticipantsDetailsScreen.route}/{id}")
+                    onSignUpToEventClick = { eventId ->
+                        navController.navigate("${Navigation.RegistrationScreen.route}/${id}")
                     }
                 )
             }
@@ -110,6 +113,33 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onEventClick = { /*TODO*/ },
                     onCommunityClick = { /*TODO*/ }) {
 
+                }
+            }
+        }
+        composable(route = "${Navigation.MyProfileScreen.route}") {
+            ScreenProfileMy(
+                eventsList = listOf(),
+                communitiesList = listOf(),
+                onBackClick = { navController.popBackStack() },
+                onEventClick = { /*TODO*/ },
+                onCommunityClick = { /*TODO*/ }) {
+
+            }
+        }
+        composable(route = "${Navigation.RegistrationScreen.route}/{eventId}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { id ->
+                ScreenRegistrationForEvent(
+                    eventId = id,
+                    selectedCountry = Country("Russia", "+7", R.drawable.flag_russia),
+                    onCloseClick = {
+                        navController.popBackStack()
+                    }
+                ) {
+                    navController.navigate("${Navigation.EventsListScreen.route}") {
+//                        дополнительно проверить работу
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             }
         }

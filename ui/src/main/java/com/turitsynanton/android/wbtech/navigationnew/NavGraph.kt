@@ -6,11 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.turitsynanton.android.wbtech.navigation.Navigation
-import com.turitsynanton.android.wbtech.navigation.communityScreenNavGraph
-import com.turitsynanton.android.wbtech.navigation.meetingScreenNavGraph
-import com.turitsynanton.android.wbtech.navigation.moremenu.moreMenuNavGraph
-import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
+import com.turitsynanton.android.wbtech.permissions.LocationPermissionScreen
+import com.turitsynanton.android.wbtech.uinew.screens.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -25,11 +22,9 @@ fun NavGraph(
         composable(route = Navigation.Splash.route) {
             SplashScreen(navController = navController)
         }
+        composable(route = Navigation.PermissionsScreen.route) {
+            LocationPermissionScreen(navController = navController)
+        }
         eventScreenNavGraph(navController = navController)
-        /*meetingScreenNavGraph(
-            navController = navController
-        )
-        communityScreenNavGraph(navController = navController)
-        moreMenuNavGraph(navController = navController)*/
     }
 }

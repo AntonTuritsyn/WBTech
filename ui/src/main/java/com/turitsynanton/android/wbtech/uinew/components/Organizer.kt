@@ -41,6 +41,7 @@ internal fun Organizer(
 
     Column(
         modifier = modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
     ) {
         SimpleTextField(

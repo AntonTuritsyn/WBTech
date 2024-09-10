@@ -7,20 +7,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 class GetParticipantsListUseCase(
     private val dataListsRepository: IDataListsRepository
-): IGetParticipantsListUseCase {
+) : IGetParticipantsListUseCase {
     override fun execute(eventId: String): Flow<List<DomainUser>> {
         val eventsList = dataListsRepository.getEventsListFlow()
         val usersList = MutableStateFlow<List<DomainUser>>(emptyList())
-        eventsList.mapLatest { list ->
-            usersList.update {
-                list.first { it.id == eventId }.participants
-            }
-        }.launchIn(CoroutineScope(Dispatchers.IO))
+
+            eventsList.mapLatest { list ->
+                usersList.update {
+                    list.first { it.id == eventId }.participants
+                }
+            }.launchIn(CoroutineScope(Dispatchers.IO))
         return usersList
     }
 }

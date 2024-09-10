@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -80,7 +81,10 @@ internal fun ScreenEventsList(
                     painter = painterResource(id = R.drawable.ic_user_new),
                     contentDescription = "",
                     modifier = Modifier
-                        .clickable { onProfileClick() }
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) { onProfileClick() }
                 )
             }
         }
@@ -88,7 +92,7 @@ internal fun ScreenEventsList(
         LazyColumn(
             modifier = modifier
                 .padding(it)
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             if (screenState.searchQuery.isEmpty()) {
@@ -101,7 +105,14 @@ internal fun ScreenEventsList(
                             ) {
                                 items(screenState.events.size) { index ->
                                     EventCard(
-                                        modifier = Modifier,
+                                        modifier = Modifier
+                                            .then(
+                                                when (index) {
+                                                    0 -> Modifier.padding(start = 16.dp)
+                                                    screenState.events.size - 1 -> Modifier.padding(end = 16.dp)
+                                                    else -> Modifier
+                                                }
+                                            ),
                                         eventId = screenState.events[index].id,
                                         eventName = screenState.events[index].name,
                                         eventDate = screenState.events[index].date,

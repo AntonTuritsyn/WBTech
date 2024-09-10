@@ -14,9 +14,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.ui.theme.NeutralActive
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
+import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,8 +24,8 @@ internal fun TopBar(
     modifier: Modifier,
     title: String,
     topBarColor: Color = Color.Unspecified,
-    needActions: Boolean,
-    onShareClick: () -> Unit,
+    topBarStyle: TopBarStyles,
+    onIconClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
 
@@ -55,13 +55,25 @@ internal fun TopBar(
             }
         },
         actions = {
-            if (needActions) {
-                IconButton(onClick = { onShareClick() }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_share),
-                        contentDescription = "back",
-                        tint = Color(0xFF9A10F0)
-                    )
+            when (topBarStyle) {
+                TopBarStyles.Empty -> {}
+                TopBarStyles.Edit -> {
+                    IconButton(onClick = { onIconClick() }) {
+                        Icon(
+                            painter = painterResource(id = topBarStyle.icon),
+                            contentDescription = "back",
+                            tint = Color(0xFF9A10F0)
+                        )
+                    }
+                }
+                TopBarStyles.Share -> {
+                    IconButton(onClick = { onIconClick() }) {
+                        Icon(
+                            painter = painterResource(id = topBarStyle.icon),
+                            contentDescription = "back",
+                            tint = Color(0xFF9A10F0)
+                        )
+                    }
                 }
             }
         }
@@ -71,6 +83,6 @@ internal fun TopBar(
 @Preview(showBackground = true)
 @Composable
 private fun TopBarPreview() {
-    TopBar(modifier = Modifier, title = "Пойдут на встречу", needActions = true, onShareClick = {}) {
+    TopBar(modifier = Modifier, title = "Пойдут на встречу", topBarStyle = TopBarStyles.Edit, onIconClick = {}) {
     }
 }

@@ -9,5 +9,6 @@ data class ScreenEventDetailsState(
     val eventDetails: UiEvent? = null,
     val otherEvents: List<UiEventCard> = emptyList(),
     val communityDetails: UiCommunity? = null,
-    val participants: List<UiPersonCard> = emptyList()
+    val participants: List<UiPersonCard> = emptyList(),
+    val buttonStatus: Boolean = false
 )

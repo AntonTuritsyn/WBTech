@@ -29,6 +29,7 @@ internal fun Subscribers(
 ) {
     Column(
         modifier = modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .clickable { onClick() },
     ) {

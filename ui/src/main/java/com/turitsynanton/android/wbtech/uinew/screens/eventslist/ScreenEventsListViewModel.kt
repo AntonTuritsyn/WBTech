@@ -93,7 +93,6 @@ internal class ScreenEventsListViewModel(
     private fun getEventsList() {
         viewModelScope.launch {
             interactorFullInfo.invoke().collect { list ->
-                Log.d("TAG", "getList: $list")
                 _eventList.update { list.eventList.map { eventCardMapper.mapToUi(it) } }
                 updateFilteredEventsList(_searchQuery.value)
             }
@@ -116,8 +115,10 @@ internal class ScreenEventsListViewModel(
     }
 
     fun updateSearchQuery(query: String) {
-        _searchQuery.update {
-            query
+        viewModelScope.launch {
+            _searchQuery.update {
+                query
+            }
         }
         filterEventUseCaseNew.execute(query)
         updateFilteredEventsList(query)

@@ -23,6 +23,7 @@ fun generateEvents(min: Int = 10, max: Int = 20): List<DataEvent> {
             host = DataUser(
                 id = UUID.randomUUID().toString(),
                 name = names.random(),
+                phone = "",
                 description = usersDescriptions.random(),
                 icon = "",
                 tags = listOf(),

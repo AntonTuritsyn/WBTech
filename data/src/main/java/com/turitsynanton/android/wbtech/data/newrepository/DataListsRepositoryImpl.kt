@@ -3,6 +3,7 @@ package com.turitsynanton.android.wbtech.data.newrepository
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.turitsynanton.android.wbtech.data.mocks.generateCommunitiesList
+import com.turitsynanton.android.wbtech.data.mocks.generateProfile
 import com.turitsynanton.android.wbtech.data.mocks.generateUsersList
 import com.turitsynanton.android.wbtech.data.mocks.mainUsersList
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.CommunityMapper
@@ -11,7 +12,9 @@ import com.turitsynanton.android.wbtech.data.newrepository.newmapper.ProfileMapp
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.UsersMapper
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapCommunityToDomain
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapEventToDomain
+import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapProfileToDomain
 import com.turitsynanton.android.wbtech.data.newrepository.newmapper.mapUserToDomain
+import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.domain.newmodels.DomainProfile
@@ -26,7 +29,8 @@ import kotlinx.coroutines.flow.map
 internal class DataListsRepositoryImpl(
     private val communityMapper: CommunityMapper,
     private val eventMapper: EventMapper,
-    private val userMapper: UsersMapper
+    private val userMapper: UsersMapper,
+    private val profileMapper: ProfileMapper
 ) : IDataListsRepository {
 
     private val communitiesList = generateCommunitiesList()
@@ -63,4 +67,7 @@ internal class DataListsRepositoryImpl(
 
     override fun getUsersListFlow(): Flow<List<DomainUser>> =
         flow {emit(usersList)}.map { it.mapUserToDomain(userMapper) }
+
+    override fun getProfileFlow(): Flow<DomainProfile> =
+        flow { emit(generateProfile()) }.map { it.mapProfileToDomain(profileMapper) }
 }

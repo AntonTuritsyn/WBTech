@@ -4,6 +4,7 @@ import com.turitsynanton.android.wbtech.data.storage.models.DataCommunity
 import com.turitsynanton.android.wbtech.data.storage.models.DataMeeting
 import com.turitsynanton.android.wbtech.data.storage.models.DataMeetingTag
 
+//      TODO удалить этот файл
 val tabs1 = listOf("Все встречи", "Активные")
 val tabs2 = listOf("Запланировано", "Уже прошли")
 internal val dataMeetingTags = listOf(

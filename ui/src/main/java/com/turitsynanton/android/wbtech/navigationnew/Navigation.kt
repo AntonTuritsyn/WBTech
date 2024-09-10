@@ -22,23 +22,10 @@ enum class Navigation(var route: String) {
     //      myProfile
     MyProfile("myProfile"),
     MyProfileScreen("myProfileDetailsScreen"),
-/*
-
-
-    //    meetings
-    Meetings("meetings", R.drawable.ic_meetings, "Встречи"),
-    MeetingsScreen("meetingsScreen", R.drawable.ic_meetings, "Встречи"),
-    MeetingDetails("meetingDetails"),
-
-    //    more
-    More("more", R.drawable.ic_more, "Ещё"),
-    MoreScreen("moreScreen", R.drawable.ic_more, "Ещё"),
-    ScreenMore("profileScreen"),
-    ScreenTheme("themeScreen"),
-    ScreenNotification("notificationScreen"),
-    ScreenSafety("safetyScreen"),
-
-    //    auth
-    ScreenCode("codeScreen"),
-    ScreenAddName("addNameScreen")*/
+    //      permissions
+    Permissions("permissions"),
+    PermissionsScreen("permissionsScreen"),
+    //      registration
+    Registration("registration"),
+    RegistrationScreen("registrationScreen")
 }

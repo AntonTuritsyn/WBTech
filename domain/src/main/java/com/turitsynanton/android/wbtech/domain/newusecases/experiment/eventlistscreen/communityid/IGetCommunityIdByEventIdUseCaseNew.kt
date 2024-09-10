@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IGetCommunityIdByEventIdUseCaseNew {
     fun execute(eventId: String)
+    fun invoke(): Flow<String>
 }

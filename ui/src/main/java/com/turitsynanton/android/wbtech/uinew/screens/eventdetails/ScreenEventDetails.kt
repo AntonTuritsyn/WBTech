@@ -1,11 +1,8 @@
 package com.turitsynanton.android.wbtech.uinew.screens.eventdetails
 
-import android.icu.util.LocaleData
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -17,24 +14,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateEvents
-import com.turitsynanton.android.wbtech.data.mocks.generateHost
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.models.UiEvent
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.components.AddressCard
@@ -50,11 +40,9 @@ import com.turitsynanton.android.wbtech.uinew.items.Tag
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
+import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-
 
 @Composable
 internal fun ScreenEventDetails(
@@ -81,8 +69,8 @@ internal fun ScreenEventDetails(
             TopBar(
                 modifier = Modifier,
                 title = "${screenState.eventDetails?.title}",
-                needActions = true,
-                onShareClick = { onShareClick() }
+                topBarStyle = TopBarStyles.Share,
+                onIconClick = { onShareClick() }
             ) {
                 onBackClick()
             }
@@ -91,7 +79,7 @@ internal fun ScreenEventDetails(
         LazyColumn(
             modifier = modifier
                 .padding(it)
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(32.dp)
         ) {
             item {
@@ -101,7 +89,8 @@ internal fun ScreenEventDetails(
             }
             item {
                 SimpleTextField(
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp),
                     text = "${screenState.eventDetails?.description}",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
@@ -151,17 +140,21 @@ internal fun ScreenEventDetails(
                     componentName = "Другие встречи сообщества",
                     eventsList = screenState.otherEvents
                 ) {
-                    onEventClick()
+                    onEventClick() // TODO добавить передачу id в качестве параметра
                 }
             }
             item {
-                GradientButton(
-                    modifier = Modifier,
-                    text = "Записаться на встречу",
-                    buttonStyle = ButtonStyle.Enable
-                ) {
-                    screenState.communityDetails?.let { it1 -> onSignUpToEventClick(it1.id) }
+                if (!screenState.buttonStatus) {
+                    GradientButton(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp),
+                        text = "Записаться на встречу",
+                        buttonStyle = ButtonStyle.Enable
+                    ) {
+                        screenState.eventDetails?.let { event -> onSignUpToEventClick(event.id) }
+                    }
                 }
+
             }
         }
     }
@@ -176,6 +169,7 @@ internal fun Header(
 ) {
     Column(
         modifier = modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .clip(
                 RoundedCornerShape(

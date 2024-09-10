@@ -40,7 +40,8 @@ internal fun DifferentEvents(
             .fillMaxWidth()
     ) {
         SimpleTextField(
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
             text = componentName,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
@@ -53,7 +54,13 @@ internal fun DifferentEvents(
         ) {
             items(eventsList.size) { index ->
                 EventCard(
-                    modifier = Modifier,
+                    modifier = Modifier.then(
+                        when (index) {
+                            0 -> Modifier.padding(start = 16.dp)
+                            eventsList.size - 1 -> Modifier.padding(end = 16.dp)
+                            else -> Modifier
+                        }
+                    ),
                     eventId = eventsList[index].id,
                     eventName = eventsList[index].name,
                     eventDate = eventsList[index].date,

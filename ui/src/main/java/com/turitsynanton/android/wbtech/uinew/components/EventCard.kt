@@ -45,14 +45,16 @@ internal fun EventCard(
     eventStyle: EventCardStyles,
     onClick: (String) -> Unit
 ) {
-
     Column(
         modifier = modifier
             .then(
                 if (eventStyle.name == "Full") {
-                    Modifier.fillMaxWidth()
+                    Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
                 } else {
-                    Modifier.width(eventStyle.width)
+                    Modifier
+                        .width(eventStyle.width)
                 }
             )
             .clip(

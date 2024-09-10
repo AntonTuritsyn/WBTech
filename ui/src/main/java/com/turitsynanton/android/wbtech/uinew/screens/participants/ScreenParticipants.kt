@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.wbtech.uinew.components.Person
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
+import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -35,8 +36,8 @@ internal fun ScreenParticipants(
             TopBar(
                 modifier = Modifier,
                 title = "Пойдут на встречу",
-                needActions = false,
-                onShareClick = {}) {
+                topBarStyle = TopBarStyles.Empty,
+                onIconClick = {}) {
                 onBackClick()
             }
         }

@@ -6,8 +6,14 @@ import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlists
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.communityid.GetCommunityIdByEventIdUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.eventlist.GetEventsListUseCaseNew
 import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.FilterEventUseCaseNew
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.stateIn
 
 internal class InfoEventListScreenInteractor(
     private val getEventsListUseCaseNew: GetEventsListUseCaseNew,
@@ -20,7 +26,7 @@ internal class InfoEventListScreenInteractor(
         getEventsListUseCaseNew(),
         getCommunitiesListUseCaseNew(),
         filterEventUseCaseNew.invoke(),
-        getCommunityIdByEventIdUseCaseNew.invoke()
+        getCommunityIdByEventIdUseCaseNew.invoke() // TODO фильтр в usecase
     ) { eventList, communitiesList, filteredEvents, communityId ->
         CombinedEventListScreenInfo(
             eventList = eventList,
@@ -28,7 +34,8 @@ internal class InfoEventListScreenInteractor(
             filteredEvents = filteredEvents,
             communityId = communityId
         )
-    }
+    }.flowOn(Dispatchers.IO) // TODO проверить
+
     override fun invoke(): Flow<CombinedEventListScreenInfo> = innerFlow
 }
 
