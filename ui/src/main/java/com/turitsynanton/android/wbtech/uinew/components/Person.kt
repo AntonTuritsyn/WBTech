@@ -9,9 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.models.UiPersonCard
+import com.turitsynanton.android.wbtech.models.UiTag
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.items.Avatar
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -48,4 +50,18 @@ internal fun Person(
         ) {
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PersonPreview() {
+    Person(
+        modifier = Modifier,
+        user = UiPersonCard(
+            "test",
+            "Anton",
+            UiTag("test", "Проджект менеджмент"),
+            "https://i.pinimg.com/736x/c6/0e/c9/c60ec93fb07de3431b475c943272632d.jpg"
+        ),
+        onClick = {})
 }

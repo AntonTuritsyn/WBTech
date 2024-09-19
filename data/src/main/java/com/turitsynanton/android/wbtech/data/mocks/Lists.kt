@@ -557,6 +557,22 @@ val usersDescriptions = listOf(
     "Руководитель проектов, управляющий разработкой и внедрением IT-решений.",
     "Инженер по кибербезопасности, защищающий системы и данные от угроз и атак."
 )
+
+val avatarLinks: List<String> = listOf(
+    "https://i.pinimg.com/736x/c6/0e/c9/c60ec93fb07de3431b475c943272632d.jpg",
+    "https://w7.pngwing.com/pngs/259/608/png-transparent-finn-the-human-jake-the-dog-adventure-time-finn-jake-investigations-television-show-cartoon-caractars-film-cartoon-network-jake-the-dog.png",
+    "https://i.pinimg.com/736x/28/41/6c/28416cc08c43e0a09ff70e9fd6e1b655--adventure-time-marceline-adventure-time-wiki.jpg",
+    "https://avatars.mds.yandex.net/i?id=c5d83e47c3b6aa1fb540113f6eb3a2ba4ef91146-8493932-images-thumbs&n=13",
+    "https://avatars.mds.yandex.net/i?id=652ff3fe1a1a8185b3c9dca4e9d11c9d6bebe04e-9700958-images-thumbs&n=13",
+    "https://w7.pngwing.com/pngs/280/472/png-transparent-marceline-the-vampire-queen-finn-the-human-jake-the-dog-princess-bubblegum-ice-king-adventure-time-cartoon-cartoon-network-jake-the-dog.png",
+    "https://i.ytimg.com/vi/6A-XYqxz8pk/maxresdefault.jpg",
+    "https://i.pinimg.com/originals/59/82/82/598282cff8ccbdb284d64a2f6d698d5f.png",
+    "https://jooinn.com/images/jake-the-dog-2.jpg",
+    "https://i.pinimg.com/originals/98/49/7e/98497e9858a2697c7d4186deedcefa11.png",
+    "https://avatars.mds.yandex.net/i?id=a34247a42ec8009b434126fafd53e554_l-5221728-images-thumbs&n=13",
+    "https://i.pinimg.com/736x/f1/a7/8d/f1a78da1cf285dfc250e66da54745269.jpg"
+)
+
 val codes = listOf(
     "1234",
     "0000",
