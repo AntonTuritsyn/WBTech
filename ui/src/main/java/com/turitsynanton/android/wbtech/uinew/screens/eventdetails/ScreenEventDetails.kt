@@ -55,11 +55,11 @@ internal fun ScreenEventDetails(
     }),
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onSubscribeClick: () -> Unit,
-    onHostClick: () -> Unit,
+    onSubscribeToCommunityClick: () -> Unit,
+    onHostClick: (String) -> Unit,
     onParticipantsClick: (String) -> Unit,
     onOganizerClick: (String) -> Unit,
-    onEventClick: () -> Unit,
+    onEventClick: (String) -> Unit,
     onSignUpToEventClick: (String) -> Unit
 ) {
     val screenState by eventDetailsViewModel.screenState.collectAsStateWithLifecycle()
@@ -100,7 +100,7 @@ internal fun ScreenEventDetails(
             item {
                 screenState.eventDetails?.let { event ->
                     Host(modifier = Modifier, host = event.host) {
-                        onHostClick()
+                        onHostClick(event.host.id)
                     }
                 }
             }
@@ -128,7 +128,7 @@ internal fun ScreenEventDetails(
                     Organizer(
                         modifier = Modifier,
                         community = community, // TODO: add community
-                        onButtonClick = { onSubscribeClick() },
+                        onButtonClick = { onSubscribeToCommunityClick() },
                         onElementClick = { communityId ->
                             onOganizerClick(communityId)
                         })
@@ -138,10 +138,9 @@ internal fun ScreenEventDetails(
                 DifferentEvents(
                     modifier = Modifier,
                     componentName = "Другие встречи сообщества",
-                    eventsList = screenState.otherEvents
-                ) {
-                    onEventClick() // TODO добавить передачу id в качестве параметра
-                }
+                    eventsList = screenState.otherEvents,
+                    onEventClick = onEventClick
+                )
             }
             item {
                 if (!screenState.buttonStatus) {
@@ -159,7 +158,6 @@ internal fun ScreenEventDetails(
         }
     }
 }
-
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -227,7 +225,7 @@ private fun ScreenEventPreview() {
         eventId = "1",
         onBackClick = {},
         onShareClick = {},
-        onSubscribeClick = {},
+        onSubscribeToCommunityClick = {},
         onHostClick = {},
         onParticipantsClick = {},
         onOganizerClick = {},

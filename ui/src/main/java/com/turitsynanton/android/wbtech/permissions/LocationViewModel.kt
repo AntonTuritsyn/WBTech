@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.permissions
 
 import androidx.lifecycle.ViewModel
-import com.turitsynanton.android.wbtech.domain.newusecases.permissions.ICheckLocationPermissionUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

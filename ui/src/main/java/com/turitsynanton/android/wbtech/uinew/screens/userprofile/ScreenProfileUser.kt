@@ -54,8 +54,8 @@ internal fun ScreenProfileUser(
     eventsList: List<UiEventCard>,
     communitiesList: List<UiCommunityCard>,
     onBackClick: () -> Unit,
-    onEventClick: () -> Unit,
-    onCommunityClick: () -> Unit,
+    onEventClick: (String) -> Unit,
+    onCommunityClick: (String) -> Unit,
     onLogOutClick: () -> Unit
 ) {
     val userInfo by profileUserViewModel.getUserInfoFlow().collectAsStateWithLifecycle()
@@ -80,48 +80,25 @@ internal fun ScreenProfileUser(
             item {
                 DifferentEvents(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .fillMaxWidth(),
                     componentName = stringResource(R.string.profile_events),
                     eventsList = events
-                ) {
-                    onEventClick()
+                ) { event ->
+                    onEventClick(event)
                 }
             }
             item {
                 CommunityRecommends(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .fillMaxWidth(),
                     recommendationName = stringResource(R.string.profile_communities),
                     communitiesList = communities,
                     subscribeButtonStyle = SubscribeButtonStyle.Default,
-                    onButtonClick = { /*TODO*/ }) {
-                    onCommunityClick()
+                    onSubscribeButtonClick = { /*TODO*/ })
+                { community ->
+                    onCommunityClick(community)
                 }
             }
-            /*item {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .drawBehind {
-                            drawRoundRect(color = Color(0xFF76778E), style = stroke)
-                        }
-                        .clickable {
-                            onLogOutClick()
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    SimpleTextField(
-                        modifier = Modifier,
-                        text = stringResource(R.string.log_out),
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color(0xFF76778E)
-                    )
-                }
-            }*/
         }
     }
 }

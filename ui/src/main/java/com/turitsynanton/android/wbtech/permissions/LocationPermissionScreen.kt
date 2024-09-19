@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.turitsynanton.android.wbtech.navigationnew.Navigation
-import org.koin.androidx.compose.getViewModel
+import com.turitsynanton.android.wbtech.navigation.Navigation
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

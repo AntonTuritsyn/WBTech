@@ -3,18 +3,10 @@ package com.turitsynanton.android.wbtech.uinew.screens.eventslist
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
-import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunitiesListUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunityIdByEventIdUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IFilterEventsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventListUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetUpcomingEventsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.CombinedEventInfo
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IFilterEventUseCaseNew
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.filterlist.IInnerFilterEventUseCaseNew
+import com.turitsynanton.android.wbtech.domain.usecases.event.filter.IFilterEventsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IGetUpcomingEventsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.filterlist.IFilterEventUseCaseNew
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.CommunityCardMapper
@@ -28,8 +20,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 internal class ScreenEventsListViewModel(
     private val eventCardMapper: EventCardMapper,
@@ -173,6 +163,12 @@ internal class ScreenEventsListViewModel(
                 Log.d("TAG", "upComingEvents: $list")
                 _upcomingEventList.update { list.map { eventCardMapper.mapToUi(it) } }
             }
+        }
+    }
+
+    fun subscribeToCommunity(communityId: String) {
+        viewModelScope.launch {
+//            subscribeToCommunityUseCase.execute(communityId)
         }
     }
 }

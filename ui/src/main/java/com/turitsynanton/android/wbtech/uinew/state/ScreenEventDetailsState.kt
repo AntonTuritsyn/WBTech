@@ -5,7 +5,7 @@ import com.turitsynanton.android.wbtech.models.UiEvent
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPersonCard
 
-data class ScreenEventDetailsState(
+internal data class ScreenEventDetailsState(
     val eventDetails: UiEvent? = null,
     val otherEvents: List<UiEventCard> = emptyList(),
     val communityDetails: UiCommunity? = null,

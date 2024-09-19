@@ -10,11 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.turitsynanton.android.wbtech.data.mocks.generateEvents
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 

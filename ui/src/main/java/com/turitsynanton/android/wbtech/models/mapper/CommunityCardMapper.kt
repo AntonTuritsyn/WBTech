@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.models.mapper
 
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainCommunity
+import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 
 internal class CommunityCardMapper : IMapperToUi<DomainCommunity, UiCommunityCard> {

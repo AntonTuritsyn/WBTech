@@ -1,24 +1,19 @@
 package com.turitsynanton.android.wbtech.uinew.screens
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.navigationnew.Navigation
-import com.turitsynanton.android.wbtech.permissions.LocationViewModel
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
+import com.turitsynanton.android.wbtech.navigation.Navigation
 
 @Composable
 internal fun SplashScreen(navController: NavHostController) {
@@ -28,7 +23,7 @@ internal fun SplashScreen(navController: NavHostController) {
             LottieCompositionSpec
                 .RawRes(R.raw.lottie)
         )
-        val logoAnimationState = animateLottieCompositionAsState(composition = composition, speed = 1.5f)
+        val logoAnimationState = animateLottieCompositionAsState(composition = composition, speed = 3f)
 
         val activity = LocalContext.current as Activity
 

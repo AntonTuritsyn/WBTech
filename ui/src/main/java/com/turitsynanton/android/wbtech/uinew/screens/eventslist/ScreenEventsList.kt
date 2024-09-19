@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.screens.eventslist
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -26,11 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.data.mocks.tags
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.models.UiCommunity
-import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
-import com.turitsynanton.android.wbtech.uinew.components.CountryDropDown
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.EventCard
 import com.turitsynanton.android.wbtech.uinew.components.OtherEvents
@@ -119,7 +114,6 @@ internal fun ScreenEventsList(
                                         eventAddress = screenState.events[index].address,
                                         eventTags = screenState.events[index].tags,
                                         eventStyle = EventCardStyles.Large,
-
                                         ) {
                                         onEventClick(screenState.events[index].id)
                                     }
@@ -140,10 +134,10 @@ internal fun ScreenEventsList(
                         2 -> {
                             CommunityRecommends(
                                 modifier = Modifier,
-                                recommendationName = "Сообщества для тестировщиков",
+                                recommendationName = "Сообщества для Вас",
                                 communitiesList = screenState.communities,
                                 subscribeButtonStyle = SubscribeButtonStyle.Default,
-                                onButtonClick = { },
+                                onSubscribeButtonClick = { },
                                 onElementClick = { communityId ->
                                     onCommunityClick(communityId)
                                 }

@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.data.mocks
 
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
+import com.turitsynanton.android.wbtech.data.storage.models.DataTag
 import java.util.UUID
 
 fun generateTags(min: Int = 1, max: Int = 4): List<DataTag> {

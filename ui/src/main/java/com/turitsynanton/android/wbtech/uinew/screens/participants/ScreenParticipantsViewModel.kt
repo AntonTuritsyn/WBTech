@@ -2,7 +2,7 @@ package com.turitsynanton.android.wbtech.uinew.screens.participants
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newusecases.participants.IGetParticipantsListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.participants.IGetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.models.UiPersonCard
 import com.turitsynanton.android.wbtech.models.mapper.PersonCardMapper
 import kotlinx.coroutines.flow.MutableStateFlow

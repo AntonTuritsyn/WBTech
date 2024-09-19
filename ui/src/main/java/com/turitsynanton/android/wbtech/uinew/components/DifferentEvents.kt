@@ -17,12 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateEvents
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles

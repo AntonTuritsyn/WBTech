@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.models.mapper
 
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainProfile
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainUser
+import com.turitsynanton.android.wbtech.domain.models.DomainProfile
 import com.turitsynanton.android.wbtech.models.UiPerson
 
 internal class ProfileMapper(

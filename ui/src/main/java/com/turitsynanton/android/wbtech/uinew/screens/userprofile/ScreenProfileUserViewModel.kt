@@ -3,10 +3,9 @@ package com.turitsynanton.android.wbtech.uinew.screens.userprofile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
-import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetCommunitiesForUserUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetEventsForUserUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetUserFullInfoUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetCommunitiesForUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetEventsForUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetUserFullInfoUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson

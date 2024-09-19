@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.data.mocks
 
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataHost
+import com.turitsynanton.android.wbtech.data.storage.models.DataHost
 import java.util.UUID
 
 fun generateHost(): DataHost {
