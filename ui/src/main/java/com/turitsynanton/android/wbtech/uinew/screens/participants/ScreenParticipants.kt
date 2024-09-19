@@ -1,14 +1,16 @@
 package com.turitsynanton.android.wbtech.uinew.screens.participants
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,26 +44,30 @@ internal fun ScreenParticipants(
             }
         }
     ) {
-        LazyColumn(
+        LazyVerticalStaggeredGrid(
             modifier = modifier
-                .fillMaxWidth()
-                .padding(it)
-                .padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .fillMaxSize()
+                .padding(it),
+            columns = StaggeredGridCells.Fixed(3),
+            verticalItemSpacing = 24.dp,
+            horizontalArrangement = Arrangement.Center,
         ) {
-            items(user.chunked(3)) { rowItems ->
-                Row(
+            items(user.size) { index ->
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Absolute.SpaceBetween
+                        .fillMaxWidth()
+                        .padding(
+//                            TODO исправить. Выглядит красиво, но постоянно перерисовывается
+                            top = if (index < 3) 32.dp else 0.dp,
+                            bottom = if (index >= user.size - 3) 32.dp else 0.dp
+                        ),
+                    contentAlignment = Alignment.Center
                 ) {
-                    for (participant in rowItems) {
-                        Person(
-                            modifier = Modifier,
-                            user = participant
-                        ) {
-                            onUserClick(participant.id)
-                        }
+                    Person(
+                        modifier = Modifier,
+                        user = user[index]
+                    ) {
+                        onUserClick(user[index].id)
                     }
                 }
             }

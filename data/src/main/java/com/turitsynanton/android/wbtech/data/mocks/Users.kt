@@ -12,7 +12,7 @@ fun generateUsersList(min: Int = 1, max: Int = 10) : List<DataUser> {
             phone = "",
             description = usersDescriptions.random(),
             tags = generateTags(1, 5),
-            icon = ""
+            icon = avatarLinks.random()
         )
     }
     return usersList

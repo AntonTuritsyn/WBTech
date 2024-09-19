@@ -84,13 +84,3 @@ internal fun Host(
         }
     }
 }
-
-/*
-@Preview(
-    widthDp = 360,
-    showBackground = true
-)
-@Composable
-private fun HostPreview() {
-    Host(modifier = Modifier, host = generateHost()) {}
-}*/

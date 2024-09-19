@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +35,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
@@ -191,6 +194,16 @@ internal fun PhotoBlock(
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
+        /*AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data("https://cdn1.ozone.ru/s3/multimedia-t/6365554865.jpg")
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentScale = ContentScale.FillWidth
+        )*/
         if (isEdit) {
             SimpleTextField(
                 modifier = Modifier
@@ -519,70 +532,4 @@ internal fun ListsBlock(
             onCommunityClick()
         }
     }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-private fun ScreenProfilePreview() {
-    val user = UiPerson(
-        id = "1",
-        name = "Антон",
-        city = "Москва",
-        phone = "8-800-555-35-35",
-        description = "Занимаюсь разрабокой интерфейсов в eCom. Учу HTML, CSS и JavaScript",
-        tags = listOf(),
-        avatar = ""
-    )
-    Column {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            SimpleTextField(
-                modifier = Modifier,
-                text = stringResource(R.string.show_my_communities),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF9A10F0)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            CustomSwitch(checked = true, onCheckedChange = {})
-        }
-        PhotoBlock(
-            user = user,
-            isEdit = false,
-            onBackClick = { /*TODO*/ },
-            onEditClick = { /*TODO*/ },
-            onSaveClick = { /*TODO*/ }) {
-
-        }
-        InfoBlock(
-            user = user,
-            isCommunitiesVisible = true,
-            isEventsVisible = true,
-            isEdit = false,
-            onEventsToggle = {},
-            onCommunitiesToggle = {},
-            onNotificationToggle = {},
-            onSocialClick = { /*TODO*/ }
-        )
-        Spacer(modifier = Modifier.padding(20.dp))
-        ListsBlock(
-            isEdit = false,
-            eventsList = listOf(),
-            communitiesList = listOf(),
-            onEventClick = { /*TODO*/ },
-            onCommunityClick = { /*TODO*/ }
-        )
-    }
-
-    /*ScreenProfileMy(
-        eventsList = listOf(),
-        communitiesList = *//*generateCommunitiesList()*//*listOf(),
-        onBackClick = {},
-        onEventClick = {},
-        onCommunityClick = {}
-    ) {}*/
 }
