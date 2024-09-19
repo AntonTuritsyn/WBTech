@@ -3,7 +3,7 @@ package com.turitsynanton.android.wbtech.uinew.screens.registration
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.mapEventCardToUi
@@ -15,12 +15,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val CODE_LENGTH = 4
+
 internal class ScreenRegistrationForEventViewModel(
     eventId: String,
     private val eventCardMapper: EventCardMapper,
     private val getEventDetailsUseCase: IGetEventDetailsUseCase
 ) : ViewModel() {
-// TODO перенести все в usecase
+    // TODO перенести все в usecase
     private val _eventDetails: MutableStateFlow<UiEventCard?> = MutableStateFlow(null)
     private val eventDetails: StateFlow<UiEventCard?> = _eventDetails.asStateFlow()
 
@@ -57,7 +58,8 @@ internal class ScreenRegistrationForEventViewModel(
     private val _codeFieldError: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val codeFieldError: StateFlow<Boolean> = _codeFieldError.asStateFlow()
     private val _buttonRegistrationStatus: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    private val buttonRegistrationStatus: StateFlow<Boolean> = _buttonRegistrationStatus.asStateFlow()
+    private val buttonRegistrationStatus: StateFlow<Boolean> =
+        _buttonRegistrationStatus.asStateFlow()
 
     private val _timerField: MutableStateFlow<String> = MutableStateFlow("")
     private val timerField: StateFlow<String> = _timerField.asStateFlow()
@@ -101,8 +103,8 @@ internal class ScreenRegistrationForEventViewModel(
                 step + 1
             }
             if (_step.value == 3) {
-            setTimerField()
-        }
+                setTimerField()
+            }
         }
     }
 
@@ -122,7 +124,7 @@ internal class ScreenRegistrationForEventViewModel(
     }
 
     fun sendCodeToPhone(code: String) {
-        val phone = "$code${_phoneToQuery.value}"
+        val phone = "$code ${_phoneToQuery.value}"
         viewModelScope.launch {
             _fullPhoneNumber.update {
                 phone
@@ -143,13 +145,15 @@ internal class ScreenRegistrationForEventViewModel(
             }
         }
     }
-//      пока не используется
+
+    //      пока не используется
     private fun setPhoneToProfile(phone: String) {
         viewModelScope.launch {
             _phoneToQuery.update { phone }
         }
     }
-//      пока не используется
+
+    //      пока не используется
     private fun compareCode() {
         viewModelScope.launch {
 

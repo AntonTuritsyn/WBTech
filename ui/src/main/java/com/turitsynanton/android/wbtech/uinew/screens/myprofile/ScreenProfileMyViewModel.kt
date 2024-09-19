@@ -3,16 +3,17 @@ package com.turitsynanton.android.wbtech.uinew.screens.myprofile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.IGetMyProfileUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.IGetListsVisibilityUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.myprofile.toggles.ISetListsVisibilityUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetCommunitiesForUserUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.userprofile.IGetEventsForUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.myprofile.IGetMyProfileUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.myprofile.toggles.IGetListsVisibilityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.myprofile.toggles.ISetListsVisibilityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetCommunitiesForUserUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetEventsForUserUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson
 import com.turitsynanton.android.wbtech.models.mapper.CommunityCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
+import com.turitsynanton.android.wbtech.models.mapper.PersonMapper
 import com.turitsynanton.android.wbtech.models.mapper.ProfileMapper
 import com.turitsynanton.android.wbtech.models.mapper.mapCommunityToUi
 import com.turitsynanton.android.wbtech.models.mapper.mapEventCardToUi
@@ -22,10 +23,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-private val COMMUNITIES_VISIBILITY_KEY = "COMMUNITIES_VISIBILITY_KEY"
+private const val COMMUNITIES_VISIBILITY_KEY = "COMMUNITIES_VISIBILITY_KEY"
 private const val EVENTS_VISIBILITY_KEY = "EVENTS_VISIBILITY_KEY"
 internal class ScreenProfileMyViewModel(
     private val profileMapper: ProfileMapper,
+    private val userMapper: PersonMapper,
     private val eventCardMapper: EventCardMapper,
     private val communityCardMapper: CommunityCardMapper,
     private val getUserFullInfoUseCase: IGetMyProfileUseCase,
@@ -67,10 +69,13 @@ internal class ScreenProfileMyViewModel(
         updateCommunitiesIsVisible(COMMUNITIES_VISIBILITY_KEY)
     }
 
-    fun getUserInfo() {
+    private fun getUserInfo() {
         viewModelScope.launch {
             getUserFullInfoUseCase.execute().collect { user ->
-                _userInfo.update { profileMapper.mapToUi(user) }
+                _userInfo.update { userMapper.mapToUi(user) }
+                Log.d("TAG", "getUserInfo: ${_userInfo.value!!.id}")
+                getEventsForUser(_userInfo.value!!.id)
+                getCommunitiesForUser(_userInfo.value!!.id)
             }
         }
     }

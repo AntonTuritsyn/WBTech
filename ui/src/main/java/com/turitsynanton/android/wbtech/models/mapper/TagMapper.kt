@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.models.mapper
 
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
+import com.turitsynanton.android.wbtech.domain.models.DomainTag
 import com.turitsynanton.android.wbtech.models.UiTag
 
 internal class TagMapper: IMapperToUi<DomainTag, UiTag> {

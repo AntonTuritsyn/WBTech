@@ -32,14 +32,12 @@ import com.turitsynanton.android.wbtech.uinew.utils.PhoneVisualTransformation
 internal fun PhoneField(
     modifier: Modifier, number: String, onPhoneEntered: (String) -> Unit
 ) {
-
-    val maxPhoneNumberLength = 10
-
     BasicTextField(
         value = number,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        onValueChange = {
-            onPhoneEntered(it)
+        onValueChange = { newInput ->
+            val filteredInput = newInput.filter { it.isDigit() }
+            onPhoneEntered(filteredInput)
         },
         visualTransformation = PhoneVisualTransformation(),
         modifier = modifier

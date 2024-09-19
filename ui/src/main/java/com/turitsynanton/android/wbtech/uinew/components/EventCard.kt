@@ -21,10 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.generateTags
-import com.turitsynanton.android.wbtech.data.mocks.tags
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
 import com.turitsynanton.android.wbtech.models.UiTag
 import com.turitsynanton.android.wbtech.ui.theme.SfProDisplay
 import com.turitsynanton.android.wbtech.uinew.items.ImageHolder

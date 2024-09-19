@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.turitsynanton.android.wbtech.domain.newusecases.permissions.ICheckLocationPermissionUseCase
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
 

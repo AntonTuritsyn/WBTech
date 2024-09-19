@@ -3,9 +3,9 @@ package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunityDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.EventsListByCommunityIdUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetPastEventsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.EventsListByCommunityIdUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IGetPastEventsUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.CommunityMapper

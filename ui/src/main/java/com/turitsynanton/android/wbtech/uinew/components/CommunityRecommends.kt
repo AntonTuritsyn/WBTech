@@ -11,14 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
-import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetailsViewModel
 import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 
 @Composable
@@ -27,7 +23,7 @@ internal fun CommunityRecommends(
     recommendationName: String,
     communitiesList: List<UiCommunityCard>,
     subscribeButtonStyle: SubscribeButtonStyle,
-    onButtonClick: () -> Unit,
+    onSubscribeButtonClick: (String) -> Unit,
     onElementClick: (String) -> Unit
 ) {
     Column(
@@ -61,10 +57,8 @@ internal fun CommunityRecommends(
                         ),
                     communityName = communitiesList[index].name,
                     subscribeButtonStyle = subscribeButtonStyle,
-                    onButtonClick = { onButtonClick() }
+                    onButtonClick = { onSubscribeButtonClick(communitiesList[index].id) }
                 ) {
-                    Log.d("TAG", "CommunityRecommendsId: ${communitiesList[index].id}")
-                    Log.d("TAG", "CommunityRecommendsId: ${communitiesList[index].name}")
                     onElementClick(communitiesList[index].id)
                 }
             }

@@ -3,13 +3,13 @@ package com.turitsynanton.android.wbtech.uinew.screens.eventdetails
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.turitsynanton.android.wbtech.domain.newusecases.community.IGetCommunityIdByEventIdUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IDisableButtonForPastEventUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetEventDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.event.IGetOtherEventsUseCase
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
-import com.turitsynanton.android.wbtech.domain.newusecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
-import com.turitsynanton.android.wbtech.domain.newusecases.participants.IGetParticipantsListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityIdByEventIdUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IDisableButtonForPastEventUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IGetOtherEventsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
+import com.turitsynanton.android.wbtech.domain.usecases.participants.IGetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEvent
@@ -84,14 +84,14 @@ internal class ScreenEventDetailsViewModel(
     }
 
     fun getEventDetailsFlow(): StateFlow<UiEvent?> = eventDetails
-    fun getOtherEventDetailsFlow(): StateFlow<List<UiEventCard>> = otherEventList
+    fun getOtherEventsFlow(): StateFlow<List<UiEventCard>> = otherEventList
     fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = communityDetails
     fun getParticipantsListFlow(): StateFlow<List<UiPersonCard>> = participantsList
     fun getButtonStatusFlow(): StateFlow<Boolean> = buttonStatus
 
     val screenState: StateFlow<ScreenEventDetailsState> = combine(
         getEventDetailsFlow(),
-        getOtherEventDetailsFlow(),
+        getOtherEventsFlow(),
         getCommunityDetailsFlow(),
         getParticipantsListFlow(),
         getButtonStatusFlow()

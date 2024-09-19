@@ -46,7 +46,7 @@ internal fun ScreenCommunityDetails(
     }),
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onSubscribeClick: () -> Unit,
+    onSubscribeToCommunityClick: () -> Unit,
     onUsersClick: (String) -> Unit,
     onEventClick: (String) -> Unit
 ) {
@@ -78,7 +78,7 @@ internal fun ScreenCommunityDetails(
                     MainInfoBlock(
                         modifier = Modifier,
                         community = community,
-                        onSubscribeClick = { onSubscribeClick() }
+                        onSubscribeClick = { onSubscribeToCommunityClick() }
                     ) {
                         onUsersClick(community.id)
                     }
@@ -198,7 +198,7 @@ private fun ScreenCommunityPreview() {
         communityId = "",
         onBackClick = {},
         onShareClick = {},
-        onSubscribeClick = {},
+        onSubscribeToCommunityClick = {},
         onUsersClick = {}
     ) {
     }

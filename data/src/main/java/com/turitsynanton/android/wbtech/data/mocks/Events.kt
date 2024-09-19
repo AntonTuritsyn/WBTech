@@ -2,9 +2,7 @@ package com.turitsynanton.android.wbtech.data.mocks
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataEvent
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
+import com.turitsynanton.android.wbtech.data.storage.models.DataEvent
 import java.time.LocalDate
 import java.time.Month
 import java.time.format.DateTimeFormatter
@@ -20,7 +18,7 @@ fun generateEvents(min: Int = 10, max: Int = 20): List<DataEvent> {
             date = generateRandomDate(),
             city = cities.random(),
             description = eventsDescriptions.random(),
-            host = DataUser(
+            host = usersForEvents().random()/*DataUser(
                 id = UUID.randomUUID().toString(),
                 name = names.random(),
                 phone = "",
@@ -28,7 +26,7 @@ fun generateEvents(min: Int = 10, max: Int = 20): List<DataEvent> {
                 icon = "",
                 tags = listOf(),
                 city = cities.random()
-            ),
+            )*/,
             participants = usersForEvents(),
             tags = generateTags(),
             icon = ""

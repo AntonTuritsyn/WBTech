@@ -5,9 +5,6 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,25 +14,18 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,11 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.tags
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson
-import com.turitsynanton.android.wbtech.models.UiProfile
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
@@ -64,14 +52,12 @@ import com.turitsynanton.android.wbtech.uinew.utils.TextFieldStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 
-private val COMMUNITIES_VISIBILITY_KEY = "COMMUNITIES_VISIBILITY_KEY"
+private const val COMMUNITIES_VISIBILITY_KEY = "COMMUNITIES_VISIBILITY_KEY"
 private const val EVENTS_VISIBILITY_KEY = "EVENTS_VISIBILITY_KEY"
 @Composable
 internal fun ScreenProfileMy(
     modifier: Modifier = Modifier,
     profileUserViewModel: ScreenProfileMyViewModel = koinViewModel(),
-    eventsList: List<UiEventCard>,
-    communitiesList: List<UiCommunityCard>,
     onBackClick: () -> Unit,
     onEditClick: () -> Unit,
     onSaveClick: () -> Unit,
@@ -80,12 +66,15 @@ internal fun ScreenProfileMy(
     onCommunityClick: () -> Unit,
     onLogOutClick: () -> Unit
 ) {
+//    TODO screenState
     val userInfo by profileUserViewModel.getUserInfoFlow().collectAsStateWithLifecycle()
     val isEdit by profileUserViewModel.getIsEditModeFlow().collectAsStateWithLifecycle()
     val isEventsVisible by profileUserViewModel.getEventsIsVisibleFlow()
         .collectAsStateWithLifecycle()
     val isCommunitiesVisible by profileUserViewModel.getCommunitiesIsVisibleFlow()
         .collectAsStateWithLifecycle()
+    val eventsList by profileUserViewModel.getEventsFlow().collectAsStateWithLifecycle()
+    val communitiesList by profileUserViewModel.getCommunitiesFlow().collectAsStateWithLifecycle()
 
     Scaffold {
         LazyColumn(
@@ -526,7 +515,7 @@ internal fun ListsBlock(
             recommendationName = stringResource(R.string.my_communities),
             communitiesList = communitiesList,
             subscribeButtonStyle = SubscribeButtonStyle.Done,
-            onButtonClick = { /*TODO*/ }) {
+            onSubscribeButtonClick = { /*TODO*/ }) {
             onCommunityClick()
         }
     }

@@ -565,4 +565,5 @@ val codes = listOf(
     "4365"
 )
 
-val mainUsersList = generateUsersList(20, 40)
+val myProfile = generateProfile()
+val mainUsersList = generateUsersList(20, 40) + myProfile

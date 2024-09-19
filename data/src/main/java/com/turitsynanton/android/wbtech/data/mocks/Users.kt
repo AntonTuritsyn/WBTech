@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.data.mocks
 
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataTag
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataUser
+import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import java.util.UUID
 
 fun generateUsersList(min: Int = 1, max: Int = 10) : List<DataUser> {

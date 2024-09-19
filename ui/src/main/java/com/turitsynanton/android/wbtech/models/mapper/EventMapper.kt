@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.models.mapper
 
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainEvent
+import com.turitsynanton.android.wbtech.domain.models.DomainEvent
 import com.turitsynanton.android.wbtech.models.UiEvent
 
 internal class EventMapper(

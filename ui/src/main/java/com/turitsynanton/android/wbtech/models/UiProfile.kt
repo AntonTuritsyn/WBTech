@@ -1,7 +1,5 @@
 package com.turitsynanton.android.wbtech.models
 
-import com.turitsynanton.android.wbtech.domain.newmodels.DomainTag
-
 data class UiProfile(
     val id: String,
     val name: String,

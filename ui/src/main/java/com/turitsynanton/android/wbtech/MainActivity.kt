@@ -8,8 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
-import com.turitsynanton.android.wbtech.navigationnew.NavGraph
-import com.turitsynanton.android.wbtech.permissions.LocationPermissionScreen
+import com.turitsynanton.android.wbtech.navigation.NavGraph
 import com.turitsynanton.android.wbtech.ui.theme.WBTechTheme
 import com.yandex.mapkit.MapKitFactory
 
@@ -22,9 +21,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             WBTechTheme {
                 val navController = rememberNavController()
-                val showBottomBar = remember {
-                    mutableStateOf(false)
-                }
                 NavGraph(navController = navController)
             }
         }

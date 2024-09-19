@@ -2,7 +2,10 @@ package com.turitsynanton.android.wbtech.data.mocks
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.turitsynanton.android.wbtech.data.storage.newmodels.DataCommunity
+import com.turitsynanton.android.wbtech.data.storage.models.DataCommunity
+import com.turitsynanton.android.wbtech.data.storage.models.DataEvent
+import com.turitsynanton.android.wbtech.data.storage.models.DataTag
+import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import java.util.UUID
 
 @RequiresApi(Build.VERSION_CODES.O)
