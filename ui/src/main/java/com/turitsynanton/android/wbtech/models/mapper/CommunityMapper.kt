@@ -13,7 +13,7 @@ internal class CommunityMapper(
             id = entity.id,
             name = entity.name,
             description = entity.description,
-            icon = entity.icon,
+            image = entity.icon,
             tags = entity.tags.map { tag ->
                 tagMapper.mapToUi(tag)
             },

@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -16,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.turitsynanton.android.ui.R
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -36,18 +36,29 @@ internal fun CommunityLargeCard(
     onSubscribeClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 16.dp)
             .fillMaxSize()
     ) {
-        Image(
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(community.image)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier
+                .size(168.dp)
+                .clip(shape = RoundedCornerShape(16.dp)),
+            contentScale = ContentScale.Crop
+        )
+        /*Image(
             painter = painterResource(id = R.drawable.event_example),
             contentDescription = "",
             modifier = modifier
                 .size(168.dp)
                 .clip(shape = RoundedCornerShape(16.dp)),
             contentScale = ContentScale.Crop
-        )
+        )*/
         Spacer(modifier = Modifier.padding(4.dp))
         SimpleTextField(
             modifier = Modifier,
@@ -59,8 +70,7 @@ internal fun CommunityLargeCard(
         )
         Spacer(modifier = Modifier.padding(4.dp))
         FlowRow(
-            modifier = Modifier
-                .heightIn(max = 50.dp),
+            modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {

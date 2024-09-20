@@ -35,6 +35,7 @@ internal fun TopEvents(
                     eventDate = eventsList[index].date,
                     eventAddress = eventsList[index].address,
                     eventTags = eventsList[index].tags,
+                    eventImage = eventsList[index].image,
                     eventStyle = EventCardStyles.Large,
                     onClick = onEventClick
                 )

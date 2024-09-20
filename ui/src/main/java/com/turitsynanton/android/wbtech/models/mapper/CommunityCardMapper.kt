@@ -10,7 +10,8 @@ internal class CommunityCardMapper : IMapperToUi<DomainCommunity, UiCommunityCar
             name = entity.name,
             tags = entity.tags.map { tag ->
                 TagMapper().mapToUi(tag)
-            }
+            },
+            image = entity.icon
         )
     }
 }

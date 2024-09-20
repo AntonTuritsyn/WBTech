@@ -26,6 +26,7 @@ import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 @Composable
 internal fun CommunitySmallCard(
     modifier: Modifier,
+    image: String,
     communityName: String,
     subscribeButtonStyle: SubscribeButtonStyle,
     onButtonClick: () -> Unit,
@@ -39,7 +40,7 @@ internal fun CommunitySmallCard(
             modifier = Modifier
                 .clickable { onClick() }
         ) {
-            ImageHolder(modifier = Modifier, image = painterResource(id = R.drawable.event_example), height = EventCardStyles.Small)
+            ImageHolder(modifier = Modifier, image = image, height = EventCardStyles.Small)
             Spacer(modifier = Modifier.padding(2.dp))
             SimpleTextField(
                 modifier = Modifier,
@@ -68,6 +69,7 @@ internal fun CommunitySmallCard(
 private fun CommunityCardPreview() {
     CommunitySmallCard(
         modifier = Modifier,
+        image = "",
         communityName = "Супер тестировщики",
         subscribeButtonStyle = SubscribeButtonStyle.Default,
         onButtonClick = {}

@@ -14,7 +14,8 @@ internal class EventCardMapper(
             address = entity.city,
             tags = entity.tags.map { tag ->
                 tagMapper.mapToUi(tag)
-            }
+            },
+            image = entity.image
         )
     }
 }

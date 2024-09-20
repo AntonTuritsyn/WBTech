@@ -11,5 +11,5 @@ fun generateProfile() = DataUser(
     phone = "+79999999999",
     description = usersDescriptions.random(),
     tags = generateTags(1, 5),
-    icon = ""
+    icon = "profile"
 )

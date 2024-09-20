@@ -3,8 +3,7 @@ package com.turitsynanton.android.wbtech.uinew.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,7 +28,6 @@ import com.turitsynanton.android.wbtech.uinew.items.Tag
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun EventCard(
     modifier: Modifier,
@@ -38,6 +36,7 @@ internal fun EventCard(
     eventDate: String,
     eventAddress: String,
     eventTags: List<UiTag>,
+    eventImage: String,
     eventStyle: EventCardStyles,
     onClick: (String) -> Unit
 ) {
@@ -65,7 +64,7 @@ internal fun EventCard(
     ) {
         ImageHolder(
             modifier = Modifier,
-            image = painterResource(id = R.drawable.event_example),
+            image = eventImage,
             height = eventStyle
         )
         Spacer(modifier = Modifier.padding(4.dp))
@@ -78,11 +77,11 @@ internal fun EventCard(
             fontStyle = FontStyle.Normal,
             color = Color(0xFF000000),
             lineHeight = eventStyle.lineHeight,
-            maxLines = 2
+            maxLines = if (eventStyle.name == "Full") 2 else 1
         )
         SimpleTextField(
             modifier = Modifier,
-            text = "${eventDate} · ${eventAddress}",
+            text = "$eventDate · $eventAddress",
             fontFamily = SfProDisplay,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
@@ -91,11 +90,9 @@ internal fun EventCard(
             maxLines = 1
         )
         Spacer(modifier = Modifier.padding(4.dp))
-        FlowRow(
-            modifier = Modifier
-            /*.heightIn(max = 50.dp)*/,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+        Row(
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             eventTags.forEach { content ->
                 Tag(modifier = Modifier, text = content.content, style = TagsStyle.Minimize) {
@@ -115,6 +112,7 @@ private fun EventCardPreview() {
         eventName = "Python daysPython daysPython daysPython daysPython days",
         eventDate = "10 августа",
         eventAddress = "Кожевенная линия, 40",
+        eventImage = "painterResource(id = R.drawable.event_example)",
         eventTags = listOf()
     ) {
 

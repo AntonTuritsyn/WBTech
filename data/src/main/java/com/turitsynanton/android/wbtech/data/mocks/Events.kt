@@ -11,25 +11,24 @@ import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun generateEvents(min: Int = 10, max: Int = 20): List<DataEvent> {
+    var availableEventsLinks = eventsLinks.toMutableList()
     val eventsList = List((min..max).random()) {
+        val randomLink = availableEventsLinks.random()
+        if (availableEventsLinks.isNotEmpty()) {
+            availableEventsLinks.remove(randomLink)
+        } else {
+            availableEventsLinks = eventsLinks.toMutableList()
+        }
         DataEvent(
             id = UUID.randomUUID().toString(),
             name = eventsNames.random(),
             date = generateRandomDate(),
             city = cities.random(),
             description = eventsDescriptions.random(),
-            host = usersForEvents().random()/*DataUser(
-                id = UUID.randomUUID().toString(),
-                name = names.random(),
-                phone = "",
-                description = usersDescriptions.random(),
-                icon = "",
-                tags = listOf(),
-                city = cities.random()
-            )*/,
+            host = usersForEvents().random(),
             participants = usersForEvents(),
             tags = generateTags(),
-            icon = ""
+            icon = randomLink
         )
     }
     return eventsList

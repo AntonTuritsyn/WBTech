@@ -102,6 +102,7 @@ internal fun ScreenCommunityDetails(
                     eventDate = screenState.eventsList[index].date,
                     eventAddress = screenState.eventsList[index].address,
                     eventTags = screenState.eventsList[index].tags,
+                    eventImage = screenState.eventsList[index].image,
                     eventStyle = EventCardStyles.Full
                 ) {
                     onEventClick(screenState.eventsList[index].id)
@@ -118,7 +119,6 @@ internal fun ScreenCommunityDetails(
             }
         }
     }
-
 }
 
 @Composable
@@ -146,7 +146,7 @@ internal fun MainInfoBlock(
         SimpleTextField(
             modifier = Modifier
                 .padding(horizontal = 16.dp),
-            text = "${community.description}",
+            text = community.description,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
             color = Color(0xFF000000)

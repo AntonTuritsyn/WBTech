@@ -93,6 +93,7 @@ internal fun ScreenProfileMy(
                         isEdit = isEdit,
                         onBackClick = { onBackClick() },
                         onEditClick = { profileUserViewModel.changeEditMode() },
+                        onCancelEdit = { profileUserViewModel.changeEditMode() },
                         onSaveClick = { onSaveClick() }) {
                     }
                 }
@@ -180,11 +181,12 @@ internal fun PhotoBlock(
     onBackClick: () -> Unit,
     onEditClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onCancelEdit: () -> Unit,
     onChangePhoto: () -> Unit
 ) {
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     ) {
         Image(
@@ -257,7 +259,7 @@ internal fun PhotoBlock(
                     onIconClick = { onSaveClick() }
                 )
                 {
-                    onBackClick()
+                    onCancelEdit()
                 }
             }
         }
@@ -280,7 +282,7 @@ internal fun InfoBlock(
     when (isEdit) {
         true -> {
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
             ) {
                 ComplexTextField(
@@ -331,7 +333,7 @@ internal fun InfoBlock(
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF000000)
                 )
-//        TODO доделать поле для добавление интересов
+//        TODO доделать поле для добавления интересов
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -434,7 +436,7 @@ internal fun InfoBlock(
 
         false -> {
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
             ) {
                 SimpleTextField(
@@ -460,6 +462,7 @@ internal fun InfoBlock(
                     text = user.description,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
+                    lineHeight = 16.sp,
                     color = Color(0xFF000000)
                 )
                 FlowRow(

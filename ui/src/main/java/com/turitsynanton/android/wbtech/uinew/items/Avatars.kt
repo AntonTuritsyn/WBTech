@@ -22,31 +22,26 @@ internal fun Avatar(
     avatarStyle: AvatarStyles,
     user: UiPersonCard
 ) {
-    AsyncImage(
+    if (user.avatar == "profile") {
+        Image(
+            painter = painterResource(id = R.drawable.my_photo),
+            contentDescription = null,
+            modifier = modifier
+                .clip(shape = CircleShape)
+                .size(avatarStyle.size),
+            contentScale = ContentScale.Crop
+        )
+    } else {
+        AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(user.avatar)
                 .crossfade(true)
                 .build(),
             contentDescription = null,
-        modifier = modifier.size(avatarStyle.size)
-            .clip(shape = CircleShape)
-            ,
+            modifier = modifier
+                .size(avatarStyle.size)
+                .clip(shape = CircleShape),
             contentScale = ContentScale.Crop
         )
-    /*Image(
-        painter = painterResource(id = R.drawable.my_photo),
-        contentDescription = null,
-        modifier = modifier
-            .clip(shape = CircleShape)
-            .size(avatarStyle.size),
-        contentScale = ContentScale.Crop
-    )*/
-
+    }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-private fun AvatarPreview() {
-    Avatar(modifier = Modifier, avatarStyle = AvatarStyles.Medium, )
-}*/

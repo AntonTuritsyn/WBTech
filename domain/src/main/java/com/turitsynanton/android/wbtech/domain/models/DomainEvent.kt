@@ -9,5 +9,5 @@ data class DomainEvent(
     val host: DomainUser,
     val participants: List<DomainUser>,
     val tags: List<DomainTag>,
-    val icon: String
+    val image: String
 )

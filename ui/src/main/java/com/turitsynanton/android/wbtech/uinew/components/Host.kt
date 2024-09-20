@@ -15,12 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiHost
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -48,7 +51,7 @@ internal fun Host(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable{ onClick() },
+                .clickable { onClick() },
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
@@ -70,17 +73,32 @@ internal fun Host(
                     fontWeight = FontWeight.Medium,
                     color = Color(0xFF000000),
                     overflow = TextOverflow.Ellipsis,
+                    lineHeight = 16.sp,
                     maxLines = 5
                 )
             }
-            Image(
-                modifier = Modifier
-                    .size(104.dp)
-                    .clip(shape = RoundedCornerShape(16.dp)),
-                painter = painterResource(id = R.drawable.my_photo),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+            if (host.icon == "profile") {
+                Image(
+                    modifier = Modifier
+                        .size(104.dp)
+                        .clip(shape = RoundedCornerShape(16.dp)),
+                    painter = painterResource(id = R.drawable.my_photo),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(host.icon)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(104.dp)
+                        .clip(shape = RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
     }
 }
