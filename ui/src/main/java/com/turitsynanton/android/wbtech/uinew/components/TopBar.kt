@@ -50,7 +50,7 @@ internal fun TopBar(
         navigationIcon = {
             IconButton(onClick = { onBackPressed() }) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_back),
+                    painter = painterResource(id = /*R.drawable.ic_back*/topBarStyle.backIcon),
                     contentDescription = "back",
                 )
             }

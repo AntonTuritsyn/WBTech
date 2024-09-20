@@ -53,7 +53,7 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     onParticipantsClick = { eventId ->
                         navController.navigate("${Navigation.ParticipantsDetailsScreen.route}/${eventId}")
                     },
-                    onOganizerClick = { communityId ->
+                    onOrganizerClick = { communityId ->
                         navController.navigate("${Navigation.CommunityDetailsScreen.route}/${communityId}")
                     },
                     onEventClick = { eventId ->
@@ -108,8 +108,6 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
             stackEntry.arguments?.getString("userId")?.let { id ->
                 ScreenProfileUser(
                     userId = id,
-                    eventsList = listOf(),
-                    communitiesList = listOf(),
                     onBackClick = { navController.popBackStack() },
                     onEventClick = { eventId->
                         navController.navigate("${Navigation.EventDetailsScreen.route}/${eventId}")

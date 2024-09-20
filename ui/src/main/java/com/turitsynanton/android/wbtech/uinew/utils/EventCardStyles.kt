@@ -13,6 +13,7 @@ internal enum class EventCardStyles(
     val fontWeight: FontWeight,
     val lineHeight: TextUnit = TextUnit.Unspecified
 ) {
+    Details(height = 268.dp, width = 320.dp, textHeight = 34.sp, fontWeight = FontWeight.Bold, lineHeight = 38.sp),
     Full(height = 180.dp, width = 320.dp, textHeight = 34.sp, fontWeight = FontWeight.Bold, lineHeight = 38.sp),
     Large(height = 180.dp, width = 320.dp, textHeight = 24.sp, fontWeight = FontWeight.Bold),
     Medium(height = 148.dp, width = 212.dp, textHeight = 18.sp, fontWeight = FontWeight.SemiBold),

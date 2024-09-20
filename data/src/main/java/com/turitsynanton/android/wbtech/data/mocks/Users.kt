@@ -4,7 +4,10 @@ import com.turitsynanton.android.wbtech.data.storage.models.DataUser
 import java.util.UUID
 
 fun generateUsersList(min: Int = 1, max: Int = 10) : List<DataUser> {
+    val availableAvatarLinks = avatarLinks.toMutableList()
     val usersList = List((min..max).random()) {
+        val randomLink = availableAvatarLinks.random()
+        availableAvatarLinks.remove(randomLink)
         DataUser(
             id = UUID.randomUUID().toString(),
             name = names.random(),
@@ -12,7 +15,7 @@ fun generateUsersList(min: Int = 1, max: Int = 10) : List<DataUser> {
             phone = "",
             description = usersDescriptions.random(),
             tags = generateTags(1, 5),
-            icon = avatarLinks.random()
+            icon = randomLink
         )
     }
     return usersList

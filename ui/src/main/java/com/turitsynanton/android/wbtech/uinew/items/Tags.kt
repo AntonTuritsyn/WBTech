@@ -24,15 +24,22 @@ internal fun Tag(
 ) {
     SimpleTextField(
         modifier = modifier
-            .clickable(
-                indication = null,
-                interactionSource = remember {
-                    MutableInteractionSource()
-                },
-                enabled = style.clickable
-            ) {
-                onClick(text)
-            }
+            .then(
+                if (style.name == "Unselected" || style.name == "Selected" || style.name == "UnselectedBig" || style.name == "SelectedBig") {
+                    Modifier
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            },
+                            enabled = style.clickable
+                        ) {
+                            onClick(text)
+                        }
+                } else {
+                    Modifier
+                }
+            )
             .background(
                 color = style.containerColor,
                 shape = RoundedCornerShape(8.dp)

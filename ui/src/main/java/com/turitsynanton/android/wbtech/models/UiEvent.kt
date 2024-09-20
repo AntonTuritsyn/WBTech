@@ -8,5 +8,6 @@ data class UiEvent(
     val tags: List<UiTag>,
     val host: UiHost,
     val description: String,
+    val image: String
 //    val events: List<UiEventCard>
 )

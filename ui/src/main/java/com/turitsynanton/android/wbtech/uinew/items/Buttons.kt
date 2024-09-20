@@ -84,6 +84,48 @@ internal fun GradientButton(
 }
 
 @Composable
+internal fun FloatingCustomButton(
+    modifier: Modifier,
+    text: String,
+    buttonStyle: ButtonStyle,
+    onClick: () -> Unit
+) {
+    if (buttonStyle.loading) {
+        CircularProgressIndicator(
+            modifier = modifier
+                .clip(shape = RoundedCornerShape(16.dp))
+                .background(
+                    brush = buttonStyle.gradient
+                )
+                .padding(16.dp),
+            color = buttonStyle.textColor
+        )
+    } else {
+        SimpleTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(16.dp))
+                .background(
+                    brush = buttonStyle.gradient
+                )
+                .clickable(
+                    enabled = buttonStyle.clickable
+                ) {
+                    onClick()
+                }
+                .padding(16.dp),
+            text = text,
+            fontFamily = SfProDisplay,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontStyle = FontStyle.Normal,
+            color = buttonStyle.textColor,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
 internal fun SubscribeButton(
     modifier: Modifier,
     style: SubscribeButtonStyle,

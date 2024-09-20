@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,12 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
@@ -75,6 +77,7 @@ internal fun Organizer(
                     fontWeight = FontWeight.Medium,
                     color = Color(0xFF000000),
                     overflow = TextOverflow.Ellipsis,
+                    lineHeight = 16.sp,
                     maxLines = 5
                 )
             }
@@ -83,14 +86,25 @@ internal fun Organizer(
                     .size(104.dp)
                     .clip(shape = RoundedCornerShape(16.dp))
             ) {
-                Image(
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(community.image)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    modifier = modifier
+                        .size(104.dp)
+                        .clip(shape = RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                /*Image(
                     modifier = Modifier
                         .size(104.dp)
                         .clip(shape = RoundedCornerShape(16.dp)),
                     painter = painterResource(id = R.drawable.my_photo),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
-                )
+                )*/
                 SubscribeButton(
                     modifier = Modifier
                         .align(Alignment.BottomStart)

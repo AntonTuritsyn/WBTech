@@ -43,15 +43,16 @@ internal fun SearchFieldNew(
         modifier = Modifier
             .then(modifier)
             .background(color = Color(0xFFF6F6FA), shape = RoundedCornerShape(16.dp))
-            .height(44.dp)
+//            .height(44.dp)
             .fillMaxWidth()
-            .padding(vertical = 12.dp, horizontal = 10.dp)
+            .padding(vertical = 10.dp, horizontal = 10.dp)
             .wrapContentHeight(Alignment.CenterVertically),
         value = query,
         onValueChange = {
             onQueryChanged(it)
         },
         enabled = true,
+        maxLines = 1,
         textStyle = TextStyle(
             color = Color(0xFF000000),
             fontSize = 14.sp,
@@ -126,7 +127,7 @@ private fun DecorationBoxForSearch(
         horizontalArrangement = Arrangement.End
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_cross),
+            painter = painterResource(id = R.drawable.ic_cross_small),
             modifier = Modifier
                 .padding(end = 6.dp)
                 .clickable(

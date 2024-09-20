@@ -13,14 +13,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,9 +32,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.models.UiCommunityCard
-import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson
 import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
@@ -51,8 +55,6 @@ internal fun ScreenProfileUser(
     profileUserViewModel: ScreenProfileUserViewModel = koinViewModel(parameters = {
         parametersOf(userId)
     }),
-    eventsList: List<UiEventCard>,
-    communitiesList: List<UiCommunityCard>,
     onBackClick: () -> Unit,
     onEventClick: (String) -> Unit,
     onCommunityClick: (String) -> Unit,
@@ -71,8 +73,8 @@ internal fun ScreenProfileUser(
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             item {
-                userInfo?.let { it1 ->
-                    MainInfo(user = it1) {
+                userInfo?.let { user ->
+                    MainInfo(user = user) {
                         onBackClick()
                     }
                 }
@@ -118,13 +120,28 @@ internal fun MainInfo(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.my_photo),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth
-            )
+            if (user.avatar == "profile") {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.my_photo),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillWidth
+                )
+            } else {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(user.avatar)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.FillWidth
+                )
+            }
+
+
             TopBar(
                 modifier = Modifier
                     .background(
@@ -135,7 +152,7 @@ internal fun MainInfo(
                 topBarColor = Color.Transparent,
                 title = "",
                 topBarStyle = TopBarStyles.Share,
-                onIconClick = {  }) {
+                onIconClick = { }) {
                 onBackClick()
             }
         }
@@ -164,7 +181,8 @@ internal fun MainInfo(
             text = user.description,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF000000)
+            color = Color(0xFF000000),
+            lineHeight = 18.sp
         )
         Spacer(modifier = Modifier.padding(9.dp))
         FlowRow(
@@ -203,8 +221,6 @@ internal fun MainInfo(
 private fun ScreenProfilePreview() {
     ScreenProfileUser(
         userId = "1",
-        eventsList = listOf(),
-        communitiesList = /*generateCommunitiesList()*/listOf(),
         onBackClick = {},
         onEventClick = {},
         onCommunityClick = {}

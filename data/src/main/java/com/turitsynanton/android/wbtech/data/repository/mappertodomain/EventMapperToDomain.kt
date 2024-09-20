@@ -23,7 +23,7 @@ internal class EventMapperToDomain(
             tags = entity.tags.map { tag ->
                 tagsMapper.mapToDomain(tag)
             },
-            icon = entity.icon
+            image = entity.icon
         )
     }
 }

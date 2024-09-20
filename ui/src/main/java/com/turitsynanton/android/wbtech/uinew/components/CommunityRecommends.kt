@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -55,6 +54,7 @@ internal fun CommunityRecommends(
                                 else -> Modifier
                             }
                         ),
+                    image = communitiesList[index].image,
                     communityName = communitiesList[index].name,
                     subscribeButtonStyle = subscribeButtonStyle,
                     onButtonClick = { onSubscribeButtonClick(communitiesList[index].id) }
