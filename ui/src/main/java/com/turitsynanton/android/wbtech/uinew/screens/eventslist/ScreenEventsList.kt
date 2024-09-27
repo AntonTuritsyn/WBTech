@@ -49,7 +49,6 @@ import com.turitsynanton.android.wbtech.uinew.components.OtherEvents
 import com.turitsynanton.android.wbtech.uinew.components.SearchFieldNew
 import com.turitsynanton.android.wbtech.uinew.state.EventsListState
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
-import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -70,7 +69,6 @@ internal fun ScreenEventsList(
 ) {
 
     val screenState by screenEventsListViewModel.screenState.collectAsStateWithLifecycle()
-    val button by screenEventsListViewModel.getButtonStatusFlow().collectAsStateWithLifecycle()
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -189,10 +187,9 @@ internal fun ScreenEventsList(
                                     2 -> {
                                         CommunityRecommends(
                                             modifier = Modifier,
-                                            recommendationName = "Сообщества для Вас",
+                                            recommendationName = stringResource(R.string.communities_for_you),
                                             communitiesList = (screenState as EventsListState.Loaded).communities,
                                             subscribeButtonStyle = /*SubscribeButtonStyle.Default*/ {
-//
                                             },
                                             onSubscribeButtonClick = { communityId ->
                                                 screenEventsListViewModel.subscribeToCommunity(communityId)

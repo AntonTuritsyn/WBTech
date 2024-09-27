@@ -13,8 +13,8 @@ import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.CommunityCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
-import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.SubscribedButtonState
 import com.turitsynanton.android.wbtech.uinew.state.EventsListState
+import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.CommunitySubscribeButtonState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -58,16 +58,16 @@ internal class ScreenEventsListViewModel(
         MutableStateFlow(emptyList())
     private val upcomingEventList: StateFlow<List<UiEventCard>> = _upcomingEventList.asStateFlow()
 
-    private val _buttonStatus: MutableStateFlow<SubscribedButtonState> =
-        MutableStateFlow(SubscribedButtonState())
-    private val buttonStatus: StateFlow<SubscribedButtonState> = _buttonStatus
+    private val _buttonStatus: MutableStateFlow<CommunitySubscribeButtonState> =
+        MutableStateFlow(CommunitySubscribeButtonState())
+    private val buttonStatus: StateFlow<CommunitySubscribeButtonState> = _buttonStatus
 
     private fun getEventsListFlow(): StateFlow<List<UiEventCard>> = eventList
     private fun getCommunitiesListFlow(): StateFlow<List<UiCommunityCard>> = communitiesList
     private fun getFilteredListFlow(): StateFlow<List<UiEventCard>> = filteredEventList
     private fun getSearchQueryFlow(): StateFlow<String> = searchQuery
     private fun getUpcomingEventListFlow(): StateFlow<List<UiEventCard>> = upcomingEventList
-    fun getButtonStatusFlow(): StateFlow<SubscribedButtonState> = buttonStatus
+    fun getButtonStatusFlow(): StateFlow<CommunitySubscribeButtonState> = buttonStatus
 
     val screenState: StateFlow<EventsListState> = combine(
         getEventsListFlow(),
@@ -218,7 +218,7 @@ internal class ScreenEventsListViewModel(
         return isSubscribedVal.value
     }*/
 
-    private fun updateButtonStatus(onUpdate: (SubscribedButtonState) -> SubscribedButtonState) {
+    private fun updateButtonStatus(onUpdate: (CommunitySubscribeButtonState) -> CommunitySubscribeButtonState) {
         _buttonStatus.update { onUpdate(it) }
     }
 }

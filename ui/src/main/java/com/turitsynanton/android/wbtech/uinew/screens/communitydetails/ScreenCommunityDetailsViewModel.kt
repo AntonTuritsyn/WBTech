@@ -3,10 +3,10 @@ package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetSubscribersCountUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.details.IGetCommunityDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.IIsSubscribedToCommunityUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.ISubscribeToCommunityUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.IUnsubscribeFromCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.details.IGetCommunityDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.EventsListByCommunityIdUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetPastEventsUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunity
@@ -14,6 +14,7 @@ import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.CommunityMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.uinew.state.ScreenCommunityDetailsState
+import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.CommunitySubscribeButtonState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -47,9 +48,9 @@ internal class ScreenCommunityDetailsViewModel(
         MutableStateFlow(emptyList())
     private val pastEventList: StateFlow<List<UiEventCard>> = _pastEventList.asStateFlow()
 
-    private val _buttonStatus: MutableStateFlow<SubscribedButtonState> =
-        MutableStateFlow(SubscribedButtonState())
-    private val buttonStatus: StateFlow<SubscribedButtonState> = _buttonStatus
+    private val _buttonStatus: MutableStateFlow<CommunitySubscribeButtonState> =
+        MutableStateFlow(CommunitySubscribeButtonState())
+    private val buttonStatus: StateFlow<CommunitySubscribeButtonState> = _buttonStatus
 
     private val _subscribersCount: MutableStateFlow<Int> = MutableStateFlow(0)
     private val subscribersCount: StateFlow<Int> = _subscribersCount.asStateFlow()
@@ -57,7 +58,7 @@ internal class ScreenCommunityDetailsViewModel(
     private fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = community
     private fun getEventsListFlow(): StateFlow<List<UiEventCard>> = eventsList
     private fun getPastEventListFlow(): StateFlow<List<UiEventCard>> = pastEventList
-    private fun getButtonStatusFlow(): StateFlow<SubscribedButtonState> = buttonStatus
+    private fun getButtonStatusFlow(): StateFlow<CommunitySubscribeButtonState> = buttonStatus
     private fun getSubscribersCountFlow(): StateFlow<Int> = subscribersCount
 
     val screenState: StateFlow<ScreenCommunityDetailsState> = combine(
@@ -138,7 +139,7 @@ internal class ScreenCommunityDetailsViewModel(
         }
     }
 
-    private fun updateButtonStatus(onUpdate: (SubscribedButtonState) -> SubscribedButtonState) {
+    private fun updateButtonStatus(onUpdate: (CommunitySubscribeButtonState) -> CommunitySubscribeButtonState) {
         _buttonStatus.update { onUpdate(it) }
     }
 
@@ -150,8 +151,3 @@ internal class ScreenCommunityDetailsViewModel(
         }
     }
 }
-
-internal data class SubscribedButtonState(
-    val buttonStatus: Boolean = false,
-    val isSubscribed: Boolean = false
-)

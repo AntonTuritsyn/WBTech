@@ -1,8 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.screens.communitydetails
 
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -32,6 +28,7 @@ import com.turitsynanton.android.wbtech.uinew.components.TopBar
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
+import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.CommunitySubscribeButtonState
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -131,7 +128,7 @@ internal fun ScreenCommunityDetails(
 internal fun MainInfoBlock(
     modifier: Modifier,
     community: UiCommunity,
-    subscribeStatus: SubscribedButtonState,
+    subscribeStatus: CommunitySubscribeButtonState,
     subscribersCount: Int,
     onSubscribeClick: (String) -> Unit,
     onUnsubscribeClick: (String) -> Unit,
@@ -170,7 +167,7 @@ internal fun MainInfoBlock(
         )
         Subscribers(
             modifier = Modifier,
-            subscribersCount = subscribersCount,
+            usersCount = subscribersCount,
             title = stringResource(id = R.string.subscribers),
             avatarsList = community.users
         ) {

@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.domain.di
 
+import com.turitsynanton.android.wbtech.domain.usecases.GetVisitorsCountUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.IInteractorFullInfoExperiment
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityIdByEventIdUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.InteractorFullInfoExperiment
@@ -10,6 +11,7 @@ import com.turitsynanton.android.wbtech.domain.usecases.experiment.GetEventDetai
 import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityIdByEventIdUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.GetSubscribersCountUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetSubscribersCountUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IGetVisitorsCountUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.details.GetCommunityDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.list.GetCommunitiesListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.community.details.IGetCommunityDetailsUseCase
@@ -107,6 +109,7 @@ val domainModule = module {
     factoryOf(::IsSubscribedToCommunityUseCase) bind IIsSubscribedToCommunityUseCase::class
     factoryOf(::UnsubscribeFromCommunityUseCase) bind IUnsubscribeFromCommunityUseCase::class
     factoryOf(::GetSubscribersCountUseCase) bind IGetSubscribersCountUseCase::class
+    factoryOf(::GetVisitorsCountUseCase) bind IGetVisitorsCountUseCase::class
 
 
     factoryOf(::SetEventsVisibilityUseCase) bind ISetListsVisibilityUseCase::class

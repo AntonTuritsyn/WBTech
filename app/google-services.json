@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709616330627",
+    "project_id": "wb-tech-ad23c",
+    "storage_bucket": "wb-tech-ad23c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709616330627:android:2630a12d16f169ad5538b6",
+        "android_client_info": {
+          "package_name": "com.turitsynanton.android.wbtech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkeY__8xRoSdJ-RZioJ1xivbMeT5aMFpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
