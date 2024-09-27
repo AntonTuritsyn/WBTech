@@ -4,7 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,12 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.KeyboardArrowUp
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,19 +25,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,7 +49,6 @@ import com.turitsynanton.android.wbtech.uinew.components.Organizer
 import com.turitsynanton.android.wbtech.uinew.components.Subscribers
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
 import com.turitsynanton.android.wbtech.uinew.items.FloatingCustomButton
-import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.ImageHolder
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
@@ -65,10 +56,10 @@ import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.EventCardStyles
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun ScreenEventDetails(
     modifier: Modifier = Modifier,
@@ -89,6 +80,8 @@ internal fun ScreenEventDetails(
 ) {
     val screenState by eventDetailsViewModel.screenState.collectAsStateWithLifecycle()
 
+    var isMapInteracting by remember { mutableStateOf(false) }
+    var isScrollingEnabled by remember { mutableStateOf(true) }
     val scrollState = rememberLazyListState()
     var previousScrollIndex by remember { mutableIntStateOf(0) }
 //    var previousScrollOffset by remember { mutableStateOf(0f) }
@@ -113,6 +106,7 @@ internal fun ScreenEventDetails(
 //        previousScrollOffset = currentScrollOffset
     }
     Scaffold(
+        modifier = Modifier,
         topBar = {
             TopBar(
                 modifier = Modifier,
@@ -127,11 +121,15 @@ internal fun ScreenEventDetails(
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
                 modifier = modifier
+                    .fillMaxSize()
                     .padding(it)
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = 16.dp)
+                    .background(Color.White),
                 state = scrollState,
-                verticalArrangement = Arrangement.spacedBy(32.dp)
+                verticalArrangement = Arrangement.spacedBy(32.dp),
+                userScrollEnabled = isScrollingEnabled
             ) {
+                Log.d("TAG", "isScrollingEnabled: ${isScrollingEnabled}")
                 item {
                     screenState.eventDetails?.let { event ->
                         Header(event = event)
@@ -156,21 +154,73 @@ internal fun ScreenEventDetails(
                     }
                 }
                 item {
+//                  TODO переделать сам компонент (был экспериментальный, сделать нормальным)
                     AddressCard(
-                        modifier = Modifier/*.pointerInteropFilter {
-                    // Consume the touch event
-                    true
-                }*/, address = "Севкабель Порт, Кожевенная линия, 40, "
+                        modifier = Modifier
+                            .pointerInput(Unit) {
+                                detectTapGestures(
+                                    onPress = { offset ->
+                                        Log.d("AddressCard", "Pressed at: $offset")
+                                        tryAwaitRelease()
+                                        Log.d("AddressCard", "Released at: $offset")
+                                    },
+                                    onTap = { offset ->
+                                        Log.d("AddressCard", "Tapped at: $offset")
+                                    },
+                                    onDoubleTap = { offset ->
+                                        Log.d("AddressCard", "Double tapped at: $offset")
+                                    },
+                                    onLongPress = { offset ->
+                                        Log.d("AddressCard", "Long pressed at: $offset")
+                                    }
+                                )
+                            }/*.pointerInteropFilter { motionEvent ->
+                            when (motionEvent.action) {
+                                MotionEvent.ACTION_DOWN -> {
+                                    Log.d("AddressCard", "Action Down: ${motionEvent.x}, ${motionEvent.y}")
+                                    isMapInteracting = true
+                                    isScrollingEnabled = false
+                                    true
+                                }
+                                MotionEvent.ACTION_MOVE -> {
+                                    Log.d("AddressCard", "Action Move: ${motionEvent.x}, ${motionEvent.y}")
+                                    isMapInteracting = true
+                                    false
+                                }
+                                MotionEvent.ACTION_UP -> {
+                                    Log.d("AddressCard", "Action Up: ${motionEvent.x}, ${motionEvent.y}")
+                                    isMapInteracting = false
+                                    isScrollingEnabled = true
+                                    true
+                                }
+                                MotionEvent.ACTION_CANCEL -> {
+                                    Log.d("AddressCard", "Action Cancel: ${motionEvent.x}, ${motionEvent.y}")
+                                    isMapInteracting = false
+                                    isScrollingEnabled = true
+                                    true
+                                }
+                                else -> {
+                                    Log.d("AddressCard", "Other action: ${motionEvent.action}, ${motionEvent.x}, ${motionEvent.y}")
+                                    *//*isMapInteracting = false
+                                    isScrollingEnabled = true*//*
+                                    false
+                                }
+                            }
+                        }*/,
+                        address = "Севкабель Порт, Кожевенная линия, 40, "
                     )
                 }
                 item {
-                    screenState.participants.let { it1 ->
-                        Subscribers(
-                            modifier = Modifier,
-                            title = stringResource(id = R.string.participants),
-                            avatarsList = it1
-                        ) {
-                            screenState.eventDetails?.let { it2 -> onParticipantsClick(it2.id) }
+                    Subscribers(
+                        modifier = Modifier,
+                        title = stringResource(id = R.string.participants),
+                        subscribersCount = /*screenState.participantsCount*/15,
+                        avatarsList = screenState.participants
+                    ) {
+                        screenState.eventDetails?.let { participant ->
+                            onParticipantsClick(
+                                participant.id
+                            )
                         }
                     }
                 }
@@ -188,21 +238,21 @@ internal fun ScreenEventDetails(
                 item {
                     DifferentEvents(
                         modifier = Modifier
-                            .padding(bottom = if (!screenState.buttonStatus) 116.dp else 0.dp),
-                        componentName = "Другие встречи сообщества",
+                            .padding(bottom = if (!screenState.buttonStatus.buttonStatus) 116.dp else 0.dp),
+                        componentName = stringResource(R.string.other_community_events),
                         eventsList = screenState.otherEvents,
                         onEventClick = onEventClick
                     )
                 }
             }
-            if (showButton && !screenState.buttonStatus) {
+            if (showButton && !screenState.buttonStatus.buttonStatus) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .shadow(
-                            elevation = 32.dp,
-                            spotColor = Color(0x33000000),
-                            ambientColor = Color(0x33000000),
+                            elevation = 60.dp,
+                            /*spotColor = Color(0x33000000),
+                            ambientColor = Color(0x33000000),*/
                             clip = false
                         )
                         .align(Alignment.BottomCenter)
@@ -218,21 +268,47 @@ internal fun ScreenEventDetails(
                         SimpleTextField(
                             modifier = Modifier
                                 .padding(bottom = 12.dp),
-                            text = "Всего 30 мест. Если передумаете — отпишитесь",
+                            text = if (!screenState.buttonStatus.isRegistered) {
+                                "Всего 30 мест. Если передумаете — отпишитесь"
+                            } else {
+                                stringResource(R.string.registered_to_event)
+                            },
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
                             lineHeight = 16.sp,
-                            color = Color(0xFF9A10F0)
+                            color =
+                            if (!screenState.buttonStatus.isRegistered) {
+                                Color(0xFF9A10F0)
+                            } else {
+                                Color(0xFF00BF59)
+                            }
                         )
-                        FloatingCustomButton(
-                            modifier = Modifier,
-                            text = stringResource(R.string.start_registration_to_event),
-                            buttonStyle = ButtonStyle.Enable
-                        ) {
-                            screenState.eventDetails?.let { event -> onSignUpToEventClick(event.id) }
+                        when (screenState.buttonStatus.isRegistered) {
+                            true -> {
+                                FloatingCustomButton(
+                                    modifier = Modifier,
+                                    text = stringResource(R.string.cant_go_to_event),
+                                    buttonStyle = ButtonStyle.Secondary
+                                ) {
+
+                                }
+                            }
+
+                            false -> {
+                                FloatingCustomButton(
+                                    modifier = Modifier,
+                                    text = stringResource(R.string.start_registration_to_event),
+                                    buttonStyle = ButtonStyle.Enable
+                                ) {
+                                    screenState.eventDetails?.let { event ->
+                                        onSignUpToEventClick(
+                                            event.id
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
-
                 }
             }
         }

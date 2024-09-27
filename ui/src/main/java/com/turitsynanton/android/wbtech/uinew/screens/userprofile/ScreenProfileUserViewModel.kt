@@ -3,6 +3,7 @@ package com.turitsynanton.android.wbtech.uinew.screens.userprofile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.turitsynanton.android.wbtech.domain.usecases.community.ISubscribeToCommunityUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetCommunitiesForUserUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetEventsForUserUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.userprofile.IGetUserFullInfoUseCase
@@ -27,7 +28,8 @@ internal class ScreenProfileUserViewModel(
     private val communityCardMapper: CommunityCardMapper,
     private val getUserFullInfoUseCase: IGetUserFullInfoUseCase,
     private val getEventsForUserUseCase: IGetEventsForUserUseCase,
-    private val getCommunitiesForUserUseCase: IGetCommunitiesForUserUseCase
+    private val getCommunitiesForUserUseCase: IGetCommunitiesForUserUseCase,
+    private val subscribeToCommunity: ISubscribeToCommunityUseCase
 ): ViewModel() {
     private val _userInfo: MutableStateFlow<UiPerson?> = MutableStateFlow(null)
     private val userInfo: StateFlow<UiPerson?> = _userInfo.asStateFlow()
@@ -70,6 +72,11 @@ internal class ScreenProfileUserViewModel(
             getCommunitiesForUserUseCase.execute(userId).collect { communities->
                 _communities.update { communities.mapCommunityToUi(communityCardMapper) }
             }
+        }
+    }
+    fun subscribeToCommunity(communityId: String) {
+        viewModelScope.launch {
+            subscribeToCommunity.execute(communityId)
         }
     }
 }

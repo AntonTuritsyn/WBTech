@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.experiment.eventdetailsscreen
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.mapLatest
@@ -27,7 +27,7 @@ class GetEventDetailsUseCase2(
 
 class GetEventDetails(
     private val getEventIdUseCase: GetEventIdUseCase,
-    private val dataListsRepository: IDataListsRepository,
+    private val dataListsRepository: DataListsRepository,
 ) {
     private val details = getEventIdUseCase.observe().mapLatest { id ->
         dataListsRepository.getEventDetailsFlowNew(id)

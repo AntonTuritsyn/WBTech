@@ -41,7 +41,7 @@ class InteractorRefreshEvents : KoinComponent {  // 3.2
 }
 
 //DOMAIN inner = никто снаружи не видит
-class UseCaseInnerGetEventsDetails() {  // 4
+class UseCaseInnerGetEventsDetails {  // 4
 
     private val streamEventsWithEventId =
         MutableSharedFlow<Int>() // Flow с id Event по которому мы хотим получить инфу
@@ -61,7 +61,7 @@ class UseCaseInnerGetEventsDetails() {  // 4
 }
 //---------------
 
-class GetEventDetails() : KoinComponent {
+class GetEventDetails : KoinComponent {
     val innerS: UseCaseInnerGetEventsDetails by inject()
 
     private val eventsPrepared = innerS.observe().mapLatest { it ->
@@ -72,7 +72,7 @@ class GetEventDetails() : KoinComponent {
     fun invoke(): Flow<EventDomainModel> = eventsPrepared
 }
 
-class GetCommunityDetail() : KoinComponent {
+class GetCommunityDetail : KoinComponent {
     val innerS: UseCaseInnerGetEventsDetails by inject()
 
     private val eventsPrepared = innerS.observe().map { it ->
@@ -83,7 +83,7 @@ class GetCommunityDetail() : KoinComponent {
     fun invoke(): Flow<CommunityDomainModel> = eventsPrepared
 }
 
-class GetEvents() {
+class GetEvents {
     fun invoke(): Flow<List<EventDomainModel>> = flowOf(listOf(EventDomainModel("kasdnfklsdf")))
 }
 
@@ -105,12 +105,12 @@ class InteractorFullInfo : KoinComponent {
 }
 
 // неиспользуемое---------
-class LoadGetCommunityDetail() {
+class LoadGetCommunityDetail {
     fun invoke(communityId: Int): Unit {
     }
 }
 
-class LoadGetEvents() : KoinComponent {
+class LoadGetEvents : KoinComponent {
 
     val details: GetEventDetails by inject()
 

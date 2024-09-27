@@ -1,5 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -16,24 +17,30 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
+import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.SubscribedButtonState
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 
+private const val TAG = "CommunityLargeCard"
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun CommunityLargeCard(
     modifier: Modifier,
     community: UiCommunity,
-    onSubscribeClick: () -> Unit
+    subscribeStatus: SubscribedButtonState,
+    onUnsubscribeClick: (String) -> Unit,
+    onSubscribeClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -51,14 +58,6 @@ internal fun CommunityLargeCard(
                 .clip(shape = RoundedCornerShape(16.dp)),
             contentScale = ContentScale.Crop
         )
-        /*Image(
-            painter = painterResource(id = R.drawable.event_example),
-            contentDescription = "",
-            modifier = modifier
-                .size(168.dp)
-                .clip(shape = RoundedCornerShape(16.dp)),
-            contentScale = ContentScale.Crop
-        )*/
         Spacer(modifier = Modifier.padding(4.dp))
         SimpleTextField(
             modifier = Modifier,
@@ -79,14 +78,27 @@ internal fun CommunityLargeCard(
                 }
             }
         }
-//        Spacer(modifier = Modifier.padding(16.dp))
-        GradientButton(
-            modifier = Modifier
-                .padding(top = 32.dp),
-            text = "Подписаться",
-            buttonStyle = ButtonStyle.Enable
-        ) {
-            onSubscribeClick()
+        if (subscribeStatus.isSubscribed) {
+            GradientButton(
+                modifier = Modifier
+                    .padding(top = 32.dp),
+                text = stringResource(R.string.unsubscribe),
+                buttonStyle = ButtonStyle.Secondary,
+                onClick = {
+                    onUnsubscribeClick(community.id)
+                    Log.d(TAG, "CommunityLargeCard: onUnsubscribeClick")
+                }
+            )
+        } else {
+            GradientButton(
+                modifier = Modifier
+                    .padding(top = 32.dp),
+                text = stringResource(R.string.subscribe),
+                buttonStyle = ButtonStyle.Enable,
+                onClick = {
+                    onSubscribeClick(community.id)
+                }
+            )
         }
     }
 }

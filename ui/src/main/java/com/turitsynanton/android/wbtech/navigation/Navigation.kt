@@ -27,5 +27,8 @@ enum class Navigation(var route: String) {
     PermissionsScreen("permissionsScreen"),
     //      registration
     Registration("registration"),
-    RegistrationScreen("registrationScreen")
+    RegistrationScreen("registrationScreen"),
+    //      addPhoto
+    AddPhoto("addPhoto"),
+    AddPhotoScreen("addPhotoScreen")
 }

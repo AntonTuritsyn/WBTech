@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.event
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.update
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class GetPastEventsUseCase(
-    private val dataListsRepository: IDataListsRepository
+internal class GetPastEventsUseCase(
+    private val dataListsRepository: DataListsRepository
 ): IGetPastEventsUseCase {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Suppress("NewApi")

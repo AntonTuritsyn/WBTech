@@ -12,10 +12,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExposedDropdownMenuBoxScope
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -179,7 +179,7 @@ internal fun Exposed (
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             Text("Скопировать", fontSize=18.sp, modifier = Modifier.padding(10.dp))
             Text("Вставить", fontSize=18.sp, modifier = Modifier.padding(10.dp))
-            Divider()
+            HorizontalDivider()
             Text("Настройки", fontSize=18.sp, modifier = Modifier.padding(10.dp))
         }
     }

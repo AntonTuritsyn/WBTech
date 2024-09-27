@@ -16,19 +16,11 @@ internal class EventRepositoryImpl(private val mapper: EventMapperToDomain) : Ev
 
     val eventsList = generateEvents(10, 40)
 
-    override fun getEventsList(): Flow<List<DomainEvent>> =
-        flow { emit(eventsList) }.map { it.mapEventToDomain(mapper) }
+    override fun getEventsListFlow(): Flow<List<DomainEvent>> =
+        flow { /*emit(getEventsListFlow) }.map { it.mapEventToDomain(mapper)*/ }
 
-    override fun getEventDetails(eventId: String): Flow<DomainEvent> =
+    override fun getEventDetailsFlow(eventId: String): Flow<DomainEvent> =
         flow {
-            eventsList.find { it.id == eventId }?.mapEventToDomain(mapper)?.let { emit(it) }
+//            getEventsListFlow.find { it.id == eventId }?.mapEventToDomain(mapper)?.let { emit(it) }
         }
-
-    override fun goToEvent(): Flow<Boolean> {
-        TODO("Not yet implemented")
-    }
-
-    override fun cancelEvent(): Flow<Boolean> {
-        TODO("Not yet implemented")
-    }
 }

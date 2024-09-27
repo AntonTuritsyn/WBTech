@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.event
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 internal class GetUpcomingEventsUseCase(
-    private val dataListsRepository: IDataListsRepository
+    private val dataListsRepository: DataListsRepository
 ) : IGetUpcomingEventsUseCase {
 
     @Suppress("NewApi")

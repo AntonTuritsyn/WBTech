@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.event
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
 
 internal class GetOtherEventsUseCase(
-    private val dataListsRepository: IDataListsRepository
+    private val dataListsRepository: DataListsRepository
 ): IGetOtherEventsUseCase {
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun execute(eventId: String): Flow<List<DomainEvent>> {

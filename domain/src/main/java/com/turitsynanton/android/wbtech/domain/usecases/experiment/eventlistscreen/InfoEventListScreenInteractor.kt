@@ -12,17 +12,17 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 
 internal class InfoEventListScreenInteractor(
-    private val getEventsListUseCaseNew: GetEventsListUseCaseNew,
-    private val filterEventUseCaseNew: FilterEventUseCaseNew,
-    private val getCommunitiesListUseCaseNew: GetCommunitiesListUseCaseNew,
-    private val getCommunityIdByEventIdUseCaseNew: GetCommunityIdByEventIdUseCaseNew
+    getEventsListUseCaseNew: GetEventsListUseCaseNew,
+    filterEventUseCaseNew: FilterEventUseCaseNew,
+    getCommunitiesListUseCaseNew: GetCommunitiesListUseCaseNew,
+    getCommunityIdByEventIdUseCaseNew: GetCommunityIdByEventIdUseCaseNew
 ): IInfoEventListScreenInteractor {
 
     private val innerFlow = combine(
         getEventsListUseCaseNew(),
         getCommunitiesListUseCaseNew(),
-        filterEventUseCaseNew.invoke(),
-        getCommunityIdByEventIdUseCaseNew.invoke() // TODO фильтр в usecase
+        filterEventUseCaseNew(),
+        getCommunityIdByEventIdUseCaseNew.invoke()
     ) { eventList, communitiesList, filteredEvents, communityId ->
         CombinedEventListScreenInfo(
             eventList = eventList,

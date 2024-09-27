@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.domain.usecases.event
 
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 internal class DisableButtonForPastEventUseCase(
-    private val dataListsRepository: IDataListsRepository
+    private val dataListsRepository: DataListsRepository
 ): IDisableButtonForPastEventUseCase {
     @Suppress("NewApi")
     override fun execute(eventId: String): Flow<Boolean> {
@@ -36,8 +36,6 @@ internal class DisableButtonForPastEventUseCase(
                 }
             }
         }.launchIn(CoroutineScope(Dispatchers.IO))
-
-        println("button: ${button.value}")
         return button
     }
 }

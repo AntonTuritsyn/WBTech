@@ -35,6 +35,8 @@ import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+private const val TAG = "ScreenCommunityDetails"
+
 @Composable
 internal fun ScreenCommunityDetails(
     modifier: Modifier = Modifier,
@@ -46,14 +48,13 @@ internal fun ScreenCommunityDetails(
     }),
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onSubscribeToCommunityClick: () -> Unit,
     onUsersClick: (String) -> Unit,
     onEventClick: (String) -> Unit
 ) {
 
     val screenState by screenCommunityDetailsViewModel.screenState
         .collectAsStateWithLifecycle()
-    Log.d("TAG", "screenState: ${screenState.pastEventsList}")
+
     Scaffold(
         topBar = {
             TopBar(
@@ -78,7 +79,14 @@ internal fun ScreenCommunityDetails(
                     MainInfoBlock(
                         modifier = Modifier,
                         community = community,
-                        onSubscribeClick = { onSubscribeToCommunityClick() }
+                        subscribeStatus = screenState.buttonState,
+                        subscribersCount = screenState.subscribersCount,
+                        onSubscribeClick = { communityId ->
+                            screenCommunityDetailsViewModel.subscribeToCommunity(communityId)
+                        },
+                        onUnsubscribeClick = { communityId ->
+                            screenCommunityDetailsViewModel.unsubscribeFromCommunity(communityId)
+                        },
                     ) {
                         onUsersClick(community.id)
                     }
@@ -106,10 +114,8 @@ internal fun ScreenCommunityDetails(
                     eventStyle = EventCardStyles.Full
                 ) {
                     onEventClick(screenState.eventsList[index].id)
-                    Log.d("TAG", "onEventClick: ${screenState.eventsList[index].id}")
                 }
             }
-
             item {
                 PastEventsRow(
                     modifier = Modifier,
@@ -125,7 +131,10 @@ internal fun ScreenCommunityDetails(
 internal fun MainInfoBlock(
     modifier: Modifier,
     community: UiCommunity,
-    onSubscribeClick: () -> Unit,
+    subscribeStatus: SubscribedButtonState,
+    subscribersCount: Int,
+    onSubscribeClick: (String) -> Unit,
+    onUnsubscribeClick: (String) -> Unit,
     onUsersClick: (String) -> Unit,
 ) {
     Column(
@@ -134,10 +143,14 @@ internal fun MainInfoBlock(
     ) {
         CommunityLargeCard(
             modifier = Modifier,
-            community = community
+            community = community,
+            subscribeStatus = subscribeStatus,
+            onUnsubscribeClick = { communityId ->
+                onUnsubscribeClick(communityId)
+            },
         )
-        {
-            onSubscribeClick()
+        { communityId ->
+            onSubscribeClick(communityId)
         }
         Spacer(
             modifier = Modifier
@@ -157,6 +170,7 @@ internal fun MainInfoBlock(
         )
         Subscribers(
             modifier = Modifier,
+            subscribersCount = subscribersCount,
             title = stringResource(id = R.string.subscribers),
             avatarsList = community.users
         ) {
@@ -186,20 +200,5 @@ internal fun PastEventsRow(
             eventsList = pastEventList,
             onEventClick = onEventClick
         )
-    }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-private fun ScreenCommunityPreview() {
-    ScreenCommunityDetails(
-        modifier = Modifier,
-        communityId = "",
-        onBackClick = {},
-        onShareClick = {},
-        onSubscribeToCommunityClick = {},
-        onUsersClick = {}
-    ) {
     }
 }

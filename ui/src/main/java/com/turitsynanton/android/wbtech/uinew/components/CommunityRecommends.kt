@@ -21,7 +21,7 @@ internal fun CommunityRecommends(
     modifier: Modifier,
     recommendationName: String,
     communitiesList: List<UiCommunityCard>,
-    subscribeButtonStyle: SubscribeButtonStyle,
+    subscribeButtonStyle: (String) -> Unit,
     onSubscribeButtonClick: (String) -> Unit,
     onElementClick: (String) -> Unit
 ) {
@@ -45,6 +45,7 @@ internal fun CommunityRecommends(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(communitiesList.size) { index ->
+                val isUserSubscribed = subscribeButtonStyle(communitiesList[index].id)
                 CommunitySmallCard(
                     modifier = Modifier
                         .then(
@@ -56,7 +57,11 @@ internal fun CommunityRecommends(
                         ),
                     image = communitiesList[index].image,
                     communityName = communitiesList[index].name,
-                    subscribeButtonStyle = subscribeButtonStyle,
+                    subscribeButtonStyle = SubscribeButtonStyle.Default/*if (isUserSubscribed) {
+                        SubscribeButtonStyle.Done
+                    } else {
+                        SubscribeButtonStyle.Default
+                    }*/,
                     onButtonClick = { onSubscribeButtonClick(communitiesList[index].id) }
                 ) {
                     onElementClick(communitiesList[index].id)
@@ -65,18 +70,3 @@ internal fun CommunityRecommends(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-private fun CommunityRecommendsPreview() {
-    CommunityRecommends(
-        modifier = Modifier,
-        recommendationName = "Сообщества для тестировщиков",
-        communitiesList = */
-/*generateCommunitiesList()*//*
-listOf(),
-        subscribeButtonStyle = SubscribeButtonStyle.Default,
-        onButtonClick = {}
-    ) {}
-}*/
