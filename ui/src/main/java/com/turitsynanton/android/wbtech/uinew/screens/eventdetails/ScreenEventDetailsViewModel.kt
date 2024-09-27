@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityIdByEventIdUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IGetVisitorsCountUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IDisableButtonForPastEventUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetOtherEventsUseCase
@@ -19,6 +20,7 @@ import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventMapper
 import com.turitsynanton.android.wbtech.models.mapper.PersonCardMapper
 import com.turitsynanton.android.wbtech.uinew.state.ScreenEventDetailsState
+import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.EventRegistrationButtonState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -29,19 +31,21 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val TAG = "ScreenEventDetailsViewModel"
+
 internal class ScreenEventDetailsViewModel(
     eventId: String,
     private val eventCardMapper: EventCardMapper,
     private val eventMapper: EventMapper,
     private val communityMapper: CommunityMapper,
     private val personCardMapper: PersonCardMapper,
-    private val iGetEventDetailsUseCase: IGetEventDetailsUseCase,
-    private val iGetCommunityIdByEventIdUseCase: IGetCommunityIdByEventIdUseCase,
-    private val getCommunityIdByEventIdUseCase: IGetCommunityIdByEventIdUseCaseNew,
-    private val getOtherEventsUseCase: IGetOtherEventsUseCase,
+    private val iGetEventDetails: IGetEventDetailsUseCase,
+    private val iGetCommunityIdByEventId: IGetCommunityIdByEventIdUseCase,
+    private val getCommunityIdByEventId: IGetCommunityIdByEventIdUseCaseNew,
+    private val getOtherEvents: IGetOtherEventsUseCase,
     private val getParticipantsListUseCase: IGetParticipantsListUseCase,
     private val disableButtonForPastEventUseCase: IDisableButtonForPastEventUseCase,
-    private val isRegisteredForEventUseCase: IIsRegisteredForEventUseCase
+    private val isRegisteredForEventUseCase: IIsRegisteredForEventUseCase,
+    private val getVisitorsCount: IGetVisitorsCountUseCase
 ) : ViewModel() {
 
     private val _eventDetails: MutableStateFlow<UiEvent?> = MutableStateFlow(null)
@@ -60,25 +64,31 @@ internal class ScreenEventDetailsViewModel(
         MutableStateFlow(emptyList())
     private val participantsList: StateFlow<List<UiPersonCard>> = _participantsList
 
-    private val _buttonStatus: MutableStateFlow<ButtonState> = MutableStateFlow(ButtonState())
-    private val buttonStatus: StateFlow<ButtonState> = _buttonStatus
+    private val _buttonStatus: MutableStateFlow<EventRegistrationButtonState> =
+        MutableStateFlow(EventRegistrationButtonState())
+    private val buttonStatus: StateFlow<EventRegistrationButtonState> = _buttonStatus
+
+    private val _visitorsCount: MutableStateFlow<Int> = MutableStateFlow(0)
+    private val visitorsCount: StateFlow<Int> = _visitorsCount.asStateFlow()
 
 
     init {
         getEventDetails(eventId)
-        getCommunityIdByEventIdUseCase.execute(eventId)
+        getCommunityIdByEventId.execute(eventId)
         getCommunityDetailsByEventId(eventId)
         getOtherEvents(eventId)
         getParticipantsList(eventId)
         getButtonStatus(eventId)
         getRegisteredStatus(eventId)
+        getVisitorsCount(eventId)
     }
 
     private fun getEventDetailsFlow(): StateFlow<UiEvent?> = eventDetails
     private fun getOtherEventsFlow(): StateFlow<List<UiEventCard>> = otherEventList
     private fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = communityDetails
     private fun getParticipantsListFlow(): StateFlow<List<UiPersonCard>> = participantsList
-    private fun getButtonStatusFlow(): StateFlow<ButtonState> = buttonStatus
+    private fun getButtonStatusFlow(): StateFlow<EventRegistrationButtonState> = buttonStatus
+    fun getVisitorsCountFlow(): StateFlow<Int> = visitorsCount
 
     val screenState: StateFlow<ScreenEventDetailsState> = combine(
         getEventDetailsFlow(),
@@ -98,15 +108,14 @@ internal class ScreenEventDetailsViewModel(
 
     private fun getEventDetails(eventsId: String) {
         viewModelScope.launch {
-//            getEventDetails.invoke()
-            iGetEventDetailsUseCase.execute(eventsId).collect { eventDetails ->
+            iGetEventDetails.execute(eventsId).collect { eventDetails ->
                 _eventDetails.update { eventMapper.mapToUi(eventDetails) }
             }
         }
     }
 
     private fun getCommunityDetailsByEventId(eventId: String) {
-        getCommunityIdByEventIdUseCase.execute(eventId)
+        getCommunityIdByEventId.execute(eventId)
         viewModelScope.launch {
             /*interactorFullInfo.invoke().collect { community ->
                 Log.d("TAG", "eventList: ${community.eventList}")
@@ -115,7 +124,7 @@ internal class ScreenEventDetailsViewModel(
                 Log.d("TAG", "communityId: ${community.communityId}")
                 _communityId.update { community.communityId }
             }*/
-            iGetCommunityIdByEventIdUseCase.execute(eventId).collect { community ->
+            iGetCommunityIdByEventId.execute(eventId).collect { community ->
                 Log.d("TAG", "communityId.value: ${communityId}")
                 _communityDetails.update { community?.let { it1 -> communityMapper.mapToUi(it1) } }
             }
@@ -124,7 +133,7 @@ internal class ScreenEventDetailsViewModel(
 
     private fun getOtherEvents(eventId: String) {
         viewModelScope.launch {
-            getOtherEventsUseCase.execute(eventId = eventId).collect { list ->
+            getOtherEvents.execute(eventId = eventId).collect { list ->
                 _otherEventList.update { list.map { eventCardMapper.mapToUi(it) } }
             }
         }
@@ -146,10 +155,6 @@ internal class ScreenEventDetailsViewModel(
                 updateButtonStatus { buttonState ->
                     buttonState.copy(buttonStatus = buttonStatus)
                 }
-                /*_buttonStatus.update { ButtonState(
-                    buttonStatus = buttonStatus,
-                    isRegistered = false
-                ) }*/
             }
         }
     }
@@ -157,19 +162,22 @@ internal class ScreenEventDetailsViewModel(
     private fun getRegisteredStatus(eventId: String) {
         viewModelScope.launch {
             isRegisteredForEventUseCase.execute(eventId).collect { isRegistered ->
-                Log.d(TAG, "isRegistered: $isRegistered")
                 updateButtonStatus { buttonState ->
-                    buttonState.copy(isRegistered = isRegistered) }
+                    buttonState.copy(isRegistered = isRegistered)
+                }
             }
         }
     }
 
-    private fun updateButtonStatus(onUpdate: (ButtonState) -> ButtonState) {
+    private fun updateButtonStatus(onUpdate: (EventRegistrationButtonState) -> EventRegistrationButtonState) {
         _buttonStatus.update { onUpdate(it) }
     }
-}
 
-internal data class ButtonState(
-    val buttonStatus: Boolean = false,
-    val isRegistered: Boolean = false
-)
+    private fun getVisitorsCount(eventId: String) {
+        viewModelScope.launch {
+            getVisitorsCount.execute(eventId).collect { count ->
+                _visitorsCount.update { count }
+            }
+        }
+    }
+}

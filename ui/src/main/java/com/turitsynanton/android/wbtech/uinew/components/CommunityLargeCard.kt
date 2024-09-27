@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,9 +27,9 @@ import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.uinew.items.GradientButton
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
-import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.SubscribedButtonState
 import com.turitsynanton.android.wbtech.uinew.utils.ButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
+import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.CommunitySubscribeButtonState
 
 private const val TAG = "CommunityLargeCard"
 @OptIn(ExperimentalLayoutApi::class)
@@ -38,7 +37,7 @@ private const val TAG = "CommunityLargeCard"
 internal fun CommunityLargeCard(
     modifier: Modifier,
     community: UiCommunity,
-    subscribeStatus: SubscribedButtonState,
+    subscribeStatus: CommunitySubscribeButtonState,
     onUnsubscribeClick: (String) -> Unit,
     onSubscribeClick: (String) -> Unit
 ) {

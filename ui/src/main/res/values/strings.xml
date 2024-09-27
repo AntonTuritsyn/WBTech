@@ -48,4 +48,5 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="cant_go_to_event">Не смогу пойти</string>
     <string name="subscribe">Подписаться</string>
     <string name="unsubscribe">Вы подписаны</string>
+    <string name="communities_for_you">Сообщества для Вас</string>
 </resources>

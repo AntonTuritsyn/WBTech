@@ -79,6 +79,7 @@ internal fun ScreenEventDetails(
     onSignUpToEventClick: (String) -> Unit
 ) {
     val screenState by eventDetailsViewModel.screenState.collectAsStateWithLifecycle()
+    val visitorsCount by eventDetailsViewModel.getVisitorsCountFlow().collectAsStateWithLifecycle()
 
     var isMapInteracting by remember { mutableStateOf(false) }
     var isScrollingEnabled by remember { mutableStateOf(true) }
@@ -213,8 +214,8 @@ internal fun ScreenEventDetails(
                 item {
                     Subscribers(
                         modifier = Modifier,
+                        usersCount = visitorsCount,
                         title = stringResource(id = R.string.participants),
-                        subscribersCount = /*screenState.participantsCount*/15,
                         avatarsList = screenState.participants
                     ) {
                         screenState.eventDetails?.let { participant ->

@@ -24,7 +24,7 @@ private const val AVATARS_TO_SHOW = 5
 internal fun Subscribers(
     modifier: Modifier,
     title: String,
-    subscribersCount: Int,
+    usersCount: Int,
     avatarsList: List<UiPersonCard>,
     onClick: () -> Unit
 ) {
@@ -50,7 +50,7 @@ internal fun Subscribers(
             userScrollEnabled = false
         ) {
 //            TODO логику расчета количества подписчиков перенести в VM (для подписки на поток)
-            when (subscribersCount) {
+            when (usersCount) {
                 0 -> {
                     items(avatarsList.size) { index ->
                         Avatar(
@@ -69,7 +69,7 @@ internal fun Subscribers(
                         )
                     }
                     item {
-                        MorePeople(modifier = Modifier, numberOfPeople = (subscribersCount))
+                        MorePeople(modifier = Modifier, numberOfPeople = (usersCount))
                     }
                 }
             }
