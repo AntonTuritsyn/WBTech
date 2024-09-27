@@ -57,11 +57,18 @@ internal fun ScreenSubscribers(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
+                        .then(
+                            when (index) {
+                                in 0 .. 2 -> Modifier.padding(top = 32.dp)
+                                in user.size - 3..< user.size -> Modifier.padding(bottom = 32.dp)
+                                else -> Modifier.padding(vertical = 0.dp)
+                            }
+                        )
+                        /*.padding(
 //                            TODO исправить. Выглядит красиво, но постоянно перерисовывается
                             top = if (index < 3) 32.dp else 0.dp,
                             bottom = if (index >= user.size - 3) 32.dp else 0.dp
-                        ),
+                        )*/,
                     contentAlignment = Alignment.Center
                 ) {
                     Person(

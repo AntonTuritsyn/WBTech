@@ -7,15 +7,13 @@ import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityI
 import com.turitsynanton.android.wbtech.domain.usecases.event.IDisableButtonForPastEventUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetOtherEventsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.event.IIsRegisteredForEventUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
 import com.turitsynanton.android.wbtech.domain.usecases.participants.IGetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunity
-import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEvent
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPersonCard
-import com.turitsynanton.android.wbtech.models.mapper.CommunityCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.CommunityMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventMapper
@@ -30,34 +28,27 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+private const val TAG = "ScreenEventDetailsViewModel"
 internal class ScreenEventDetailsViewModel(
     eventId: String,
     private val eventCardMapper: EventCardMapper,
     private val eventMapper: EventMapper,
-    private val communityCardMapper: CommunityCardMapper,
     private val communityMapper: CommunityMapper,
     private val personCardMapper: PersonCardMapper,
     private val iGetEventDetailsUseCase: IGetEventDetailsUseCase,
-    private val interactorFullInfo: IInfoEventListScreenInteractor,
     private val iGetCommunityIdByEventIdUseCase: IGetCommunityIdByEventIdUseCase,
     private val getCommunityIdByEventIdUseCase: IGetCommunityIdByEventIdUseCaseNew,
     private val getOtherEventsUseCase: IGetOtherEventsUseCase,
     private val getParticipantsListUseCase: IGetParticipantsListUseCase,
     private val disableButtonForPastEventUseCase: IDisableButtonForPastEventUseCase,
-    ) : ViewModel() {
+    private val isRegisteredForEventUseCase: IIsRegisteredForEventUseCase
+) : ViewModel() {
 
     private val _eventDetails: MutableStateFlow<UiEvent?> = MutableStateFlow(null)
     private val eventDetails: StateFlow<UiEvent?> = _eventDetails.asStateFlow()
 
-    private val _eventList: MutableStateFlow<List<UiEventCard>> = MutableStateFlow(emptyList())
-    private val eventList: StateFlow<List<UiEventCard>> = _eventList.asStateFlow()
-
     private val _otherEventList: MutableStateFlow<List<UiEventCard>> = MutableStateFlow(emptyList())
     private val otherEventList: StateFlow<List<UiEventCard>> = _otherEventList.asStateFlow()
-
-    private val _communitiesList: MutableStateFlow<List<UiCommunityCard>> =
-        MutableStateFlow(emptyList())
-    private val communitiesList: StateFlow<List<UiCommunityCard>> = _communitiesList.asStateFlow()
 
     private val _communityDetails: MutableStateFlow<UiCommunity?> = MutableStateFlow(null)
     private val communityDetails: StateFlow<UiCommunity?> = _communityDetails.asStateFlow()
@@ -69,25 +60,25 @@ internal class ScreenEventDetailsViewModel(
         MutableStateFlow(emptyList())
     private val participantsList: StateFlow<List<UiPersonCard>> = _participantsList
 
-    private val _buttonStatus: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    private val buttonStatus: StateFlow<Boolean> = _buttonStatus
+    private val _buttonStatus: MutableStateFlow<ButtonState> = MutableStateFlow(ButtonState())
+    private val buttonStatus: StateFlow<ButtonState> = _buttonStatus
 
 
     init {
         getEventDetails(eventId)
         getCommunityIdByEventIdUseCase.execute(eventId)
-        getList()
         getCommunityDetailsByEventId(eventId)
         getOtherEvents(eventId)
         getParticipantsList(eventId)
         getButtonStatus(eventId)
+        getRegisteredStatus(eventId)
     }
 
-    fun getEventDetailsFlow(): StateFlow<UiEvent?> = eventDetails
-    fun getOtherEventsFlow(): StateFlow<List<UiEventCard>> = otherEventList
-    fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = communityDetails
-    fun getParticipantsListFlow(): StateFlow<List<UiPersonCard>> = participantsList
-    fun getButtonStatusFlow(): StateFlow<Boolean> = buttonStatus
+    private fun getEventDetailsFlow(): StateFlow<UiEvent?> = eventDetails
+    private fun getOtherEventsFlow(): StateFlow<List<UiEventCard>> = otherEventList
+    private fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = communityDetails
+    private fun getParticipantsListFlow(): StateFlow<List<UiPersonCard>> = participantsList
+    private fun getButtonStatusFlow(): StateFlow<ButtonState> = buttonStatus
 
     val screenState: StateFlow<ScreenEventDetailsState> = combine(
         getEventDetailsFlow(),
@@ -105,7 +96,7 @@ internal class ScreenEventDetailsViewModel(
         )
     }.stateIn(viewModelScope, SharingStarted.Lazily, ScreenEventDetailsState())
 
-    fun getEventDetails(eventsId: String) {
+    private fun getEventDetails(eventsId: String) {
         viewModelScope.launch {
 //            getEventDetails.invoke()
             iGetEventDetailsUseCase.execute(eventsId).collect { eventDetails ->
@@ -114,31 +105,7 @@ internal class ScreenEventDetailsViewModel(
         }
     }
 
-    fun getList() {
-        viewModelScope.launch {
-            interactorFullInfo.invoke().collect { list ->
-                Log.d("TAG", "getList: $list")
-                _eventList.update { list.eventList.map { eventCardMapper.mapToUi(it) } }
-            }
-        }
-    }
-
-    private fun getCommunitiesList() {
-        viewModelScope.launch {
-            interactorFullInfo.invoke().collect { list ->
-                Log.d("TAG", "getList: ${list.communitiesList}")
-                _communitiesList.update { list.communitiesList.map { communityCardMapper.mapToUi(it) } }
-            }
-        }
-        /*viewModelScope.launch {
-            iGetCommunitiesListUseCase.execute().collect { communitiesList ->
-                _communitiesListDomain.update { communitiesList }
-                _communitiesList.update { communitiesList.map { communityCardMapper.mapToUi(it) } }
-            }
-        }*/
-    }
-
-    fun getCommunityDetailsByEventId(eventId: String) {
+    private fun getCommunityDetailsByEventId(eventId: String) {
         getCommunityIdByEventIdUseCase.execute(eventId)
         viewModelScope.launch {
             /*interactorFullInfo.invoke().collect { community ->
@@ -176,8 +143,33 @@ internal class ScreenEventDetailsViewModel(
     private fun getButtonStatus(eventId: String) {
         viewModelScope.launch {
             disableButtonForPastEventUseCase.execute(eventId).collect { buttonStatus ->
-                _buttonStatus.update { buttonStatus }
+                updateButtonStatus { buttonState ->
+                    buttonState.copy(buttonStatus = buttonStatus)
+                }
+                /*_buttonStatus.update { ButtonState(
+                    buttonStatus = buttonStatus,
+                    isRegistered = false
+                ) }*/
             }
         }
     }
+
+    private fun getRegisteredStatus(eventId: String) {
+        viewModelScope.launch {
+            isRegisteredForEventUseCase.execute(eventId).collect { isRegistered ->
+                Log.d(TAG, "isRegistered: $isRegistered")
+                updateButtonStatus { buttonState ->
+                    buttonState.copy(isRegistered = isRegistered) }
+            }
+        }
+    }
+
+    private fun updateButtonStatus(onUpdate: (ButtonState) -> ButtonState) {
+        _buttonStatus.update { onUpdate(it) }
+    }
 }
+
+internal data class ButtonState(
+    val buttonStatus: Boolean = false,
+    val isRegistered: Boolean = false
+)

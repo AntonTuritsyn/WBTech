@@ -41,4 +41,11 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="notifications">Включить уведомления\n</string>
     <string name="delete_profile">Удалить профиль</string>
     <string name="start_registration_to_event">Записаться на встречу</string>
+    <string name="choose_interests"><![CDATA[Выберите интересы, чтобы мы рекомендовали полезные встречи]]></string>
+    <string name="save">Сохранить</string>
+    <string name="other_community_events">Другие встречи сообщества</string>
+    <string name="registered_to_event">✓ Вы пойдёте</string>
+    <string name="cant_go_to_event">Не смогу пойти</string>
+    <string name="subscribe">Подписаться</string>
+    <string name="unsubscribe">Вы подписаны</string>
 </resources>

@@ -39,7 +39,8 @@ internal fun ScreenParticipants(
                 modifier = Modifier,
                 title = "Пойдут на встречу",
                 topBarStyle = TopBarStyles.Empty,
-                onIconClick = {}) {
+                onIconClick = {}
+            ) {
                 onBackClick()
             }
         }
@@ -55,12 +56,7 @@ internal fun ScreenParticipants(
             items(user.size) { index ->
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-//                            TODO исправить. Выглядит красиво, но постоянно перерисовывается
-                            top = if (index < 3) 32.dp else 0.dp,
-                            bottom = if (index >= user.size - 3) 32.dp else 0.dp
-                        ),
+                        .fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
                     Person(

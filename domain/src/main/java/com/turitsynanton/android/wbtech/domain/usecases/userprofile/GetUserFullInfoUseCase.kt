@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.userprofile
 
 import com.turitsynanton.android.wbtech.domain.models.DomainUser
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 internal class GetUserFullInfoUseCase(
-    private val dataListsRepository: IDataListsRepository
+    private val dataListsRepository: DataListsRepository
 ): IGetUserFullInfoUseCase {
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun execute(userId: String): Flow<DomainUser?> {

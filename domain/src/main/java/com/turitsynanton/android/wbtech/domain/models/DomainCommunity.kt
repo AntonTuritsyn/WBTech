@@ -7,5 +7,6 @@ data class DomainCommunity(
     val icon: String,
     val tags: List<DomainTag>,
     val users: List<DomainUser>,
-    val events: List<DomainEvent>
+    val events: List<DomainEvent>,
+    val isSubscribed: Boolean = false
 )

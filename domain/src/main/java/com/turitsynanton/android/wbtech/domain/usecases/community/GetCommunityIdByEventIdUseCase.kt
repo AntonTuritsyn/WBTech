@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.community
 
 import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
 
-internal class GetCommunityIdByEventIdUseCase(private val dataListsRepository: IDataListsRepository) :
+internal class GetCommunityIdByEventIdUseCase(private val dataListsRepository: DataListsRepository) :
     IGetCommunityIdByEventIdUseCase {
     override fun execute(
         eventId: String

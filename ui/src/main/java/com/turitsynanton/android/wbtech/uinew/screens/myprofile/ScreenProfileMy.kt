@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.screens.myprofile
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,16 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
@@ -57,6 +52,7 @@ import org.koin.androidx.compose.koinViewModel
 
 private const val COMMUNITIES_VISIBILITY_KEY = "COMMUNITIES_VISIBILITY_KEY"
 private const val EVENTS_VISIBILITY_KEY = "EVENTS_VISIBILITY_KEY"
+
 @Composable
 internal fun ScreenProfileMy(
     modifier: Modifier = Modifier,
@@ -64,9 +60,10 @@ internal fun ScreenProfileMy(
     onBackClick: () -> Unit,
     onEditClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onChangePhoto: () -> Unit,
     onSocialClick: () -> Unit,
-    onEventClick: () -> Unit,
-    onCommunityClick: () -> Unit,
+    onEventClick: (String) -> Unit,
+    onCommunityClick: (String) -> Unit,
     onLogOutClick: () -> Unit
 ) {
 //    TODO screenState
@@ -86,16 +83,18 @@ internal fun ScreenProfileMy(
                 .padding(it)
                 .padding(bottom = 16.dp)
         ) {
+            Log.d("TAG", "isEdit: $isEdit")
             item {
                 userInfo?.let { user ->
                     PhotoBlock(
                         user = user,
                         isEdit = isEdit,
-                        onBackClick = { onBackClick() },
+                        onBackClick = { if (!isEdit) { onBackClick() } },
                         onEditClick = { profileUserViewModel.changeEditMode() },
                         onCancelEdit = { profileUserViewModel.changeEditMode() },
-                        onSaveClick = { onSaveClick() }) {
-                    }
+                        onSaveClick = { onSaveClick() },
+                        onChangePhoto = { onChangePhoto() }
+                    )
                 }
             }
             item {
@@ -127,8 +126,12 @@ internal fun ScreenProfileMy(
                         isEdit = isEdit,
                         eventsList = eventsList,
                         communitiesList = communitiesList,
-                        onEventClick = { onEventClick() },
-                        onCommunityClick = { onCommunityClick() }
+                        onEventClick = { eventId ->
+                            onEventClick(eventId)
+                        },
+                        onCommunityClick = { community ->
+                            onCommunityClick(community)
+                        }
                     )
                 }
             }
@@ -218,7 +221,9 @@ internal fun PhotoBlock(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
-                    ) { onChangePhoto() }
+                    ) {
+                        onChangePhoto()
+                    }
                     .padding(8.dp),
                 text = stringResource(R.string.change_photo),
                 fontSize = 16.sp,
@@ -509,8 +514,8 @@ internal fun ListsBlock(
     isEdit: Boolean,
     eventsList: List<UiEventCard>,
     communitiesList: List<UiCommunityCard>,
-    onEventClick: () -> Unit,
-    onCommunityClick: () -> Unit,
+    onEventClick: (String) -> Unit,
+    onCommunityClick: (String) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -521,18 +526,19 @@ internal fun ListsBlock(
                 .fillMaxWidth(),
             componentName = stringResource(R.string.my_events),
             eventsList = eventsList
-        ) {
-            onEventClick()
+        ) { eventId ->
+            onEventClick(eventId)
         }
         Spacer(modifier = Modifier.padding(20.dp))
-        CommunityRecommends(
+        /*CommunityRecommends(
             modifier = Modifier
                 .fillMaxWidth(),
             recommendationName = stringResource(R.string.my_communities),
             communitiesList = communitiesList,
             subscribeButtonStyle = SubscribeButtonStyle.Done,
-            onSubscribeButtonClick = { /*TODO*/ }) {
-            onCommunityClick()
-        }
+            onSubscribeButtonClick = { *//*TODO*//* }
+        ) { communityId ->
+            onCommunityClick(communityId)
+        }*/
     }
 }

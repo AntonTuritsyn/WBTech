@@ -24,6 +24,7 @@ private const val AVATARS_TO_SHOW = 5
 internal fun Subscribers(
     modifier: Modifier,
     title: String,
+    subscribersCount: Int,
     avatarsList: List<UiPersonCard>,
     onClick: () -> Unit
 ) {
@@ -42,14 +43,15 @@ internal fun Subscribers(
         )
         Spacer(modifier = Modifier.padding(8.dp))
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(-10.dp),
+            horizontalArrangement = Arrangement.spacedBy((-10).dp),
             reverseLayout = false,
             modifier = Modifier
                 .fillMaxWidth(),
             userScrollEnabled = false
         ) {
-            when (avatarsList.size) {
-                in 0..AVATARS_TO_SHOW -> {
+//            TODO логику расчета количества подписчиков перенести в VM (для подписки на поток)
+            when (subscribersCount) {
+                0 -> {
                     items(avatarsList.size) { index ->
                         Avatar(
                             modifier = Modifier,
@@ -67,28 +69,11 @@ internal fun Subscribers(
                         )
                     }
                     item {
-//            изменить numberOfPeople
-                        MorePeople(modifier = Modifier, numberOfPeople = (avatarsList.size - AVATARS_TO_SHOW))
+                        MorePeople(modifier = Modifier, numberOfPeople = (subscribersCount))
                     }
                 }
             }
 
         }
     }
-
 }
-
-/*@Preview(
-    *//*widthDp = 400,
-    heightDp = 200,
-    backgroundColor = 0xFF00FF00,*//*
-    showBackground = true,
-)
-@Composable
-private fun SubscriberPreview() {
-    Subscribers(
-        modifier = Modifier,
-        title = stringResource(id = R.string.subscribers),
-        avatarsList = avatars
-    ) {}
-}*/

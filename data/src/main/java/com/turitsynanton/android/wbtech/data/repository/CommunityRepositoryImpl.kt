@@ -19,6 +19,6 @@ internal class CommunityRepositoryImpl(private val mapper: CommunityMapperToDoma
     override fun getCommunitiesListFlow(): Flow<List<DomainCommunity>> =
         flow { emit(communityList) }.map { it.mapCommunityToDomain(mapper) }
 
-    override fun getCommunityDetailsFlow(comunityId: String): Flow<DomainCommunity?> =
-        flow { emit(communityList.find { it.id == comunityId }?.mapCommunityToDomain(mapper)) }
+    override fun getCommunityDetailsFlow(communityId: String): Flow<DomainCommunity?> =
+        flow { emit(communityList.find { it.id == communityId }?.mapCommunityToDomain(mapper)) }
 }

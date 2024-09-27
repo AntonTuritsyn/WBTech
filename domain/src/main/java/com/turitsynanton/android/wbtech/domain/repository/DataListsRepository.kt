@@ -2,13 +2,12 @@ package com.turitsynanton.android.wbtech.domain.repository
 
 import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
-import com.turitsynanton.android.wbtech.domain.models.DomainProfile
 import com.turitsynanton.android.wbtech.domain.models.DomainUser
 import kotlinx.coroutines.flow.Flow
 
-interface IDataListsRepository {
+interface DataListsRepository {
 
-    fun getCommunityDetailsFlow(comunityId: String) : Flow<DomainCommunity>
+    fun getCommunityDetailsFlow(communityId: String) : Flow<DomainCommunity>
 
     fun getCommunitiesListFlow() : Flow<List<DomainCommunity>>
 
@@ -24,4 +23,7 @@ interface IDataListsRepository {
 
     fun getProfileFlow() : Flow<DomainUser>
 
+    fun getMyProfileFlow() : Flow<DomainUser>
+
+    fun updateCommunitiesList(community: DomainCommunity)
 }

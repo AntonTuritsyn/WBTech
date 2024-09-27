@@ -1,5 +1,8 @@
 package com.turitsynanton.android.wbtech.data.mocks
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+
 val names = listOf(
     "Александр", "Мария", "Дмитрий", "Анна", "Сергей", "Екатерина", "Алексей", "Елена",
     "Андрей", "Ольга", "Иван", "Наталья", "Максим", "Татьяна", "Владимир", "Ирина",
@@ -736,3 +739,8 @@ val codes = listOf(
 
 val myProfile = generateProfile()
 val mainUsersList = generateUsersList(20, 40) + myProfile
+@RequiresApi(Build.VERSION_CODES.O)
+val generatedCommunitiesList = generateCommunitiesList()
+val generatedProfile = myProfile
+@RequiresApi(Build.VERSION_CODES.O)
+val generatedAllEventsList = generatedCommunitiesList.flatMap { it.events }

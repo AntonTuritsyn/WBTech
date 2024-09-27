@@ -30,7 +30,6 @@ internal fun TopBar(
     onIconClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
-
     CenterAlignedTopAppBar(
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
@@ -50,7 +49,7 @@ internal fun TopBar(
         navigationIcon = {
             IconButton(onClick = { onBackPressed() }) {
                 Image(
-                    painter = painterResource(id = /*R.drawable.ic_back*/topBarStyle.backIcon),
+                    painter = painterResource(topBarStyle.backIcon),
                     contentDescription = "back",
                 )
             }

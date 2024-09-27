@@ -7,14 +7,18 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.turitsynanton.android.wbtech.data.dataStore
 import com.turitsynanton.android.wbtech.data.repository.DataListsRepositoryImpl
+import com.turitsynanton.android.wbtech.data.repository.mappertodata.CommunityMapperToData
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.CommunityMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.EventMapperToDomain
-import com.turitsynanton.android.wbtech.data.repository.mappertodomain.EventsListVisibilityInProfileRepositoryIml
+import com.turitsynanton.android.wbtech.data.repository.EventsListVisibilityInProfileRepositoryIml
+import com.turitsynanton.android.wbtech.data.repository.mappertodata.EventMapperToData
+import com.turitsynanton.android.wbtech.data.repository.mappertodata.TagsMapperToData
+import com.turitsynanton.android.wbtech.data.repository.mappertodata.UsersMapperToData
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.UsersMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.TagsMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.HostMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.ProfileMapperToDomain
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import com.turitsynanton.android.wbtech.domain.repository.InfoVisibilityInProfileRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -30,10 +34,15 @@ val dataModule = module {
     singleOf(::HostMapperToDomain)
     singleOf(::ProfileMapperToDomain)
 
+    singleOf(::CommunityMapperToData)
+    singleOf(::TagsMapperToData)
+    singleOf(::UsersMapperToData)
+    singleOf(::EventMapperToData)
+
     /*singleOf(::CommunityRepositoryImpl) bind CommunityRepository::class
     singleOf(::EventRepositoryImpl) bind EventRepository::class*/
 
-    singleOf(::DataListsRepositoryImpl) bind IDataListsRepository::class
+    singleOf(::DataListsRepositoryImpl) bind DataListsRepository::class
     singleOf(::EventsListVisibilityInProfileRepositoryIml) bind InfoVisibilityInProfileRepository::class
 
     single<DataStore<Preferences>> {

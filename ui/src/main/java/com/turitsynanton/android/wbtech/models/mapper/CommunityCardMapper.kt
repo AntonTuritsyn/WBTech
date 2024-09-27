@@ -11,7 +11,8 @@ internal class CommunityCardMapper : IMapperToUi<DomainCommunity, UiCommunityCar
             tags = entity.tags.map { tag ->
                 TagMapper().mapToUi(tag)
             },
-            image = entity.icon
+            image = entity.icon,
+            isSubscribed = entity.isSubscribed
         )
     }
 }

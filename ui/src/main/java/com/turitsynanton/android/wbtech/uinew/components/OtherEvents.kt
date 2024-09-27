@@ -27,6 +27,7 @@ internal fun OtherEvents(
     modifier: Modifier,
     tagsList: List<Pair<String, TagsStyle>>,
 //    tagsStyle: TagsStyle,
+    title: Int,
     onTagClick: (String) -> Unit
 ) {
     Column(
@@ -34,14 +35,16 @@ internal fun OtherEvents(
             .padding(horizontal = 16.dp)
             .fillMaxWidth()
     ) {
-        SimpleTextField(
-            modifier = Modifier
-                .padding(bottom = 16.dp),
-            text = stringResource(id = R.string.other_events),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color(0xFF000000)
-        )
+        if (title != 0) {
+            SimpleTextField(
+                modifier = Modifier
+                    .padding(bottom = 16.dp),
+                text = stringResource(id = title),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFF000000)
+            )
+        }
         FlowRow(
             modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -60,7 +63,7 @@ internal fun OtherEvents(
 @Preview(showBackground = true)
 @Composable
 private fun OtherEventsPreview() {
-    OtherEvents(modifier = Modifier, tagsList = listOf()) {
+    OtherEvents(modifier = Modifier, title = R.string.other_events, tagsList = listOf()) {
 
     }
 }

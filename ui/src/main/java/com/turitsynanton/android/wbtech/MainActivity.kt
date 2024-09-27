@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.turitsynanton.android.wbtech.navigation.NavGraph
 import com.turitsynanton.android.wbtech.ui.theme.WBTechTheme
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.mapview.MapView
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)

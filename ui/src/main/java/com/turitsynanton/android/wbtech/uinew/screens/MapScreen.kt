@@ -39,6 +39,8 @@ fun MapScreen() {
                         // Replace with your Toast code
                         true
                     }*/
+                    setNoninteractive(true)
+                    screenshot
                 }
             },
             update = { mapView ->

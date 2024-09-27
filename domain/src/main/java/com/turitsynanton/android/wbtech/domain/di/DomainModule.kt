@@ -8,10 +8,18 @@ import com.turitsynanton.android.wbtech.domain.usecases.experiment.CombinedEvent
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.UseCaseInnerGetEventDetails
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.GetEventDetailsUseCaseExperiment
 import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityIdByEventIdUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunityDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.GetCommunitiesListUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunitiesListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.GetSubscribersCountUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IGetSubscribersCountUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.details.GetCommunityDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.list.GetCommunitiesListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.details.IGetCommunityDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.list.IGetCommunitiesListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IIsSubscribedToCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.ISubscribeToCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IUnsubscribeFromCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.IsSubscribedToCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.SubscribeToCommunityUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.community.UnsubscribeFromCommunityUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.DisableButtonForPastEventUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.EventsListByCommunityIdUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.GetEventDetailsUseCase
@@ -27,6 +35,10 @@ import com.turitsynanton.android.wbtech.domain.usecases.event.IEventsListByCommu
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetOtherEventsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetPastEventsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetUpcomingEventsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IIsRegisteredForEventUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IUpdateSearchQueryUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.IsRegisteredForEventUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.event.UpdateSearchQueryUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventdetailsscreen.GetEventDetailsUseCaseNew
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventdetailsscreen.IGetEventDetailsUseCaseNew
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.IInfoEventListScreenInteractor
@@ -89,6 +101,13 @@ val domainModule = module {
     factoryOf(::GetEventsForUserUseCase) bind IGetEventsForUserUseCase::class
     factoryOf(::GetCommunitiesForUserUseCase) bind IGetCommunitiesForUserUseCase::class
     factoryOf(::GetMyProfileUseCase) bind IGetMyProfileUseCase::class
+    factoryOf(::UpdateSearchQueryUseCase) bind IUpdateSearchQueryUseCase::class
+    factoryOf(::IsRegisteredForEventUseCase) bind IIsRegisteredForEventUseCase::class
+    factoryOf(::SubscribeToCommunityUseCase) bind ISubscribeToCommunityUseCase::class
+    factoryOf(::IsSubscribedToCommunityUseCase) bind IIsSubscribedToCommunityUseCase::class
+    factoryOf(::UnsubscribeFromCommunityUseCase) bind IUnsubscribeFromCommunityUseCase::class
+    factoryOf(::GetSubscribersCountUseCase) bind IGetSubscribersCountUseCase::class
+
 
     factoryOf(::SetEventsVisibilityUseCase) bind ISetListsVisibilityUseCase::class
     factoryOf(::GetEventsVisibilityUseCase) bind IGetListsVisibilityUseCase::class

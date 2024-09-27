@@ -7,11 +7,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.ui.R
+import com.turitsynanton.android.wbtech.uinew.screens.addphoto.ScreenAddPhoto
 import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
 import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
 import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
+import com.turitsynanton.android.wbtech.uinew.screens.interests.ScreenAddInterests
 import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMy
 import com.turitsynanton.android.wbtech.uinew.screens.registration.Country
 import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEvent
@@ -71,9 +73,6 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     communityId = id,
                     onBackClick = { navController.popBackStack() },
                     onShareClick = {},
-                    onSubscribeToCommunityClick = {
-
-                    },
                     onUsersClick = { communityId ->
                         navController.navigate("${Navigation.SubscribersDetailsScreen.route}/${communityId}")
                     },
@@ -124,8 +123,15 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 onBackClick = { navController.popBackStack() },
                 onEditClick = {},
                 onSaveClick = {},
-                onEventClick = { /*TODO*/ },
-                onCommunityClick = { /*TODO*/ },
+                onChangePhoto = {
+//                    navController.navigate("${Navigation.AddPhotoScreen.route}")
+                },
+                onEventClick = { eventId->
+                    navController.navigate("${Navigation.EventDetailsScreen.route}/${eventId}")
+                },
+                onCommunityClick = { communityId ->
+                    navController.navigate("${Navigation.CommunityDetailsScreen.route}/${communityId}")
+                },
                 onSocialClick = {},
                 onLogOutClick = {}
             )
@@ -146,6 +152,13 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     }
                 }
             }
+        }
+        composable(route = "${Navigation.AddPhotoScreen.route}") {
+            ScreenAddPhoto()
+            /*ScreenAddInterests(
+                onTagClick = {},
+                onSaveClick = {}
+            )*/
         }
     }
 }

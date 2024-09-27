@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.communityid
 
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
-import kotlinx.coroutines.CoroutineScope
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -9,11 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
 
 internal class GetCommunityIdByEventIdUseCaseNew(
-    private val dataListsRepository: IDataListsRepository,
+    private val dataListsRepository: DataListsRepository,
 ) : IGetCommunityIdByEventIdUseCaseNew {
 
     private val id: MutableStateFlow<String> = MutableStateFlow("null")

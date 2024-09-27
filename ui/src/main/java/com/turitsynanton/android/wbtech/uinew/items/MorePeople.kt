@@ -39,7 +39,7 @@ internal fun MorePeople(
             }
             .size(48.dp)
             .wrapContentSize(align = Alignment.Center),
-        text = "+${numberOfPeople.toString()}",
+        text = "+$numberOfPeople",
         fontFamily = SfProDisplay,
         fontSize = 14.sp,
         fontWeight = FontWeight.Medium,

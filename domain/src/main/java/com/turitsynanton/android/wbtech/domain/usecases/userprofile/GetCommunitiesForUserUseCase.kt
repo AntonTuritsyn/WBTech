@@ -1,7 +1,7 @@
 package com.turitsynanton.android.wbtech.domain.usecases.userprofile
 
 import com.turitsynanton.android.wbtech.domain.models.DomainCommunity
-import com.turitsynanton.android.wbtech.domain.repository.IDataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
-class GetCommunitiesForUserUseCase(
-    private val dataListsRepository: IDataListsRepository
+internal class GetCommunitiesForUserUseCase(
+    private val dataListsRepository: DataListsRepository
 ): IGetCommunitiesForUserUseCase {
     override fun execute(userId: String): Flow<List<DomainCommunity>> {
         val communities = dataListsRepository.getCommunitiesListFlow()
