@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.components
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +15,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -123,7 +121,7 @@ internal fun EventCard(
                 var tagWidth by remember { mutableIntStateOf(0) }
                 val spacingInPx = with(density) { 6.dp.toPx() }
                 totalTagWidth += (tagWidth + spacingInPx.toInt())
-                val sdf = columnWidth - specialTagWidth < totalTagWidth
+                val experiment = columnWidth - specialTagWidth < totalTagWidth
 //                rowWidth += tagWidth
 //                Log.d(TAG, "rowWidth2: $rowWidth")
                 Tag(

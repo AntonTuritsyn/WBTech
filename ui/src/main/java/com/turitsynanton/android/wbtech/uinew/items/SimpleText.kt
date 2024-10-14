@@ -37,7 +37,6 @@ internal fun SimpleTextField(
         fontStyle = fontStyle,
         color = color,
         textAlign = textAlign,
-//        style = lineHeight,
         maxLines = maxLines,
         overflow = overflow,
         lineHeight = lineHeight

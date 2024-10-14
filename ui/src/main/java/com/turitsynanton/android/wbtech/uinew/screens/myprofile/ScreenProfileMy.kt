@@ -36,7 +36,6 @@ import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.models.UiCommunityCard
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.UiPerson
-import com.turitsynanton.android.wbtech.uinew.components.CommunityRecommends
 import com.turitsynanton.android.wbtech.uinew.components.DifferentEvents
 import com.turitsynanton.android.wbtech.uinew.components.TopBar
 import com.turitsynanton.android.wbtech.uinew.items.ComplexTextField
@@ -44,7 +43,6 @@ import com.turitsynanton.android.wbtech.uinew.items.CustomSwitch
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.SocialButton
 import com.turitsynanton.android.wbtech.uinew.items.Tag
-import com.turitsynanton.android.wbtech.uinew.utils.SubscribeButtonStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TextFieldStyle
 import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles

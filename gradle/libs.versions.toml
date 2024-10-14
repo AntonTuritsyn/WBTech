@@ -62,7 +62,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 
 maps-mobile = { module = "com.yandex.android:maps.mobile", version.ref = "yandexMapkit" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+#firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 #kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesCore" }
 
 [plugins]

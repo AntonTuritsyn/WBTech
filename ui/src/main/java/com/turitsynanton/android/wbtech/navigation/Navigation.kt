@@ -8,7 +8,7 @@ enum class Navigation(var route: String) {
     EventsListScreen("eventsScreen"),
     EventDetailsScreen("eventDetailsScreen"),
     //      communities
-    Community("communitys"),
+    Community("communities"),
     CommunityDetailsScreen("communityDetailsScreen"),
     //      participants
     Participants("participants"),
@@ -28,6 +28,9 @@ enum class Navigation(var route: String) {
     //      registration
     Registration("registration"),
     RegistrationScreen("registrationScreen"),
+    //      registration finish
+    RegistrationFinish("registrationFinish"),
+    RegistrationFinishScreen("registrationFinishScreen"),
     //      addPhoto
     AddPhoto("addPhoto"),
     AddPhotoScreen("addPhotoScreen")

@@ -27,7 +27,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -59,7 +58,6 @@ import com.turitsynanton.android.wbtech.uinew.utils.TopBarStyles
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun ScreenEventDetails(
     modifier: Modifier = Modifier,
@@ -78,8 +76,8 @@ internal fun ScreenEventDetails(
     onEventClick: (String) -> Unit,
     onSignUpToEventClick: (String) -> Unit
 ) {
-    val screenState by eventDetailsViewModel.screenState.collectAsStateWithLifecycle()
-    val visitorsCount by eventDetailsViewModel.getVisitorsCountFlow().collectAsStateWithLifecycle()
+    val screenMainState by eventDetailsViewModel.mainScreenState.collectAsStateWithLifecycle()
+    val screenAdditionalState by eventDetailsViewModel.additionalScreenState.collectAsStateWithLifecycle()
 
     var isMapInteracting by remember { mutableStateOf(false) }
     var isScrollingEnabled by remember { mutableStateOf(true) }
@@ -111,7 +109,7 @@ internal fun ScreenEventDetails(
         topBar = {
             TopBar(
                 modifier = Modifier,
-                title = "${screenState.eventDetails?.title}",
+                title = "${screenMainState.eventDetails?.title}",
                 topBarStyle = TopBarStyles.Share,
                 onIconClick = { onShareClick() }
             ) {
@@ -132,7 +130,7 @@ internal fun ScreenEventDetails(
             ) {
                 Log.d("TAG", "isScrollingEnabled: ${isScrollingEnabled}")
                 item {
-                    screenState.eventDetails?.let { event ->
+                    screenMainState.eventDetails?.let { event ->
                         Header(event = event)
                     }
                 }
@@ -140,7 +138,7 @@ internal fun ScreenEventDetails(
                     SimpleTextField(
                         modifier = Modifier
                             .padding(horizontal = 16.dp),
-                        text = "${screenState.eventDetails?.description}",
+                        text = "${screenMainState.eventDetails?.description}",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium,
                         lineHeight = 16.sp,
@@ -148,7 +146,7 @@ internal fun ScreenEventDetails(
                     )
                 }
                 item {
-                    screenState.eventDetails?.let { event ->
+                    screenMainState.eventDetails?.let { event ->
                         Host(modifier = Modifier, host = event.host) {
                             onHostClick(event.host.id)
                         }
@@ -214,11 +212,11 @@ internal fun ScreenEventDetails(
                 item {
                     Subscribers(
                         modifier = Modifier,
-                        usersCount = visitorsCount,
+                        usersCount = screenAdditionalState.visitorsCount,
                         title = stringResource(id = R.string.participants),
-                        avatarsList = screenState.participants
+                        avatarsList = screenMainState.participants
                     ) {
-                        screenState.eventDetails?.let { participant ->
+                        screenMainState.eventDetails?.let { participant ->
                             onParticipantsClick(
                                 participant.id
                             )
@@ -226,7 +224,7 @@ internal fun ScreenEventDetails(
                     }
                 }
                 item {
-                    screenState.communityDetails?.let { community ->
+                    screenMainState.communityDetails?.let { community ->
                         Organizer(
                             modifier = Modifier,
                             community = community,
@@ -239,14 +237,14 @@ internal fun ScreenEventDetails(
                 item {
                     DifferentEvents(
                         modifier = Modifier
-                            .padding(bottom = if (!screenState.buttonStatus.buttonStatus) 116.dp else 0.dp),
+                            .padding(bottom = if (!screenAdditionalState.buttonStatus.buttonStatus) 116.dp else 0.dp),
                         componentName = stringResource(R.string.other_community_events),
-                        eventsList = screenState.otherEvents,
+                        eventsList = screenMainState.otherEvents,
                         onEventClick = onEventClick
                     )
                 }
             }
-            if (showButton && !screenState.buttonStatus.buttonStatus) {
+            if (showButton && !screenAdditionalState.buttonStatus.buttonStatus) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -269,7 +267,7 @@ internal fun ScreenEventDetails(
                         SimpleTextField(
                             modifier = Modifier
                                 .padding(bottom = 12.dp),
-                            text = if (!screenState.buttonStatus.isRegistered) {
+                            text = if (!screenAdditionalState.buttonStatus.isRegistered) {
                                 "Всего 30 мест. Если передумаете — отпишитесь"
                             } else {
                                 stringResource(R.string.registered_to_event)
@@ -278,13 +276,13 @@ internal fun ScreenEventDetails(
                             fontWeight = FontWeight.Medium,
                             lineHeight = 16.sp,
                             color =
-                            if (!screenState.buttonStatus.isRegistered) {
+                            if (!screenAdditionalState.buttonStatus.isRegistered) {
                                 Color(0xFF9A10F0)
                             } else {
                                 Color(0xFF00BF59)
                             }
                         )
-                        when (screenState.buttonStatus.isRegistered) {
+                        when (screenAdditionalState.buttonStatus.isRegistered) {
                             true -> {
                                 FloatingCustomButton(
                                     modifier = Modifier,
@@ -301,7 +299,7 @@ internal fun ScreenEventDetails(
                                     text = stringResource(R.string.start_registration_to_event),
                                     buttonStyle = ButtonStyle.Enable
                                 ) {
-                                    screenState.eventDetails?.let { event ->
+                                    screenMainState.eventDetails?.let { event ->
                                         onSignUpToEventClick(
                                             event.id
                                         )

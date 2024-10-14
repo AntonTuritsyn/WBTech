@@ -1,6 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.screens.eventdetails
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetCommunityIdByEventIdUseCase
@@ -9,7 +8,6 @@ import com.turitsynanton.android.wbtech.domain.usecases.event.IDisableButtonForP
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetOtherEventsUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.event.IIsRegisteredForEventUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
 import com.turitsynanton.android.wbtech.domain.usecases.participants.IGetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.models.UiCommunity
 import com.turitsynanton.android.wbtech.models.UiEvent
@@ -19,7 +17,8 @@ import com.turitsynanton.android.wbtech.models.mapper.CommunityMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventMapper
 import com.turitsynanton.android.wbtech.models.mapper.PersonCardMapper
-import com.turitsynanton.android.wbtech.uinew.state.ScreenEventDetailsState
+import com.turitsynanton.android.wbtech.uinew.state.eventdetails.ScreenEventDetailsAdditionalState
+import com.turitsynanton.android.wbtech.uinew.state.eventdetails.ScreenEventDetailsMainState
 import com.turitsynanton.android.wbtech.uinew.utils.buttonstates.EventRegistrationButtonState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -38,13 +37,12 @@ internal class ScreenEventDetailsViewModel(
     private val eventMapper: EventMapper,
     private val communityMapper: CommunityMapper,
     private val personCardMapper: PersonCardMapper,
-    private val iGetEventDetails: IGetEventDetailsUseCase,
-    private val iGetCommunityIdByEventId: IGetCommunityIdByEventIdUseCase,
-    private val getCommunityIdByEventId: IGetCommunityIdByEventIdUseCaseNew,
+    private val getEventDetails: IGetEventDetailsUseCase,
+    private val getCommunityIdByEventId: IGetCommunityIdByEventIdUseCase,
     private val getOtherEvents: IGetOtherEventsUseCase,
     private val getParticipantsListUseCase: IGetParticipantsListUseCase,
-    private val disableButtonForPastEventUseCase: IDisableButtonForPastEventUseCase,
-    private val isRegisteredForEventUseCase: IIsRegisteredForEventUseCase,
+    private val disableButtonForPastEvent: IDisableButtonForPastEventUseCase,
+    private val isRegisteredForEvent: IIsRegisteredForEventUseCase,
     private val getVisitorsCount: IGetVisitorsCountUseCase
 ) : ViewModel() {
 
@@ -57,9 +55,6 @@ internal class ScreenEventDetailsViewModel(
     private val _communityDetails: MutableStateFlow<UiCommunity?> = MutableStateFlow(null)
     private val communityDetails: StateFlow<UiCommunity?> = _communityDetails.asStateFlow()
 
-    private val _communityId: MutableStateFlow<String> = MutableStateFlow("")
-    private val communityId: StateFlow<String> = _communityId.asStateFlow()
-
     private val _participantsList: MutableStateFlow<List<UiPersonCard>> =
         MutableStateFlow(emptyList())
     private val participantsList: StateFlow<List<UiPersonCard>> = _participantsList
@@ -71,10 +66,8 @@ internal class ScreenEventDetailsViewModel(
     private val _visitorsCount: MutableStateFlow<Int> = MutableStateFlow(0)
     private val visitorsCount: StateFlow<Int> = _visitorsCount.asStateFlow()
 
-
     init {
         getEventDetails(eventId)
-        getCommunityIdByEventId.execute(eventId)
         getCommunityDetailsByEventId(eventId)
         getOtherEvents(eventId)
         getParticipantsList(eventId)
@@ -88,45 +81,50 @@ internal class ScreenEventDetailsViewModel(
     private fun getCommunityDetailsFlow(): StateFlow<UiCommunity?> = communityDetails
     private fun getParticipantsListFlow(): StateFlow<List<UiPersonCard>> = participantsList
     private fun getButtonStatusFlow(): StateFlow<EventRegistrationButtonState> = buttonStatus
-    fun getVisitorsCountFlow(): StateFlow<Int> = visitorsCount
+    private fun getVisitorsCountFlow(): StateFlow<Int> = visitorsCount
 
-    val screenState: StateFlow<ScreenEventDetailsState> = combine(
+    val mainScreenState: StateFlow<ScreenEventDetailsMainState> = combine(
         getEventDetailsFlow(),
         getOtherEventsFlow(),
         getCommunityDetailsFlow(),
-        getParticipantsListFlow(),
-        getButtonStatusFlow()
-    ) { eventDetails, otherEventList, communityDetails, participantsList, buttonStatus ->
-        ScreenEventDetailsState(
+        getParticipantsListFlow()
+    ) { eventDetails, otherEventList, communityDetails, participantsList ->
+        ScreenEventDetailsMainState(
             eventDetails = eventDetails,
             otherEvents = otherEventList,
             communityDetails = communityDetails,
             participants = participantsList,
-            buttonStatus = buttonStatus
         )
-    }.stateIn(viewModelScope, SharingStarted.Lazily, ScreenEventDetailsState())
+    }.stateIn(viewModelScope, SharingStarted.Lazily, ScreenEventDetailsMainState())
+
+    val additionalScreenState: StateFlow<ScreenEventDetailsAdditionalState> = combine(
+        getButtonStatusFlow(),
+        getVisitorsCountFlow()
+    ) { buttonStatus, visitorsCount ->
+        ScreenEventDetailsAdditionalState(
+            buttonStatus = buttonStatus,
+            visitorsCount = visitorsCount
+        )
+    }.stateIn(viewModelScope, SharingStarted.Lazily, ScreenEventDetailsAdditionalState())
 
     private fun getEventDetails(eventsId: String) {
         viewModelScope.launch {
-            iGetEventDetails.execute(eventsId).collect { eventDetails ->
+            getEventDetails.execute(eventsId).collect { eventDetails ->
                 _eventDetails.update { eventMapper.mapToUi(eventDetails) }
             }
         }
     }
 
     private fun getCommunityDetailsByEventId(eventId: String) {
-        getCommunityIdByEventId.execute(eventId)
         viewModelScope.launch {
-            /*interactorFullInfo.invoke().collect { community ->
-                Log.d("TAG", "eventList: ${community.eventList}")
-                Log.d("TAG", "communitiesList: ${community.communitiesList}")
-                Log.d("TAG", "filteredEvents: ${community.filteredEvents}")
-                Log.d("TAG", "communityId: ${community.communityId}")
-                _communityId.update { community.communityId }
-            }*/
-            iGetCommunityIdByEventId.execute(eventId).collect { community ->
-                Log.d("TAG", "communityId.value: ${communityId}")
-                _communityDetails.update { community?.let { it1 -> communityMapper.mapToUi(it1) } }
+            getCommunityIdByEventId.execute(eventId).collect { community ->
+                _communityDetails.update {
+                    community?.let { communityToMap ->
+                        communityMapper.mapToUi(
+                            communityToMap
+                        )
+                    }
+                }
             }
         }
     }
@@ -151,7 +149,7 @@ internal class ScreenEventDetailsViewModel(
 
     private fun getButtonStatus(eventId: String) {
         viewModelScope.launch {
-            disableButtonForPastEventUseCase.execute(eventId).collect { buttonStatus ->
+            disableButtonForPastEvent.execute(eventId).collect { buttonStatus ->
                 updateButtonStatus { buttonState ->
                     buttonState.copy(buttonStatus = buttonStatus)
                 }
@@ -161,7 +159,7 @@ internal class ScreenEventDetailsViewModel(
 
     private fun getRegisteredStatus(eventId: String) {
         viewModelScope.launch {
-            isRegisteredForEventUseCase.execute(eventId).collect { isRegistered ->
+            isRegisteredForEvent.execute(eventId).collect { isRegistered ->
                 updateButtonStatus { buttonState ->
                     buttonState.copy(isRegistered = isRegistered)
                 }

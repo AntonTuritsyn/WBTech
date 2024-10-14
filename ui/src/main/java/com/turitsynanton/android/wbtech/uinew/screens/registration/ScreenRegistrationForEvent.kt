@@ -125,7 +125,6 @@ internal fun ScreenRegistrationForEvent(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-
                     .padding(16.dp)
             ) {
                 event?.let { event ->
@@ -207,7 +206,7 @@ internal fun ScreenRegistrationForEvent(
                             ) {
                                 screenRegistrationForEventViewModel.apply {
                                     sendCodeToPhone("${selectedCountry.code}")
-                                    screenRegistrationForEventViewModel.getCodeStatusBar()
+                                    getCodeStatusBar()
                                     setStep()
                                 }
                             }
@@ -218,9 +217,9 @@ internal fun ScreenRegistrationForEvent(
                                 modifier = Modifier,
                                 hint = stringResource(R.string.code_plaseholder),
                                 query = code,
-                                onQueryChanged = {
+                                onQueryChanged = { query ->
                                     screenRegistrationForEventViewModel.setCodeQuery(
-                                        it
+                                        query
                                     )
                                 },
                                 keyboardOptions = KeyboardOptions(

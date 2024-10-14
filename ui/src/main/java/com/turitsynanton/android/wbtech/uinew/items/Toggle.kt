@@ -1,7 +1,5 @@
 package com.turitsynanton.android.wbtech.uinew.items
 
-import android.widget.Switch
-import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,17 +8,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -72,6 +64,6 @@ internal fun CustomSwitch(
 @Preview(showBackground = true)
 @Composable
 private fun TogglePreview() {
-    var isChecked by remember { mutableStateOf(false) }
+    val isChecked by remember { mutableStateOf(false) }
     CustomSwitch(checked = isChecked, onCheckedChange = {/*isChecked = it*/})
 }

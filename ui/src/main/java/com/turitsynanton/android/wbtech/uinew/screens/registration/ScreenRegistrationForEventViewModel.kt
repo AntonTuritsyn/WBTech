@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registration.ISetRegistrationStepUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetCodeQueryInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetTimerFieldInteractor
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.mapEventCardToUi
-import kotlinx.coroutines.delay
+import com.turitsynanton.android.wbtech.uinew.utils.ResourceProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,11 +18,16 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val CODE_LENGTH = 4
+private const val TAG = "ScreenRegistrationForEventViewModel"
 
 internal class ScreenRegistrationForEventViewModel(
     eventId: String,
     private val eventCardMapper: EventCardMapper,
-    private val getEventDetailsUseCase: IGetEventDetailsUseCase
+    private val resourceProvider: ResourceProvider,
+    private val getEventDetailsUseCase: IGetEventDetailsUseCase,
+    private val setRegistrationStep: ISetRegistrationStepUseCase,
+    private val setTimerField: ISetTimerFieldInteractor,
+    private val setCodeQuery: ISetCodeQueryInteractor
 ) : ViewModel() {
     // TODO перенести все в usecase
     private val _eventDetails: MutableStateFlow<UiEventCard?> = MutableStateFlow(null)
@@ -97,14 +105,17 @@ internal class ScreenRegistrationForEventViewModel(
 
     fun setStep() {
         viewModelScope.launch {
+            setRegistrationStep.execute(_step.value).collect { step ->
+                Log.d(TAG, "setStep: $step")
+                _step.update { step }
+            }
 //            TODO добавить обработку ошибки на >4
 //            TODO добавить проверку на правильность кода и доступность кнопки
-            _step.update { step ->
-                step + 1
-            }
-            if (_step.value == 3) {
-                setTimerField()
-            }
+        }
+        if (_step.value == 3) {
+            Log.d(TAG, "ВЫЗЫВАЕТСЯ 3")
+            setTimerField()
+            setTimerStatus()
         }
     }
 
@@ -162,9 +173,11 @@ internal class ScreenRegistrationForEventViewModel(
 
     fun registrationToEvent() {
         viewModelScope.launch {
-            if (_codeQuery.value == "1234") {
+            setCodeQuery.observeCodeStatusBarFlow().collect { status ->
+                _getCodeStatusBar.update { status }
+                /*if (_codeQuery.value == "1234") {
                 _getCodeStatusBar.update {
-                    "Отправили код на ${_fullPhoneNumber.value}"
+                    resourceProvider.getString(R.string.send_code_to_num) + _fullPhoneNumber.value
                 }
                 setStep()
             } else {
@@ -173,7 +186,21 @@ internal class ScreenRegistrationForEventViewModel(
                 }
                 _codeFieldError.update { true }
                 _buttonRegistrationStatus.update { false }
+            }*/
             }
+            viewModelScope.launch {
+                setCodeQuery.observeButtonRegistrationStatusFlow().collect { status ->
+                    _buttonRegistrationStatus.update { status }
+                }
+            }
+            viewModelScope.launch {
+                setCodeQuery.observeCodeFieldErrorFlow().collect { status ->
+                    _codeFieldError.update { status }
+                }
+            }
+        }
+        setCodeQuery.setStepIfRightCode {
+            setStep()
         }
     }
 
@@ -192,30 +219,35 @@ internal class ScreenRegistrationForEventViewModel(
 
     fun setCodeQuery(code: String) {
         viewModelScope.launch {
-            _codeQuery.update { code }
-
-            if (_codeQuery.value.length >= CODE_LENGTH) {
-                _buttonRegistrationStatus.update { true }
-            } else {
-                _codeFieldError.update { false }
-                _buttonRegistrationStatus.update { false }
+            setCodeQuery.observeCodeQueryFlow(code).collect { query ->
+                _codeQuery.update { query }
+            }
+        }
+        viewModelScope.launch {
+            setCodeQuery.observeButtonRegistrationStatusFlow().collect { status ->
+                _buttonRegistrationStatus.update { status }
+            }
+        }
+        viewModelScope.launch {
+            setCodeQuery.observeCodeFieldErrorFlow().collect { status ->
+                _codeFieldError.update { status }
             }
         }
     }
 
-    fun setTimerField() {
+    private fun setTimerField() {
         viewModelScope.launch {
-            for (step in 10 downTo 0) {
-                _timerField.update {
-                    "Получить новый код через $step"
-                }
-                delay(1000L)
-                _timerStatus.update { false }
+            setTimerField.observeTimerFieldFlow().collect { field ->
+                _timerField.update { field }
             }
-            _timerField.update {
-                "Получить новый код"
+        }
+    }
+
+    private fun setTimerStatus() {
+        viewModelScope.launch {
+            setTimerField.observeTimerStatusFlow().collect { status ->
+                _timerStatus.update { status }
             }
-            _timerStatus.update { true }
         }
     }
 }

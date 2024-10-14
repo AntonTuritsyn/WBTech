@@ -1,7 +1,6 @@
 package com.turitsynanton.android.wbtech.uinew.items
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -22,6 +21,7 @@ internal fun Avatar(
     avatarStyle: AvatarStyles,
     user: UiPersonCard
 ) {
+//    TODO изменить после получения бэка
     if (user.avatar == "profile") {
         Image(
             painter = painterResource(id = R.drawable.my_photo),
