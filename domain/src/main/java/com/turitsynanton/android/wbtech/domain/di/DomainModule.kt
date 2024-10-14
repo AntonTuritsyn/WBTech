@@ -63,6 +63,12 @@ import com.turitsynanton.android.wbtech.domain.usecases.myprofile.toggles.SetCom
 import com.turitsynanton.android.wbtech.domain.usecases.myprofile.toggles.SetEventsVisibilityUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.participants.GetParticipantsListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.participants.IGetParticipantsListUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registration.ISetRegistrationStepUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registration.SetRegistrationStepUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetCodeQueryInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetTimerFieldInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.SetCodeQueryInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registration.code.SetTimerFieldInteractor
 import com.turitsynanton.android.wbtech.domain.usecases.subscribers.GetSubscribersListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.subscribers.IGetSubscribersListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.userprofile.GetCommunitiesForUserUseCase
@@ -110,6 +116,9 @@ val domainModule = module {
     factoryOf(::UnsubscribeFromCommunityUseCase) bind IUnsubscribeFromCommunityUseCase::class
     factoryOf(::GetSubscribersCountUseCase) bind IGetSubscribersCountUseCase::class
     factoryOf(::GetVisitorsCountUseCase) bind IGetVisitorsCountUseCase::class
+    factoryOf(::SetRegistrationStepUseCase) bind ISetRegistrationStepUseCase::class
+    factoryOf(::SetTimerFieldInteractor) bind ISetTimerFieldInteractor::class
+    factoryOf(::SetCodeQueryInteractor) bind ISetCodeQueryInteractor::class
 
 
     factoryOf(::SetEventsVisibilityUseCase) bind ISetListsVisibilityUseCase::class

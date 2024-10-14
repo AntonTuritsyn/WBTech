@@ -172,7 +172,6 @@ internal fun ScreenEventsList(
                                                 }
                                             }
                                         }
-//                            CountryDropDown(modifier = Modifier)
                                     }
 
                                     1 -> {

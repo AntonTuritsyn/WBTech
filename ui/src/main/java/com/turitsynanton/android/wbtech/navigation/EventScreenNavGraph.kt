@@ -8,16 +8,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.uinew.screens.addphoto.ScreenAddPhoto
-import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
-import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
 import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
 import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
-import com.turitsynanton.android.wbtech.uinew.screens.interests.ScreenAddInterests
 import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMy
+import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
 import com.turitsynanton.android.wbtech.uinew.screens.registration.Country
 import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEvent
+import com.turitsynanton.android.wbtech.uinew.screens.registrationend.ScreenFinishRegistration
 import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribers
+import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
@@ -42,8 +42,8 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(route = "${Navigation.EventDetailsScreen.route}/{eventid}") { stackEntry ->
-            stackEntry.arguments?.getString("eventid")?.let { id ->
+        composable(route = "${Navigation.EventDetailsScreen.route}/{eventId}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { id ->
                 ScreenEventDetails(
                     eventId = id,
                     onBackClick = { navController.popBackStack() },
@@ -67,8 +67,8 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 )
             }
         }
-        composable(route = "${Navigation.CommunityDetailsScreen.route}/{communityid}") { stackEntry ->
-            stackEntry.arguments?.getString("communityid")?.let { id ->
+        composable(route = "${Navigation.CommunityDetailsScreen.route}/{communityId}") { stackEntry ->
+            stackEntry.arguments?.getString("communityId")?.let { id ->
                 ScreenCommunityDetails(
                     communityId = id,
                     onBackClick = { navController.popBackStack() },
@@ -151,6 +151,15 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                         launchSingleTop = true
                     }
                 }
+            }
+        }
+        composable(route = "${Navigation.RegistrationFinishScreen.route}/{eventId}") { stackEntry ->
+            stackEntry.arguments?.getString("eventId")?.let { id ->
+                ScreenFinishRegistration(
+                    eventId = id,
+                    onMyEventsClick = {},
+                    onBackToEventsClick = {}
+                )
             }
         }
         composable(route = "${Navigation.AddPhotoScreen.route}") {

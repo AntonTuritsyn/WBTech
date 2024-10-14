@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +37,6 @@ internal fun Organizer(
     onButtonClick: () -> Unit,
     onElementClick: (String) -> Unit
 ) {
-
     Column(
         modifier = modifier
             .padding(horizontal = 16.dp)
@@ -97,14 +95,6 @@ internal fun Organizer(
                         .clip(shape = RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
-                /*Image(
-                    modifier = Modifier
-                        .size(104.dp)
-                        .clip(shape = RoundedCornerShape(16.dp)),
-                    painter = painterResource(id = R.drawable.my_photo),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )*/
                 SubscribeButton(
                     modifier = Modifier
                         .align(Alignment.BottomStart)

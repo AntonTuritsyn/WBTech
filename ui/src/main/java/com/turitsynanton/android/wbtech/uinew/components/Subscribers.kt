@@ -49,7 +49,6 @@ internal fun Subscribers(
                 .fillMaxWidth(),
             userScrollEnabled = false
         ) {
-//            TODO логику расчета количества подписчиков перенести в VM (для подписки на поток)
             when (usersCount) {
                 0 -> {
                     items(avatarsList.size) { index ->
@@ -73,7 +72,6 @@ internal fun Subscribers(
                     }
                 }
             }
-
         }
     }
 }

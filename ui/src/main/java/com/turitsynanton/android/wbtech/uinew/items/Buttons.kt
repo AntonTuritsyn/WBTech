@@ -13,8 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.ExposedDropdownMenuBoxScope
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -172,7 +170,7 @@ internal fun Exposed (
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    Box(modifier = Modifier) {
+    Box(modifier = modifier) {
         IconButton(onClick = { expanded = true }) {
             Icon(Icons.Default.MoreVert, contentDescription = "Показать меню")
         }
@@ -183,7 +181,6 @@ internal fun Exposed (
             Text("Настройки", fontSize=18.sp, modifier = Modifier.padding(10.dp))
         }
     }
-
 }
 
 @Preview(
@@ -207,13 +204,10 @@ private fun GradientButtonPreview() {
             }
             Spacer(modifier = Modifier.padding(18.dp))
             SocialButton(modifier = Modifier, icon = painterResource(id = R.drawable.ic_habr)) {
-                
             }
             Spacer(modifier = Modifier.padding(18.dp))
             SocialButton(modifier = Modifier, icon = painterResource(id = R.drawable.ic_telegram)) {
-
             }
         }
-
     }
 }

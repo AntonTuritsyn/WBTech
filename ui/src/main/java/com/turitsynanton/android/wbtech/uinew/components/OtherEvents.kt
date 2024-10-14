@@ -16,11 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.data.mocks.tags
 import com.turitsynanton.android.wbtech.uinew.items.SimpleTextField
 import com.turitsynanton.android.wbtech.uinew.items.Tag
 import com.turitsynanton.android.wbtech.uinew.utils.TagsStyle
 
+private const val TAG = "OtherEvents"
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun OtherEvents(
@@ -53,7 +53,7 @@ internal fun OtherEvents(
             tagsList.sortedBy { it.first }.forEach { (content, style) ->
                 Tag(modifier = Modifier, text = content, style = style) {
                     onTagClick(content)
-                    Log.d("TAG", "OtherEvents: $content")
+                    Log.d(TAG, "OtherEvents: $content")
                 }
             }
         }
@@ -64,6 +64,5 @@ internal fun OtherEvents(
 @Composable
 private fun OtherEventsPreview() {
     OtherEvents(modifier = Modifier, title = R.string.other_events, tagsList = listOf()) {
-
     }
 }

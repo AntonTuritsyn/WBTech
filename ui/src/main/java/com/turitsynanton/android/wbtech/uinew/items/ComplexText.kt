@@ -10,19 +10,12 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.turitsynanton.android.wbtech.ui.theme.BrandColorDefault
@@ -63,10 +56,7 @@ internal fun ComplexTextField(
             fontFamily = SfProDisplay,
             fontWeight = FontWeight.Normal,
         ),
-        keyboardOptions = keyboardOptions/*KeyboardOptions(
-            capitalization = KeyboardCapitalization.Sentences,
-            keyboardType = KeyboardType.Text
-        )*/,
+        keyboardOptions = keyboardOptions,
         decorationBox = { innerTextField ->
             Decoration(query = query, hint = hint)
             innerTextField()
@@ -94,10 +84,3 @@ private fun Decoration(
         }
     }
 }
-
-/*@Preview(showBackground = true)
-@Composable
-private fun ComplexTextFieldPreview() {
-    ComplexTextField(hint = "Имя и фамилия", query = "", textFieldStyle = TextFieldStyle.Error)
-}*/
-

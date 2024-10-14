@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,7 +42,6 @@ internal fun SearchFieldNew(
         modifier = Modifier
             .then(modifier)
             .background(color = Color(0xFFF6F6FA), shape = RoundedCornerShape(16.dp))
-//            .height(44.dp)
             .fillMaxWidth()
             .padding(vertical = 10.dp, horizontal = 10.dp)
             .wrapContentHeight(Alignment.CenterVertically),

@@ -95,7 +95,6 @@ internal class ScreenEventsListViewModel(
         getCommunitiesList()
         updateFilteredEventsList("")
         upcomingEvents()
-//        getSubscribedStatus()
     }
 
     private fun getEventsList() {
@@ -120,13 +119,6 @@ internal class ScreenEventsListViewModel(
             }
         }
     }
-    /*viewModelScope.launch {
-        iGetCommunitiesListUseCase.execute().collect { communitiesList ->
-            _communitiesListDomain.update { communitiesList }
-            _communitiesList.update { communitiesList.map { communityCardMapper.mapToUi(it) } }
-        }
-    }*/
-
 
     fun updateSearchQuery(query: String) {
         viewModelScope.launch {
@@ -138,7 +130,6 @@ internal class ScreenEventsListViewModel(
                 updateFilteredEventsList(query)
             }
 //        filterEventUseCaseNew.execute(query)
-
         }
     }
 
@@ -222,10 +213,3 @@ internal class ScreenEventsListViewModel(
         _buttonStatus.update { onUpdate(it) }
     }
 }
-
-
-/*
-internal data class SubscribedButtonState(
-    val buttonStatus: Boolean = false,
-    val isSubscribed: Boolean = false
-)*/

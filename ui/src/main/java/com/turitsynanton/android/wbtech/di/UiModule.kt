@@ -19,8 +19,10 @@ import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDe
 import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMyViewModel
 import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipantsViewModel
 import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEventViewModel
+import com.turitsynanton.android.wbtech.uinew.screens.registrationend.ScreenFinishRegistrationViewModel
 import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribersViewModel
 import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUserViewModel
+import com.turitsynanton.android.wbtech.uinew.utils.ResourceProvider
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -38,6 +40,7 @@ val uiModule = module {
     viewModelOf(::ScreenProfileUserViewModel)
     viewModelOf(::ScreenProfileMyViewModel)
     viewModelOf(::ScreenRegistrationForEventViewModel)
+    viewModelOf(::ScreenFinishRegistrationViewModel)
 
     singleOf(::CommunityCardMapper)
     singleOf(::CommunityMapper)
@@ -49,6 +52,7 @@ val uiModule = module {
     singleOf(::TagMapper)
     singleOf(::PersonMapper)
     singleOf(::ProfileMapper)
+    singleOf(::ResourceProvider)
 
 // Provide AndroidPermissionChecker
     factory { (activity: Activity) -> AndroidPermissionChecker(context = get(), activity = activity) }
