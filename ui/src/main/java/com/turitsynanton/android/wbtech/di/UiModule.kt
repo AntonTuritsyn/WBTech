@@ -13,16 +13,16 @@ import com.turitsynanton.android.wbtech.models.mapper.ProfileMapper
 import com.turitsynanton.android.wbtech.models.mapper.TagMapper
 import com.turitsynanton.android.wbtech.permissions.AndroidPermissionChecker
 import com.turitsynanton.android.wbtech.permissions.LocationViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetailsViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsListViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetailsViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMyViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipantsViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEventViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.registrationend.ScreenFinishRegistrationViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribersViewModel
-import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUserViewModel
-import com.turitsynanton.android.wbtech.uinew.utils.ResourceProvider
+import com.turitsynanton.android.wbtech.ui.screens.communitydetails.ScreenCommunityDetailsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.eventslist.ScreenEventsListViewModel
+import com.turitsynanton.android.wbtech.ui.screens.eventdetails.ScreenEventDetailsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.myprofile.ScreenProfileMyViewModel
+import com.turitsynanton.android.wbtech.ui.screens.participants.ScreenParticipantsViewModel
+import com.turitsynanton.android.wbtech.ui.screens.registration.ScreenRegistrationForEventViewModel
+import com.turitsynanton.android.wbtech.ui.screens.registrationend.ScreenFinishRegistrationViewModel
+import com.turitsynanton.android.wbtech.ui.screens.subscribers.ScreenSubscribersViewModel
+import com.turitsynanton.android.wbtech.ui.screens.userprofile.ScreenProfileUserViewModel
+import com.turitsynanton.android.wbtech.ui.utils.ResourceProvider
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -54,7 +54,7 @@ val uiModule = module {
     singleOf(::ProfileMapper)
     singleOf(::ResourceProvider)
 
-// Provide AndroidPermissionChecker
+    // Provide AndroidPermissionChecker
     factory { (activity: Activity) -> AndroidPermissionChecker(context = get(), activity = activity) }
 
     // Provide LocationViewModel

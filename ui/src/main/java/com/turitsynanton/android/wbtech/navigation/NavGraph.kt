@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.turitsynanton.android.wbtech.permissions.LocationPermissionScreen
-import com.turitsynanton.android.wbtech.uinew.screens.SplashScreen
+import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

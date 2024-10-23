@@ -50,4 +50,6 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="unsubscribe">Вы подписаны</string>
     <string name="communities_for_you">Сообщества для Вас</string>
     <string name="send_code_to_num">"Отправили код на "</string>
+    <string name="tell_later_button">Расскажу позже</string>
+    <string name="change_interests_profile">Изменить</string>
 </resources>

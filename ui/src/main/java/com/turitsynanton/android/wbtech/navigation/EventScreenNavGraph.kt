@@ -7,17 +7,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.turitsynanton.android.ui.R
-import com.turitsynanton.android.wbtech.uinew.screens.addphoto.ScreenAddPhoto
-import com.turitsynanton.android.wbtech.uinew.screens.communitydetails.ScreenCommunityDetails
-import com.turitsynanton.android.wbtech.uinew.screens.eventdetails.ScreenEventDetails
-import com.turitsynanton.android.wbtech.uinew.screens.eventslist.ScreenEventsList
-import com.turitsynanton.android.wbtech.uinew.screens.myprofile.ScreenProfileMy
-import com.turitsynanton.android.wbtech.uinew.screens.participants.ScreenParticipants
-import com.turitsynanton.android.wbtech.uinew.screens.registration.Country
-import com.turitsynanton.android.wbtech.uinew.screens.registration.ScreenRegistrationForEvent
-import com.turitsynanton.android.wbtech.uinew.screens.registrationend.ScreenFinishRegistration
-import com.turitsynanton.android.wbtech.uinew.screens.subscribers.ScreenSubscribers
-import com.turitsynanton.android.wbtech.uinew.screens.userprofile.ScreenProfileUser
+import com.turitsynanton.android.wbtech.ui.screens.addphoto.ScreenAddPhoto
+import com.turitsynanton.android.wbtech.ui.screens.communitydetails.ScreenCommunityDetails
+import com.turitsynanton.android.wbtech.ui.screens.eventdetails.ScreenEventDetails
+import com.turitsynanton.android.wbtech.ui.screens.eventslist.ScreenEventsList
+import com.turitsynanton.android.wbtech.ui.screens.interests.ScreenAddInterests
+import com.turitsynanton.android.wbtech.ui.screens.myprofile.ScreenProfileMy
+import com.turitsynanton.android.wbtech.ui.screens.participants.ScreenParticipants
+import com.turitsynanton.android.wbtech.ui.screens.registration.Country
+import com.turitsynanton.android.wbtech.ui.screens.registration.ScreenRegistrationForEvent
+import com.turitsynanton.android.wbtech.ui.screens.registrationend.ScreenFinishRegistration
+import com.turitsynanton.android.wbtech.ui.screens.subscribers.ScreenSubscribers
+import com.turitsynanton.android.wbtech.ui.screens.userprofile.ScreenProfileUser
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
@@ -28,7 +29,7 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
         composable(route = Navigation.EventsList.route) {
             ScreenEventsList(
                 onProfileClick = {
-                    navController.navigate("${Navigation.MyProfileScreen.route}")
+                    navController.navigate(Navigation.MyProfileScreen.route)
                 },
                 onEventClick = { eventId ->
                     navController.navigate("${Navigation.EventDetailsScreen.route}/${eventId}")
@@ -118,7 +119,7 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 }
             }
         }
-        composable(route = "${Navigation.MyProfileScreen.route}") {
+        composable(route = Navigation.MyProfileScreen.route) {
             ScreenProfileMy(
                 onBackClick = { navController.popBackStack() },
                 onEditClick = {},
@@ -133,6 +134,9 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                     navController.navigate("${Navigation.CommunityDetailsScreen.route}/${communityId}")
                 },
                 onSocialClick = {},
+                onChangeInterests = {
+                    navController.navigate(Navigation.ChangeInterestsScreen.route)
+                },
                 onLogOutClick = {}
             )
         }
@@ -141,11 +145,14 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 ScreenRegistrationForEvent(
                     eventId = id,
                     selectedCountry = Country("Russia", "+7", R.drawable.flag_russia),
+                    onFinishRegistrationClick = { registrationId ->
+                        navController.navigate("${Navigation.RegistrationFinishScreen.route}/${registrationId}")
+                    },
                     onCloseClick = {
                         navController.popBackStack()
                     }
                 ) {
-                    navController.navigate("${Navigation.EventsListScreen.route}") {
+                    navController.navigate(Navigation.EventsListScreen.route) {
 //                        дополнительно проверить работу
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
@@ -162,12 +169,17 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
                 )
             }
         }
-        composable(route = "${Navigation.AddPhotoScreen.route}") {
+        composable(route = Navigation.AddPhotoScreen.route) {
             ScreenAddPhoto()
             /*ScreenAddInterests(
                 onTagClick = {},
                 onSaveClick = {}
             )*/
+        }
+        composable(route = Navigation.ChangeInterestsScreen.route) {
+            ScreenAddInterests(
+                onTagClick = {},
+            ) { }
         }
     }
 }
