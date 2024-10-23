@@ -33,5 +33,8 @@ enum class Navigation(var route: String) {
     RegistrationFinishScreen("registrationFinishScreen"),
     //      addPhoto
     AddPhoto("addPhoto"),
-    AddPhotoScreen("addPhotoScreen")
+    AddPhotoScreen("addPhotoScreen"),
+    //      change interests profile
+    ChangeInterests("changeInterests"),
+    ChangeInterestsScreen("changeInterestsScreen")
 }
