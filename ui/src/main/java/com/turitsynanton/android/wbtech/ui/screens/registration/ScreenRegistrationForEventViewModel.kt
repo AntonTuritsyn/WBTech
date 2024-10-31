@@ -3,14 +3,15 @@ package com.turitsynanton.android.wbtech.ui.screens.registration
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.turitsynanton.android.ui.R
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventDetailsUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.registration.ISetRegistrationStepUseCase
-import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetCodeQueryInteractor
-import com.turitsynanton.android.wbtech.domain.usecases.registration.code.ISetTimerFieldInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.ISetRegistrationStepUseCase
+import com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.code.ISetCodeQueryInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.code.ISetTimerFieldInteractor
+import com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.phone.ISetPhoneQueryInteractor
 import com.turitsynanton.android.wbtech.models.UiEventCard
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.models.mapper.mapEventCardToUi
-import com.turitsynanton.android.wbtech.ui.state.eventdetails.ScreenEventDetailsMainState
 import com.turitsynanton.android.wbtech.ui.state.registration.CodeBlockState
 import com.turitsynanton.android.wbtech.ui.state.registration.MainRegistrationState
 import com.turitsynanton.android.wbtech.ui.state.registration.NameBlockState
@@ -24,6 +25,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 private const val CODE_LENGTH = 4
 private const val TAG = "ScreenRegistrationForEventViewModel"
@@ -34,6 +36,7 @@ internal class ScreenRegistrationForEventViewModel(
     private val resourceProvider: ResourceProvider,
     private val getEventDetailsUseCase: IGetEventDetailsUseCase,
     private val setRegistrationStep: ISetRegistrationStepUseCase,
+    private val setPhoneQuery: ISetPhoneQueryInteractor,
     private val setTimerField: ISetTimerFieldInteractor,
     private val setCodeQuery: ISetCodeQueryInteractor
 ) : ViewModel() {
@@ -84,6 +87,9 @@ internal class ScreenRegistrationForEventViewModel(
     private val _timerStatus: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val timerStatus: StateFlow<Boolean> = _timerStatus.asStateFlow()
 
+    private val _isCodeRight: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val isCodeRight: StateFlow<Boolean> = _isCodeRight.asStateFlow()
+
     val screenMainInfoState: StateFlow<MainRegistrationState> = combine(
         getEventDetailsFlow(),
         setStepFlow()
@@ -120,7 +126,8 @@ internal class ScreenRegistrationForEventViewModel(
         getCodeFieldStatusFlow(),
         getTimerFieldFlow(),
         getTimerStatusFlow(),
-        setButtonRegistrationStatusFlow()
+        setButtonRegistrationStatusFlow(),
+        isCodeRightFlow()
     ) { flows ->
         CodeBlockState(
             code = flows.getOrNull(0) as String,
@@ -128,7 +135,8 @@ internal class ScreenRegistrationForEventViewModel(
             codeFieldStatus = flows.getOrNull(2) as Boolean,
             timerField = flows.getOrNull(3) as String,
             timerStatus = flows.getOrNull(4) as Boolean,
-            buttonRegistrationStatus = flows.getOrNull(5) as Boolean
+            buttonRegistrationStatus = flows.getOrNull(5) as Boolean,
+            isCodeRight = flows.getOrNull(6) as Boolean
         )
     }.stateIn(viewModelScope, SharingStarted.Lazily, CodeBlockState())
 
@@ -156,16 +164,12 @@ internal class ScreenRegistrationForEventViewModel(
     fun setPhoneQuery(phone: String) {
         viewModelScope.launch {
 //            TODO добавить проверку на любые символы, кроме цифр
-            val phoneToSave = phone.trim().take(10)
-            Log.d("TAG", "setPhoneQuery: $phoneToSave")
-            _phoneToQuery.update { phoneToSave }
-
-            if (_phoneToQuery.value.length > 9) {
-                _buttonSendCodeStatus.update { true }
-            } else {
-                _buttonSendCodeStatus.update { false }
+            setPhoneQuery.setPhoneQueryFlow(phone).collect { phone ->
+                Log.d("TAG", "setPhoneQuery: $phone")
+                _phoneToQuery.update { phone }
             }
         }
+        setButtonSendCodeStatus()
     }
 
     fun sendCodeToPhone(code: String) {
@@ -178,16 +182,25 @@ internal class ScreenRegistrationForEventViewModel(
     }
 
     fun getCodeStatusBar() {
+        val wrongCode = resourceProvider.getString(R.string.wrong_code)
+        val sendCodeToNum = resourceProvider.getString(R.string.send_code_to_num)
+        val phoneNum = _fullPhoneNumber.value
         viewModelScope.launch {
-            if (_errorCode.value) {
+            /*if (_errorCode.value) {
                 _getCodeStatusBar.update {
-                    "Неправильный код"
+                    wrongCode
                 }
             } else {
                 _getCodeStatusBar.update {
-                    "Отправили код на ${_fullPhoneNumber.value}"
+                    "$sendCodeToNum ${_fullPhoneNumber.value}"
                 }
-            }
+            }*/
+            setCodeQuery.observeCodeStatusBarFlow(wrongCode, sendCodeToNum, phoneNum)
+                .collect { statusBar ->
+                    _getCodeStatusBar.update {
+                        statusBar
+                    }
+                }
         }
     }
 
@@ -200,6 +213,16 @@ internal class ScreenRegistrationForEventViewModel(
                 _buttonNextStatus.update { true }
             } else {
                 _buttonNextStatus.update { false }
+            }
+        }
+    }
+
+    fun setTimerField() {
+        val getCodeAfter = resourceProvider.getString(R.string.get_code_after)
+        val getNewCode = resourceProvider.getString(R.string.get_new_code)
+        viewModelScope.launch {
+            setTimerField.observeTimerFieldFlow(getCodeAfter, getNewCode).collect { field ->
+                _timerField.update { field }
             }
         }
     }
@@ -220,24 +243,19 @@ internal class ScreenRegistrationForEventViewModel(
                 _codeFieldError.update { status }
             }
         }
+        viewModelScope.launch {
+            setCodeQuery.checkIfRightCodeFlow().collect { status ->
+                _isCodeRight.update { status }
+            }
+        }
     }
 
     fun registrationToEvent() {
+        val wrongCode = resourceProvider.getString(R.string.wrong_code)
         viewModelScope.launch {
-            setCodeQuery.observeCodeStatusBarFlow().collect { status ->
+            setCodeQuery.observeErrorCodeStatusBarFlow(wrongCode).collect { status ->
                 _getCodeStatusBar.update { status }
-                /*if (_codeQuery.value == "1234") {
-                _getCodeStatusBar.update {
-                    resourceProvider.getString(R.string.send_code_to_num) + _fullPhoneNumber.value
-                }
-                setStep()
-            } else {
-                _getCodeStatusBar.update {
-                    "Неправильный код"
-                }
-                _codeFieldError.update { true }
-                _buttonRegistrationStatus.update { false }
-            }*/
+                Log.d(TAG, "registrationToEvent: ${_getCodeStatusBar.value}")
             }
             viewModelScope.launch {
                 setCodeQuery.observeButtonRegistrationStatusFlow().collect { status ->
@@ -249,9 +267,6 @@ internal class ScreenRegistrationForEventViewModel(
                     _codeFieldError.update { status }
                 }
             }
-        }
-        setCodeQuery.setStepIfRightCode {
-            setStep()
         }
     }
 
@@ -270,6 +285,7 @@ internal class ScreenRegistrationForEventViewModel(
     private fun setButtonNextStatusFlow(): StateFlow<Boolean> = buttonNextStatus
     private fun setButtonSendCodeStatusFlow(): StateFlow<Boolean> = buttonSendCodeStatus
     private fun setButtonRegistrationStatusFlow(): StateFlow<Boolean> = buttonRegistrationStatus
+    private fun isCodeRightFlow(): StateFlow<Boolean> = isCodeRight
 
     private fun getEventDetails(eventId: String) {
         viewModelScope.launch {
@@ -293,13 +309,14 @@ internal class ScreenRegistrationForEventViewModel(
         }
     }
 
-    private fun setTimerField() {
+    private fun setButtonSendCodeStatus() {
         viewModelScope.launch {
-            setTimerField.observeTimerFieldFlow().collect { field ->
-                _timerField.update { field }
+            setPhoneQuery.setButtonSendCodeStatusFlow().collect { status ->
+                _buttonSendCodeStatus.update { status }
             }
         }
     }
+
 
     private fun setTimerStatus() {
         viewModelScope.launch {

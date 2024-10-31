@@ -49,7 +49,10 @@ Malesuada egestas enim purus cras diam eget vel. Massa ante sit scelerisque scel
     <string name="subscribe">Подписаться</string>
     <string name="unsubscribe">Вы подписаны</string>
     <string name="communities_for_you">Сообщества для Вас</string>
-    <string name="send_code_to_num">"Отправили код на "</string>
     <string name="tell_later_button">Расскажу позже</string>
     <string name="change_interests_profile">Изменить</string>
+    <string name="wrong_code">Неправильный код</string>
+    <string name="send_code_to_num">Отправили код на</string>
+    <string name="get_code_after">Получить новый код через</string>
+    <string name="get_new_code">Получить новый код</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.usecases.registration.code
+package com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.code
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,25 +14,24 @@ internal class SetTimerFieldInteractor : ISetTimerFieldInteractor {
     private val startTime = 10
     private val endTime = 1
 
-    private val timerField = MutableStateFlow("")
     private val timerStatus = MutableStateFlow(false)
-    private val observableTimerField = timerField.flatMapLatest {
-        flow {
+
+    override suspend fun observeTimerFieldFlow(
+        getCodeAfter: String,
+        getNewCode: String
+    ): Flow<String> {
+        val timerField: Flow<String> = flow {
             for (step in startTime downTo endTime) {
-//                TODO поменять на передачу строки
-                emit("Получить новый код через $step")
-                delay(1000L)
                 timerStatus.update {
                     false
                 }
+                emit("$getCodeAfter $step")
+                delay(1000L)
             }
-            emit("Получить новый код")
+            emit(getNewCode)
             timerStatus.update { true }
-        }.flowOn(Dispatchers.IO)
-    }
-
-    override fun observeTimerFieldFlow(): Flow<String> {
-        return observableTimerField
+        }
+        return timerField
     }
 
     override fun observeTimerStatusFlow(): Flow<Boolean> {

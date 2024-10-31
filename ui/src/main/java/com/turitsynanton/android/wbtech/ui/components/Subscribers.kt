@@ -61,11 +61,14 @@ internal fun Subscribers(
                 }
                 else -> {
                     items(AVATARS_TO_SHOW) { index ->
-                        Avatar(
-                            modifier = Modifier,
-                            avatarStyle = AvatarStyles.Small,
-                            user = avatarsList[index],
-                        )
+                        if (index > 0) {
+                            Avatar(
+                                modifier = Modifier,
+                                avatarStyle = AvatarStyles.Small,
+//                            TODO вылезает ошибка java.lang.IndexOutOfBoundsException: Empty list doesn't contain element at index 0.
+                                user = avatarsList[index],
+                            )
+                        }
                     }
                     item {
                         MorePeople(modifier = Modifier, numberOfPeople = (usersCount))

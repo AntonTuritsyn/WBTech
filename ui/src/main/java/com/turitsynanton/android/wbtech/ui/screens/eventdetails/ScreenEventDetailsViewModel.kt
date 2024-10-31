@@ -75,9 +75,9 @@ internal class ScreenEventDetailsViewModel(
         getVisitorsCountFlow()
     ) { flows ->
         ScreenEventDetailsMainState(
-            eventDetails = flows.getOrNull(0) as UiEvent,
+            eventDetails = flows.getOrNull(0) as UiEvent?,
             otherEvents = flows.getOrNull(1) as List<UiEventCard>,
-            communityDetails = flows.getOrNull(2) as UiCommunity,
+            communityDetails = flows.getOrNull(2) as UiCommunity?,
             participants = flows.getOrNull(3) as List<UiPersonCard>,
             buttonStatus = flows.getOrNull(4) as EventRegistrationButtonState,
             visitorsCount = flows.getOrNull(5) as Int

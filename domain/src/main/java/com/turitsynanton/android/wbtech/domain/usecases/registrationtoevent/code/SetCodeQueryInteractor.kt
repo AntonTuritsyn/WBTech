@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.usecases.registration.code
+package com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent.code
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,10 +32,17 @@ internal class SetCodeQueryInteractor: ISetCodeQueryInteractor {
         return codeFieldError
     }
 
-    override fun observeCodeStatusBarFlow(): Flow<String> {
+    override fun observeCodeStatusBarFlow(wrongCode: String, sendToNum: String, phoneNum: String): Flow<String> {
+        codeStatusBar.update {
+            "$sendToNum $phoneNum"
+        }
+        return codeStatusBar
+    }
+
+    override fun observeErrorCodeStatusBarFlow(wrongCode: String): Flow<String> {
         if (codeQuery.value != "1234") {
             codeStatusBar.update {
-                "Неправильный код"
+                wrongCode
             }
             codeFieldError.update { true }
             buttonRegistrationStatus.update { false }
@@ -43,9 +50,17 @@ internal class SetCodeQueryInteractor: ISetCodeQueryInteractor {
         return codeStatusBar
     }
 
-    override fun setStepIfRightCode(setStep: (Unit) -> Unit) {
+    override fun checkIfRightCodeFlow(): Flow<Boolean> {
+        val isCodeRight = MutableStateFlow(false)
         if (codeQuery.value == "1234") {
-            setStep.invoke(Unit)
+            isCodeRight.update {
+                true
+            }
+        } else {
+            isCodeRight.update {
+                false
+            }
         }
+        return isCodeRight
     }
 }
