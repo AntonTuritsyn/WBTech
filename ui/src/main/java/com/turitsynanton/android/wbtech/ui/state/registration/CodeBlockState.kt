@@ -6,5 +6,6 @@ internal data class CodeBlockState(
     val codeFieldStatus: Boolean = false,
     val timerField: String = "",
     val timerStatus: Boolean = false,
-    val buttonRegistrationStatus: Boolean = false
+    val buttonRegistrationStatus: Boolean = false,
+    val isCodeRight: Boolean = false
 )

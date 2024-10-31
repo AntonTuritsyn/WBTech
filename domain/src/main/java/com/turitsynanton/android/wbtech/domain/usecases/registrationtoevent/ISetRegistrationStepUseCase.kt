@@ -1,4 +1,4 @@
-package com.turitsynanton.android.wbtech.domain.usecases.registration
+package com.turitsynanton.android.wbtech.domain.usecases.registrationtoevent
 
 import kotlinx.coroutines.flow.Flow
 

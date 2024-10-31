@@ -1,8 +1,6 @@
 package com.turitsynanton.android.wbtech.ui.screens.registration
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -22,13 +20,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -118,9 +114,9 @@ internal fun ScreenRegistrationForEvent(
                             ComplexTextField(
                                 hint = stringResource(R.string.hint_name),
                                 query = screenNameState.name,
-                                onQueryChanged = {
+                                onQueryChanged = { name ->
                                     screenRegistrationForEventViewModel.setNameQuery(
-                                        it
+                                        name
                                     )
                                 },
                                 keyboardOptions = KeyboardOptions(
@@ -157,7 +153,10 @@ internal fun ScreenRegistrationForEvent(
                                     selectedCountry = selectedCountry
                                 )
 
-                                PhoneField(modifier = Modifier, number = screenPhoneState.phone) { phone ->
+                                PhoneField(
+                                    modifier = Modifier,
+                                    number = screenPhoneState.phone
+                                ) { phone ->
                                     Log.d("TAG", "phone: $phone")
                                     screenRegistrationForEventViewModel.setPhoneQuery(phone)
                                 }
@@ -213,7 +212,13 @@ internal fun ScreenRegistrationForEvent(
                                     .align(alignment = Alignment.CenterHorizontally)
                                     .clickable(
                                         enabled = screenCodeState.timerStatus,
-                                    ) { },
+                                    ) {
+                                        screenRegistrationForEventViewModel.apply {
+                                            sendCodeToPhone(selectedCountry.code)
+                                            getCodeStatusBar()
+                                            setTimerField()
+                                        }
+                                    },
                                 text = screenCodeState.timerField,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
@@ -233,8 +238,11 @@ internal fun ScreenRegistrationForEvent(
                                     ButtonStyle.Enable
                                 }
                             ) {
-//                                screenRegistrationForEventViewModel.registrationToEvent()
-                                onFinishRegistrationClick(eventId)
+                                if (screenCodeState.isCodeRight) {
+                                    onFinishRegistrationClick(eventId)
+                                } else {
+                                    screenRegistrationForEventViewModel.registrationToEvent()
+                                }
                             }
                         }
                     }
@@ -276,18 +284,3 @@ internal fun Title(
 }
 
 data class Country(val name: String, val code: String, val flag: Int)
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    ScreenRegistrationForEvent(
-        modifier = Modifier,
-        eventId = "1",
-        selectedCountry = Country("Russia", "+7", R.drawable.flag_russia),
-        onFinishRegistrationClick = {},
-        onCloseClick = {}
-    ) {
-
-    }
-}
