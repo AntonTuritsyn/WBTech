@@ -2,6 +2,7 @@ package com.turitsynanton.android.wbtech.domain.usecases.userprofile
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
 import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,10 +12,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 internal class GetEventsForUserUseCase(
-    private val dataListsRepository: DataListsRepository
+    private val eventRepository: EventRepository
 ): IGetEventsForUserUseCase {
     override fun execute(userId: String): Flow<List<DomainEvent>> {
-        val events = dataListsRepository.getEventsListFlow()
+        val events = eventRepository.getEventsListFlow()
         val eventsForUser = MutableStateFlow<List<DomainEvent>>(emptyList())
 
         events.map { eventsList->

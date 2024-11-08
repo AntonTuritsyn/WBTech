@@ -2,6 +2,7 @@ package com.turitsynanton.android.wbtech.domain.usecases.experiment
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
 import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import com.turitsynanton.android.wbtech.domain.usecases.IInteractorFullInfoExperiment
 import com.turitsynanton.android.wbtech.domain.usecases.event.IGetEventListUseCase
 import com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscreen.communityid.IGetCommunityIdByEventIdUseCaseNew
@@ -13,9 +14,9 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 class GetEventListUseCaseExperiment(
-    private val dataListsRepository: DataListsRepository
+    private val eventRepository: EventRepository
 ) : IGetEventListUseCase {
-    override fun execute(): Flow<List<DomainEvent>> = dataListsRepository.getEventsListFlow()
+    override fun execute(): Flow<List<DomainEvent>> = eventRepository.getEventsListFlow()
 }
 
 class GetEventDetailsUseCaseExperiment(

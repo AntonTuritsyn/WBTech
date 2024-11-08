@@ -18,15 +18,15 @@ internal class ScreenFinishRegistrationViewModel(
     private val eventCardMapper: EventCardMapper,
     private val resourceProvider: ResourceProvider,
     private val getEventDetailsUseCase: IGetEventDetailsUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _eventDetails: MutableStateFlow<UiEventCard?> = MutableStateFlow(null)
     private val eventDetails: StateFlow<UiEventCard?> = _eventDetails.asStateFlow()
-
-    fun getEventDetailsFlow(): StateFlow<UiEventCard?> = eventDetails
 
     init {
         getEventDetails(eventId)
     }
+
+    fun getEventDetailsFlow(): StateFlow<UiEventCard?> = eventDetails
 
     private fun getEventDetails(eventId: String) {
         viewModelScope.launch {

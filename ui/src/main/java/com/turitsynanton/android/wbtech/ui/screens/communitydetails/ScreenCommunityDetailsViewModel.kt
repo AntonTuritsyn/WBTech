@@ -15,6 +15,7 @@ import com.turitsynanton.android.wbtech.models.mapper.CommunityMapper
 import com.turitsynanton.android.wbtech.models.mapper.EventCardMapper
 import com.turitsynanton.android.wbtech.ui.state.ScreenCommunityDetailsState
 import com.turitsynanton.android.wbtech.ui.utils.buttonstates.CommunitySubscribeButtonState
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
 internal class ScreenCommunityDetailsViewModel(

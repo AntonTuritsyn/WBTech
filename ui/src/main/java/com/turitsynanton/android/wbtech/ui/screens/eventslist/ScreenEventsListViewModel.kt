@@ -62,7 +62,7 @@ internal class ScreenEventsListViewModel(
         MutableStateFlow(CommunitySubscribeButtonState())
     private val buttonStatus: StateFlow<CommunitySubscribeButtonState> = _buttonStatus
 
-    val screenState: StateFlow<EventsListState> = combine(
+    private val screenState: StateFlow<EventsListState> = combine(
         getEventsListFlow(),
         getCommunitiesListFlow(),
         getFilteredListFlow(),
@@ -90,12 +90,7 @@ internal class ScreenEventsListViewModel(
         upcomingEvents()
     }
 
-    private fun getEventsListFlow(): StateFlow<List<UiEventCard>> = eventList
-    private fun getCommunitiesListFlow(): StateFlow<List<UiCommunityCard>> = communitiesList
-    private fun getFilteredListFlow(): StateFlow<List<UiEventCard>> = filteredEventList
-    private fun getSearchQueryFlow(): StateFlow<String> = searchQuery
-    private fun getUpcomingEventListFlow(): StateFlow<List<UiEventCard>> = upcomingEventList
-    fun getButtonStatusFlow(): StateFlow<CommunitySubscribeButtonState> = buttonStatus
+    fun screenState(): StateFlow<EventsListState> = screenState
 
     fun updateSearchQuery(query: String) {
         viewModelScope.launch {
@@ -129,6 +124,13 @@ internal class ScreenEventsListViewModel(
             subscribeToCommunity.execute(communityId)
         }
     }
+
+    private fun getEventsListFlow(): StateFlow<List<UiEventCard>> = eventList
+    private fun getCommunitiesListFlow(): StateFlow<List<UiCommunityCard>> = communitiesList
+    private fun getFilteredListFlow(): StateFlow<List<UiEventCard>> = filteredEventList
+    private fun getSearchQueryFlow(): StateFlow<String> = searchQuery
+    private fun getUpcomingEventListFlow(): StateFlow<List<UiEventCard>> = upcomingEventList
+    fun getButtonStatusFlow(): StateFlow<CommunitySubscribeButtonState> = buttonStatus
 
     private fun getEventsList() {
         viewModelScope.launch {

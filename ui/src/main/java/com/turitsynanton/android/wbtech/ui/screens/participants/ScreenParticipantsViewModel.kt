@@ -14,7 +14,7 @@ internal class ScreenParticipantsViewModel(
     eventId: String,
     private val personCardMapper: PersonCardMapper,
     private val getParticipantsListUseCase: IGetParticipantsListUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _participantsList: MutableStateFlow<List<UiPersonCard>> = MutableStateFlow(emptyList())
     private val participantsList: StateFlow<List<UiPersonCard>> = _participantsList
 

@@ -40,6 +40,12 @@ import com.turitsynanton.android.wbtech.ui.utils.TextFieldStyle
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+interface ScreenRegistrationActions {
+    fun onCloseClick()
+    fun onFinishRegistrationClick(eventId: String)
+    fun onBackToEventsClick()
+}
+
 @Composable
 internal fun ScreenRegistrationForEvent(
     modifier: Modifier = Modifier,
@@ -49,11 +55,13 @@ internal fun ScreenRegistrationForEvent(
             parametersOf(
                 eventId
             )
-        }),
+        }
+    ),
     selectedCountry: Country,
-    onCloseClick: () -> Unit,
+    /*onCloseClick: () -> Unit,
     onFinishRegistrationClick: (String) -> Unit,
-    onBackToEventsClick: () -> Unit
+    onBackToEventsClick: () -> Unit,*/
+    actions: ScreenRegistrationActions
 ) {
 //    TODO в state
 
@@ -84,7 +92,7 @@ internal fun ScreenRegistrationForEvent(
                                 MutableInteractionSource()
                             },
                             indication = null
-                        ) { onCloseClick() },
+                        ) { /*onCloseClick()*/actions.onCloseClick() },
                     painter = painterResource(id = R.drawable.ic_cross),
                     contentDescription = null
                 )
@@ -145,9 +153,8 @@ internal fun ScreenRegistrationForEvent(
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-
 //                            TODO ОБЯЗАТЕЛЬНО ДОРАБОТАТЬ ВСЮ ЛОГИКУ ЧЕРЕЗ VM
-//__________________________________________________________________________________________________________
+// __________________________________________________________________________________________________________
                                 CountryDropDown(
                                     modifier = Modifier,
                                     selectedCountry = selectedCountry
@@ -239,7 +246,8 @@ internal fun ScreenRegistrationForEvent(
                                 }
                             ) {
                                 if (screenCodeState.isCodeRight) {
-                                    onFinishRegistrationClick(eventId)
+                                    /*onFinishRegistrationClick(eventId)*/
+                                    actions.onFinishRegistrationClick(eventId)
                                 } else {
                                     screenRegistrationForEventViewModel.registrationToEvent()
                                 }

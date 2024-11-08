@@ -2,6 +2,7 @@ package com.turitsynanton.android.wbtech.domain.usecases.experiment.eventlistscr
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
 import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,13 +17,13 @@ import kotlinx.coroutines.flow.update
 
 internal class FilterEventUseCaseNew(
     private val innerFilterEventUseCaseExperiment: InnerFilterEventUseCaseNew,
-    private val dataListsRepository: DataListsRepository
+    private val eventRepository: EventRepository
 ) : IFilterEventUseCaseNew {
     private val eventsPrepared = MutableStateFlow<List<DomainEvent>>(emptyList())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun execute(query: String) {
-        val eventsList = dataListsRepository.getEventsListFlow()
+        val eventsList = eventRepository.getEventsListFlow()
 
         eventsList.mapLatest { events ->
             if (query.isEmpty()) {

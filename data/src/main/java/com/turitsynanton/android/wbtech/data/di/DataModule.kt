@@ -7,6 +7,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.turitsynanton.android.wbtech.data.dataStore
 import com.turitsynanton.android.wbtech.data.repository.DataListsRepositoryImpl
+import com.turitsynanton.android.wbtech.data.repository.EventRepositoryImpl
 import com.turitsynanton.android.wbtech.data.repository.mappertodata.CommunityMapperToData
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.CommunityMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.EventMapperToDomain
@@ -19,6 +20,7 @@ import com.turitsynanton.android.wbtech.data.repository.mappertodomain.TagsMappe
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.HostMapperToDomain
 import com.turitsynanton.android.wbtech.data.repository.mappertodomain.ProfileMapperToDomain
 import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import com.turitsynanton.android.wbtech.domain.repository.InfoVisibilityInProfileRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -43,6 +45,7 @@ val dataModule = module {
     singleOf(::EventRepositoryImpl) bind EventRepository::class*/
 
     singleOf(::DataListsRepositoryImpl) bind DataListsRepository::class
+    singleOf(::EventRepositoryImpl) bind EventRepository::class
     singleOf(::EventsListVisibilityInProfileRepositoryIml) bind InfoVisibilityInProfileRepository::class
 
     single<DataStore<Preferences>> {

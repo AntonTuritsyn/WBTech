@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.domain.usecases.event
 
-import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -12,14 +12,14 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 internal class IsRegisteredForEventUseCase(
-    private val dataListsRepository: DataListsRepository
-): IIsRegisteredForEventUseCase {
+    private val eventRepository: EventRepository
+) : IIsRegisteredForEventUseCase {
     override fun execute(eventId: String): Flow<Boolean> {
-        val eventDetails = dataListsRepository.getEventDetailsFlow(eventId)
-        val profileId = dataListsRepository.getMyProfileFlow().map { it.id }
-        val button  = MutableStateFlow<Boolean>(false)
+        val eventDetails = eventRepository.getEventDetailsFlow(eventId)
+        val profileId = eventRepository.getMyProfileFlow().map { it.id }
+        val button = MutableStateFlow<Boolean>(false)
 
-        eventDetails.mapLatest { event->
+        eventDetails.mapLatest { event ->
             button.update {
                 event.participants.any { it.id == profileId.first() }
             }

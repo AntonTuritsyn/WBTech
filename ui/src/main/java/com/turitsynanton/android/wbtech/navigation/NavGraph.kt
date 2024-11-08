@@ -11,14 +11,13 @@ import com.turitsynanton.android.wbtech.ui.screens.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NavGraph(
+internal fun NavGraph(
     navController: NavHostController
 ) {
     NavHost(
         navController = navController,
         startDestination = Navigation.Splash.route
-    )
-    {
+    ) {
         composable(route = Navigation.Splash.route) {
             SplashScreen(navController = navController)
         }

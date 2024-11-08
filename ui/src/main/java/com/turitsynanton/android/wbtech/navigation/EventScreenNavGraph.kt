@@ -15,13 +15,16 @@ import com.turitsynanton.android.wbtech.ui.screens.interests.ScreenAddInterests
 import com.turitsynanton.android.wbtech.ui.screens.myprofile.ScreenProfileMy
 import com.turitsynanton.android.wbtech.ui.screens.participants.ScreenParticipants
 import com.turitsynanton.android.wbtech.ui.screens.registration.Country
+import com.turitsynanton.android.wbtech.ui.screens.registration.ScreenRegistrationActions
 import com.turitsynanton.android.wbtech.ui.screens.registration.ScreenRegistrationForEvent
 import com.turitsynanton.android.wbtech.ui.screens.registrationend.ScreenFinishRegistration
 import com.turitsynanton.android.wbtech.ui.screens.subscribers.ScreenSubscribers
 import com.turitsynanton.android.wbtech.ui.screens.userprofile.ScreenProfileUser
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
+internal fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
     navigation(
         startDestination = Navigation.EventsList.route,
         route = Navigation.EventsListScreen.route
@@ -142,22 +145,43 @@ fun NavGraphBuilder.eventScreenNavGraph(navController: NavHostController) {
         }
         composable(route = "${Navigation.RegistrationScreen.route}/{eventId}") { stackEntry ->
             stackEntry.arguments?.getString("eventId")?.let { id ->
+
+                val registrationActions = object : ScreenRegistrationActions {
+                    override fun onCloseClick() {
+                        navController.popBackStack()
+                    }
+
+                    override fun onFinishRegistrationClick(eventId: String) {
+                        navController.navigate("${Navigation.RegistrationFinishScreen.route}/${eventId}")
+                    }
+
+                    override fun onBackToEventsClick() {
+                        navController.navigate(Navigation.EventsListScreen.route) {
+//                        дополнительно проверить работу
+                            popUpTo(0) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    }
+                }
+
                 ScreenRegistrationForEvent(
                     eventId = id,
                     selectedCountry = Country("Russia", "+7", R.drawable.flag_russia),
-                    onFinishRegistrationClick = { registrationId ->
-                        navController.navigate("${Navigation.RegistrationFinishScreen.route}/${registrationId}")
+                    actions = registrationActions
+                    /*onFinishRegistrationClick = { eventId ->
+                        navController.navigate("${Navigation.RegistrationFinishScreen.route}/${eventId}")
                     },
                     onCloseClick = {
                         navController.popBackStack()
-                    }
-                ) {
-                    navController.navigate(Navigation.EventsListScreen.route) {
+                    },
+                    onBackToEventsClick = {
+                        navController.navigate(Navigation.EventsListScreen.route) {
 //                        дополнительно проверить работу
-                        popUpTo(0) { inclusive = true }
-                        launchSingleTop = true
-                    }
-                }
+                            popUpTo(0) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    }*/
+                )
             }
         }
         composable(route = "${Navigation.RegistrationFinishScreen.route}/{eventId}") { stackEntry ->

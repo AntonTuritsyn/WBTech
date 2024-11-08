@@ -2,14 +2,15 @@ package com.turitsynanton.android.wbtech.domain.usecases.event.filter
 
 import com.turitsynanton.android.wbtech.domain.models.DomainEvent
 import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 
 class FilterEventsUseCase(
-    private val dataListsRepository: DataListsRepository
+    private val eventRepository: EventRepository
 ): IFilterEventsUseCase {
     override fun execute(query: String): Flow<List<DomainEvent>> {
-        val events = dataListsRepository.getEventsListFlow()
+        val events = eventRepository.getEventsListFlow()
         return if (query.isEmpty()) {
             events
         } else {

@@ -1,6 +1,6 @@
 package com.turitsynanton.android.wbtech.domain.usecases
 
-import com.turitsynanton.android.wbtech.domain.repository.DataListsRepository
+import com.turitsynanton.android.wbtech.domain.repository.EventRepository
 import com.turitsynanton.android.wbtech.domain.usecases.community.IGetVisitorsCountUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 class GetVisitorsCountUseCase(
-    private val dataListsRepository: DataListsRepository
+    private val eventRepository: EventRepository
 ): IGetVisitorsCountUseCase {
     override fun execute(eventId: String): Flow<Int> {
         val visitorsToShow = 5
         val visitorsCount: MutableStateFlow<Int> = MutableStateFlow(0)
-        val eventDetails = dataListsRepository.getEventDetailsFlow(eventId)
+        val eventDetails = eventRepository.getEventDetailsFlow(eventId)
         eventDetails.mapLatest { event ->
             if (event.participants.size > visitorsToShow) {
                 visitorsCount.update { event.participants.size - visitorsToShow }

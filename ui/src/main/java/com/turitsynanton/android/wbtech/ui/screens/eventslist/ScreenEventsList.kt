@@ -66,8 +66,7 @@ internal fun ScreenEventsList(
     onSubscribeClick: (String) -> Unit,
     onUserClick: () -> Unit
 ) {
-
-    val screenState by screenEventsListViewModel.screenState.collectAsStateWithLifecycle()
+    val screenState by screenEventsListViewModel.screenState().collectAsStateWithLifecycle()
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 
 class LocationViewModel(
     private val locationPermissionChecker: AndroidPermissionChecker
-): ViewModel() {
+) : ViewModel() {
 
     private val _locationPermissionGranted = MutableStateFlow(false)
     private val locationPermissionGranted: StateFlow<Boolean> = _locationPermissionGranted

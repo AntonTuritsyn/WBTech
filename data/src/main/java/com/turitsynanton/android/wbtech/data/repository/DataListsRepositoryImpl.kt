@@ -56,17 +56,6 @@ internal class DataListsRepositoryImpl(
             }
         }
 
-    override fun getEventsListFlow(): Flow<List<DomainEvent>> {
-        println(generatedAllEventsList.size)
-        return flow { emit(generatedAllEventsList) }.map { it.mapEventToDomain(eventMapper) }
-    }
-
-    override fun getEventDetailsFlow(eventId: String): Flow<DomainEvent> =
-        flow {
-            generatedAllEventsList.find { it.id == eventId }?.mapEventToDomain(eventMapper)
-                ?.let { emit(it) }
-        }
-
     override fun getEventDetailsFlowExperiment(eventId: String): Flow<DomainEvent?> =
         flow {
             /*generatedAllEventsList.find { it.id == eventId }?.mapEventToDomain(eventMapper)?.let { emit(it) }*/
@@ -101,7 +90,6 @@ internal class DataListsRepositoryImpl(
                         existingCommunity
                     }
                 }
-
             }
         }
     }
